@@ -60,6 +60,15 @@ func _test_effects() -> void:
 	equal(subtract_effect["kind"], Abilities.Effect.SUBTRACT, "subtraction is recognised")
 	equal(subtract_effect["amount"], 3, "the operand comes from the effect clause, not the trigger")
 	equal(subtract_effect["on_enemy"], true, "opponent dice are targeted")
+	equal(subtract_effect["whole_pool"], true, "'all' hits every die")
+	# Tackle names no side; a penalty must not fall on the owner's own trio.
+	var tackle := Abilities.parse_effect(
+		_ability("Reduces a die's value by 1. ACTIVATES when your team rolls a PAIR.", 2)
+	)
+	equal(tackle["on_enemy"], true, "an unqualified penalty hits the opponent")
+	equal(tackle["whole_pool"], false, "'a die' is a single die")
+	var self_penalty := Abilities.parse_effect(_ability("Halves the value of one of your dice.", 2))
+	equal(self_penalty["on_enemy"], false, "'your dice' stays on the owner's team")
 	var reroll := _ability("Re-roll any one die of your choice. ACTIVATES when your team rolls a 1.", 19)
 	equal(Abilities.parse_effect(reroll)["kind"], Abilities.Effect.REROLL, "re-rolls are recognised")
 	var ties := _ability("Your team wins all ties.", Abilities.Trigger.WIN_TIES)
@@ -90,6 +99,19 @@ func _test_match() -> void:
 		var shot: Dictionary = played["shot"]
 		if not shot.is_empty() and bool(shot["goal"]):
 			goals += 1
+	var tackle := AbilityRecord.from_dict(7, {
+		"Name": "Tackle",
+		"AbilityDescription": "Reduces a die's value by 1. ACTIVATES when your team rolls a TRIPLE.",
+		"BuffTrigger": Abilities.Trigger.TRIPLE,
+	})
+	var tackling := MatchSim.new(
+		_team([4], 7), _team([4]), {7: tackle}, {"seed": 3, "match_seconds": 600}
+	)
+	var penalised := tackling.play_encounter()
+	equal(penalised["totals"][MatchSim.Side.HOME], 12, "the owner's own trio is untouched")
+	equal(penalised["totals"][MatchSim.Side.AWAY], 11, "the penalty lands on the other trio")
+	equal(penalised["winner"], MatchSim.Side.HOME, "the ability wins the encounter")
+
 	check(goals > 0, "the stronger team scores")
 	equal(scorer.score[MatchSim.Side.HOME], goals, "the scoreboard counts the goals")
 	equal(scorer.play_encounter(), {}, "a finished match plays no more encounters")
@@ -145,13 +167,15 @@ func _ability(description: String, trigger: int) -> AbilityRecord:
 	})
 
 
-## Seven identical players, so totals are predictable.
-func _team(faces: Array) -> Array[PlayerRecord]:
+## Seven identical players, so totals are predictable. Any ability is given to
+## the central forward alone, so it fires exactly once per encounter.
+func _team(faces: Array, ability_id := 0) -> Array[PlayerRecord]:
 	var players: Array[PlayerRecord] = []
 	for slot in Career.LINEUP_SIZE:
 		players.append(PlayerRecord.from_dict(slot, {
 			"Name": "Player %d" % slot,
 			"Position": PlayerRecord.GK if slot == 0 else PlayerRecord.MID,
 			"DiceSides": ",".join(faces.map(func(face: int) -> String: return str(face))),
+			"Superpower": ability_id if slot == MatchSim.CENTRAL_ATTACK_SLOT else 0,
 		}))
 	return players

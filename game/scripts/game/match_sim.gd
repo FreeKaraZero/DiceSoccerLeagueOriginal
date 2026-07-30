@@ -204,32 +204,38 @@ func _resolve_abilities(side: int, own: Array[Dictionary], enemy: Array[Dictiona
 	return triggered
 
 
-## Targets are picked automatically: the original let the player choose.
+## Targets are picked automatically: the original let the player choose. A buff
+## takes the pool's best die and a penalty its most damaging one, so both sides
+## play their abilities as well as they can.
 func _apply_effect(effect: Dictionary, own: Array[Dictionary], enemy: Array[Dictionary]) -> void:
-	var pool: Array[Dictionary] = enemy if bool(effect["on_enemy"]) else own
+	var hostile := bool(effect["on_enemy"])
+	var pool: Array[Dictionary] = enemy if hostile else own
 	if pool.is_empty():
 		return
-	var kind := int(effect["kind"])
+	var targets: Array[Dictionary] = pool
+	if not bool(effect["whole_pool"]):
+		targets = [_best_die(pool, true)]
 	var amount := int(effect["amount"])
-	match kind:
+	match int(effect["kind"]):
 		Abilities.Effect.DOUBLE:
-			var best := _best_die(pool, not bool(effect["on_enemy"]))
-			best["value"] = int(best["value"]) * 2
-			best["modifier"] = "x2"
+			for die in targets:
+				die["value"] = int(die["value"]) * 2
+				die["modifier"] = "x2"
 		Abilities.Effect.HALVE:
-			var target := _best_die(pool, false)
-			target["value"] = int(target["value"]) / 2
-			target["modifier"] = "half"
+			for die in targets:
+				die["value"] = int(die["value"]) / 2
+				die["modifier"] = "half"
 		Abilities.Effect.ADD:
-			var lowest := _best_die(pool, false)
-			lowest["value"] = int(lowest["value"]) + amount
-			lowest["modifier"] = "+%d" % amount
+			for die in targets:
+				die["value"] = int(die["value"]) + amount
+				die["modifier"] = "+%d" % amount
 		Abilities.Effect.SUBTRACT:
-			for die in pool:
+			for die in targets:
 				die["value"] = maxi(int(die["value"]) - amount, 0)
 				die["modifier"] = "-%d" % amount
 		Abilities.Effect.REROLL:
-			var weakest := _best_die(pool, false)
+			# Re-rolling the weakest die of your own trio is what helps.
+			var weakest := _best_die(pool, hostile)
 			var player: PlayerRecord = weakest["player"]
 			if player != null:
 				var face := player.roll(_rng)

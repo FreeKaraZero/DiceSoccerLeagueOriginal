@@ -46,13 +46,6 @@ func _ready() -> void:
 	_refresh()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if _match == null:
-		return
-	if event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_select"):
-		_play_encounter()
-
-
 func _field_texture() -> Texture2D:
 	var sheet := "Season%dField2(1.1)" % App.career.season_index
 	var texture := App.sprite(sheet, "Field")
@@ -95,6 +88,10 @@ func _build_dice() -> void:
 	for side: int in [MatchSim.Side.HOME, MatchSim.Side.AWAY]:
 		var faces: Array[TextureRect] = []
 		var labels: Array[Label] = []
+		# Before kickoff the cards show who will roll them: attackers for the
+		# side in possession, defenders for the other one.
+		var slots: Array = MatchSim.ATTACK_SLOTS if side == _match.possession else MatchSim.DEFENCE_SLOTS
+		var players := _match.lineup(side)
 		for row: float in ROW_Y:
 			var centre := Vector2(COLUMN_X[side], row)
 			var background := TextureRect.new()
@@ -109,7 +106,8 @@ func _build_dice() -> void:
 			add_child(face)
 			faces.append(face)
 
-			var label := Ui.centred("", 18)
+			var starter: PlayerRecord = players[slots[labels.size()]] if slots[labels.size()] < players.size() else null
+			var label := Ui.centred(starter.player_name if starter != null else "", 18)
 			label.position = Vector2(centre.x - 130, row + DICE_SIZE.y / 2.0)
 			label.size = Vector2(260, 26)
 			add_child(label)
@@ -132,28 +130,17 @@ func _build_controls() -> void:
 	_log.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(_log)
 
-	var normal := App.image("PlayOnButton")
-	if normal != null:
-		var texture_button := TextureButton.new()
-		texture_button.texture_normal = normal
-		texture_button.texture_pressed = App.image("PlayOnButtonPressed")
-		texture_button.texture_disabled = App.image("PlayOnButtonDisabled")
-		_play_on = texture_button
-	else:
-		_play_on = Ui.button("PLAY ON")
-	_play_on.position = Vector2(200, 850)
-	_play_on.size = Vector2(240, 80)
+	_play_on = _textured_button(
+		"PLAY ON", "PlayOnButton", Rect2(Vector2(200, 848), Vector2(240, 80))
+	)
 	_play_on.pressed.connect(_play_encounter)
 	add_child(_play_on)
+	# Keyboard confirm goes through the focused button, so it fires once.
+	_play_on.grab_focus()
 
-	var forfeit: BaseButton = Ui.button("FORFEIT", 18)
-	if App.image("ForfeitButton") != null:
-		var textured := TextureButton.new()
-		textured.texture_normal = App.image("ForfeitButton")
-		textured.texture_pressed = App.image("ForfeitButtonPressed")
-		forfeit = textured
-	forfeit.position = Vector2(20, 850)
-	forfeit.size = Vector2(150, 60)
+	var forfeit := _textured_button(
+		"ABANDON", "ForfeitButton", Rect2(Vector2(20, 856), Vector2(150, 64))
+	)
 	forfeit.pressed.connect(func() -> void: App.goto(App.MENU_SCENE))
 	add_child(forfeit)
 
@@ -161,6 +148,26 @@ func _build_controls() -> void:
 	_clock.position = Vector2(220, 925)
 	_clock.size = Vector2(200, 30)
 	add_child(_clock)
+
+
+## A TextureButton keeps its texture's own size unless told otherwise, which
+## would let the art overlap its neighbours, so the rect is enforced here.
+func _textured_button(text: String, image_name: String, rect: Rect2) -> BaseButton:
+	var art := App.image(image_name)
+	var button: BaseButton
+	if art == null:
+		button = Ui.button(text, 20)
+	else:
+		var textured := TextureButton.new()
+		textured.texture_normal = art
+		textured.texture_pressed = App.image(image_name + "Pressed")
+		textured.texture_disabled = App.image(image_name + "Disabled")
+		textured.ignore_texture_size = true
+		textured.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		button = textured
+	button.position = rect.position
+	button.size = rect.size
+	return button
 
 
 func _play_encounter() -> void:
@@ -257,7 +264,7 @@ func _show_full_time() -> void:
 	var away: int = _match.score[MatchSim.Side.AWAY]
 	var payout := App.career.record_result(home, away)
 
-	var overlay := Ui.panel(Color(0, 0, 0, 0.8))
+	var overlay := Ui.panel(Color(0, 0, 0, 0.97))
 	overlay.position = Vector2(60, 330)
 	overlay.size = Vector2(520, 300)
 	add_child(overlay)

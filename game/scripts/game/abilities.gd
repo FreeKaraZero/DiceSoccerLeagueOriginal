@@ -101,23 +101,33 @@ static func matches_pattern(trigger: int, values: Array[int]) -> bool:
 ## unrelated behaviours), so the effect is read out of the ability copy.
 static func parse_effect(ability: AbilityRecord) -> Dictionary:
 	if ability.trigger == Trigger.WIN_TIES:
-		return {"kind": Effect.WIN_TIES, "amount": 0, "on_enemy": false}
-	var text := ability.description.to_lower()
-	var on_enemy := text.contains("opponent") or text.contains("enemy")
+		return _effect(Effect.WIN_TIES, 0, false, false)
+	# Only the clause before "ACTIVATES" describes the effect; the rest is the
+	# trigger and always mentions "your team", which would confuse the target.
+	var text := ability.description.to_lower().split("activates")[0]
+	var theirs := text.contains("opponent") or text.contains("enemy")
+	var yours := text.contains("your") or text.contains("own")
+	# "Reduces a die's value by 1" names no side: a penalty hits the other team
+	# unless the text explicitly says otherwise.
+	var whole_pool := text.contains(" all ") or text.contains("each") or text.contains("every")
 	var amount := _amount_after_verb(text)
 	if text.contains("double"):
-		return {"kind": Effect.DOUBLE, "amount": 0, "on_enemy": on_enemy}
+		return _effect(Effect.DOUBLE, 0, theirs, whole_pool)
 	if text.contains("halve") or text.contains("half"):
-		return {"kind": Effect.HALVE, "amount": 0, "on_enemy": on_enemy}
-	if text.contains("subtract") or text.contains("reduce"):
-		return {"kind": Effect.SUBTRACT, "amount": maxi(amount, 1), "on_enemy": on_enemy}
+		return _effect(Effect.HALVE, 0, not yours, whole_pool)
+	if text.contains("subtract") or text.contains("reduce") or text.contains("strip"):
+		return _effect(Effect.SUBTRACT, maxi(amount, 1), not yours, whole_pool)
 	if text.contains("add") and amount > 0:
-		return {"kind": Effect.ADD, "amount": amount, "on_enemy": on_enemy}
+		return _effect(Effect.ADD, amount, theirs, whole_pool)
 	if text.contains("re-roll") or text.contains("reroll"):
-		return {"kind": Effect.REROLL, "amount": maxi(amount, 1), "on_enemy": on_enemy}
+		return _effect(Effect.REROLL, maxi(amount, 1), theirs, whole_pool)
 	if text.contains("win the encounter") or text.contains("instantly win"):
-		return {"kind": Effect.INSTANT_WIN, "amount": 0, "on_enemy": false}
-	return {"kind": Effect.FLAVOUR, "amount": 0, "on_enemy": on_enemy}
+		return _effect(Effect.INSTANT_WIN, 0, false, false)
+	return _effect(Effect.FLAVOUR, 0, theirs, false)
+
+
+static func _effect(kind: Effect, amount: int, on_enemy: bool, whole_pool: bool) -> Dictionary:
+	return {"kind": kind, "amount": amount, "on_enemy": on_enemy, "whole_pool": whole_pool}
 
 
 static func effect_label(effect: Dictionary) -> String:
