@@ -42,6 +42,7 @@ function parsePlayer(id: number, raw: JsonObject, where: string): PlayerRecord {
     position,
     faces: asString(raw["DiceSides"], `${where}.DiceSides`)
       .split(",")
+      .filter((face) => face.trim() !== "") // some rows end with a stray comma
       .map((face) => asNumber(face.trim(), `${where}.DiceSides`)),
     abilityId: asNumber(raw["Superpower"] ?? 0, `${where}.Superpower`),
     description: asString(raw["Player Description"] ?? "", `${where}.Player Description`),
@@ -55,7 +56,10 @@ function parsePlayers(raw: JsonObject, offset: number, source: string): PlayerRe
   const players: PlayerRecord[] = [];
   for (const [key, value] of Object.entries(raw)) {
     if (!/^\d+$/.test(key)) continue; // skips bookkeeping keys such as LastPlayerID
-    players.push(parsePlayer(offset + Number(key), asObject(value, `${source}.${key}`), `${source}.${key}`));
+    const record = asObject(value, `${source}.${key}`);
+    // Entry 0 is the referee die: it has faces but no position or name.
+    if (record["Position"] === undefined) continue;
+    players.push(parsePlayer(offset + Number(key), record, `${source}.${key}`));
   }
   return players;
 }
@@ -84,8 +88,11 @@ function parseSeasons(raw: JsonObject): Map<string, Map<string, TeamRecord[]>> {
     if (!seasonKey.startsWith("Season")) continue;
     const modes = new Map<string, TeamRecord[]>();
     for (const [modeKey, modeValue] of Object.entries(asObject(seasonValue, seasonKey))) {
+      // Seasons also carry scalars such as Name alongside their League/Tournament modes.
+      if (typeof modeValue !== "object" || modeValue === null || Array.isArray(modeValue)) continue;
       const teams: TeamRecord[] = [];
       for (const [teamKey, teamValue] of Object.entries(asObject(modeValue, `${seasonKey}.${modeKey}`))) {
+        if (!/^\d+$/.test(teamKey)) continue; // modes also carry scalars such as NoOfMatches
         const where = `${seasonKey}.${modeKey}.${teamKey}`;
         const team = asObject(teamValue, where);
         teams.push({

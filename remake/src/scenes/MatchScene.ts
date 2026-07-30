@@ -17,6 +17,9 @@ const FONT = "Krungthep";
 const DICE_SIZE = 130;
 const COLUMN_X: Record<Side, number> = { home: 170, away: 470 };
 const ROW_Y = [330, 500, 670];
+/** Team totals sit in the corners of the pitch, as in the original. */
+const TOTAL_X: Record<Side, number> = { home: 50, away: 590 };
+const TOTAL_Y = 700;
 const BALL_LANE_Y = 235;
 
 /** The training season lineups the original game starts you with. */
@@ -107,10 +110,10 @@ export class MatchScene extends Phaser.Scene {
 
     this.totals = {
       home: this.add
-        .text(COLUMN_X.home, 790, "0", { fontFamily: FONT, fontSize: "44px", color: "#2f7d32", stroke: "#ffffff", strokeThickness: 5 })
+        .text(TOTAL_X.home, TOTAL_Y, "0", { fontFamily: FONT, fontSize: "44px", color: "#2f7d32", stroke: "#ffffff", strokeThickness: 5 })
         .setOrigin(0.5),
       away: this.add
-        .text(COLUMN_X.away, 790, "0", { fontFamily: FONT, fontSize: "44px", color: "#c62828", stroke: "#ffffff", strokeThickness: 5 })
+        .text(TOTAL_X.away, TOTAL_Y, "0", { fontFamily: FONT, fontSize: "44px", color: "#c62828", stroke: "#ffffff", strokeThickness: 5 })
         .setOrigin(0.5),
     };
   }
@@ -128,7 +131,7 @@ export class MatchScene extends Phaser.Scene {
       .text(this.scale.width / 2, 935, "", { fontFamily: FONT, fontSize: "28px", color: "#ffffff", stroke: "#000000", strokeThickness: 4 })
       .setOrigin(0.5);
     this.logText = this.add
-      .text(this.scale.width / 2, 830, "Tap PLAY ON to kick off", {
+      .text(this.scale.width / 2, 800, "Tap PLAY ON to kick off", {
         fontFamily: FONT,
         fontSize: "20px",
         color: "#ffffff",
