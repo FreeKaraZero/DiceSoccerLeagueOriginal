@@ -4,12 +4,18 @@ extends Node
 const FONT_PATH := "res://assets/fonts/Krungthep.ttf"
 const IMAGES_DIR := "res://assets/images"
 const SPRITES_DIR := "res://assets/sprites"
+## Highest number a sheet family goes up to, e.g. GoalAnimationSS1...SS4.
+const SHEET_SIBLINGS := 6
 
 const MENU_SCENE := "res://scenes/main_menu.tscn"
 const MATCH_SCENE := "res://scenes/match_scene.tscn"
 const SQUAD_SCENE := "res://scenes/squad_scene.tscn"
 const SHOP_SCENE := "res://scenes/shop_scene.tscn"
 const SEASON_SCENE := "res://scenes/season_scene.tscn"
+const TROPHY_SCENE := "res://scenes/trophy_scene.tscn"
+const HANDBOOK_SCENE := "res://scenes/handbook_scene.tscn"
+const ENTOURAGE_SCENE := "res://scenes/entourage_scene.tscn"
+const KIT_SCENE := "res://scenes/kit_scene.tscn"
 
 var data: GameData
 var career: Career
@@ -32,8 +38,24 @@ func goto(scene_path: String) -> void:
 	get_tree().change_scene_to_file(scene_path)
 
 
+## A frame of one of the extracted cocos2d sheets. The original split a screen
+## over numbered sheets (MatchSelectionSS1, MatchSelectionSS2, ...) and spread its
+## frames between them, so a miss is looked up in the sibling sheets too.
 func sprite(sheet: String, frame: String) -> Texture2D:
-	return texture(SPRITES_DIR.path_join(sheet).path_join(frame + ".png"))
+	var found := texture(SPRITES_DIR.path_join(sheet).path_join(frame + ".png"))
+	if found != null:
+		return found
+	var family := sheet.rstrip("0123456789")
+	if family == sheet:
+		return null
+	for number in range(1, SHEET_SIBLINGS + 1):
+		var sibling := "%s%d" % [family, number]
+		if sibling == sheet:
+			continue
+		found = texture(SPRITES_DIR.path_join(sibling).path_join(frame + ".png"))
+		if found != null:
+			return found
+	return null
 
 
 func image(name: String) -> Texture2D:

@@ -46,7 +46,11 @@ func _ready() -> void:
 			"match_seconds": Career.MATCH_MINUTES * 60,
 			"bench": career.bench_players(),
 			"referee": App.data.referee,
-			"entourage": {MatchSim.Side.HOME: career.entourage_members()},
+			"entourage": {
+				MatchSim.Side.HOME: career.entourage_members(),
+				MatchSim.Side.AWAY: App.data.entourage_members(opponent.entourage),
+			},
+			"bonus": {MatchSim.Side.AWAY: opponent.bonus},
 		}
 	)
 
@@ -120,6 +124,7 @@ func _build_dice() -> void:
 			var face := TextureRect.new()
 			face.position = background.position
 			face.size = DICE_SIZE
+			face.visible = false  ## No side shows until the dice are rolled.
 			add_child(face)
 			faces.append(face)
 
@@ -167,7 +172,7 @@ func _name_rollers(side: int) -> void:
 	for index in _dice[side].size():
 		var face: TextureRect = _dice[side][index]
 		face.texture = null
-		face.visible = index < slots.size()
+		face.visible = false
 
 
 func _build_controls() -> void:

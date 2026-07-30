@@ -190,11 +190,17 @@ func buy_kit(kit_id: int, price: int, is_shirt: bool) -> bool:
 	return true
 
 
+## The original sold most of the wardrobe as in-app purchases; with no store to
+## talk to, any kit the bundle describes may be worn.
 func wear(kit_id: int, is_shirt: bool) -> bool:
-	if is_shirt and kit_id in owned_shirts:
+	if is_shirt and _data.kit(kit_id) != null:
 		shirt = kit_id
-	elif not is_shirt and kit_id in owned_pants:
+		if not kit_id in owned_shirts:
+			owned_shirts.append(kit_id)
+	elif not is_shirt and kit_id > 0:
 		pants = kit_id
+		if not kit_id in owned_pants:
+			owned_pants.append(kit_id)
 	else:
 		return false
 	save()

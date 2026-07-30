@@ -47,6 +47,7 @@ var stats := {
 
 var _abilities: Dictionary
 var _entourage := {Side.HOME: [], Side.AWAY: []}
+var _bonus := {Side.HOME: 0, Side.AWAY: 0}
 var _rng := RandomNumberGenerator.new()
 var _referee: PlayerRecord
 
@@ -70,6 +71,10 @@ func _init(
 		var members: Dictionary = options["entourage"]
 		for side: int in members:
 			_entourage[side] = members[side]
+	if options.has("bonus"):
+		var bonuses: Dictionary = options["bonus"]
+		for side: int in bonuses:
+			_bonus[side] = int(bonuses[side])
 	if options.has("seed"):
 		_rng.seed = int(options["seed"])
 	else:
@@ -115,6 +120,7 @@ func start_encounter() -> Encounter:
 			"shot": shot,
 			"player_side": Side.HOME,
 			"entourage": _entourage,
+			"bonus": _bonus,
 			"context": {
 				"seconds_remaining": seconds_remaining,
 				"goals_for": score[Side.HOME],

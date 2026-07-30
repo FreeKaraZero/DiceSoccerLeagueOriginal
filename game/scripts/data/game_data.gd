@@ -63,6 +63,15 @@ func entourage_member(id: int) -> EntourageRecord:
 	return entourage.get(id)
 
 
+func entourage_members(ids: Array[int]) -> Array[EntourageRecord]:
+	var members: Array[EntourageRecord] = []
+	for id in ids:
+		var member := entourage_member(id)
+		if member != null:
+			members.append(member)
+	return members
+
+
 func achievement(id: int) -> AchievementRecord:
 	return achievements.get(id)
 

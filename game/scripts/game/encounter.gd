@@ -53,6 +53,10 @@ func _init(
 		team_bonus[side] = 0
 		entourage[side] = []
 	_context = options.get("context", {})
+	# PBonus: the flat bonus a fixture gives its team in the later seasons.
+	var bonuses: Dictionary = options.get("bonus", {})
+	for side: int in bonuses:
+		team_bonus[side] = int(bonuses[side])
 	var members: Dictionary = options.get("entourage", {})
 	for side: int in members:
 		entourage[side] = members[side]
