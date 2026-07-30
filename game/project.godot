@@ -1,0 +1,28 @@
+; Engine configuration file.
+; https://docs.godotengine.org/en/stable/tutorials/editor/project_settings.html
+
+config_version=5
+
+[application]
+
+config/name="Dice Soccer"
+config/description="Native remake of the 2012 iOS game Dice Soccer, driven by the data of the original bundle."
+run/main_scene="res://scenes/main_menu.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[autoload]
+
+App="*res://scripts/app.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=960
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=1

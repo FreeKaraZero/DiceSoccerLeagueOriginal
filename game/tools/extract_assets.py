@@ -2,7 +2,8 @@
 """Extract the original Dice Soccer iOS bundle into engine-agnostic assets.
 
 Reads ``Payload/Dice Soccer.app`` (binary plists, cocos2d spritesheets, audio)
-and writes plain JSON plus upright PNG atlases into ``remake/public``.
+and writes plain JSON plus upright PNGs into ``game/assets``, where Godot
+imports them as ordinary resources.
 
 Usage: python3 tools/extract_assets.py [--src <app bundle>] [--out <dir>]
 """
@@ -78,53 +79,18 @@ def extract_frame(sheet: Image.Image, frame: Frame) -> Image.Image:
     return out
 
 
-def shelf_pack(sizes: list[tuple[str, int, int]], max_width: int = 2048) -> tuple[dict[str, tuple[int, int]], int, int]:
-    """Pack rectangles into rows sorted by descending height."""
-    positions: dict[str, tuple[int, int]] = {}
-    x = y = row_height = width = 0
-    for name, w, h in sorted(sizes, key=lambda s: -s[2]):
-        if x + w > max_width:
-            x = 0
-            y += row_height
-            row_height = 0
-        positions[name] = (x, y)
-        x += w
-        width = max(width, x)
-        row_height = max(row_height, h)
-    return positions, width, y + row_height
-
-
-def convert_spritesheet(plist_path: Path, data: dict, out_dir: Path) -> None:
+def convert_spritesheet(plist_path: Path, data: dict, out_dir: Path) -> int:
+    """Explode a cocos2d sheet into one upright PNG per frame."""
     png_path = plist_path.with_suffix(".png")
     if not png_path.exists():
-        return
-    frames = [parse_frame(name, info) for name, info in data["frames"].items()]
+        return 0
     sheet = open_image(png_path)
-    images = {f.name: extract_frame(sheet, f) for f in frames}
-
-    positions, width, height = shelf_pack([(f.name, f.source_w, f.source_h) for f in frames])
-    atlas = Image.new("RGBA", (max(width, 1), max(height, 1)))
-    json_frames = {}
-    for frame in frames:
-        x, y = positions[frame.name]
-        atlas.paste(images[frame.name], (x, y))
-        json_frames[frame.name] = {
-            "frame": {"x": x, "y": y, "w": frame.source_w, "h": frame.source_h},
-            "rotated": False,
-            "trimmed": False,
-            "sourceSize": {"w": frame.source_w, "h": frame.source_h},
-            "spriteSourceSize": {"x": 0, "y": 0, "w": frame.source_w, "h": frame.source_h},
-        }
-
-    name = atlas_name(plist_path.stem)
-    (out_dir / "atlas").mkdir(parents=True, exist_ok=True)
-    atlas.save(out_dir / "atlas" / f"{name}.png")
-    (out_dir / "atlas" / f"{name}.json").write_text(
-        json.dumps(
-            {"frames": json_frames, "meta": {"image": f"{name}.png", "size": {"w": atlas.width, "h": atlas.height}, "scale": "1"}},
-            indent=1,
-        )
-    )
+    target = out_dir / "sprites" / atlas_name(plist_path.stem)
+    target.mkdir(parents=True, exist_ok=True)
+    for name, info in data["frames"].items():
+        frame = parse_frame(name, info)
+        extract_frame(sheet, frame).save(target / f"{Path(frame.name).stem}.png")
+    return len(data["frames"])
 
 
 def atlas_name(stem: str) -> str:
@@ -156,7 +122,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     here = Path(__file__).resolve().parents[1]
     parser.add_argument("--src", type=Path, default=here.parent / "Payload" / "Dice Soccer.app")
-    parser.add_argument("--out", type=Path, default=here / "public")
+    parser.add_argument("--out", type=Path, default=here / "assets")
     args = parser.parse_args()
 
     src: Path = args.src
@@ -164,19 +130,20 @@ def main() -> None:
     if not src.is_dir():
         raise SystemExit(f"original app bundle not found: {src}")
 
-    for sub in ("data", "atlas", "images", "audio", "fonts"):
+    for sub in ("data", "sprites", "images", "audio", "fonts"):
         shutil.rmtree(out / sub, ignore_errors=True)
         (out / sub).mkdir(parents=True, exist_ok=True)
 
     sheet_names: set[str] = set()
     data_files = 0
     sheets = 0
+    frames = 0
     for plist_path in preferred_plists(src):
         with plist_path.open("rb") as handle:
             data = plistlib.load(handle)
         if is_spritesheet(data):
             sheet_names.add(atlas_name(plist_path.stem))
-            convert_spritesheet(plist_path, data, out)
+            frames += convert_spritesheet(plist_path, data, out)
             sheets += 1
         elif plist_path.stem not in SKIPPED_DATA:
             (out / "data" / f"{atlas_name(plist_path.stem)}.json").write_text(json.dumps(data, indent=1, default=str))
@@ -194,7 +161,7 @@ def main() -> None:
     for font in sorted(src.glob("*.ttf")):
         shutil.copy2(font, out / "fonts" / font.name)
 
-    print(f"data: {data_files} json, atlases: {sheets}, loose images: {images}")
+    print(f"data: {data_files} json, sheets: {sheets} ({frames} sprites), loose images: {images}")
 
 
 if __name__ == "__main__":
