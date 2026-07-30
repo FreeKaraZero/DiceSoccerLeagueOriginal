@@ -1,0 +1,27 @@
+{
+  "name": "dice-soccer-remake",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Modern web remake of the 2012 iOS game Dice Soccer, driven by the data extracted from the original bundle",
+  "scripts": {
+    "extract": "python3 tools/extract_assets.py",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "phaser": "3.87.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.17.0",
+    "eslint": "9.17.0",
+    "typescript": "5.7.2",
+    "typescript-eslint": "8.19.0",
+    "vite": "6.0.7",
+    "vitest": "2.1.8"
+  }
+}
