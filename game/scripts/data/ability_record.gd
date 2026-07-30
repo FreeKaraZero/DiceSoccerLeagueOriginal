@@ -11,6 +11,8 @@ var trigger: int
 var buff_type: int
 var buff_slot: int
 var buff_target: int
+## LocalReroll: the ability also rolls the die it sits on again.
+var local_reroll: int
 
 
 static func from_dict(id_: int, raw: Dictionary) -> AbilityRecord:
@@ -23,4 +25,5 @@ static func from_dict(id_: int, raw: Dictionary) -> AbilityRecord:
 	ability.buff_type = int(raw.get("BuffType", 0))
 	ability.buff_slot = int(raw.get("BuffSlot", 0))
 	ability.buff_target = int(raw.get("BuffTarget", 0))
+	ability.local_reroll = int(raw.get("LocalReroll", 0))
 	return ability
