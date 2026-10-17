@@ -1,0 +1,149 @@
+{
+ "name": "ShopSS",
+ "frames": [
+  {
+   "name": "ShopMoneyPouch",
+   "sourceWidth": 308,
+   "sourceHeight": 224,
+   "offsetX": 97,
+   "offsetY": 46,
+   "textureX": 2,
+   "textureY": 386,
+   "textureWidth": 100,
+   "textureHeight": 118,
+   "rotated": false
+  },
+  {
+   "name": "ShirtTab",
+   "sourceWidth": 200,
+   "sourceHeight": 120,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 650,
+   "textureY": 302,
+   "textureWidth": 116,
+   "textureHeight": 192,
+   "rotated": true
+  },
+  {
+   "name": "ShortsTab",
+   "sourceWidth": 200,
+   "sourceHeight": 120,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 298,
+   "textureY": 386,
+   "textureWidth": 192,
+   "textureHeight": 116,
+   "rotated": false
+  },
+  {
+   "name": "ShopBox",
+   "sourceWidth": 308,
+   "sourceHeight": 230,
+   "offsetX": 9,
+   "offsetY": 10,
+   "textureX": 598,
+   "textureY": 2,
+   "textureWidth": 212,
+   "textureHeight": 298,
+   "rotated": true
+  },
+  {
+   "name": "CoinsTab",
+   "sourceWidth": 200,
+   "sourceHeight": 120,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 812,
+   "textureY": 2,
+   "textureWidth": 192,
+   "textureHeight": 116,
+   "rotated": false
+  },
+  {
+   "name": "ShirtTabPressed",
+   "sourceWidth": 200,
+   "sourceHeight": 120,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 532,
+   "textureY": 302,
+   "textureWidth": 116,
+   "textureHeight": 192,
+   "rotated": true
+  },
+  {
+   "name": "ShopSoldOut",
+   "sourceWidth": 400,
+   "sourceHeight": 392,
+   "offsetX": 11,
+   "offsetY": 6,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 380,
+   "textureHeight": 382,
+   "rotated": true
+  },
+  {
+   "name": "ShortsTabPressed",
+   "sourceWidth": 200,
+   "sourceHeight": 120,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 104,
+   "textureY": 386,
+   "textureWidth": 192,
+   "textureHeight": 116,
+   "rotated": false
+  },
+  {
+   "name": "CoinsTabPressed",
+   "sourceWidth": 200,
+   "sourceHeight": 120,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 768,
+   "textureY": 302,
+   "textureWidth": 116,
+   "textureHeight": 192,
+   "rotated": true
+  },
+  {
+   "name": "ShopCoin",
+   "sourceWidth": 40,
+   "sourceHeight": 40,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 384,
+   "textureY": 302,
+   "textureWidth": 40,
+   "textureHeight": 40,
+   "rotated": false
+  },
+  {
+   "name": "ShopBoxPressed",
+   "sourceWidth": 308,
+   "sourceHeight": 230,
+   "offsetX": 9,
+   "offsetY": 10,
+   "textureX": 384,
+   "textureY": 2,
+   "textureWidth": 212,
+   "textureHeight": 298,
+   "rotated": true
+  },
+  {
+   "name": "ShopMoneyBar",
+   "sourceWidth": 210,
+   "sourceHeight": 40,
+   "offsetX": 5,
+   "offsetY": 1,
+   "textureX": 492,
+   "textureY": 302,
+   "textureWidth": 38,
+   "textureHeight": 204,
+   "rotated": true
+  }
+ ]
+}

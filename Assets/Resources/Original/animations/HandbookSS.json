@@ -1,0 +1,161 @@
+{
+ "name": "HandbookSS",
+ "frames": [
+  {
+   "name": "Handbook4",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 36,
+   "offsetY": 123,
+   "textureX": 668,
+   "textureY": 1224,
+   "textureWidth": 618,
+   "textureHeight": 504,
+   "rotated": true
+  },
+  {
+   "name": "Handbook1",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 31,
+   "offsetY": 123,
+   "textureX": 578,
+   "textureY": 2,
+   "textureWidth": 662,
+   "textureHeight": 532,
+   "rotated": true
+  },
+  {
+   "name": "HandbookRightArrowDisabled",
+   "sourceWidth": 178,
+   "sourceHeight": 82,
+   "offsetX": 3,
+   "offsetY": 1,
+   "textureX": 754,
+   "textureY": 536,
+   "textureWidth": 174,
+   "textureHeight": 80,
+   "rotated": false
+  },
+  {
+   "name": "HandbookLeftArrow",
+   "sourceWidth": 178,
+   "sourceHeight": 82,
+   "offsetX": 1,
+   "offsetY": 1,
+   "textureX": 578,
+   "textureY": 618,
+   "textureWidth": 174,
+   "textureHeight": 80,
+   "rotated": false
+  },
+  {
+   "name": "Handbook6",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 61,
+   "offsetY": 123,
+   "textureX": 2,
+   "textureY": 1352,
+   "textureWidth": 474,
+   "textureHeight": 626,
+   "rotated": false
+  },
+  {
+   "name": "Handbook3",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 21,
+   "offsetY": 123,
+   "textureX": 668,
+   "textureY": 700,
+   "textureWidth": 648,
+   "textureHeight": 522,
+   "rotated": true
+  },
+  {
+   "name": "HandbookRightArrow",
+   "sourceWidth": 178,
+   "sourceHeight": 82,
+   "offsetX": 3,
+   "offsetY": 1,
+   "textureX": 578,
+   "textureY": 536,
+   "textureWidth": 174,
+   "textureHeight": 80,
+   "rotated": false
+  },
+  {
+   "name": "Handbook5",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 41,
+   "offsetY": 123,
+   "textureX": 1242,
+   "textureY": 2,
+   "textureWidth": 628,
+   "textureHeight": 522,
+   "rotated": true
+  },
+  {
+   "name": "Handbook2",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 31,
+   "offsetY": 123,
+   "textureX": 2,
+   "textureY": 816,
+   "textureWidth": 664,
+   "textureHeight": 534,
+   "rotated": true
+  },
+  {
+   "name": "HandbookBG",
+   "sourceWidth": 594,
+   "sourceHeight": 826,
+   "offsetX": 12,
+   "offsetY": 5,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 574,
+   "textureHeight": 812,
+   "rotated": false
+  },
+  {
+   "name": "HandbookLeftArrowPressed",
+   "sourceWidth": 178,
+   "sourceHeight": 82,
+   "offsetX": 1,
+   "offsetY": 1,
+   "textureX": 1106,
+   "textureY": 608,
+   "textureWidth": 174,
+   "textureHeight": 80,
+   "rotated": false
+  },
+  {
+   "name": "HandbookRightArrowPressed",
+   "sourceWidth": 178,
+   "sourceHeight": 82,
+   "offsetX": 3,
+   "offsetY": 1,
+   "textureX": 930,
+   "textureY": 536,
+   "textureWidth": 174,
+   "textureHeight": 80,
+   "rotated": false
+  },
+  {
+   "name": "HandbookLeftArrowDisabled",
+   "sourceWidth": 178,
+   "sourceHeight": 82,
+   "offsetX": 1,
+   "offsetY": 1,
+   "textureX": 1242,
+   "textureY": 526,
+   "textureWidth": 174,
+   "textureHeight": 80,
+   "rotated": false
+  }
+ ]
+}

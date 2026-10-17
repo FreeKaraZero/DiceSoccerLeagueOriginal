@@ -1,0 +1,87 @@
+{
+ "10": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Bench is locked until you finish the first two matches!"
+  ]
+ },
+ "2": {
+  "CustomPopup": [],
+  "PopupText": [
+   "MANAGE is currently disabled! Finish the first match to gain access!"
+  ]
+ },
+ "3": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Go into MANAGE mode to make team changes before the next match!"
+  ]
+ },
+ "11": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Please update to the latest version to play against other players!"
+  ]
+ },
+ "4": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Tap on Jerry Hattrick (the old guy) in order to replace him."
+  ]
+ },
+ "5": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Find Randy Johnson under the green MID tab at the bottom of your screen. Then HIRE and SELECT him!"
+  ]
+ },
+ "12": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Your opponent is running an older version of the game and cannot play against you!"
+  ]
+ },
+ "6": {
+  "CustomPopup": [],
+  "PopupText": [
+   "We need to fill all 7 slots in the main team before going into the match!"
+  ]
+ },
+ "13": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Please connect to the Internet to access this feature!"
+  ]
+ },
+ "7": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Access to this TOURNAMENT is still restricted! Complete more league games to be worthy of entry!"
+  ]
+ },
+ "LastID": 14,
+ "8": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Tap on MANAGE to make changes to our team first!"
+  ]
+ },
+ "14": {
+  "CustomPopup": [],
+  "PopupText": [
+   "iCloud is only supported on iOS 5 and above!"
+  ]
+ },
+ "1": {
+  "CustomPopup": [],
+  "PopupText": [
+   "The deck is currently locked! Go PLAY and come back later!"
+  ]
+ },
+ "9": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Multiplayer is locked until the end of Training!"
+  ]
+ }
+}

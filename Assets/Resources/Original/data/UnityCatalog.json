@@ -1,0 +1,8332 @@
+{
+ "players": [
+  {
+   "id": 0,
+   "name": "Player 0",
+   "position": "",
+   "cost": 0,
+   "sellingPrice": 0,
+   "imageId": 0,
+   "skinColour": 2,
+   "description": "",
+   "unlockCriteria": "",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    10,
+    32,
+    32,
+    32,
+    32,
+    32
+   ]
+  },
+  {
+   "id": 1,
+   "name": "Willy the Kid",
+   "position": "GK",
+   "cost": 0,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Though the big kids will only let him play goalie, Willy's always wanted to be a soccer star. What he lacks in size, he'll make up in heart.",
+   "unlockCriteria": "",
+   "superpower": 67,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    16,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Earnest Mulligan",
+   "position": "DEF",
+   "cost": 50,
+   "sellingPrice": 30,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Sport might not be his forte, but he'll put mind over matter if his best friend Willy needs him. Always of assistance, Ernie is great at getting you out of a bad roll.",
+   "unlockCriteria": "",
+   "superpower": 61,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Jo Lee-Roger",
+   "position": "DEF",
+   "cost": 50,
+   "sellingPrice": 26,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Josephine may look like the typical girl next door, but this tomboy packs a mean tackle! Especially if you call her by her real name!",
+   "unlockCriteria": "",
+   "superpower": 53,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Sherman 'Tank'",
+   "position": "DEF",
+   "cost": 40,
+   "sellingPrice": 26,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Sherman is the local thug who'll always get you out of a spot before he gets into one. So when Willy needed an extra defender on his DSL team, his older brother was happy to oblige.",
+   "unlockCriteria": "",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 5,
+   "name": "Randy Johnson",
+   "position": "MID",
+   "cost": 100,
+   "sellingPrice": 65,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Randy is completely nuts! And winning is not the only STREAK he's crazy about. Better to have him on your team than on theirs! Look out for those exhibition matches.",
+   "unlockCriteria": "",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    31,
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 6,
+   "name": "David Little",
+   "position": "FWD",
+   "cost": 100,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Don't judge David by his acne and braces. This giant-killer can pack quite the punch when deployed behind enemy lines. Underestimate him at your own peril!",
+   "unlockCriteria": "",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 7,
+   "name": "Justin Huff",
+   "position": "FWD",
+   "cost": 400,
+   "sellingPrice": 260,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "A true lover of the game, and always ready to fight for the underdogs, Justin brings much needed post-pubescent height to the starting lineup.",
+   "unlockCriteria": "",
+   "superpower": 75,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 8,
+   "name": "Jerry Hat-trick",
+   "position": "FWD",
+   "cost": 800,
+   "sellingPrice": 520,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Jerry was once the greatest striker in all of football. Though age has since caught up with him, he still has a trick or two up his sleeve.",
+   "unlockCriteria": "To Unlock, Complete all Training matches!!",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    16,
+    16,
+    2,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "id": 9,
+   "name": "Jose Heartbreak",
+   "position": "GK",
+   "cost": 5000,
+   "sellingPrice": 3300,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "He's been known to let a few in from time to time, but now that he's moved out of the City, he's set on getting rid of his blues.",
+   "unlockCriteria": "To Unlock, concede zero goals in one game!!",
+   "superpower": 76,
+   "gender": 0,
+   "diceSides": [
+    1,
+    16,
+    2,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 10,
+   "name": "Linus Backer",
+   "position": "DEF",
+   "cost": 1200,
+   "sellingPrice": 780,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Linus Backer was born to play football. Unfortunately, a slight mixup with his athletic scholarship drafted him into the wrong kind of football program.",
+   "unlockCriteria": "Complete 6 Matches in the Season 1 League!",
+   "superpower": 72,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 11,
+   "name": "Sheikh Ab. II",
+   "position": "DEF",
+   "cost": 800,
+   "sellingPrice": 520,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "An exchange student at Dice Soccer High, Sheikh Abdullah II's family wealth is partly behind the formation of the Dice Soccer League.",
+   "unlockCriteria": "Hoard 10000 cash in your bank!",
+   "superpower": 56,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 12,
+   "name": "Marshall Artz",
+   "position": "DEF",
+   "cost": 800,
+   "sellingPrice": 520,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Marshall is the other exchange student at Dice Soccer High. He is a scheming competitor and will stop at nothing to achieve world domination. And victory. ",
+   "unlockCriteria": "To unlock, Visit the Dice Soccer Federation Authorities and sit through their presentation!",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    16,
+    16,
+    2,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 13,
+   "name": "Marc Bullock",
+   "position": "MID",
+   "cost": 5000,
+   "sellingPrice": 3250,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Marc Bullock is a tough contender and is built like an ox. After ending a successful career in Germany, he comes to the Dice Soccer League in search of new horns to lock!",
+   "unlockCriteria": "Complete 4 Matches in Tournament 1 of Season 1!",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    31,
+    2,
+    3,
+    3,
+    4,
+    31
+   ]
+  },
+  {
+   "id": 14,
+   "name": "Barney Hulligan",
+   "position": "FWD",
+   "cost": 2000,
+   "sellingPrice": 1300,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Formerly a devout and boisterous fan of Footchester United, Dice Soccer gave Barney the chance to make his footballing dreams come true, both on and off the field.",
+   "unlockCriteria": "Complete 1 Match in the Season 1 League!",
+   "superpower": 46,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 15,
+   "name": "Johnny Speed",
+   "position": "FWD",
+   "cost": 1500,
+   "sellingPrice": 975,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Johnny is Jimmy's first cousin once removed. His unique athleticism in an otherwise pedestrian lineup makes him a difficult target for the opposition to hold down.",
+   "unlockCriteria": "Complete Match 2 of the Training Season!",
+   "superpower": 48,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 16,
+   "name": "Jack von Strapp",
+   "position": "FWD",
+   "cost": 5000,
+   "sellingPrice": 3250,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Bully. Jock. Prom King. von Strapp has done it all. Now all he would like to do is kick some little kids' rears on the Dice Soccer field. ",
+   "unlockCriteria": "Win all your Training matches!",
+   "superpower": 43,
+   "gender": 0,
+   "diceSides": [
+    1,
+    16,
+    16,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 17,
+   "name": "King Jim",
+   "position": "GK",
+   "cost": 30000,
+   "sellingPrice": 19500,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "King Jim has spent many years as goalie for some of England's best teams. With retirement around the corner, Dice Soccer seemed like a good place to spend his time while he continues to collect art.",
+   "unlockCriteria": "Complete 2 Matches in Tournament 2 of Season 1!",
+   "superpower": 62,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 18,
+   "name": "Bob Zomby",
+   "position": "DEF",
+   "cost": 10000,
+   "sellingPrice": 6500,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Bob eats, breathes and lives soccer. And at this rate he'll probably die soccer too. Which makes him a great member of any Dice Soccer team.",
+   "unlockCriteria": "Complete 9 Matches in Season 1's League!",
+   "superpower": 46,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 19,
+   "name": "Bryan Nelson",
+   "position": "DEF",
+   "cost": 10000,
+   "sellingPrice": 5850,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "After getting tired of regulation Soccer, Bryan chose to transfer to the DSL rather than go back to his hometown in New Zealand.",
+   "unlockCriteria": "Complete 2 matches in Tournament 1 of Season 1!",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 20,
+   "name": "Latent Paines",
+   "position": "DEF",
+   "cost": 10000,
+   "sellingPrice": 6500,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Latent Paines is a solid defender who can bring a snowballing attack to a complete standstill. Just make sure you roll what he needs!",
+   "unlockCriteria": "Complete 4 Matches in Tournament 2 of Season 1!",
+   "superpower": 57,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 21,
+   "name": "Steve Jeopardy",
+   "position": "MID",
+   "cost": 11000,
+   "sellingPrice": 7150,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Stevie J is a living legend, a hero in his hometown of Lillypool, and now he's come to make another name for himself in the Dice Soccer League that's quickly gathering momentum!",
+   "unlockCriteria": "To Unlock, Roll a total of 20 or more!",
+   "superpower": 61,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    3,
+    3,
+    5
+   ]
+  },
+  {
+   "id": 22,
+   "name": "Ray Beeze",
+   "position": "FWD",
+   "cost": 17000,
+   "sellingPrice": 11050,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Ray is the kinda player who's always hungry for the ball. But his bark can often be worse than his bite. Make sure his ponytail is wagging!",
+   "unlockCriteria": "To Unlock, Roll a total of 0!",
+   "superpower": 47,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    2,
+    6,
+    7
+   ]
+  },
+  {
+   "id": 23,
+   "name": "Antonio Lucacci",
+   "position": "FWD",
+   "cost": 20000,
+   "sellingPrice": 13000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "This Italian stallion will give you a run for your money. His ability to turn a game on its head makes him an asset to any team!",
+   "unlockCriteria": "To Unlock, Win 10 matches!",
+   "superpower": 44,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    3,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 24,
+   "name": "Solo Kilo",
+   "position": "FWD",
+   "cost": 15000,
+   "sellingPrice": 9750,
+   "imageId": 1,
+   "skinColour": 5,
+   "description": "From the Ivorian coasts comes Solo Kilo, leading the waves of Pro footballers who are taking kindly towards this new form of the sport!",
+   "unlockCriteria": "Score 3 goals in a single game!",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    17,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 25,
+   "name": "Jolly Kaisaro",
+   "position": "GK",
+   "cost": 90000,
+   "sellingPrice": 58500,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "The Brazilian Custodian, as he is commonly called, finds goalkeeping with dice a little easier on the knees than his previous assignment.",
+   "unlockCriteria": "To Unlock, roll a total of 50 or more!",
+   "superpower": 53,
+   "gender": 0,
+   "diceSides": [
+    2,
+    17,
+    3,
+    3,
+    3,
+    5
+   ]
+  },
+  {
+   "id": 26,
+   "name": "Davy Loose",
+   "position": "DEF",
+   "cost": 19000,
+   "sellingPrice": 12350,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Dave Loose just completed an expensive transfer to one of England's top clubs. But even they couldn't keep him for long, once the appeal of the DSL grew.",
+   "unlockCriteria": "To Unlock, Win 20 matches!",
+   "superpower": 80,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    4,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 27,
+   "name": "Jen Glonson",
+   "position": "DEF",
+   "cost": 22000,
+   "sellingPrice": 14300,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "Jen is a dogged defender, and his former Lillypool team-mates will defend that. But rolling in the grass is so much more fun when you're dice, isn't it?",
+   "unlockCriteria": "I'll be available once you unlock players 1-16!",
+   "superpower": 34,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 28,
+   "name": "Tommy Vermillion",
+   "position": "DEF",
+   "cost": 25000,
+   "sellingPrice": 16250,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Tommy loves obscure shades of red and orange. But don't get distracted - this Belgian defender will break intercept your blitz!",
+   "unlockCriteria": "To Unlock, survive the infamous Chancy FC!",
+   "superpower": 79,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 29,
+   "name": "Three Lung Park",
+   "position": "MID",
+   "cost": 55000,
+   "sellingPrice": 24000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Doctors have concluded that the only explanation behind the Korean star's stamina and endurance is that he was born with an extra lung.",
+   "unlockCriteria": "Win 1 Match in Tournament 2 of Season 2!",
+   "superpower": 63,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    31,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 30,
+   "name": "Wiley Sniper",
+   "position": "FWD",
+   "cost": 63000,
+   "sellingPrice": 40950,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "He's a cunning ol' coyote, he is. Give him even half a chance and he'll take it away from you and finish in style. There's no going dutch with this Dutchman!",
+   "unlockCriteria": "To Unlock, Win all matches of Season 1 League!",
+   "superpower": 81,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 31,
+   "name": "Sammy Nazareth",
+   "position": "FWD",
+   "cost": 78000,
+   "sellingPrice": 50700,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "This French messiah was making all the transfer headlines in England before he decided to join the exodus and become a part of the DSL.",
+   "unlockCriteria": "To Unlock, finish 10 matches in a draw!",
+   "superpower": 28,
+   "gender": 0,
+   "diceSides": [
+    2,
+    3,
+    3,
+    3,
+    4,
+    6
+   ]
+  },
+  {
+   "id": 32,
+   "name": "Blanc Bribery",
+   "position": "FWD",
+   "cost": 92000,
+   "sellingPrice": 59800,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Beware of Blanc! The Frenchman is a big threat in the German leagues and will rob you of your possession in broad daylight if you don't watch him like a hawk.",
+   "unlockCriteria": "To Unlock, Win Tournament 1.1!",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    16,
+    2,
+    17,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 33,
+   "name": "Twin Powered",
+   "position": "GK",
+   "cost": 200000,
+   "sellingPrice": 130000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "This All-American is tall, strong, and quick; he's good enough to even be a striker! He'll have you seeing stars and stripes if you try and score!",
+   "unlockCriteria": "To Unlock, make the enemy roll a Zero total!",
+   "superpower": 75,
+   "gender": 0,
+   "diceSides": [
+    2,
+    3,
+    3,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 34,
+   "name": "Glee Cliche",
+   "position": "DEF",
+   "cost": 52000,
+   "sellingPrice": 33800,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "He might seem like just another Pro footballer trying to cash in on the DSL mania, but Glee's no song and dance - he's got what it takes!",
+   "unlockCriteria": "To Unlock, Roll a 40 or more!",
+   "superpower": 71,
+   "gender": 0,
+   "diceSides": [
+    16,
+    17,
+    3,
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 35,
+   "name": "Zachary Santa",
+   "position": "DEF",
+   "cost": 60000,
+   "sellingPrice": 39000,
+   "imageId": 1,
+   "skinColour": 5,
+   "description": "Don't be fooled by the name - he's not giving away any presents this year, especially if you've been nice! He'll tackle you hard and won't even apologize after.",
+   "unlockCriteria": "To Unlock, roll a total of 30 or more!",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    2,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 36,
+   "name": "Kello the Tourist",
+   "position": "DEF",
+   "cost": 75000,
+   "sellingPrice": 48750,
+   "imageId": 1,
+   "skinColour": 5,
+   "description": "He may look like he's here for the sights and sounds, but he'll blindside you with tight marking. His brother Yoyo is rumored to be interested in the DSL too.",
+   "unlockCriteria": "Complete 4 Matches in the Season 2 League",
+   "superpower": 57,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    2,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 37,
+   "name": "Franklin Leinhart",
+   "position": "MID",
+   "cost": 50000,
+   "sellingPrice": 32500,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Good 'ol Franky was a stalwart back at Cheesy FC, before they lost the league and cleaned house. Good thing the DSL was growing up and looking for experienced players!",
+   "unlockCriteria": "Win 30 matches to unlock.",
+   "superpower": 39,
+   "gender": 0,
+   "diceSides": [
+    2,
+    31,
+    3,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 38,
+   "name": "Toby van Mercy",
+   "position": "FWD",
+   "cost": 200000,
+   "sellingPrice": 130000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "The assassin from the Netherlands is here to stake his claim on the DSL title. Young and full of vigor, he's a sucker for a well placed offside trap.",
+   "unlockCriteria": "To Unlock, concede 3 goals in one game!",
+   "superpower": 40,
+   "gender": 0,
+   "diceSides": [
+    1,
+    3,
+    3,
+    4,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 39,
+   "name": "Andy Robin",
+   "position": "FWD",
+   "cost": 320000,
+   "sellingPrice": 208000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "He's no sidekick. He'll kick it square in the ball. And score. Coz that's the Oranje way. ",
+   "unlockCriteria": "To Unlock, complete 12 Matches in Season 2's League!",
+   "superpower": 74,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    2,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 40,
+   "name": "Bertie Schweister",
+   "position": "FWD",
+   "cost": 500000,
+   "sellingPrice": 325000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Bertie is a German juggernaught. He'll blitz through your defensive lines faster than he made the switch to the DSL when he heard of its success.",
+   "unlockCriteria": "To Unlock, Win 1 Match in Tournament 1 of Season 2!",
+   "superpower": 81,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    17,
+    17,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 41,
+   "name": "Papa Raynor",
+   "position": "GK",
+   "cost": 810000,
+   "sellingPrice": 526500,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Raynor's a hard man to beat. It was hard to even convince the Spaniard to leave his club in England to come play in the Dice Soccer League.",
+   "unlockCriteria": "To Unlock, qualify for Season 2!",
+   "superpower": 62,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 42,
+   "name": "Mason",
+   "position": "DEF",
+   "cost": 125000,
+   "sellingPrice": 81250,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "Mason. One word that strikes fear into the hearts of even the heartiest of strikers. They've been known to freeze in their tracks at just the sight of him.",
+   "unlockCriteria": "To Unlock, Win tournament 1.2!",
+   "superpower": 19,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 43,
+   "name": "Dani Always",
+   "position": "DEF",
+   "cost": 150000,
+   "sellingPrice": 97500,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "Dani left the New Camp just recently when heard that a new league was forming. He's reliable, relentless and rearing to go!",
+   "unlockCriteria": "To Unlock, Win tournament 2.1!",
+   "superpower": 37,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 44,
+   "name": "Loco",
+   "position": "DEF",
+   "cost": 175000,
+   "sellingPrice": 113750,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Loco. Another name that drives forwards up the wall. When he and Mason combine, prepare for a Samba lockdown.",
+   "unlockCriteria": "Complete 3 Matches in Tournament 1 of Season 2!",
+   "superpower": 44,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 45,
+   "name": "Cesar Fabulas",
+   "position": "MID",
+   "cost": 130000,
+   "sellingPrice": 84500,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "He's a hard worker and a born leader. A rare Spaniard who made a living in England, he chose the DSL over going back to his home in the New Camp.",
+   "unlockCriteria": "Complete 5 Matches in Tournament 1 of Season 2!",
+   "superpower": 29,
+   "gender": 0,
+   "diceSides": [
+    2,
+    3,
+    3,
+    5,
+    5,
+    31
+   ]
+  },
+  {
+   "id": 46,
+   "name": "Dmitri Bubbletop",
+   "position": "FWD",
+   "cost": 700000,
+   "sellingPrice": 455000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "His laconian playing style is reminiscent of his humble Bulgarian origins. But his predatory skills live up to those of the deadliest of red devils.",
+   "unlockCriteria": "Unlock Players 17-32 and I'll be yours!",
+   "superpower": 80,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    4,
+    4,
+    5,
+    7
+   ]
+  },
+  {
+   "id": 47,
+   "name": "Sammy Uatu'u",
+   "position": "FWD",
+   "cost": 1000000,
+   "sellingPrice": 650000,
+   "imageId": 1,
+   "skinColour": 5,
+   "description": "Uatu'u is a watcher. And a waiter. His career isn't ending - it's just beginning to roll!",
+   "unlockCriteria": "To Unlock, Score 7 Goals in a game!",
+   "superpower": 58,
+   "gender": 0,
+   "diceSides": [
+    16,
+    17,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 48,
+   "name": "Manual Automator",
+   "position": "FWD",
+   "cost": 1500000,
+   "sellingPrice": 975000,
+   "imageId": 1,
+   "skinColour": 5,
+   "description": "The Automator, is a goal scoring machine. And from England to Spain to the DSL, he just won't stop rolling in the goals.",
+   "unlockCriteria": "Earn 119 Stars or buy him real cheap while you can!",
+   "superpower": 21,
+   "gender": 0,
+   "diceSides": [
+    3,
+    18,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 49,
+   "name": "Hector Hernandez",
+   "position": "GK",
+   "cost": 1500000,
+   "sellingPrice": 975000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "The goals don't come easy when he's on duty. He's got matador blood running in his veins. Ole!",
+   "unlockCriteria": "Complete 4 Matches in Season 3's League!",
+   "superpower": 81,
+   "gender": 0,
+   "diceSides": [
+    16,
+    16,
+    16,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 50,
+   "name": "Ricky Cavalier",
+   "position": "DEF",
+   "cost": 400000,
+   "sellingPrice": 260000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Rick's always up to his tricks in the locker room. But on the field, he's as steady as a rock. Just don't let him get you Rick-rolled.",
+   "unlockCriteria": "Earn 118 Stars or buy him real cheap while you can!",
+   "superpower": 59,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    4,
+    6
+   ]
+  },
+  {
+   "id": 51,
+   "name": "Pete Everlast",
+   "position": "DEF",
+   "cost": 500000,
+   "sellingPrice": 325000,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "The former French skipper loves turning a good contest on its head, and has had plenty of them in his time with the Diablos. The DSL better watch out!",
+   "unlockCriteria": "Lose 10 Matches and I'll come to your aid!",
+   "superpower": 44,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 52,
+   "name": "Paulse Alarm",
+   "position": "DEF",
+   "cost": 630000,
+   "sellingPrice": 409500,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "The German skipper gave up his national responsibilities just so that he could transfer to the promising and lucrative DSL. Surely he made the right choice?",
+   "unlockCriteria": "Win 40 Matches to Unlock!!",
+   "superpower": 69,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    2,
+    4,
+    4,
+    6
+   ]
+  },
+  {
+   "id": 53,
+   "name": "Dryin' Legs",
+   "position": "MID",
+   "cost": 300000,
+   "sellingPrice": 195000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Luck is temporary, class is permanent. 'Ol Legsy has been tearing it up since 1991 and continues to ravage and plunder even in the DSL.",
+   "unlockCriteria": "To Unlock, Win Tournament 2.2",
+   "superpower": 66,
+   "gender": 0,
+   "diceSides": [
+    31,
+    2,
+    2,
+    2,
+    4,
+    24
+   ]
+  },
+  {
+   "id": 54,
+   "name": "Teri Handry",
+   "position": "FWD",
+   "cost": 500000,
+   "sellingPrice": 325000,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "Teri prefers a much more hands-on approach to the game than other players. The DSL provides the Frenchman with one more chance to salvage his career.",
+   "unlockCriteria": "Hoard 2 Million in your bank to unlock!",
+   "superpower": 42,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    3,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 55,
+   "name": "McDonaldino",
+   "position": "FWD",
+   "cost": 1750000,
+   "sellingPrice": 1137500,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "With a grin that stretches from Brazil to Milan, you just know that he's lovin' it. The DSL couldn't have been happier when the trickster made the switch.",
+   "unlockCriteria": "Complete 3 Matches in Tournament 2 of Season 2!",
+   "superpower": 36,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    2,
+    5,
+    7
+   ]
+  },
+  {
+   "id": 56,
+   "name": "Charlie Estevez",
+   "position": "FWD",
+   "cost": 1500000,
+   "sellingPrice": 750000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "He is winning! The Argentinian star moved into the riches of City and moved out once more to the even greener pastures of the Dice Soccer League.",
+   "unlockCriteria": "Hoard 5 Million in your bank to unlock!",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    1,
+    17,
+    18,
+    2,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 57,
+   "name": "Pat Cheque",
+   "position": "GK",
+   "cost": 4000000,
+   "sellingPrice": 2600000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Pat dives head first into every encounter, and most of the time comes out on top. He's an inspiration to young goalkeepers back home in Prague.",
+   "unlockCriteria": "Win 1 Match in Tournament 2 of Season 3!",
+   "superpower": 41,
+   "gender": 0,
+   "diceSides": [
+    3,
+    5,
+    5,
+    5,
+    6,
+    9
+   ]
+  },
+  {
+   "id": 58,
+   "name": "Ashton Cool",
+   "position": "DEF",
+   "cost": 900000,
+   "sellingPrice": 585000,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "The iceman is never fazed, always composed in defense. The only time he heats up is when he's left on the bench!",
+   "unlockCriteria": "Complete 5 Matches in Tournament 2 of Season 2!",
+   "superpower": 42,
+   "gender": 0,
+   "diceSides": [
+    3,
+    4,
+    5,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "id": 59,
+   "name": "Jerry Pickaxe",
+   "position": "DEF",
+   "cost": 1500000,
+   "sellingPrice": 975000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "He's got an axe to grind and you better not be at the wrong end of it. He'll whittle you down before you know it and turn you in to firewood for the New Camp site.",
+   "unlockCriteria": "Spend 10 million on players and I'll join you!",
+   "superpower": 36,
+   "gender": 0,
+   "diceSides": [
+    1,
+    3,
+    3,
+    4,
+    6,
+    6
+   ]
+  },
+  {
+   "id": 60,
+   "name": "Narnia Villish",
+   "position": "DEF",
+   "cost": 2500000,
+   "sellingPrice": 1625000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "You'll never know where the ball lands up if you try running past the fearsome Narnia from Serbia. His favorite color is red and he's seen it plenty of times too.",
+   "unlockCriteria": "To Unlock, Roll a total of 60 or more!",
+   "superpower": 22,
+   "gender": 0,
+   "diceSides": [
+    1,
+    3,
+    3,
+    3,
+    5,
+    6
+   ]
+  },
+  {
+   "id": 61,
+   "name": "Andrew Fiesta",
+   "position": "MID",
+   "cost": 650000,
+   "sellingPrice": 422500,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Andy was one of the first few heavyweight world-class players to have left their own leagues in favor of the DSL. This is hopefully the start of a positive trend for the competition.",
+   "unlockCriteria": "Complete 8 Matches in Season 3's League!",
+   "superpower": 22,
+   "gender": 0,
+   "diceSides": [
+    2,
+    24,
+    31,
+    31,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 62,
+   "name": "Neo Ballcop",
+   "position": "FWD",
+   "cost": 1500000,
+   "sellingPrice": 750000,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "He's a firebrand, and he's the future of soccer. The DSL couldn't have asked for a better posterboy to join their ranks to promote the game to more youngsters out there.",
+   "unlockCriteria": "To Unlock, Qualify for Season 3!",
+   "superpower": 46,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    5,
+    5,
+    7
+   ]
+  },
+  {
+   "id": 63,
+   "name": "Zoltron Abrams",
+   "position": "FWD",
+   "cost": 4000000,
+   "sellingPrice": 2600000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Zolton's won more tournaments with more teams than anyone can keep track of. Time to add to the silverware with DSL trophies!",
+   "unlockCriteria": "To Unlock, score 5 goals in a single game!",
+   "superpower": 40,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 64,
+   "name": "David Chateau",
+   "position": "FWD",
+   "cost": 7000000,
+   "sellingPrice": 4550000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "With half his team quitting and joining the DSL, David has an easy choice: retire to his Spanish villa, or complete his destiny with dice.",
+   "unlockCriteria": "Unlock Players 33-48 and you'll get me too!",
+   "superpower": 54,
+   "gender": 0,
+   "diceSides": [
+    1,
+    3,
+    18,
+    18,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 65,
+   "name": "Flying Dutchman",
+   "position": "GK",
+   "cost": 5000000,
+   "sellingPrice": 3250000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "At the age of 40, he's still one of the best goalies in the world. Willy could learn a thing or two from him now that he's retiring from the Diablos.",
+   "unlockCriteria": "Win 50 Matches if you want me!",
+   "superpower": 78,
+   "gender": 0,
+   "diceSides": [
+    16,
+    6,
+    6,
+    6,
+    7,
+    7
+   ]
+  },
+  {
+   "id": 66,
+   "name": "Jeremy Carrier",
+   "position": "DEF",
+   "cost": 6500000,
+   "sellingPrice": 4225000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "He's a fighter. And he battles with concussive force. Which he can sometimes be at the receiving end of. But he's a fighter nonetheless.",
+   "unlockCriteria": "Roll a total of 70 or more!",
+   "superpower": 47,
+   "gender": 0,
+   "diceSides": [
+    1,
+    4,
+    5,
+    6,
+    7,
+    7
+   ]
+  },
+  {
+   "id": 67,
+   "name": "Ivan Brainovic",
+   "position": "DEF",
+   "cost": 5000000,
+   "sellingPrice": 3250000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Another Serb who enjoys the appeal of playing soccer with dice, Ivan was a key member of his former unit back at Cheesy FC.",
+   "unlockCriteria": "To Unlock, Roll a total of 100 or more!",
+   "superpower": 37,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "id": 68,
+   "name": "Jorges Beinsilli",
+   "position": "DEF",
+   "cost": 7500000,
+   "sellingPrice": 4875000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Jorges loves wearing black and white stripes and is one of the few Italians in the league currently. Can you help him find a matching kit?",
+   "unlockCriteria": "To Unlock, roll a total of 80 or more!",
+   "superpower": 36,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    5,
+    7
+   ]
+  },
+  {
+   "id": 69,
+   "name": "Footy Spice",
+   "position": "MID",
+   "cost": 3000000,
+   "sellingPrice": 1950000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Footy Spice is the glam king of the sport. When he joined the DSL, custom dice with his number imprinted sold like British pop records.",
+   "unlockCriteria": "To Unlock, Win all 6 tournaments!",
+   "superpower": 25,
+   "gender": 0,
+   "diceSides": [
+    31,
+    2,
+    4,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "id": 70,
+   "name": "El Toro",
+   "position": "FWD",
+   "cost": 7000000,
+   "sellingPrice": 4550000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "El Toro was one of the most expensive players bought by an English club - just before he ran into a spell of bad luck. Maybe the DSL can help him fix that?",
+   "unlockCriteria": "To Unlock, Win Tournament 3.1!",
+   "superpower": 80,
+   "gender": 0,
+   "diceSides": [
+    3,
+    4,
+    5,
+    6,
+    6,
+    8
+   ]
+  },
+  {
+   "id": 71,
+   "name": "Hugo Gonzalez",
+   "position": "FWD",
+   "cost": 2500000,
+   "sellingPrice": 650000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Gonzo, as he is known, loves finding the back of the net. But sometimes it can also be a pain in the neck.",
+   "unlockCriteria": "Win 1 Match in Tournament 1 of Season 3",
+   "superpower": 44,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    3,
+    5,
+    5,
+    7
+   ]
+  },
+  {
+   "id": 72,
+   "name": "Dido Dropbear",
+   "position": "FWD",
+   "cost": 6000000,
+   "sellingPrice": 3200000,
+   "imageId": 1,
+   "skinColour": 5,
+   "description": "He'll pounce at you out of nowhere and score without a word. From Ivory Coast to London, he's a force to reckon.",
+   "unlockCriteria": "Unlock all players from 49-64 and I'll join you too!",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    16,
+    17,
+    18,
+    6
+   ]
+  },
+  {
+   "id": 73,
+   "name": "Ikea Quesadillas",
+   "position": "GK",
+   "cost": 7000000,
+   "sellingPrice": 4550000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "He's not swedish nor mexican, but a salt of the earth Spaniard. And he'll protect his dice-goal just like he does in Madrid.",
+   "unlockCriteria": "Qualify for Season 4 to get me!",
+   "superpower": 33,
+   "gender": 0,
+   "diceSides": [
+    17,
+    17,
+    4,
+    6,
+    8,
+    10
+   ]
+  },
+  {
+   "id": 74,
+   "name": "Carlos The Wall",
+   "position": "DEF",
+   "cost": 9000000,
+   "sellingPrice": 5850000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Carlos puts the Mad in Madrid, when he plays against his archrivals. But the DSL is a place for new alliances to be formed.",
+   "unlockCriteria": "To Unlock, roll a total of 90 or more!",
+   "superpower": 39,
+   "gender": 0,
+   "diceSides": [
+    1,
+    4,
+    5,
+    7,
+    9,
+    9
+   ]
+  },
+  {
+   "id": 75,
+   "name": "Theo Fernando",
+   "position": "DEF",
+   "cost": 9000000,
+   "sellingPrice": 5850000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "With the twist of a shoulder Theo can turn a scoring chance into an offside trap. When he teams up with Narnia, it's improbable to score.",
+   "unlockCriteria": "Complete 3 Matches in Tournament 1 of Season 3!",
+   "superpower": 38,
+   "gender": 0,
+   "diceSides": [
+    16,
+    2,
+    3,
+    6,
+    6,
+    7
+   ]
+  },
+  {
+   "id": 76,
+   "name": "Jean Terrible",
+   "position": "DEF",
+   "cost": 10000000,
+   "sellingPrice": 6250000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Having Jean on the field is a terrible idea. For the opposition! Though he leads from the back, there's no affrontery that he won't spare you.",
+   "unlockCriteria": "Win Tournament 3.2 and I'll join you.",
+   "superpower": 82,
+   "gender": 0,
+   "diceSides": [
+    1,
+    17,
+    4,
+    5,
+    5,
+    6
+   ]
+  },
+  {
+   "id": 77,
+   "name": "Caliente Rollovo",
+   "position": "MID",
+   "cost": 1500000,
+   "sellingPrice": 975000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Caliente loves attention. Especially female attention. And he knows how to get it. He'll dribble and dive his way past enemy lines, and finish in style.",
+   "unlockCriteria": "Earn 120 Stars or buy him real cheap while you can!",
+   "superpower": 52,
+   "gender": 0,
+   "diceSides": [
+    24,
+    5,
+    5,
+    5,
+    5,
+    31
+   ]
+  },
+  {
+   "id": 78,
+   "name": "Vain Looney",
+   "position": "FWD",
+   "cost": 9000000,
+   "sellingPrice": 5850000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Looney's a loose cannon! He puts his foot in mouth as often as he put its it goal. He's a hard hitter, so make sure you have him set in a good position!",
+   "unlockCriteria": "To Unlock, Win all matches in Season 2 League!",
+   "superpower": 43,
+   "gender": 0,
+   "diceSides": [
+    1,
+    5,
+    4,
+    6,
+    10,
+    10
+   ]
+  },
+  {
+   "id": 79,
+   "name": "La Messy",
+   "position": "FWD",
+   "cost": 10000000,
+   "sellingPrice": 6600000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "The game is most beautiful when it's Messy. The irony is not lost on this poet with a powershot. You can lift your jaw off the floor now.",
+   "unlockCriteria": "Complete 3 Matches in Tournament 2 of Season 3!",
+   "superpower": 30,
+   "gender": 0,
+   "diceSides": [
+    3,
+    18,
+    3,
+    5,
+    6,
+    8
+   ]
+  },
+  {
+   "id": 80,
+   "name": "Kiki",
+   "position": "FWD",
+   "cost": 10200000,
+   "sellingPrice": 6500000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "What every soccer kid should aspire to be - A star on the field, and a human being off of it. Kiki's a real role model. He's also really expensive.",
+   "unlockCriteria": "To Unlock, Win All Matches in Season 3 League!",
+   "superpower": 57,
+   "gender": 0,
+   "diceSides": [
+    1,
+    17,
+    17,
+    18,
+    4,
+    9
+   ]
+  },
+  {
+   "id": 81,
+   "name": "Dave The Jewel",
+   "position": "GK",
+   "cost": 500000,
+   "sellingPrice": 250000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "This Spaniard's had a rough debut. He's young, agile and eager, and someday might even be as great as the Flying Dutchman.",
+   "unlockCriteria": "Concede a goal with less than 1:00 on the clock",
+   "superpower": 51,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    16,
+    16,
+    4,
+    8
+   ]
+  },
+  {
+   "id": 82,
+   "name": "Gabe Ketchup",
+   "position": "DEF",
+   "cost": 700000,
+   "sellingPrice": 350000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Gabe's a saucy competitor. He's fierce on defense and at his age he can still catch up to the fastest of forwards.",
+   "unlockCriteria": "Win Match 3 of T4.1",
+   "superpower": 52,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 83,
+   "name": "Syrio Romas",
+   "position": "DEF",
+   "cost": 8000000,
+   "sellingPrice": 5000000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Syrio would like nothing more than to win every trophy by beating his rival New Campers in the final. Let's hope he gets his wish.",
+   "unlockCriteria": "Complete Match 3 of League 4",
+   "superpower": 20,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 84,
+   "name": "Savio Confetti",
+   "position": "DEF",
+   "cost": 1000000,
+   "sellingPrice": 500000,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "The Argentine captain has years of experience under his belt. Don't cry for him unless you want him to have the last laugh.",
+   "unlockCriteria": "Complete Match 7 of League 4",
+   "superpower": 70,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    6,
+    6
+   ]
+  },
+  {
+   "id": 85,
+   "name": "Rowdy Morales",
+   "position": "MID",
+   "cost": 80000,
+   "sellingPrice": 40000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Rowdy's not the fairest of players. His morals when it comes to sportsmanship are as reliable as his hairdo and tattoos. He's got a sure foot nonetheless.",
+   "unlockCriteria": "Be denied a goal with less than 1:00 on the clock",
+   "superpower": 61,
+   "gender": 0,
+   "diceSides": [
+    24,
+    1,
+    2,
+    2,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 86,
+   "name": "Drogo Militante",
+   "position": "FWD",
+   "cost": 20000,
+   "sellingPrice": 10000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "If you want someone who can run like a horse, this is your man. Fast, furious and dogged in his pursuit, Drogo will seldom disappoint.",
+   "unlockCriteria": "Score a goal with less than 1:00 on the clock",
+   "superpower": 48,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    17,
+    17,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 87,
+   "name": "Robin Horde",
+   "position": "FWD",
+   "cost": 25000,
+   "sellingPrice": 12500,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "He'll score against the rich and the poor alike. He's come all the way from Brazil and he plans to take no prisoners. Watch out!",
+   "unlockCriteria": "Win 2 Multiplayer Matches",
+   "superpower": 75,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    16,
+    16,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 88,
+   "name": "Derry Cute",
+   "position": "FWD",
+   "cost": 7000000,
+   "sellingPrice": 3500000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "He's the new sweetheart of Lillypool team, or so he'd like to believe. Ever since his partner Toro left for bluer pastures, all eyes have been on Derry!",
+   "unlockCriteria": "Complete Match 11 of League 4",
+   "superpower": 52,
+   "gender": 0,
+   "diceSides": [
+    1,
+    16,
+    16,
+    5,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 89,
+   "name": "Faith Uno",
+   "position": "GK",
+   "cost": 7000000,
+   "sellingPrice": 3500000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "If you believe in Faith, she will never fail to deliver. She's anchored the American women's team many a time, with great performances in goal.",
+   "unlockCriteria": "Complete Match 1 of Tournament 4.1",
+   "superpower": 52,
+   "gender": 1,
+   "diceSides": [
+    16,
+    5,
+    5,
+    5,
+    5,
+    10
+   ]
+  },
+  {
+   "id": 90,
+   "name": "Crystal Rampage",
+   "position": "DEF",
+   "cost": 6000,
+   "sellingPrice": 3000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "This Crystal is far from delicate. Even the boys think twice about crossing the ball when she's around.",
+   "unlockCriteria": "Complete 1 Multiplayer Match",
+   "superpower": 77,
+   "gender": 1,
+   "diceSides": [
+    1,
+    2,
+    2,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 91,
+   "name": "Carl Darkhorse",
+   "position": "DEF",
+   "cost": 1200000,
+   "sellingPrice": 600000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "The captain of the Spanglers is a true leader, inspiring skeptical fans to think twice before writing of Dice Soccer as a real sport.",
+   "unlockCriteria": "Complete Match 2 of Tournament 4.2",
+   "superpower": 27,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    4,
+    4,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 92,
+   "name": "Mickey Coachson",
+   "position": "DEF",
+   "cost": 5000000,
+   "sellingPrice": 1250000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "The game runs in his blood! While his father coaches the national team, Mickey's busy doing his club and country proud, patriotic to the very core.",
+   "unlockCriteria": "Win Match 4 of Tournament 4.2",
+   "superpower": 55,
+   "gender": 0,
+   "diceSides": [
+    16,
+    2,
+    2,
+    3,
+    8,
+    8
+   ]
+  },
+  {
+   "id": 93,
+   "name": "Lauretta Chancy",
+   "position": "MID",
+   "cost": 5000000,
+   "sellingPrice": 1250000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "There's no lucky breaks with this gal from Indianapolis. Her goals get the ball rolling, and her assists will win matches.",
+   "unlockCriteria": "Win All League Matches in Season 4",
+   "superpower": 61,
+   "gender": 1,
+   "diceSides": [
+    24,
+    16,
+    17,
+    2,
+    5,
+    31
+   ]
+  },
+  {
+   "id": 94,
+   "name": "Alice Hogan",
+   "position": "FWD",
+   "cost": 8000000,
+   "sellingPrice": 4000000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Don't underestimate America's sweetheart. Once they opened up the league to women, she was the first in and has never looked back since.",
+   "unlockCriteria": "Qualify for Season 5 with at least 30 stars in Season 4",
+   "superpower": 50,
+   "gender": 1,
+   "diceSides": [
+    1,
+    16,
+    3,
+    18,
+    6,
+    6
+   ]
+  },
+  {
+   "id": 95,
+   "name": "Annie Winback",
+   "position": "FWD",
+   "cost": 6000000,
+   "sellingPrice": 3000000,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "She's got he wind in her sails and doesn't look like she'll be stopping any time soon. Annie leads from the front and scores the crucial winning goals.",
+   "unlockCriteria": "Win the First Tournament of Season 4",
+   "superpower": 60,
+   "gender": 1,
+   "diceSides": [
+    1,
+    2,
+    5,
+    5,
+    7,
+    8
+   ]
+  },
+  {
+   "id": 96,
+   "name": "Orlando Donahue",
+   "position": "FWD",
+   "cost": 6000000,
+   "sellingPrice": 3000000,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "The poster boy for American soccer, he's played at every level of the game and is now bringing his talents to an all new contest to conquer.",
+   "unlockCriteria": "Win the Second Tournament of Season 4",
+   "superpower": 49,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    5,
+    5,
+    7,
+    7
+   ]
+  },
+  {
+   "id": 1001,
+   "name": "Random",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    3
+   ]
+  },
+  {
+   "id": 1002,
+   "name": "Milito",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 21,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1003,
+   "name": "Heinze",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 59,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 1004,
+   "name": "Pepe",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    3,
+    4,
+    6
+   ]
+  },
+  {
+   "id": 1005,
+   "name": "Zanetti",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 76,
+   "gender": 0,
+   "diceSides": [
+    2,
+    3,
+    3,
+    4,
+    4,
+    7
+   ]
+  },
+  {
+   "id": 1006,
+   "name": "Random",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "id": 1007,
+   "name": "Joe Cole",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    3,
+    4,
+    4,
+    5,
+    5,
+    8
+   ]
+  },
+  {
+   "id": 1008,
+   "name": "Ronaldo",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    4,
+    4,
+    5,
+    5,
+    6,
+    9
+   ]
+  },
+  {
+   "id": 1009,
+   "name": "Random",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 1,
+   "diceSides": [
+    1,
+    1,
+    3,
+    3,
+    3,
+    5
+   ]
+  },
+  {
+   "id": 1010,
+   "name": "Kuyt",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 1011,
+   "name": "Hugo Lloris",
+   "position": "GK",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    3,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1012,
+   "name": "Scezny",
+   "position": "GK",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 1013,
+   "name": "ARG KEEPER",
+   "position": "GK",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    2,
+    3,
+    3,
+    4,
+    2,
+    5
+   ]
+  },
+  {
+   "id": 1014,
+   "name": "Kalou Clone",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 67,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    17,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 1015,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    2
+   ]
+  },
+  {
+   "id": 1016,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 30,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    2,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1017,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 4,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 75,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    4,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "id": 1018,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1019,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 1,
+   "diceSides": [
+    1,
+    3,
+    5,
+    7,
+    31,
+    4
+   ]
+  },
+  {
+   "id": 1020,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    10
+   ]
+  },
+  {
+   "id": 1021,
+   "name": "Soccer Kid",
+   "position": "GK",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    2,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 1022,
+   "name": "Soccer Kid",
+   "position": "GK",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    3
+   ]
+  },
+  {
+   "id": 1023,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 3,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 0,
+   "gender": 0,
+   "diceSides": [
+    1,
+    1,
+    1,
+    3,
+    2,
+    4
+   ]
+  },
+  {
+   "id": 1024,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 35,
+   "gender": 1,
+   "diceSides": [
+    16,
+    16,
+    3,
+    3,
+    3,
+    4
+   ]
+  },
+  {
+   "id": 1025,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 34,
+   "gender": 0,
+   "diceSides": [
+    17,
+    2,
+    3,
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 1026,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 35,
+   "gender": 0,
+   "diceSides": [
+    1,
+    17,
+    18,
+    2,
+    4,
+    5
+   ]
+  },
+  {
+   "id": 1027,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 2,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 40,
+   "gender": 1,
+   "diceSides": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 1028,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 40,
+   "gender": 1,
+   "diceSides": [
+    2,
+    2,
+    4,
+    4,
+    5,
+    5
+   ]
+  },
+  {
+   "id": 1029,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 49,
+   "gender": 0,
+   "diceSides": [
+    2,
+    2,
+    3,
+    3,
+    4,
+    4
+   ]
+  },
+  {
+   "id": 1030,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 61,
+   "gender": 0,
+   "diceSides": [
+    31,
+    31,
+    31,
+    5,
+    5,
+    6
+   ]
+  },
+  {
+   "id": 1031,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 59,
+   "gender": 0,
+   "diceSides": [
+    4,
+    4,
+    4,
+    4,
+    8,
+    8
+   ]
+  },
+  {
+   "id": 1032,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 75,
+   "gender": 0,
+   "diceSides": [
+    10,
+    10,
+    8,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1033,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 77,
+   "gender": 0,
+   "diceSides": [
+    9,
+    9,
+    7,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1034,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 59,
+   "gender": 0,
+   "diceSides": [
+    4,
+    4,
+    4,
+    4,
+    1,
+    2
+   ]
+  },
+  {
+   "id": 1035,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 75,
+   "gender": 0,
+   "diceSides": [
+    5,
+    4,
+    3,
+    3,
+    3,
+    3
+   ]
+  },
+  {
+   "id": 1036,
+   "name": "Soccer Kid",
+   "position": "MID",
+   "cost": 100000,
+   "sellingPrice": 0,
+   "imageId": 1,
+   "skinColour": 1,
+   "description": "Soccer Kid is so awesome that he doesn't know it.",
+   "unlockCriteria": "Kiss Your Elbow",
+   "superpower": 20,
+   "gender": 0,
+   "diceSides": [
+    1,
+    2,
+    2,
+    2,
+    3,
+    3
+   ]
+  }
+ ],
+ "abilities": [
+  {
+   "id": 16,
+   "name": "Dribble +1",
+   "description": "Add 1 to your final roll. Roll this die again.",
+   "trigger": 0,
+   "type": 3,
+   "target": 0,
+   "slot": 5,
+   "localReroll": 1
+  },
+  {
+   "id": 17,
+   "name": "Dribble +2",
+   "description": "Add 2 to your final roll. Roll this die again.",
+   "trigger": 0,
+   "type": 3,
+   "target": 0,
+   "slot": 5,
+   "localReroll": 1
+  },
+  {
+   "id": 18,
+   "name": "Dribble +3",
+   "description": "Add 3 to your final roll. Roll this die again.",
+   "trigger": 0,
+   "type": 3,
+   "target": 0,
+   "slot": 5,
+   "localReroll": 1
+  },
+  {
+   "id": 19,
+   "name": "Hard Tackle",
+   "description": "Subtracts 3 from a target dice. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 20,
+   "name": "Sliding Tackle",
+   "description": "Subtracts 3 from all opponent dice. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 2,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 21,
+   "name": "Critical Striker",
+   "description": "Multiply a target dice by 4. ACTIVATES when ALL your dice are ODD.",
+   "trigger": 3,
+   "type": 2,
+   "target": 1,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 22,
+   "name": "Zonal Marking",
+   "description": "Strip the enemy team of all its bonuses. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 4,
+   "target": 2,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 23,
+   "name": "Assist",
+   "description": "Re-roll any one die of your choice.",
+   "trigger": 0,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 24,
+   "name": "Cross",
+   "description": "Re-roll this die and any one die of your choice.",
+   "trigger": 0,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 1
+  },
+  {
+   "id": 25,
+   "name": "Perfect Cross",
+   "description": "Re-roll any TWO dice of your choice. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 26,
+   "name": "Dive!",
+   "description": "Roll the Referee die after this play.",
+   "trigger": 0,
+   "type": 1,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 27,
+   "name": "Defensive Wall",
+   "description": "Adds 1 to all players on your team. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 3,
+   "target": 3,
+   "slot": 5,
+   "localReroll": 0
+  },
+  {
+   "id": 28,
+   "name": "Step-Over",
+   "description": "Clear all reductions from your team. ACTIVATES when your team rolls any 3 consecutive numbers.",
+   "trigger": 5,
+   "type": 1,
+   "target": 2,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 29,
+   "name": "Step-Over",
+   "description": "Clear all reductions from your team. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 1,
+   "target": 2,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 30,
+   "name": "Step-Over",
+   "description": "Clear all reductions from your team. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 1,
+   "target": 2,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 31,
+   "name": "Total Footballer",
+   "description": "The Wild side adds no value to your total. Rather, it will help activate ANY COMBOS that your team mates possess.",
+   "trigger": 0,
+   "type": 5,
+   "target": 0,
+   "slot": 0,
+   "localReroll": 0
+  },
+  {
+   "id": 32,
+   "name": "God-like",
+   "description": "Houston, we have a problem. +1  to all opponents!",
+   "trigger": 0,
+   "type": 5,
+   "target": 2,
+   "slot": 5,
+   "localReroll": 0
+  },
+  {
+   "id": 33,
+   "name": "Tackle",
+   "description": "Reduces a die's value by 1. ACTIVATES when you roll a 4.",
+   "trigger": 22,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 34,
+   "name": "Hard Tackle",
+   "description": "Reduces a die's value by 2. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 35,
+   "name": "Clearance",
+   "description": "Reduces all enemy dice by 1. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 2,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 36,
+   "name": "Sliding Tackle",
+   "description": "Reduces all enemy dice by 2. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 2,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 37,
+   "name": "Charge",
+   "description": "Reduces the value of any one die by half. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 0,
+   "target": 1,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 38,
+   "name": "Offside Trap",
+   "description": "Reduces all enemy dice by half. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 0,
+   "target": 2,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 39,
+   "name": "Critical Striker",
+   "description": "Choose a die and double its value. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 2,
+   "target": 1,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 40,
+   "name": "Bicycle Kick",
+   "description": "Choose a die and triple its value. ACTIVATES when you roll a PAIR.",
+   "trigger": 2,
+   "type": 2,
+   "target": 1,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 41,
+   "name": "Man Marking",
+   "description": "Strip a player of all his bonuses. ACTIVATES when you roll a 5.",
+   "trigger": 23,
+   "type": 0,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 42,
+   "name": "Anchor",
+   "description": "Make one dice immune to ALL abilities. Triggers when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 43,
+   "name": "Intercept",
+   "description": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 44,
+   "name": "Saving Tackle",
+   "description": "Choose a die and switch its positive and negative bonuses. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 0,
+   "target": 1,
+   "slot": 0,
+   "localReroll": 0
+  },
+  {
+   "id": 45,
+   "name": "Dive!",
+   "description": "Roll the REFEREE die at the end of this play. ACTIVATES when your team rolls THREE identical numbers.",
+   "trigger": 6,
+   "type": 0,
+   "target": 0,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 46,
+   "name": "Feint",
+   "description": "Target one of YOUR OWN dice. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when total is ODD",
+   "trigger": 7,
+   "type": 3,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 47,
+   "name": "Through Pass",
+   "description": "Instantly move forward! ACTIVATES on POSSESSION when ALL 3 dice are ODD.",
+   "trigger": 3,
+   "type": 2,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 48,
+   "name": "Shielding",
+   "description": "Clear all reductions from one die. ACTIVATES when your team rolls a 2.",
+   "trigger": 20,
+   "type": 2,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 49,
+   "name": "Feint",
+   "description": "Target ALL dice on your team. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when your team's total is ODD.",
+   "trigger": 7,
+   "type": 3,
+   "target": 3,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 50,
+   "name": "Feint",
+   "description": "Target one of YOUR OWN dice. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when your team rolls a 6.",
+   "trigger": 24,
+   "type": 3,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 51,
+   "name": "Parry",
+   "description": "Re-roll any one die of your choice. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 52,
+   "name": "Anchor",
+   "description": "Make one dice immune to ALL abilities. ACTIVATES when your team rolls a 5.",
+   "trigger": 23,
+   "type": 0,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 53,
+   "name": "Tackle",
+   "description": "Reduces a die's value by 1. ACTIVATES when your team rolls a 2.",
+   "trigger": 20,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 54,
+   "name": "Critical Striker",
+   "description": "Select a die and double its value. ACTIVATES when your TOTAL is ODD.",
+   "trigger": 7,
+   "type": 2,
+   "target": 1,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 55,
+   "name": "Feint",
+   "description": "Target one of YOUR OWN dice. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when your team rolls a 8.",
+   "trigger": 26,
+   "type": 3,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 56,
+   "name": "Man Marking",
+   "description": "Strip one player of all his bonuses. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 4,
+   "target": 1,
+   "slot": 5,
+   "localReroll": 0
+  },
+  {
+   "id": 57,
+   "name": "Zonal Marking",
+   "description": "Strip the other team of all their bonuses. ACTIVATES when your team rolls a PAIR.",
+   "trigger": 2,
+   "type": 4,
+   "target": 2,
+   "slot": 5,
+   "localReroll": 0
+  },
+  {
+   "id": 58,
+   "name": "Man Marking",
+   "description": "Strip one player of all his bonuses. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 4,
+   "target": 1,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 59,
+   "name": "Defensive Wall",
+   "description": "Adds 1 to all players on your team. ACTIVATES when your team rolls a TRIPLE.",
+   "trigger": 6,
+   "type": 3,
+   "target": 3,
+   "slot": 5,
+   "localReroll": 0
+  },
+  {
+   "id": 60,
+   "name": "Anchor",
+   "description": "Make ALL dice on opponent's team immune to ALL abilities. ACTIVATES when ALL 3 dice are ODD.",
+   "trigger": 3,
+   "type": 0,
+   "target": 3,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 61,
+   "name": "Assist",
+   "description": "Re-roll any one die of your choice. ACTIVATES when your team rolls a 1.",
+   "trigger": 19,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 62,
+   "name": "Parry",
+   "description": "Re-roll any die of your choice. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 63,
+   "name": "Assist",
+   "description": "Re-roll any one die of your choice. ACTIVATES when your team rolls a 2.",
+   "trigger": 20,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 64,
+   "name": "+5",
+   "description": "+5 on a triple, for entourage 1",
+   "trigger": 6,
+   "type": 5,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 65,
+   "name": "Yellow Card",
+   "description": "Yellow Card for entourage 20",
+   "trigger": 20,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 66,
+   "name": "Critical Striker",
+   "description": "Double the value of a target die. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 2,
+   "target": 1,
+   "slot": 0,
+   "localReroll": 0
+  },
+  {
+   "id": 67,
+   "name": "Tackle",
+   "description": "Reduce the value of any die by 1. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 68,
+   "name": "Tackle",
+   "description": "Reduce the value of any die by 1. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 69,
+   "name": "Hard Tackle",
+   "description": "Reduce the value of any die by 2. ACTIVATES when your team rolls a 2.",
+   "trigger": 20,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 70,
+   "name": "Hard Tackle",
+   "description": "Reduce the value of any die by 2. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 71,
+   "name": "Hard Tackle",
+   "description": "Reduce the value of any die by 2. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 0,
+   "target": 1,
+   "slot": 2,
+   "localReroll": 0
+  },
+  {
+   "id": 72,
+   "name": "Charge",
+   "description": "Reduce the value of a die by half. ACTIVATES when your TOTAL is EVEN.",
+   "trigger": 8,
+   "type": 0,
+   "target": 1,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 73,
+   "name": "Charge",
+   "description": "Reduce the value of a die by half. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 0,
+   "target": 1,
+   "slot": 1,
+   "localReroll": 0
+  },
+  {
+   "id": 74,
+   "name": "Critical Striker",
+   "description": "Double the value of a target die. ACTIVATES when your team rolls a 2.",
+   "trigger": 20,
+   "type": 2,
+   "target": 1,
+   "slot": 0,
+   "localReroll": 0
+  },
+  {
+   "id": 75,
+   "name": "Critical Striker",
+   "description": "Double the value of a target die. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 2,
+   "target": 1,
+   "slot": 4,
+   "localReroll": 0
+  },
+  {
+   "id": 76,
+   "name": "Intercept",
+   "description": "Remove all Re-rolls from a target die. ACTIVATES when your team rolls a 2.",
+   "trigger": 20,
+   "type": 0,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 77,
+   "name": "Intercept",
+   "description": "Remove one Re-roll from all opponents. ACTIVATES when ALL 3 dice are ODD.",
+   "trigger": 3,
+   "type": 0,
+   "target": 2,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 78,
+   "name": "Intercept",
+   "description": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a 6.",
+   "trigger": 24,
+   "type": 0,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 79,
+   "name": "Intercept",
+   "description": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a 3.",
+   "trigger": 21,
+   "type": 0,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 80,
+   "name": "Through Pass",
+   "description": "Instantly move forward! ACTIVATES on POSSESSION when ALL 3 dice are EVEN.",
+   "trigger": 4,
+   "type": 2,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  },
+  {
+   "id": 81,
+   "name": "Intercept",
+   "description": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a 4.",
+   "trigger": 22,
+   "type": 0,
+   "target": 1,
+   "slot": 3,
+   "localReroll": 0
+  },
+  {
+   "id": 82,
+   "name": "Captain",
+   "description": "Your team will win any turn that ends in a tie.",
+   "trigger": 1,
+   "type": 2,
+   "target": 1,
+   "slot": 6,
+   "localReroll": 0
+  }
+ ],
+ "seasons": [
+  {
+   "id": 0,
+   "name": "Training Season",
+   "fieldObjects": {
+    "Normal": [
+     "{-276.5,-89.5}",
+     "{148,139.5}",
+     "{-160.5,131}",
+     "{277,77.5}",
+     "{-121,-171.5}",
+     "{408.5,-99}",
+     "{-325.5,-91.5}",
+     "{-193,157}",
+     "{44.5,167.5}",
+     "{176.25,-123.25}",
+     "{383,-36}",
+     "{114.5,162.5}",
+     "{-42,66}",
+     "{289,-103}",
+     "{-349,-119.5}",
+     "{36.5,-61}"
+    ],
+    "iPad": [
+     "{-698,-175}",
+     "{181,283}",
+     "{-466,266}",
+     "{701,154}",
+     "{-387,-339}",
+     "{1044,-189}",
+     "{-796,-169}",
+     "{-531,318}",
+     "{94,339}",
+     "{417,-242}",
+     "{953,-73}",
+     "{234,329}",
+     "{-229,136}",
+     "{583,-202}",
+     "{-843,-235}",
+     "{78,-118}"
+    ]
+   },
+   "competitions": [
+    {
+     "name": "League",
+     "matchCount": 3,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "The Neighbours",
+       "lineup": [
+        1022,
+        3,
+        1001,
+        1015,
+        1015,
+        12,
+        1001
+       ],
+       "cashWin": 1000,
+       "cashDraw": 500,
+       "cashLose": 200,
+       "shirt": 9,
+       "pants": 9,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Var City",
+       "lineup": [
+        1022,
+        1023,
+        1023,
+        1023,
+        1023,
+        10,
+        1023
+       ],
+       "cashWin": 1000,
+       "cashDraw": 500,
+       "cashLose": 200,
+       "shirt": 1,
+       "pants": 2,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "DS High",
+       "lineup": [
+        1022,
+        1014,
+        5,
+        3,
+        1001,
+        12,
+        1018
+       ],
+       "cashWin": 1000,
+       "cashDraw": 500,
+       "cashLose": 200,
+       "shirt": 4,
+       "pants": 4,
+       "shirtPatternColor": 2,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T2",
+     "matchCount": 0,
+     "fixtures": []
+    },
+    {
+     "name": "T1",
+     "matchCount": 0,
+     "fixtures": []
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "name": "Bootcamp",
+   "fieldObjects": {
+    "Normal": [
+     "{-252,-56}",
+     "{-54.5,-124.5}",
+     "{304.5,-68.5}",
+     "{112,-127}",
+     "{37,71}",
+     "{75,156.5}",
+     "{-169,148.5}",
+     "{227.5,162}",
+     "{-45,-32.5}",
+     "{-232,-116}",
+     "{183,71}",
+     "{-321.5,109.5}"
+    ],
+    "iPad": [
+     "{-696,-130}",
+     "{-200,-267}",
+     "{758,-185}",
+     "{373,-192}",
+     "{69,124}",
+     "{146,295}",
+     "{-335,279}",
+     "{680,306}",
+     "{-95,-83}",
+     "{-656,-250}",
+     "{501,124}",
+     "{-835,201}"
+    ]
+   },
+   "competitions": [
+    {
+     "name": "League",
+     "matchCount": 10,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Shinfield Utd",
+       "lineup": [
+        1021,
+        36,
+        11,
+        1009,
+        1001,
+        1004,
+        20
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 3,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "FC Studley",
+       "lineup": [
+        1021,
+        1018,
+        4,
+        1005,
+        1003,
+        8,
+        3
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 4,
+       "pants": 10,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Footchester",
+       "lineup": [
+        9,
+        22,
+        1001,
+        1002,
+        1015,
+        1017,
+        7
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Heelside",
+       "lineup": [
+        1021,
+        1002,
+        11,
+        12,
+        22,
+        16,
+        1003
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 5,
+       "pants": 10,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Toe-nados",
+       "lineup": [
+        17,
+        1010,
+        1003,
+        1010,
+        1001,
+        15,
+        1018
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 8,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "FC Studley",
+       "lineup": [
+        1021,
+        1018,
+        4,
+        1005,
+        1003,
+        8,
+        3
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 4,
+       "pants": 10,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 7,
+       "teamName": "Footchester",
+       "lineup": [
+        9,
+        22,
+        1001,
+        1002,
+        1015,
+        1017,
+        7
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 8,
+       "teamName": "Toe-nados",
+       "lineup": [
+        17,
+        1010,
+        1003,
+        1010,
+        1001,
+        15,
+        1018
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 8,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 9,
+       "teamName": "Shinfield Utd",
+       "lineup": [
+        1021,
+        36,
+        11,
+        1009,
+        1001,
+        1004,
+        20
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 3,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 10,
+       "teamName": "Heelside",
+       "lineup": [
+        1021,
+        1002,
+        11,
+        12,
+        22,
+        16,
+        1003
+       ],
+       "cashWin": 2000,
+       "cashDraw": 1000,
+       "cashLose": 500,
+       "shirt": 5,
+       "pants": 10,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T2",
+     "matchCount": 5,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Fireworks",
+       "lineup": [
+        9,
+        1003,
+        12,
+        43,
+        39,
+        20,
+        1001
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 4,
+       "shirtPatternColor": 7,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Misery FC",
+       "lineup": [
+        1011,
+        1009,
+        1010,
+        1003,
+        38,
+        45,
+        22
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 10,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Dynamite",
+       "lineup": [
+        1011,
+        1001,
+        24,
+        35,
+        1002,
+        1020,
+        1004
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 2,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "HMK 20",
+       "lineup": [
+        17,
+        1004,
+        34,
+        11,
+        13,
+        1009,
+        14
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 7,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 7,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Grenadiers",
+       "lineup": [
+        25,
+        26,
+        21,
+        15,
+        40,
+        31,
+        1004
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 8,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T1",
+     "matchCount": 5,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Emphatico",
+       "lineup": [
+        1022,
+        27,
+        1009,
+        1003,
+        7,
+        21,
+        1015
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 8,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Rossazurri",
+       "lineup": [
+        9,
+        20,
+        1009,
+        1003,
+        1010,
+        1006,
+        28
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 9,
+       "shirtPatternColor": 2,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Magnifique",
+       "lineup": [
+        9,
+        1010,
+        1002,
+        1009,
+        13,
+        1003,
+        1018
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 6,
+       "pants": 3,
+       "shirtPatternColor": 3,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Nachtburg",
+       "lineup": [
+        1011,
+        1010,
+        1003,
+        1004,
+        5,
+        32,
+        21
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 10,
+       "shirtPatternColor": 7,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 7,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Strangers",
+       "lineup": [
+        17,
+        1002,
+        16,
+        1017,
+        48,
+        27,
+        29
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 5,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "Turf War",
+   "fieldObjects": {
+    "Normal": [
+     "{256,90}",
+     "{158,128.5}",
+     "{185.5,-173}",
+     "{313,158}",
+     "{-338,-93.5}",
+     "{256,-100.5}",
+     "{370,-158}",
+     "{-227.5,-185.5}",
+     "{-97.5,-91}",
+     "{85,42}",
+     "{-315.5,114.5}",
+     "{381,-101.5}",
+     "{26.5,-61.5}",
+     "{-224.5,126}"
+    ],
+    "iPad": [
+     "{665,201}",
+     "{180,210}",
+     "{179,-349}",
+     "{639,254}",
+     "{-861,-190}",
+     "{693,-204}",
+     "{200,-240}",
+     "{-639,-374}",
+     "{-482,-142}",
+     "{351,81}",
+     "{-815,226}",
+     "{943,-206}",
+     "{83,-114}",
+     "{-515,209}"
+    ]
+   },
+   "competitions": [
+    {
+     "name": "League",
+     "matchCount": 14,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Kismet",
+       "lineup": [
+        25,
+        35,
+        1009,
+        1005,
+        48,
+        31,
+        1016
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 2000,
+       "shirt": 8,
+       "pants": 1,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Fortuna",
+       "lineup": [
+        1013,
+        27,
+        1017,
+        1014,
+        38,
+        1010,
+        5
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 4,
+       "pants": 3,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 3,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Destino",
+       "lineup": [
+        1012,
+        1009,
+        20,
+        42,
+        1005,
+        1006,
+        39
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 1,
+       "pants": 5,
+       "shirtPatternColor": 5,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Lucky 7",
+       "lineup": [
+        33,
+        1009,
+        1010,
+        43,
+        31,
+        32,
+        36
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 3,
+       "pants": 6,
+       "shirtPatternColor": 6,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 3,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Chancy FC",
+       "lineup": [
+        25,
+        1024,
+        34,
+        1025,
+        45,
+        1007,
+        1017
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 6,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Voodoo Utd",
+       "lineup": [
+        33,
+        27,
+        37,
+        1025,
+        1005,
+        47,
+        46
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 7,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 7,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 7,
+       "teamName": "Leprecorners",
+       "lineup": [
+        49,
+        50,
+        13,
+        51,
+        1014,
+        1004,
+        56
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 5,
+       "pants": 9,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 8,
+       "teamName": "Lucky 7",
+       "lineup": [
+        33,
+        1009,
+        1010,
+        43,
+        31,
+        32,
+        36
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 3,
+       "pants": 6,
+       "shirtPatternColor": 6,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 3,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 9,
+       "teamName": "Voodoo Utd",
+       "lineup": [
+        33,
+        27,
+        37,
+        1025,
+        1005,
+        47,
+        46
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 7,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 7,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 10,
+       "teamName": "Leprecorners",
+       "lineup": [
+        49,
+        50,
+        13,
+        51,
+        1014,
+        1004,
+        56
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 5,
+       "pants": 9,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 11,
+       "teamName": "Chancy FC",
+       "lineup": [
+        25,
+        1024,
+        34,
+        1025,
+        45,
+        1007,
+        1017
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 6,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 12,
+       "teamName": "Destino",
+       "lineup": [
+        1012,
+        1009,
+        20,
+        42,
+        1005,
+        1006,
+        39
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 1,
+       "pants": 5,
+       "shirtPatternColor": 5,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 13,
+       "teamName": "Kismet",
+       "lineup": [
+        25,
+        35,
+        1009,
+        1005,
+        48,
+        31,
+        1016
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 8,
+       "pants": 1,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 14,
+       "teamName": "Fortuna",
+       "lineup": [
+        1013,
+        27,
+        1017,
+        1014,
+        38,
+        1010,
+        5
+       ],
+       "cashWin": 8000,
+       "cashDraw": 5000,
+       "cashLose": 3000,
+       "shirt": 4,
+       "pants": 3,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 3,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T2",
+     "matchCount": 6,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Knucklebones",
+       "lineup": [
+        41,
+        10,
+        1018,
+        66,
+        1005,
+        1007,
+        59
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 10,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "The Pips",
+       "lineup": [
+        49,
+        51,
+        1010,
+        67,
+        1006,
+        1020,
+        1008
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 4,
+       "pants": 2,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Hexaheads",
+       "lineup": [
+        57,
+        45,
+        37,
+        68,
+        1007,
+        1009,
+        54
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 7,
+       "pants": 7,
+       "shirtPatternColor": 5,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Ace",
+       "lineup": [
+        25,
+        1019,
+        59,
+        1006,
+        70,
+        39,
+        64
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 6,
+       "shirtPatternColor": 6,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Snake Eyes",
+       "lineup": [
+        33,
+        1014,
+        53,
+        58,
+        71,
+        45,
+        16
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 8,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Loaded",
+       "lineup": [
+        57,
+        28,
+        63,
+        1010,
+        72,
+        1019,
+        22
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 4,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T1",
+     "matchCount": 6,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Snakes",
+       "lineup": [
+        41,
+        1005,
+        1009,
+        1004,
+        7,
+        39,
+        22
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 10,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Ladders",
+       "lineup": [
+        49,
+        1007,
+        11,
+        12,
+        40,
+        48,
+        16
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 2,
+       "pants": 7,
+       "shirtPatternColor": 7,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Sugoroku",
+       "lineup": [
+        41,
+        45,
+        51,
+        52,
+        1026,
+        29,
+        56
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 9,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "FC Risque",
+       "lineup": [
+        33,
+        5,
+        53,
+        35,
+        53,
+        39,
+        1010
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 6,
+       "pants": 2,
+       "shirtPatternColor": 5,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Gammonback",
+       "lineup": [
+        49,
+        21,
+        10,
+        50,
+        55,
+        31,
+        42
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "El Ludo",
+       "lineup": [
+        57,
+        1004,
+        1008,
+        52,
+        38,
+        29,
+        1028
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 2,
+       "pants": 5,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "High Rollers",
+   "fieldObjects": {
+    "Normal": [
+     "{380,140}"
+    ],
+    "iPad": [
+     "{904,328}"
+    ]
+   },
+   "competitions": [
+    {
+     "name": "League",
+     "matchCount": 14,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "New Campers",
+       "lineup": [
+        49,
+        59,
+        43,
+        74,
+        79,
+        64,
+        61
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 8,
+       "pants": 2,
+       "shirtPatternColor": 2,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Armory",
+       "lineup": [
+        1012,
+        28,
+        34,
+        35,
+        62,
+        38,
+        45
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Globale",
+       "lineup": [
+        25,
+        1005,
+        42,
+        44,
+        63,
+        47,
+        30
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 2,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Neverlone",
+       "lineup": [
+        41,
+        27,
+        66,
+        85,
+        21,
+        70,
+        88
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 9,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Bridgeford",
+       "lineup": [
+        57,
+        58,
+        76,
+        67,
+        72,
+        37,
+        24
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 2,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Galactus",
+       "lineup": [
+        73,
+        83,
+        69,
+        50,
+        71,
+        77,
+        80
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 1,
+       "pants": 1,
+       "shirtPatternColor": 3,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 7,
+       "teamName": "Diablo",
+       "lineup": [
+        81,
+        60,
+        29,
+        75,
+        78,
+        46,
+        53
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 10,
+       "pants": 1,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 8,
+       "teamName": "Globale",
+       "lineup": [
+        25,
+        1005,
+        42,
+        44,
+        63,
+        47,
+        30
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 2,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 9,
+       "teamName": "Diablo",
+       "lineup": [
+        81,
+        60,
+        29,
+        75,
+        78,
+        46,
+        53
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 10,
+       "teamName": "Galactus",
+       "lineup": [
+        73,
+        83,
+        69,
+        50,
+        71,
+        80,
+        77
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 1,
+       "pants": 1,
+       "shirtPatternColor": 3,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 11,
+       "teamName": "Neverlone",
+       "lineup": [
+        41,
+        27,
+        66,
+        85,
+        21,
+        70,
+        88
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 9,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 12,
+       "teamName": "Armory",
+       "lineup": [
+        1012,
+        28,
+        34,
+        35,
+        62,
+        38,
+        45
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 13,
+       "teamName": "Bridgeford",
+       "lineup": [
+        57,
+        58,
+        76,
+        67,
+        72,
+        37,
+        24
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 2,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 14,
+       "teamName": "New Campers",
+       "lineup": [
+        49,
+        59,
+        43,
+        74,
+        79,
+        64,
+        61
+       ],
+       "cashWin": 50000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 8,
+       "pants": 2,
+       "shirtPatternColor": 2,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T2",
+     "matchCount": 6,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Reductio",
+       "lineup": [
+        49,
+        75,
+        68,
+        10,
+        36,
+        55,
+        53
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 10,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Trifecta",
+       "lineup": [
+        57,
+        71,
+        62,
+        54,
+        40,
+        56,
+        39
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 4,
+       "shirtPatternColor": 5,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Negato",
+       "lineup": [
+        65,
+        1018,
+        24,
+        52,
+        32,
+        72,
+        35
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 2,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Blitz",
+       "lineup": [
+        41,
+        26,
+        53,
+        52,
+        46,
+        74,
+        77
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 10,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Le Critique",
+       "lineup": [
+        33,
+        37,
+        38,
+        39,
+        1027,
+        63,
+        1028
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 5,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Perfecta",
+       "lineup": [
+        73,
+        69,
+        74,
+        76,
+        77,
+        80,
+        64
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 7,
+       "pants": 7,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 7,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T1",
+     "matchCount": 6,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Les Bleus",
+       "lineup": [
+        1011,
+        35,
+        34,
+        51,
+        31,
+        54,
+        32
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 3,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 3,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Silverina",
+       "lineup": [
+        1013,
+        82,
+        84,
+        86,
+        79,
+        71,
+        56
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 6,
+       "pants": 10,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Windmills",
+       "lineup": [
+        65,
+        1006,
+        28,
+        1010,
+        30,
+        38,
+        39
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 7,
+       "pants": 1,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 7,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Union",
+       "lineup": [
+        17,
+        75,
+        58,
+        76,
+        69,
+        78,
+        62
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 3,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 2,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Samba",
+       "lineup": [
+        25,
+        43,
+        42,
+        44,
+        80,
+        55,
+        1008
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 4,
+       "pants": 2,
+       "shirtPatternColor": 0,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Matador",
+       "lineup": [
+        41,
+        74,
+        59,
+        61,
+        45,
+        64,
+        70
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 2,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Just for Kicks",
+   "fieldObjects": {
+    "Normal": [
+     "{-394,160.5}",
+     "{27,-77.5}",
+     "{-432,-77.5}",
+     "{215, 92.5}",
+     "{-199.5,99.5}",
+     "{363.5,-148}",
+     "{85.5,178}"
+    ],
+    "iPad": [
+     "{-971,317}",
+     "{91,-131}",
+     "{-1058,-160}",
+     "{577,179}",
+     "{-484,224}",
+     "{752,-286}",
+     "{145,358}"
+    ]
+   },
+   "competitions": [
+    {
+     "name": "League",
+     "matchCount": 14,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Aloha",
+       "lineup": [
+        49,
+        32,
+        43,
+        52,
+        70,
+        94,
+        59
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 11,
+       "pants": 6,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 11,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Goal Coast",
+       "lineup": [
+        1012,
+        92,
+        79,
+        70,
+        39,
+        56,
+        74
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 4,
+       "pants": 8,
+       "shirtPatternColor": 8,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Quicksand",
+       "lineup": [
+        25,
+        68,
+        78,
+        48,
+        58,
+        95,
+        71
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 5,
+       "pants": 4,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 6,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Sunshine",
+       "lineup": [
+        41,
+        92,
+        45,
+        37,
+        30,
+        79,
+        46
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 7,
+       "shirtPatternStyle": 5,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Shellshock",
+       "lineup": [
+        57,
+        38,
+        67,
+        54,
+        34,
+        96,
+        64
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 10,
+       "pants": 3,
+       "shirtPatternColor": 3,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Breeze",
+       "lineup": [
+        73,
+        1036,
+        55,
+        1029,
+        42,
+        88,
+        77
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 6,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 7,
+       "teamName": "Baywatch",
+       "lineup": [
+        89,
+        62,
+        63,
+        66,
+        36,
+        80,
+        35
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 4,
+       "pants": 9,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 7,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 8,
+       "teamName": "Breeze",
+       "lineup": [
+        73,
+        1036,
+        55,
+        1029,
+        42,
+        88,
+        77
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 6,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 9,
+       "teamName": "Baywatch",
+       "lineup": [
+        89,
+        62,
+        63,
+        66,
+        36,
+        80,
+        35
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 4,
+       "pants": 9,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 7,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 10,
+       "teamName": "Aloha",
+       "lineup": [
+        49,
+        32,
+        43,
+        52,
+        70,
+        94,
+        59
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 11,
+       "pants": 6,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 11,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 11,
+       "teamName": "Goal Coast",
+       "lineup": [
+        1012,
+        92,
+        79,
+        70,
+        39,
+        56,
+        74
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 4,
+       "pants": 8,
+       "shirtPatternColor": 8,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 12,
+       "teamName": "Quicksand",
+       "lineup": [
+        25,
+        68,
+        78,
+        48,
+        58,
+        95,
+        71
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 5,
+       "pants": 4,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 6,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 13,
+       "teamName": "Sunshine",
+       "lineup": [
+        41,
+        92,
+        45,
+        37,
+        30,
+        79,
+        46
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 9,
+       "pants": 1,
+       "shirtPatternColor": 7,
+       "shirtPatternStyle": 5,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 14,
+       "teamName": "Shellshock",
+       "lineup": [
+        57,
+        38,
+        67,
+        54,
+        34,
+        96,
+        64
+       ],
+       "cashWin": 75000,
+       "cashDraw": 25000,
+       "cashLose": 10000,
+       "shirt": 10,
+       "pants": 3,
+       "shirtPatternColor": 3,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        0,
+        0
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T2",
+     "matchCount": 6,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Crownstag",
+       "lineup": [
+        25,
+        67,
+        68,
+        91,
+        56,
+        63,
+        79
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 4,
+       "pants": 4,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 6,
+       "sleevesSock": 4,
+       "emblem": 0,
+       "entourageLineup": [
+        7,
+        10
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Greypyke",
+       "lineup": [
+        41,
+        82,
+        58,
+        60,
+        88,
+        92,
+        90
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 10,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 5,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        17,
+        9
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Highflower",
+       "lineup": [
+        49,
+        38,
+        37,
+        53,
+        52,
+        46,
+        40
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 5,
+       "pants": 5,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 4,
+       "sleevesSock": 5,
+       "emblem": 0,
+       "entourageLineup": [
+        6,
+        15
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Casterlion",
+       "lineup": [
+        89,
+        69,
+        52,
+        88,
+        15,
+        70,
+        40
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 8,
+       "pants": 8,
+       "shirtPatternColor": 4,
+       "shirtPatternStyle": 5,
+       "sleevesSock": 8,
+       "emblem": 0,
+       "entourageLineup": [
+        16,
+        2
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Winterwolves",
+       "lineup": [
+        1,
+        95,
+        96,
+        50,
+        1036,
+        74,
+        82
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 12,
+       "pants": 12,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 7,
+       "sleevesSock": 12,
+       "emblem": 0,
+       "entourageLineup": [
+        20,
+        21
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Nightwall",
+       "lineup": [
+        57,
+        84,
+        8,
+        86,
+        50,
+        1031,
+        1034
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 10,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 3,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        20,
+        4
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    },
+    {
+     "name": "T1",
+     "matchCount": 6,
+     "fixtures": [
+      {
+       "id": 1,
+       "teamName": "Munchies",
+       "lineup": [
+        65,
+        13,
+        52,
+        1017,
+        40,
+        39,
+        32
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 10,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 5,
+       "sleevesSock": 1,
+       "emblem": 0,
+       "entourageLineup": [
+        1,
+        2
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 2,
+       "teamName": "Nalimca",
+       "lineup": [
+        1013,
+        1002,
+        1005,
+        1003,
+        87,
+        63,
+        1035
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 9,
+       "pants": 10,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 9,
+       "emblem": 0,
+       "entourageLineup": [
+        21,
+        15
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 3,
+       "teamName": "Spanglers",
+       "lineup": [
+        89,
+        90,
+        91,
+        92,
+        94,
+        95,
+        96
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 2,
+       "shirtPatternColor": 9,
+       "shirtPatternStyle": 6,
+       "sleevesSock": 2,
+       "emblem": 0,
+       "entourageLineup": [
+        4,
+        3
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 4,
+       "teamName": "Blue City",
+       "lineup": [
+        9,
+        34,
+        1029,
+        36,
+        31,
+        1030,
+        56
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 6,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 0,
+       "sleevesSock": 6,
+       "emblem": 0,
+       "entourageLineup": [
+        10,
+        18
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 5,
+       "teamName": "Eventus",
+       "lineup": [
+        1013,
+        68,
+        1031,
+        1034,
+        1032,
+        1033,
+        23
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 1,
+       "pants": 1,
+       "shirtPatternColor": 10,
+       "shirtPatternStyle": 1,
+       "sleevesSock": 10,
+       "emblem": 0,
+       "entourageLineup": [
+        17,
+        21
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      },
+      {
+       "id": 6,
+       "teamName": "Amazoo",
+       "lineup": [
+        89,
+        1024,
+        3,
+        90,
+        94,
+        93,
+        95
+       ],
+       "cashWin": 0,
+       "cashDraw": 0,
+       "cashLose": 0,
+       "shirt": 11,
+       "pants": 1,
+       "shirtPatternColor": 1,
+       "shirtPatternStyle": 7,
+       "sleevesSock": 11,
+       "emblem": 0,
+       "entourageLineup": [
+        5,
+        16
+       ],
+       "possessionBonus": 0,
+       "eventName": ""
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "initialLineup": [
+  1,
+  2,
+  3,
+  4,
+  7,
+  6,
+  8
+ ],
+ "tips": [
+  "Collect enough stars in one Season, to move on to the next!",
+  "Your Team always plays from the Left side of the screen!",
+  "The front of a player's card displays all the numbers that the player can roll!",
+  "Midfielders can be used as either Forwards or Defenders!",
+  "The Central Forward will always be the one to attempt a Goal. Choose well!",
+  "Add players to your Bench! Substitute them later on once your game begins.",
+  "Upgrade your players periodically by hiring those with better numbers!",
+  "Pay attention to the requirements for your players' abilities and develop stunning combos!",
+  "New players often bring new abilities or easier conditions to trigger them!",
+  "Remember to fill up your Bench when you can! This will allow you to adapt to new threats!",
+  "You can tap on Locked players too to read their cards!",
+  "You can use in-app purchases to unlock any player, any time!",
+  "It's ok to lose a match! You'll still unlock the next league game and can come back later!",
+  "You will still have to pay the hiring fee after unlocking a player via in-app.",
+  "The hiring fee for locked players can be seen by tapping the Unlock button.",
+  "Midfielders are very useful and can be accessed from any slot except for Goalie!",
+  "Use the Play On button to interrupt a long play, if you've already won that turn!",
+  "Constantly upgrading your players is key to scoring well!",
+  "Find players whose abilities complement each other. Read the back of their cards!",
+  "The numbers available for each player to roll are displayed on the front of the card.",
+  "You can replay any match any time to improve your score or earn more cash!",
+  "League matches just need to be completed in order to unlock the next!",
+  "Tournament matches must be Won in order to unlock the next!",
+  "Tournament matches offer no cash, but a BIG prize in the finals.",
+  "Tap Unlock on Locked players to find out how to Unlock them.",
+  "Completing achievements always unlocks more players or kits!",
+  "Re-rolls are vital in building great combo chains!",
+  "Always be on the look out for new players that have better numbers than yours!",
+  "Explore the criteria required for unlocking new players by tapping the Unlock button.",
+  "You can get more coins and kits by visiting the shop!",
+  "Running low on credits? Go to the shop to stock up on more!",
+  "Change into your new uniforms by visiting the locker room from the Manage screen.",
+  "It's always a good idea to preview the enemy team before going in to Play.",
+  "Click the refresh button in the Trophy Room to check for missed achievements.",
+  "Through Pass can be a great way to plough through a tough defense!",
+  "You can Tap the sides of the screen instead of shaking the device!",
+  "Always play Feint on your own dice!"
+ ],
+ "shopCash": [
+  {
+   "id": 1,
+   "price": 0.99,
+   "coins": 25000
+  },
+  {
+   "id": 2,
+   "price": 1.99,
+   "coins": 250000
+  },
+  {
+   "id": 3,
+   "price": 2.99,
+   "coins": 1200000
+  },
+  {
+   "id": 4,
+   "price": 4.99,
+   "coins": 2500000
+  },
+  {
+   "id": 5,
+   "price": 9.99,
+   "coins": 7500000
+  },
+  {
+   "id": 6,
+   "price": 19.99,
+   "coins": 20000000
+  },
+  {
+   "id": 7,
+   "price": 49.99,
+   "coins": 100000000
+  }
+ ],
+ "shirts": [
+  {
+   "id": 1,
+   "shirtColour": 1,
+   "sleeveColour": 1,
+   "shirtStyle": 0,
+   "styleColour": 0,
+   "price": 0.99
+  },
+  {
+   "id": 2,
+   "shirtColour": 2,
+   "sleeveColour": 2,
+   "shirtStyle": 0,
+   "styleColour": 0,
+   "price": 0.99
+  },
+  {
+   "id": 3,
+   "shirtColour": 6,
+   "sleeveColour": 6,
+   "shirtStyle": 0,
+   "styleColour": 0,
+   "price": 0.99
+  },
+  {
+   "id": 4,
+   "shirtColour": 10,
+   "sleeveColour": 10,
+   "shirtStyle": 0,
+   "styleColour": 0,
+   "price": 0.99
+  },
+  {
+   "id": 5,
+   "shirtColour": 8,
+   "sleeveColour": 8,
+   "shirtStyle": 0,
+   "styleColour": 0,
+   "price": 0.99
+  },
+  {
+   "id": 6,
+   "shirtColour": 7,
+   "sleeveColour": 7,
+   "shirtStyle": 0,
+   "styleColour": 0,
+   "price": 0.99
+  },
+  {
+   "id": 7,
+   "shirtColour": 2,
+   "sleeveColour": 2,
+   "shirtStyle": 1,
+   "styleColour": 1,
+   "price": 0.99
+  },
+  {
+   "id": 8,
+   "shirtColour": 1,
+   "sleeveColour": 1,
+   "shirtStyle": 1,
+   "styleColour": 3,
+   "price": 0.99
+  },
+  {
+   "id": 9,
+   "shirtColour": 4,
+   "sleeveColour": 4,
+   "shirtStyle": 2,
+   "styleColour": 2,
+   "price": 0.99
+  },
+  {
+   "id": 10,
+   "shirtColour": 5,
+   "sleeveColour": 5,
+   "shirtStyle": 3,
+   "styleColour": 1,
+   "price": 0.99
+  },
+  {
+   "id": 11,
+   "shirtColour": 7,
+   "sleeveColour": 7,
+   "shirtStyle": 1,
+   "styleColour": 2,
+   "price": 1.99
+  },
+  {
+   "id": 12,
+   "shirtColour": 2,
+   "sleeveColour": 2,
+   "shirtStyle": 1,
+   "styleColour": 8,
+   "price": 1.99
+  },
+  {
+   "id": 13,
+   "shirtColour": 9,
+   "sleeveColour": 9,
+   "shirtStyle": 3,
+   "styleColour": 10,
+   "price": 1.99
+  },
+  {
+   "id": 14,
+   "shirtColour": 1,
+   "sleeveColour": 3,
+   "shirtStyle": 3,
+   "styleColour": 6,
+   "price": 1.99
+  },
+  {
+   "id": 15,
+   "shirtColour": 4,
+   "sleeveColour": 4,
+   "shirtStyle": 1,
+   "styleColour": 5,
+   "price": 1.99
+  },
+  {
+   "id": 16,
+   "shirtColour": 8,
+   "sleeveColour": 8,
+   "shirtStyle": 1,
+   "styleColour": 7,
+   "price": 1.99
+  },
+  {
+   "id": 17,
+   "shirtColour": 1,
+   "sleeveColour": 7,
+   "shirtStyle": 1,
+   "styleColour": 7,
+   "price": 0.99
+  },
+  {
+   "id": 18,
+   "shirtColour": 10,
+   "sleeveColour": 10,
+   "shirtStyle": 2,
+   "styleColour": 5,
+   "price": 0.99
+  },
+  {
+   "id": 19,
+   "shirtColour": 9,
+   "sleeveColour": 4,
+   "shirtStyle": 3,
+   "styleColour": 4,
+   "price": 0.99
+  },
+  {
+   "id": 20,
+   "shirtColour": 1,
+   "sleeveColour": 1,
+   "shirtStyle": 4,
+   "styleColour": 5,
+   "price": 1.99
+  },
+  {
+   "id": 21,
+   "shirtColour": 3,
+   "sleeveColour": 3,
+   "shirtStyle": 4,
+   "styleColour": 7,
+   "price": 1.99
+  },
+  {
+   "id": 22,
+   "shirtColour": 2,
+   "sleeveColour": 2,
+   "shirtStyle": 5,
+   "styleColour": 6,
+   "price": 1.99
+  },
+  {
+   "id": 23,
+   "shirtColour": 6,
+   "sleeveColour": 4,
+   "shirtStyle": 5,
+   "styleColour": 5,
+   "price": 1.99
+  },
+  {
+   "id": 24,
+   "shirtColour": 9,
+   "sleeveColour": 8,
+   "shirtStyle": 6,
+   "styleColour": 3,
+   "price": 1.99
+  },
+  {
+   "id": 25,
+   "shirtColour": 10,
+   "sleeveColour": 5,
+   "shirtStyle": 7,
+   "styleColour": 1,
+   "price": 1.99
+  },
+  {
+   "id": 26,
+   "shirtColour": 1,
+   "sleeveColour": 7,
+   "shirtStyle": 1,
+   "styleColour": 7,
+   "price": 0.99
+  },
+  {
+   "id": 27,
+   "shirtColour": 10,
+   "sleeveColour": 10,
+   "shirtStyle": 2,
+   "styleColour": 5,
+   "price": 0.99
+  },
+  {
+   "id": 28,
+   "shirtColour": 9,
+   "sleeveColour": 4,
+   "shirtStyle": 3,
+   "styleColour": 4,
+   "price": 0.99
+  }
+ ],
+ "colours": [
+  {
+   "id": 1,
+   "r": 255,
+   "g": 255,
+   "b": 255
+  },
+  {
+   "id": 2,
+   "r": 48,
+   "g": 121,
+   "b": 237
+  },
+  {
+   "id": 3,
+   "r": 3,
+   "g": 3,
+   "b": 138
+  },
+  {
+   "id": 4,
+   "r": 255,
+   "g": 215,
+   "b": 0
+  },
+  {
+   "id": 5,
+   "r": 105,
+   "g": 209,
+   "b": 0
+  },
+  {
+   "id": 6,
+   "r": 53,
+   "g": 234,
+   "b": 252
+  },
+  {
+   "id": 7,
+   "r": 255,
+   "g": 165,
+   "b": 0
+  },
+  {
+   "id": 8,
+   "r": 179,
+   "g": 0,
+   "b": 96
+  },
+  {
+   "id": 9,
+   "r": 255,
+   "g": 0,
+   "b": 0
+  },
+  {
+   "id": 10,
+   "r": 50,
+   "g": 50,
+   "b": 50
+  },
+  {
+   "id": 11,
+   "r": 255,
+   "g": 0,
+   "b": 174
+  },
+  {
+   "id": 12,
+   "r": 184,
+   "g": 184,
+   "b": 184
+  }
+ ],
+ "achievements": [
+  {
+   "id": 1,
+   "unlockedDescription": "Completed All 3 Matches in Training Season",
+   "lockedDescription": "Show Up For Training!",
+   "goldReward": 0,
+   "pantsReward": 2,
+   "entourageReward": 0
+  },
+  {
+   "id": 2,
+   "unlockedDescription": "Won All 3 Matches in Training Season",
+   "lockedDescription": "Ace The Training Season",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 3,
+   "unlockedDescription": "Collected Enough Stars In Season 1 For Qualification",
+   "lockedDescription": "Qualify for Turf Wars",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 4,
+   "unlockedDescription": "Won All Games In Season 1 League",
+   "lockedDescription": "Ace The County Championship",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 5,
+   "unlockedDescription": "Won The First Tournament Of Season 1",
+   "lockedDescription": "Win The Europa Trophy",
+   "goldReward": 50000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 6,
+   "unlockedDescription": "Won The Second Tournament Of Season 1",
+   "lockedDescription": "Win The Superstar Trophy",
+   "goldReward": 100000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 7,
+   "unlockedDescription": "Collected Enough Stars To unlock Season 3",
+   "lockedDescription": "Qualify For The High Rollers",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 8,
+   "unlockedDescription": "Won All Matches in Season 2 League",
+   "lockedDescription": "Ace The League Of Luck",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 9,
+   "unlockedDescription": "Won The First Tournament Of Season 2",
+   "lockedDescription": "Win The Rolling Trophy",
+   "goldReward": 500000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 10,
+   "unlockedDescription": "Won The 2nd Tournament of Season 2",
+   "lockedDescription": "Win the White Cube Trophy",
+   "goldReward": 1000000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 11,
+   "unlockedDescription": "Qualified For Season 4",
+   "lockedDescription": "Qualify For The Big League",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 12,
+   "unlockedDescription": "Won Every Game in the League of Season 3",
+   "lockedDescription": "Ace the League of Champions",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 13,
+   "unlockedDescription": "Won The First Tournament of Season 3",
+   "lockedDescription": "Win The World Cup",
+   "goldReward": 10000000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 14,
+   "unlockedDescription": "Won The Second Tournament of Season 3",
+   "lockedDescription": "Win The All Star Trophy",
+   "goldReward": 20000000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 15,
+   "unlockedDescription": "Won Every League Game From Seaso 1 to 3",
+   "lockedDescription": "Win Every League Game From Season 1 to 3",
+   "goldReward": 0,
+   "pantsReward": 3,
+   "entourageReward": 0
+  },
+  {
+   "id": 16,
+   "unlockedDescription": "Won The First 6 Tournaments",
+   "lockedDescription": "Win The First 6 Tournaments",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 17,
+   "unlockedDescription": "Won 10 Matches",
+   "lockedDescription": "Win 10 Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 18,
+   "unlockedDescription": "Won 20 Matches",
+   "lockedDescription": "Win 20 Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 19,
+   "unlockedDescription": "Won 30 Matches",
+   "lockedDescription": "Win 30 Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 20,
+   "unlockedDescription": "Won 40 Matches",
+   "lockedDescription": "Win 40 Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 21,
+   "unlockedDescription": "Won 50 Matches",
+   "lockedDescription": "Win 50 Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 22,
+   "unlockedDescription": "Drew 10 Matches",
+   "lockedDescription": "Finish 10 Games With No Result",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 23,
+   "unlockedDescription": "Lost 10 Matches",
+   "lockedDescription": "Discover Defeat in 10 Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 24,
+   "unlockedDescription": "Unlocked 10 Goalkeepers",
+   "lockedDescription": "Free The First 10 Goalies",
+   "goldReward": 0,
+   "pantsReward": 4,
+   "entourageReward": 0
+  },
+  {
+   "id": 25,
+   "unlockedDescription": "Unlocked 30 Forwards",
+   "lockedDescription": "Find The First 30 Forwards",
+   "goldReward": 0,
+   "pantsReward": 5,
+   "entourageReward": 0
+  },
+  {
+   "id": 26,
+   "unlockedDescription": "Unlocked 10 Midfielders",
+   "lockedDescription": "Muster The First 10 Midfielders",
+   "goldReward": 0,
+   "pantsReward": 6,
+   "entourageReward": 0
+  },
+  {
+   "id": 27,
+   "unlockedDescription": "Unlocked 30 Defenders",
+   "lockedDescription": "Unlock The First 30 Defenders",
+   "goldReward": 0,
+   "pantsReward": 7,
+   "entourageReward": 0
+  },
+  {
+   "id": 28,
+   "unlockedDescription": "Unlocked All Tier 1 Cards",
+   "lockedDescription": "Get All The Greens",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 29,
+   "unlockedDescription": "Unlocked All Tier 2 Cards",
+   "lockedDescription": "Bring All The Blues",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 30,
+   "unlockedDescription": "Unlocked All Tier 3 Cards",
+   "lockedDescription": "Ready All The Reds",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 31,
+   "unlockedDescription": "Unlocked All Tier 4 Cards",
+   "lockedDescription": "Unlock All The Yellows",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 32,
+   "unlockedDescription": "Unlocked All Tier 5 Cards",
+   "lockedDescription": "Grab All The Greys",
+   "goldReward": 0,
+   "pantsReward": 8,
+   "entourageReward": 0
+  },
+  {
+   "id": 33,
+   "unlockedDescription": "Visited the Credits",
+   "lockedDescription": "Visit the Hall of Fame",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 34,
+   "unlockedDescription": "Hoarded 10,000 In Earnings",
+   "lockedDescription": "Hoard 10K Credits",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 35,
+   "unlockedDescription": "Hoarded 2 Million Earnings",
+   "lockedDescription": "Gather Up 2 Million",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 36,
+   "unlockedDescription": "Hoarded 5 Million Earnings",
+   "lockedDescription": "Gather Up 5 Million",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 37,
+   "unlockedDescription": "Spent 10 Million Bucks!",
+   "lockedDescription": "Spend Over 10 Million of Your Earnings",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 38,
+   "unlockedDescription": "Kept A Clean Sheet For An Entire Game",
+   "lockedDescription": "Let No Goals In",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 39,
+   "unlockedDescription": "Let The Opposition Score 3 Times In A Game",
+   "lockedDescription": "Let In 3 Goals",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 40,
+   "unlockedDescription": "Scored 3 Goals In One Game",
+   "lockedDescription": "Score A Hat-Trick",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 41,
+   "unlockedDescription": "Scored 5 Times In One Game!",
+   "lockedDescription": "Score 5 Goals In A Match",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 42,
+   "unlockedDescription": "Scored 4 Times In One Match!!",
+   "lockedDescription": "Score 4 Goals In A Game",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 43,
+   "unlockedDescription": "Scored SIX Times In One Match",
+   "lockedDescription": "Score SIX Goals In A Game",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 44,
+   "unlockedDescription": "Scored At Least 20 In One Roll",
+   "lockedDescription": "Score At Least 20 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 45,
+   "unlockedDescription": "Scored At Least 30 In One Roll",
+   "lockedDescription": "Score At Least 30 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 46,
+   "unlockedDescription": "Scored At Least 40 In One Roll",
+   "lockedDescription": "Score At Least 40 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 47,
+   "unlockedDescription": "Scored At Least 50 In One Roll",
+   "lockedDescription": "Score At Least 50 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 48,
+   "unlockedDescription": "Scored At Least 60 In One Roll",
+   "lockedDescription": "Score At Least 60 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 49,
+   "unlockedDescription": "Scored At Least 70 In One Roll",
+   "lockedDescription": "Score At Least 70 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 50,
+   "unlockedDescription": "Scored At Least 80 In One Roll",
+   "lockedDescription": "Score At Least 80 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 51,
+   "unlockedDescription": "Scored At Least 90 In One Roll",
+   "lockedDescription": "Score At Least 90 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 52,
+   "unlockedDescription": "Scored At Least 100 In One Roll",
+   "lockedDescription": "Score At Least 100 In One Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 53,
+   "unlockedDescription": "Scored 0 On A Single Roll",
+   "lockedDescription": "Score 0 On A Single Roll",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 54,
+   "unlockedDescription": "Made Your Opponents Roll A Duck",
+   "lockedDescription": "Get Your Opponents To Roll 0 For Their Team ",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 55,
+   "unlockedDescription": "Scored a goal with less than 1:00 on the clock.",
+   "lockedDescription": "Score A Last Minute Goal. (NOT IN TRAINING SEASON)",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 4
+  },
+  {
+   "id": 56,
+   "unlockedDescription": "Missed a goal with less than 1:00 on the clock.",
+   "lockedDescription": "Miss A Last Minute Goal. (NOT IN TRAINING SEASON)",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 6
+  },
+  {
+   "id": 57,
+   "unlockedDescription": "Saved a goal with less that 1:00 on the clock.",
+   "lockedDescription": "Save a Last Minute Goal. (NOT IN TRAINING SEASON)",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 7
+  },
+  {
+   "id": 58,
+   "unlockedDescription": "Conceded a goal with less than 1:00 on the clock.",
+   "lockedDescription": "Concede a goal with less than 1:00 on the clock. (NOT IN TRAINING SEASON)",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 9
+  },
+  {
+   "id": 59,
+   "unlockedDescription": "Scored an Equaliser in the final minute!",
+   "lockedDescription": "Score an equaliser with less than 1:00 on the clock. (NOT IN TRAINING SEASON)",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 10
+  },
+  {
+   "id": 60,
+   "unlockedDescription": "Scored a Tie Breaker in the final minute!",
+   "lockedDescription": "Score a tie breaker with less than 1:00 on the clock. (NOT IN TRAINING SEASON)",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 11
+  },
+  {
+   "id": 61,
+   "unlockedDescription": "Qualified for Season 5.",
+   "lockedDescription": "Qualify for Season 5.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 62,
+   "unlockedDescription": "Won all Season 4 League matches.",
+   "lockedDescription": "Win the Beach League",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 63,
+   "unlockedDescription": "Won the First Tournament of Season 4",
+   "lockedDescription": "Win the Entourage Cup",
+   "goldReward": 7500000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 64,
+   "unlockedDescription": "You Won the Game of Goals!",
+   "lockedDescription": "Win the Cup of Thrones",
+   "goldReward": 15000000,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 65,
+   "unlockedDescription": "Won a match with at least 1 WAG equipped.",
+   "lockedDescription": "Win a match with at least 1 WAG equipped.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 8
+  },
+  {
+   "id": 66,
+   "unlockedDescription": "Rolled more than 150",
+   "lockedDescription": "Roll at least 150.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 18
+  },
+  {
+   "id": 67,
+   "unlockedDescription": "Won a match in Season 4 with an empty bench.",
+   "lockedDescription": "Win a match in Season 4 with an empty bench.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 19
+  },
+  {
+   "id": 68,
+   "unlockedDescription": "Won a match in Season 4 with no Entourage help.",
+   "lockedDescription": "Win a match in Season 4 with no Entourage help.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 17
+  },
+  {
+   "id": 69,
+   "unlockedDescription": "Unlocked all White Bordered cards.",
+   "lockedDescription": "Unlock all White Bordered cards.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 21
+  },
+  {
+   "id": 70,
+   "unlockedDescription": "Unlocked all Entourage.",
+   "lockedDescription": "Unlock all Entourage.",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 0
+  },
+  {
+   "id": 71,
+   "unlockedDescription": "Complete 1 Multiplayer Match",
+   "lockedDescription": "Completed 1 Multiplayer Match",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 3
+  },
+  {
+   "id": 72,
+   "unlockedDescription": "Win 2 Multiplayer Matches",
+   "lockedDescription": "Won 2 Multiplayer Matches",
+   "goldReward": 0,
+   "pantsReward": 0,
+   "entourageReward": 5
+  }
+ ],
+ "entourage": [
+  {
+   "id": 1,
+   "name": "Mary Hail",
+   "position": "WAG",
+   "cost": 0,
+   "abilityTrigger": 5,
+   "abilityIcon": 64,
+   "abilityName": "Ex-Cheerleader",
+   "abilityDescription": "Add +5 to the dice of your choice, when your team rolls three identical numbers.",
+   "playerDescription": "Mary Hail hails from humble beginnings but is now living hale and hearty life as a Dice Soccer wife. She'll be there to cheer on her hubby come hail or snow, so keep your earplugs near!",
+   "inGameDescription": "Adds +5 when you roll a triple.",
+   "unlockCriteria": "",
+   "sellingPrice": 0,
+   "inappPrice": 0.0
+  },
+  {
+   "id": 2,
+   "name": "Callie McLooney",
+   "position": "WAG",
+   "cost": 25000,
+   "abilityTrigger": 0,
+   "abilityIcon": 0,
+   "abilityName": "Possessive GF",
+   "abilityDescription": "Adds +1 to your total score whenever your team has possession of the ball.",
+   "playerDescription": "Callie's probably the most famous WAG of them all, given that she's been both wife AND girlfriend of the forward Vain Looney. She's extremely possessive, cheaters beware!",
+   "inGameDescription": "Adds +1 to your total when your team has possession.",
+   "unlockCriteria": "",
+   "sellingPrice": 0,
+   "inappPrice": 0.0
+  },
+  {
+   "id": 3,
+   "name": "Miguel Panini",
+   "position": "OFF",
+   "cost": 50000,
+   "abilityTrigger": 7,
+   "abilityIcon": 24,
+   "abilityName": "UEDA President",
+   "abilityDescription": "Re-roll any dice when your team rolls a sum less than 5, including all powerups.",
+   "playerDescription": "Miguel's a giant of the traditional game, and now spends his time promoting the Dice variant. He's extremely encouraging and loves to see teams reach their potential.",
+   "inGameDescription": "Re-roll a dice when your team rolls less than 5.",
+   "unlockCriteria": "Complete 1 Multiplayer Match",
+   "sellingPrice": 30000,
+   "inappPrice": 0.99
+  },
+  {
+   "id": 4,
+   "name": "Maria Single",
+   "position": "SPE",
+   "cost": 10000,
+   "abilityTrigger": 5,
+   "abilityIcon": 27,
+   "abilityName": "Talent Scout",
+   "abilityDescription": "Add +1 to all your dice when your team rolls three identical numbers.",
+   "playerDescription": "She's on the prowl for promising talent, but rumor has it that this spinster's actually looking to be WAG some day. And the boys are just lining up in walls to impress!",
+   "inGameDescription": "Add +1 to all your dice. Triggers on a triple.",
+   "unlockCriteria": "Score a goal with less than 1:00 on the clock",
+   "sellingPrice": 7500,
+   "inappPrice": 0.99
+  },
+  {
+   "id": 5,
+   "name": "Remy Romantique",
+   "position": "WAG",
+   "cost": 15000,
+   "abilityTrigger": 3,
+   "abilityIcon": 17,
+   "abilityName": "The Cassanova",
+   "abilityDescription": "Add +2 to a dice when your roll a pair. Triggers only if there is at least one female on your team.",
+   "playerDescription": "He's a true lover of the game; the game of love that is. He'll have the girls swept off their feet faster than a sliding tackle, and they'll be glad to be sent off into his arms.",
+   "inGameDescription": "Add +2 on rolling a pair. Valid if there is a female on your team.",
+   "unlockCriteria": "Win 2 Multiplayer Matches",
+   "sellingPrice": 7500,
+   "inappPrice": 0.99
+  },
+  {
+   "id": 6,
+   "name": "Milan Mariott",
+   "position": "WAG",
+   "cost": 10000,
+   "abilityTrigger": 3,
+   "abilityIcon": 16,
+   "abilityName": "The Socialite",
+   "abilityDescription": "Add +1 to any dice when your team rolls a pair.",
+   "playerDescription": "She's not particularly a soccer fan, but she's heard the boys are cute so she'll offer some token support. It's coming out of her daddy's purse anyway!",
+   "inGameDescription": "Add +1 to any dice. Triggers on a pair.",
+   "unlockCriteria": "Be denied a goal with less than 1:00 on the clock",
+   "sellingPrice": 3000,
+   "inappPrice": 0.99
+  },
+  {
+   "id": 7,
+   "name": "Dicey Dave",
+   "position": "SPE",
+   "cost": 100000,
+   "abilityTrigger": 11,
+   "abilityIcon": 39,
+   "abilityName": "Team Mascot",
+   "abilityDescription": "Doubles the value of one dice. Triggers when the enemy rolls a total higher than yours by 6 or more.",
+   "playerDescription": "He's no clown but he sure can turn a frown up side down. A morale boost always does the troops some good, especially when they're not on a roll.",
+   "inGameDescription": "If the enemy beats you by more than five, double one dice.",
+   "unlockCriteria": "Save a goal with less than 1:00 on the clock",
+   "sellingPrice": 50000,
+   "inappPrice": 0.99
+  },
+  {
+   "id": 8,
+   "name": "Shirley Tweety",
+   "position": "WAG",
+   "cost": 75000,
+   "abilityTrigger": 1,
+   "abilityIcon": 0,
+   "abilityName": "Traffic Stopper",
+   "abilityDescription": "Add or subtract 5 minutes from the clock. Triggers when 7 minutes remain.",
+   "playerDescription": "When Shirley makes an appearance, time stands still. Or maybe time just disappears as people stop and stare. Who can tell? She's so pretty!",
+   "inGameDescription": "Add or subtract 5 minutes. Triggers at <7 minutes.",
+   "unlockCriteria": "Win 1 Match with a WAG equipped",
+   "sellingPrice": 50000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 9,
+   "name": "Jeff Blather",
+   "position": "OFF",
+   "cost": 50000,
+   "abilityTrigger": 9,
+   "abilityIcon": 46,
+   "abilityName": "FIDA President",
+   "abilityDescription": "Swap powerups of 3 dice if your opponent rolls a sum more than 20, including all powerups.",
+   "playerDescription": "Jeff's a champion of the sport who has never come near being a champion at the sport. It's a strange controversy, or contradiction rather.",
+   "inGameDescription": "Swap powerups of 3 dice if your opponent rolls a sum more than 20.",
+   "unlockCriteria": "Concede a goal with less than 1:00 on the clock",
+   "sellingPrice": 30000,
+   "inappPrice": 0.99
+  },
+  {
+   "id": 10,
+   "name": "Lionel Scrimmage",
+   "position": "OFF",
+   "cost": 1000000,
+   "abilityTrigger": 10,
+   "abilityIcon": 44,
+   "abilityName": "Football Referee",
+   "abilityDescription": "Change positive powers to negative, or vice versa for once dice. Triggers when the enemy rolls a sum higher than yours.",
+   "playerDescription": "How Lionel made it to the soccer pitch is anyone's guess. It's worrying that he appears to be refereeing the games with American football rules.",
+   "inGameDescription": "Flip + and - for one dice. Triggers when enemy rolls higher than you.",
+   "unlockCriteria": "Score an equalizer with less than 1:00 on the clock",
+   "sellingPrice": 500000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 11,
+   "name": "Sheikh Abdullah I",
+   "position": "SPE",
+   "cost": 75000,
+   "abilityTrigger": 0,
+   "abilityIcon": 0,
+   "abilityName": "The Investor",
+   "abilityDescription": "Increases reward for Victory by 10,000.",
+   "playerDescription": "Sheikh Abdullah's got a lot of money. It is said that he's secretly financing the entire Dice Soccer League! And all because his school going son invented the game!",
+   "inGameDescription": "Increases reward for Victory by 10,000.",
+   "unlockCriteria": "Score a tie breaker with less than 1:00 on the clock",
+   "sellingPrice": 37500,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 12,
+   "name": "Ronin Chelskovic",
+   "position": "SPE",
+   "cost": 200000,
+   "abilityTrigger": 0,
+   "abilityIcon": 0,
+   "abilityName": "The Oil Baron",
+   "abilityDescription": "A game that ends in a Draw awards you the same amount of money as a Win.",
+   "playerDescription": "He's drowning in cash but he'd much rather be drowning in an opponent's tears. He'll do anything for a win, even if it means buying a team and paying for it himself!",
+   "inGameDescription": "A Draw awards you the same as a Win.",
+   "unlockCriteria": "Complete Match 1 of T4.1",
+   "sellingPrice": 125000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 13,
+   "name": "Sylvester Punter",
+   "position": "SPE",
+   "cost": 75000,
+   "abilityTrigger": 0,
+   "abilityIcon": 0,
+   "abilityName": "Small Bookie",
+   "abilityDescription": "Extra +15k if you win. -15k if you don't. Abandon at your own risk!",
+   "playerDescription": "This sly operator will take you up on any wager and though he doesn't look like much, he's got the thugs who'll come looking for you if you don't pay up!",
+   "inGameDescription": "Extra +15k if you win. -15k if you don't or abandon.",
+   "unlockCriteria": "Complete Match 3 of League 4",
+   "sellingPrice": 37500,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 14,
+   "name": "Hilly Will",
+   "position": "SPE",
+   "cost": 500000,
+   "abilityTrigger": 0,
+   "abilityIcon": 0,
+   "abilityName": "Big Bookie",
+   "abilityDescription": "Extra +50k if you win. -50k if you don't. Abandon at your own risk!",
+   "playerDescription": "Ol' Hilbert will make you an offer you can't refuse. But if you refuse to pay when you lose, you'll find yourself quickly amongst the next morning's refuse.",
+   "inGameDescription": "Extra +50k if you win. -50k if you don't or abandon",
+   "unlockCriteria": "Complete Match 7 of League 4",
+   "sellingPrice": 200000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 15,
+   "name": "Torna Hammstring",
+   "position": "OFF",
+   "cost": 200000,
+   "abilityTrigger": 2,
+   "abilityIcon": 0,
+   "abilityName": "Team Physio",
+   "abilityDescription": "Permanent +1 Bonus to your team when you're one goal or more behind your opponent.",
+   "playerDescription": "Injury woes? Fatigue's gotten the better of you? Then nothing beats having the world's best physio on your side! Chase that win with vim and vigor!",
+   "inGameDescription": "Permanent +1 Bonus to your team when losing.",
+   "unlockCriteria": "Complete Match 11 of League 4",
+   "sellingPrice": 75000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 16,
+   "name": "Flashy Spice",
+   "position": "WAG",
+   "cost": 1500000,
+   "abilityTrigger": 0,
+   "abilityIcon": 0,
+   "abilityName": "Paparazi Magnet",
+   "abilityDescription": "Your team wins any turn that ends in a tie.",
+   "playerDescription": "She was born for attention and oh how she makes those heads and cameras turn! The perfect distraction for her hubby's team to capitalize on!",
+   "inGameDescription": "Your team wins any turn that ends in a tie.",
+   "unlockCriteria": "Win Match 3 of T4.1",
+   "sellingPrice": 1000000,
+   "inappPrice": 3.99
+  },
+  {
+   "id": 17,
+   "name": "Parshall LeBlynde",
+   "position": "OFF",
+   "cost": 2000000,
+   "abilityTrigger": 12,
+   "abilityIcon": 37,
+   "abilityName": "Dubious Referee",
+   "abilityDescription": "Reduce a dice by half. Triggers when your team produces a 2x powerup. ",
+   "playerDescription": "Parshall's never been the real athletic type. That's why he chose a life of refereeing instead. Too bad he's never been the observant type either.",
+   "inGameDescription": "Reduce a dice by half if you produce a 2x.",
+   "unlockCriteria": "Win 1 Match in Season 4 with both Entourage slots empty",
+   "sellingPrice": 500000,
+   "inappPrice": 2.99
+  },
+  {
+   "id": 18,
+   "name": "The Special One",
+   "position": "OFF",
+   "cost": 5000000,
+   "abilityTrigger": 7,
+   "abilityIcon": 42,
+   "abilityName": "Defensive Coach",
+   "abilityDescription": "Disable 3 dice from using any powerups. Triggers when your team rolls a sum less than 10 after adding in all powerups",
+   "playerDescription": "The Special One's known to turn every thing he touches to gold. But gold is extremely heavy. ",
+   "inGameDescription": "Anchor 3 dice. Triggers when you roll less than 10 total.",
+   "unlockCriteria": "Roll 150 in a single turn",
+   "sellingPrice": 2500000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 19,
+   "name": "Le Professeur",
+   "position": "OFF",
+   "cost": 5000000,
+   "abilityTrigger": 4,
+   "abilityIcon": 17,
+   "abilityName": "Frugal Coach",
+   "abilityDescription": "Add +2 to a dice when you roll a pair. Triggers only if your Bench is empty.",
+   "playerDescription": "He's miserly with his money but efficient with his expenditure. No excess required when you have a gifted young team. Or so he believes.",
+   "inGameDescription": "Add +2 when you roll a pair. Triggers if Bench is empty.",
+   "unlockCriteria": "Win 1 Match in Season 4 with an empty bench",
+   "sellingPrice": 125000,
+   "inappPrice": 1.99
+  },
+  {
+   "id": 20,
+   "name": "Pierre Bear Stare",
+   "position": "OFF",
+   "cost": 1500000,
+   "abilityTrigger": 8,
+   "abilityIcon": 65,
+   "abilityName": "Tough Referee",
+   "abilityDescription": "Give a yellow card to one dice. A second card on that dice will disqualify it from that turn. Triggers when an opponent dice rolls >7. ",
+   "playerDescription": "Pierre's cold icy gaze will compel toward compliance the most petulant of players. There's no messing with this bloke, else the cards will come a-flying. ",
+   "inGameDescription": "Give a yellow card if an enemy dice rolls >7.",
+   "unlockCriteria": "Complete Match 14 of League 4",
+   "sellingPrice": 500000,
+   "inappPrice": 3.99
+  },
+  {
+   "id": 21,
+   "name": "Sir Al Flubberson",
+   "position": "OFF",
+   "cost": 10000000,
+   "abilityTrigger": 3,
+   "abilityIcon": 21,
+   "abilityName": "Offensive Coach",
+   "abilityDescription": "Quadruple the value of one dice. Triggers when your team rolls a pair.",
+   "playerDescription": "When it comes to tactics or tact, this attacking Knight goes straight for the jugular. You'll have to stick him down with chewing up to stop him!",
+   "inGameDescription": "Get a 4x token when your team rolls a pair.",
+   "unlockCriteria": "Unlock all White Bordered cards",
+   "sellingPrice": 5000000,
+   "inappPrice": 3.99
+  }
+ ],
+ "tutorials": [
+  {
+   "id": 1,
+   "popupText": [
+    "This is the DECK, where you can review your players and UNLOCK, HIRE or SELL them!",
+    "TAP on a card to enlarge it, and TAP on the card once again to read about its abilities!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 2,
+   "popupText": [
+    "Welcome to the SHOP! Use external funding here to get us more CASH and some shiny new threads too."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 3,
+   "popupText": [
+    "Ah the sweet smell of the locker room! Here's where we can pick our team colors.",
+    "Get us more kits by completing achievements! You can also buy them from the SHOP or during certain tournaments."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 4,
+   "popupText": [
+    "Good to see you here, Coach! Our Trophy Cabinet is sparse for now! But with your help we'll fill it up real fast!",
+    "Complete these ACHIEVEMENTS to attract new players and sponsors to our team!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 5,
+   "popupText": [
+    "Hi there! The new Dice Soccer fad has just begun, and we are really eager to play!",
+    "I've managed to get a few friends to make a team. Now all we need is a coach -- YOU!",
+    "Let's head to the practice grounds and get started! Tap on the TRAINING SEASON to begin!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 6,
+   "popupText": [
+    "Welcome to the MANAGE screen!",
+    "This is where you can change our starting lineup, before any game!",
+    "Tap on Jerry Hattrick (the old guy in the top left corner) in order to replace him."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 7,
+   "popupText": [
+    "Looking for new options in your FORWARD lineup? This is the right place!",
+    "Remember, the numbers on their cards are the numbers that they can roll during the game."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 8,
+   "popupText": [
+    "You've selected a DEFENDER position!",
+    "All slots in defense are currently full. But you can always shuffle them around."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 9,
+   "popupText": [
+    "You've selected a GOALKEEPER position!",
+    "You've already got ME in goal - but there might be better goalies here soon!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 10,
+   "popupText": [
+    "TAP on the card to read more about his abilties. Then HIRE and SELECT him."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 11,
+   "popupText": [
+    "The game is about to begin... OH WAIT - we haven't told you how we play yet!",
+    "It's quite simple actually, just Shake OR Tap your screen and we'll all transform into our DICE form!",
+    "We're playing from the left side - if our DICE numbers ADD up higher than theirs, then we get control of the ball and can move forward!"
+   ],
+   "customPopup": [
+    5
+   ]
+  },
+  {
+   "id": 12,
+   "popupText": [
+    "Also, some of us can produce cool POWERS when the right NUMBERS are rolled."
+   ],
+   "customPopup": [
+    6,
+    1
+   ]
+  },
+  {
+   "id": 13,
+   "popupText": [
+    "It might feel a little random for now, but you'll soon get to choose the kinds of dice we use."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 14,
+   "popupText": [
+    "Play TIME is limited - until the clock below counts down to zero! Each ROLL uses up about a minute of time."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 15,
+   "popupText": [
+    "You Scored!!! Get more goals to ensure your victory!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 16,
+   "popupText": [
+    "Your shot was saved! Let's try again soon!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 17,
+   "popupText": [
+    "They've scored! Let's try and fight back!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 18,
+   "popupText": [
+    "We lost! That's ok, it's still a long way to go.",
+    "You can always replay any games you've lost and try to improve your score!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 19,
+   "popupText": [
+    "Good job. Let's try for a win next time!",
+    "Winning games will attract more players to offer us their services!",
+    "HIRE these new talents to strengthen our lineup."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 20,
+   "popupText": [
+    "Congrats! What a good start!",
+    "Scoring more goals will get us more stars!",
+    "Use the money we've earned to HIRE more players for our team!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 21,
+   "popupText": [
+    "That was a good game! But I think it's time we got some fresh legs on our team...",
+    "In fact, Jerry Hattrick was with us on loan from the neighboring team!",
+    "Let's go into MANAGE mode and make some changes!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 22,
+   "popupText": [
+    "If you're tired, you can TAP near the edges of the screen instead of shaking it."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 23,
+   "popupText": [
+    "Now you're getting the hang of it. Play more matches until we get PROMOTED to the next season.",
+    "Experiment with different player combinations to improve your dice rolls!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 24,
+   "popupText": [
+    "You'll have to complete a number of matches each season, in order to progress.",
+    "Let's try this first training game against THE NEIGHBOURS! Tap PLAY to begin!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 25,
+   "popupText": [
+    "Dice Soccer rules allow us to make as many SUBSTITUTIONS as we like during a game!",
+    "But we can only choose from 4 reserves at a time. TAP on the player whom you want to remove from the lineup. "
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 26,
+   "popupText": [
+    " Remember: The total of our dice and powers has to BEAT theirs! If the numbers are tied, nothing moves, and we all have to roll again."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 27,
+   "popupText": [
+    "Whoa! Looks like there's been some kind of mixup. This isn't the kind of football team we were expecting!",
+    "They look far too big and strong. That's fine though, we've got a wild card of our own!"
+   ],
+   "customPopup": [
+    2
+   ]
+  },
+  {
+   "id": 28,
+   "popupText": [
+    "Great! Now you can choose from any of the available forwards or midfielders to take up his spot.",
+    "I suggest putting in our newly acquired midfielder. Find him under the green MID tab at the bottom of the screen!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 29,
+   "popupText": [
+    "Good job! Now TAP on the Streaker, HIRE him, and SELECT him into our team!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 30,
+   "popupText": [
+    "Excellent! I have a feeling he's going to take us on a winning streak!",
+    "Also, add your extra players to the BENCH once you start hiring more of them. Now, let's go PLAY our match against the local college!"
+   ],
+   "customPopup": [
+    4
+   ]
+  },
+  {
+   "id": 31,
+   "popupText": [
+    "That was quite the match eh? Now onto our last training game for the season.",
+    "We're currently in LEAGUE mode, which means we just have to complete one match to unlock the next!",
+    "In future LEAGUEs, we'll have to earn a number of stars before progressing to the next season."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 32,
+   "popupText": [],
+   "customPopup": [
+    3
+   ]
+  },
+  {
+   "id": 33,
+   "popupText": [
+    "Alright! That's the end of training! We've been invited to join the Bootcamp Season!",
+    "The matches will be longer and tougher, so it's time to man up!",
+    "Go back to the previous screen and scroll on to SEASON ONE!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 34,
+   "popupText": [
+    "Ah Coach! You made it! Our team is here and warming up already.",
+    "There's so much more talent out here amongst the competition. We should try recruiting them as we go along!",
+    "Also, remember to add players to your BENCH before a match starts. Only these players can be accessed from the pause menu later."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 35,
+   "popupText": [
+    "Tap the PLAY ON button to skip any re-rolls you have remaining. Use this feature ONLY when the outcome is inevitable!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 36,
+   "popupText": [],
+   "customPopup": [
+    3
+   ]
+  },
+  {
+   "id": 37,
+   "popupText": [],
+   "customPopup": [
+    7
+   ]
+  },
+  {
+   "id": 38,
+   "popupText": [
+    "Regular hiring of players is the best way to succeed as the matches get tougher. Tap on any player cards for more on their abilities."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 39,
+   "popupText": [
+    "Some players have the THROUGH PASS ability. When this triggers, they'll immediately progress forward. Watch Out!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 40,
+   "popupText": [
+    "Hurray! For making it this far, we've been invited to our first tournament of the season! Tap the T1 tab to access the available matches!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 41,
+   "popupText": [
+    "In TOURNAMENT mode, WIN each match to unlock the next. Each match has no reward, but HUGE CASH will be won in the FINALS!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 42,
+   "popupText": [
+    "Every time your forward line rolls a 3, one of your players will trigger the critical 2x ability. Use this power to boost your dice!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 43,
+   "popupText": [
+    "Season 3!! These are Professional teams we're taking on now, but fear not, I'm sure you've learnt plenty of tricks getting us here!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 44,
+   "popupText": [
+    "Careful coach, this team's Captain's ability makes them to WIN every encounter that should be a TIE. Time to fight extra hard!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 45,
+   "popupText": [
+    "This is where we get a PREVIEW of our opponents. We won't always know their entire lineup, but even the slightest info can be helpful.",
+    "Once you're done admiring the enemy team, tap on MANAGE to inspect our own squad."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 46,
+   "popupText": [
+    "The bench can hold up to 4 reserve players. These reserves can be swapped into their positions during a match."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 47,
+   "popupText": [
+    "This is a tough season, Coach. But we'll get THROUGH it! Just gotta find a way to beat these teams quick!",
+    "And it's ok if we lose a couple of matches on the way. We can always come back to win them later!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 48,
+   "popupText": [
+    "Would you look at that! There's a whole bandwagon of folks here to lend us their support!",
+    "I think we should bring a couple of them to our matches for some extra benefits!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 49,
+   "popupText": [
+    "The Entourage! Hurray! Selecting these fans, officials and specators to come to our matches will be real fun!",
+    "It looks like we can use 2 of them per match for some extra bonuses!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 50,
+   "popupText": [
+    "Welcome to Multiplayer mode! Challenge your friends via GameCenter of Bluetooth.",
+    "Get points as we win, level up and show off our cool trophies.",
+    " You can also manage your team from here. There's lots of big money to be won!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 51,
+   "popupText": [
+    "We could use all the help we can get coach. Hire up some new Entourage members via the Manage screen!"
+   ],
+   "customPopup": []
+  }
+ ],
+ "persistentTutorials": [
+  {
+   "id": 1,
+   "popupText": [
+    "The deck is currently locked! Go PLAY and come back later!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 2,
+   "popupText": [
+    "MANAGE is currently disabled! Finish the first match to gain access!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 3,
+   "popupText": [
+    "Go into MANAGE mode to make team changes before the next match!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 4,
+   "popupText": [
+    "Tap on Jerry Hattrick (the old guy) in order to replace him."
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 5,
+   "popupText": [
+    "Find Randy Johnson under the green MID tab at the bottom of your screen. Then HIRE and SELECT him!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 6,
+   "popupText": [
+    "We need to fill all 7 slots in the main team before going into the match!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 7,
+   "popupText": [
+    "Access to this TOURNAMENT is still restricted! Complete more league games to be worthy of entry!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 8,
+   "popupText": [
+    "Tap on MANAGE to make changes to our team first!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 9,
+   "popupText": [
+    "Multiplayer is locked until the end of Training!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 10,
+   "popupText": [
+    "Bench is locked until you finish the first two matches!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 11,
+   "popupText": [
+    "Please update to the latest version to play against other players!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 12,
+   "popupText": [
+    "Your opponent is running an older version of the game and cannot play against you!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 13,
+   "popupText": [
+    "Please connect to the Internet to access this feature!"
+   ],
+   "customPopup": []
+  },
+  {
+   "id": 14,
+   "popupText": [
+    "iCloud is only supported on iOS 5 and above!"
+   ],
+   "customPopup": []
+  }
+ ]
+}

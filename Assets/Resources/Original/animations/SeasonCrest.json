@@ -1,0 +1,65 @@
+{
+ "name": "SeasonCrest",
+ "frames": [
+  {
+   "name": "Season0Crest",
+   "sourceWidth": 500,
+   "sourceHeight": 589,
+   "offsetX": 16,
+   "offsetY": 49,
+   "textureX": 480,
+   "textureY": 510,
+   "textureWidth": 481,
+   "textureHeight": 468,
+   "rotated": true
+  },
+  {
+   "name": "StarCounter",
+   "sourceWidth": 67,
+   "sourceHeight": 64,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 462,
+   "textureY": 450,
+   "textureWidth": 61,
+   "textureHeight": 58,
+   "rotated": false
+  },
+  {
+   "name": "Season2Crest",
+   "sourceWidth": 500,
+   "sourceHeight": 589,
+   "offsetX": 26,
+   "offsetY": 7,
+   "textureX": 462,
+   "textureY": 2,
+   "textureWidth": 511,
+   "textureHeight": 446,
+   "rotated": true
+  },
+  {
+   "name": "Season4Crest",
+   "sourceWidth": 500,
+   "sourceHeight": 589,
+   "offsetX": 12,
+   "offsetY": 85,
+   "textureX": 2,
+   "textureY": 561,
+   "textureWidth": 476,
+   "textureHeight": 453,
+   "rotated": false
+  },
+  {
+   "name": "Season3Crest",
+   "sourceWidth": 500,
+   "sourceHeight": 589,
+   "offsetX": 21,
+   "offsetY": 26,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 458,
+   "textureHeight": 557,
+   "rotated": false
+  }
+ ]
+}

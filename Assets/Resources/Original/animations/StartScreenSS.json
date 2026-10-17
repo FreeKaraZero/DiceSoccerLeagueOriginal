@@ -1,0 +1,29 @@
+{
+ "name": "StartScreenSS",
+ "frames": [
+  {
+   "name": "StartScreenBG",
+   "sourceWidth": 640,
+   "sourceHeight": 960,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 640,
+   "textureHeight": 960,
+   "rotated": false
+  },
+  {
+   "name": "StartScreenClouds",
+   "sourceWidth": 768,
+   "sourceHeight": 212,
+   "offsetX": 10,
+   "offsetY": 10,
+   "textureX": 644,
+   "textureY": 2,
+   "textureWidth": 196,
+   "textureHeight": 752,
+   "rotated": true
+  }
+ ]
+}

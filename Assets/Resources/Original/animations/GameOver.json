@@ -1,0 +1,161 @@
+{
+ "name": "GameOver",
+ "frames": [
+  {
+   "name": "Gold1Star",
+   "sourceWidth": 310,
+   "sourceHeight": 130,
+   "offsetX": 11,
+   "offsetY": 4,
+   "textureX": 736,
+   "textureY": 118,
+   "textureWidth": 284,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "Gold0Star",
+   "sourceWidth": 310,
+   "sourceHeight": 130,
+   "offsetX": 11,
+   "offsetY": 4,
+   "textureX": 736,
+   "textureY": 2,
+   "textureWidth": 284,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "GameOverDefeatBox",
+   "sourceWidth": 410,
+   "sourceHeight": 600,
+   "offsetX": 38,
+   "offsetY": 412,
+   "textureX": 402,
+   "textureY": 2,
+   "textureWidth": 332,
+   "textureHeight": 144,
+   "rotated": false
+  },
+  {
+   "name": "GameOverBox",
+   "sourceWidth": 410,
+   "sourceHeight": 600,
+   "offsetX": 6,
+   "offsetY": 7,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 398,
+   "textureHeight": 584,
+   "rotated": false
+  },
+  {
+   "name": "GameOverLevelUp",
+   "sourceWidth": 162,
+   "sourceHeight": 118,
+   "offsetX": 10,
+   "offsetY": 2,
+   "textureX": 772,
+   "textureY": 540,
+   "textureWidth": 144,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "Gold2Star",
+   "sourceWidth": 310,
+   "sourceHeight": 130,
+   "offsetX": 11,
+   "offsetY": 4,
+   "textureX": 736,
+   "textureY": 234,
+   "textureWidth": 284,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "Gold3Star",
+   "sourceWidth": 310,
+   "sourceHeight": 130,
+   "offsetX": 11,
+   "offsetY": 4,
+   "textureX": 736,
+   "textureY": 350,
+   "textureWidth": 284,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "GameOverVictory",
+   "sourceWidth": 332,
+   "sourceHeight": 80,
+   "offsetX": 2,
+   "offsetY": 5,
+   "textureX": 402,
+   "textureY": 440,
+   "textureWidth": 326,
+   "textureHeight": 72,
+   "rotated": false
+  },
+  {
+   "name": "GameOverDefeat",
+   "sourceWidth": 332,
+   "sourceHeight": 80,
+   "offsetX": 40,
+   "offsetY": 5,
+   "textureX": 730,
+   "textureY": 466,
+   "textureWidth": 246,
+   "textureHeight": 72,
+   "rotated": false
+  },
+  {
+   "name": "GameOverNewHighScore",
+   "sourceWidth": 162,
+   "sourceHeight": 118,
+   "offsetX": 0,
+   "offsetY": 2,
+   "textureX": 608,
+   "textureY": 540,
+   "textureWidth": 162,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "GameOverVictoryBox",
+   "sourceWidth": 410,
+   "sourceHeight": 600,
+   "offsetX": 38,
+   "offsetY": 412,
+   "textureX": 402,
+   "textureY": 294,
+   "textureWidth": 332,
+   "textureHeight": 144,
+   "rotated": false
+  },
+  {
+   "name": "GameOverDraw",
+   "sourceWidth": 332,
+   "sourceHeight": 80,
+   "offsetX": 61,
+   "offsetY": 5,
+   "textureX": 402,
+   "textureY": 514,
+   "textureWidth": 204,
+   "textureHeight": 72,
+   "rotated": false
+  },
+  {
+   "name": "GameOverDrawBox",
+   "sourceWidth": 410,
+   "sourceHeight": 600,
+   "offsetX": 38,
+   "offsetY": 412,
+   "textureX": 402,
+   "textureY": 148,
+   "textureWidth": 332,
+   "textureHeight": 144,
+   "rotated": false
+  }
+ ]
+}

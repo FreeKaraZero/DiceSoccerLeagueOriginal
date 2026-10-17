@@ -1,0 +1,105 @@
+{
+ "InAppPurchaseIdentifiers": [
+  "com.lambdamugames.dicesoccer.newmoneybag01",
+  "com.lambdamugames.dicesoccer.newmoneybag02",
+  "com.lambdamugames.dicesoccer.newmoneybag03",
+  "com.lambdamugames.dicesoccer.newmoneybag04",
+  "com.lambdamugames.dicesoccer.newmoneybag05",
+  "com.lambdamugames.dicesoccer.newmoneybag06",
+  "com.lambdamugames.dicesoccer.newmoneybag07",
+  "com.lambdamugames.dicesoccer.newpants1",
+  "com.lambdamugames.dicesoccer.newpants2",
+  "com.lambdamugames.dicesoccer.newpants3",
+  "com.lambdamugames.dicesoccer.newpants4",
+  "com.lambdamugames.dicesoccer.newpants5",
+  "com.lambdamugames.dicesoccer.newpants6",
+  "com.lambdamugames.dicesoccer.newpants7",
+  "com.lambdamugames.dicesoccer.newpants8",
+  "com.lambdamugames.dicesoccer.newpants9",
+  "com.lambdamugames.dicesoccer.newpants10",
+  "com.lambdamugames.dicesoccer.newpants11",
+  "com.lambdamugames.dicesoccer.newpants12",
+  "com.lambdamugames.dicesoccer.newshirt2",
+  "com.lambdamugames.dicesoccer.newshirt3",
+  "com.lambdamugames.dicesoccer.newshirt4",
+  "com.lambdamugames.dicesoccer.newshirt5",
+  "com.lambdamugames.dicesoccer.newshirt6",
+  "com.lambdamugames.dicesoccer.newshirt7",
+  "com.lambdamugames.dicesoccer.newshirt8",
+  "com.lambdamugames.dicesoccer.newshirt9",
+  "com.lambdamugames.dicesoccer.newshirt10",
+  "com.lambdamugames.dicesoccer.newshirt11",
+  "com.lambdamugames.dicesoccer.newshirt12",
+  "com.lambdamugames.dicesoccer.newshirt13",
+  "com.lambdamugames.dicesoccer.newshirt14",
+  "com.lambdamugames.dicesoccer.newshirt15",
+  "com.lambdamugames.dicesoccer.newshirt16",
+  "com.lambdamugames.dicesoccer.newshirt17",
+  "com.lambdamugames.dicesoccer.newshirt18",
+  "com.lambdamugames.dicesoccer.newshirt19",
+  "com.lambdamugames.dicesoccer.newshirt20",
+  "com.lambdamugames.dicesoccer.newshirt21",
+  "com.lambdamugames.dicesoccer.newshirt22",
+  "com.lambdamugames.dicesoccer.newshirt23",
+  "com.lambdamugames.dicesoccer.newshirt24",
+  "com.lambdamugames.dicesoccer.newshirt25",
+  "com.lambdamugames.dicesoccer.newshirt26",
+  "com.lambdamugames.dicesoccer.newshirt27",
+  "com.lambdamugames.dicesoccer.newshirt28"
+ ],
+ "Pants": [
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99,
+  0.99
+ ],
+ "Card (NOT IN USE)": [
+  {
+   "PlayerID": 0
+  }
+ ],
+ "Cash": [
+  {
+   "InAppPurchasePrice": 0.99,
+   "Comments": "Ignore this",
+   "InGameCoinAmount": 25000
+  },
+  {
+   "InAppPurchasePrice": 0.99,
+   "InGameCoinAmount": 25000
+  },
+  {
+   "InAppPurchasePrice": 1.99,
+   "InGameCoinAmount": 250000
+  },
+  {
+   "InAppPurchasePrice": 2.99,
+   "InGameCoinAmount": 1200000
+  },
+  {
+   "InAppPurchasePrice": 4.99,
+   "InGameCoinAmount": 2500000
+  },
+  {
+   "InAppPurchasePrice": 9.99,
+   "InGameCoinAmount": 7500000
+  },
+  {
+   "InAppPurchasePrice": 19.99,
+   "InGameCoinAmount": 20000000
+  },
+  {
+   "InAppPurchasePrice": 49.99,
+   "InGameCoinAmount": 100000000
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "name": "CustomPopup2",
+ "frames": [
+  {
+   "name": "Custom7",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 117,
+   "offsetY": 109,
+   "textureX": 489,
+   "textureY": 2,
+   "textureWidth": 321,
+   "textureHeight": 476,
+   "rotated": false
+  },
+  {
+   "name": "Custom4",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 3,
+   "offsetY": 93,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 485,
+   "textureHeight": 536,
+   "rotated": false
+  }
+ ]
+}

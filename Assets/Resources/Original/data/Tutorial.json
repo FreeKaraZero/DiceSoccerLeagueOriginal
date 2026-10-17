@@ -1,0 +1,355 @@
+{
+ "3": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Ah the sweet smell of the locker room! Here's where we can pick our team colors.",
+   "Get us more kits by completing achievements! You can also buy them from the SHOP or during certain tournaments."
+  ]
+ },
+ "12": {
+  "CustomPopup": [
+   6,
+   1
+  ],
+  "PopupText": [
+   "Also, some of us can produce cool POWERS when the right NUMBERS are rolled."
+  ]
+ },
+ "21": {
+  "CustomPopup": [],
+  "PopupText": [
+   "That was a good game! But I think it's time we got some fresh legs on our team...",
+   "In fact, Jerry Hattrick was with us on loan from the neighboring team!",
+   "Let's go into MANAGE mode and make some changes!"
+  ]
+ },
+ "4": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Good to see you here, Coach! Our Trophy Cabinet is sparse for now! But with your help we'll fill it up real fast!",
+   "Complete these ACHIEVEMENTS to attract new players and sponsors to our team!"
+  ]
+ },
+ "30": {
+  "CustomPopup": [
+   4
+  ],
+  "PopupText": [
+   "Excellent! I have a feeling he's going to take us on a winning streak!",
+   "Also, add your extra players to the BENCH once you start hiring more of them. Now, let's go PLAY our match against the local college!"
+  ]
+ },
+ "13": {
+  "CustomPopup": [],
+  "PopupText": [
+   "It might feel a little random for now, but you'll soon get to choose the kinds of dice we use."
+  ]
+ },
+ "5": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Hi there! The new Dice Soccer fad has just begun, and we are really eager to play!",
+   "I've managed to get a few friends to make a team. Now all we need is a coach -- YOU!",
+   "Let's head to the practice grounds and get started! Tap on the TRAINING SEASON to begin!"
+  ]
+ },
+ "22": {
+  "CustomPopup": [],
+  "PopupText": [
+   "If you're tired, you can TAP near the edges of the screen instead of shaking it."
+  ]
+ },
+ "6": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Welcome to the MANAGE screen!",
+   "This is where you can change our starting lineup, before any game!",
+   "Tap on Jerry Hattrick (the old guy in the top left corner) in order to replace him."
+  ]
+ },
+ "31": {
+  "CustomPopup": [],
+  "PopupText": [
+   "That was quite the match eh? Now onto our last training game for the season.",
+   "We're currently in LEAGUE mode, which means we just have to complete one match to unlock the next!",
+   "In future LEAGUEs, we'll have to earn a number of stars before progressing to the next season."
+  ]
+ },
+ "14": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Play TIME is limited - until the clock below counts down to zero! Each ROLL uses up about a minute of time."
+  ]
+ },
+ "7": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Looking for new options in your FORWARD lineup? This is the right place!",
+   "Remember, the numbers on their cards are the numbers that they can roll during the game."
+  ]
+ },
+ "23": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Now you're getting the hang of it. Play more matches until we get PROMOTED to the next season.",
+   "Experiment with different player combinations to improve your dice rolls!"
+  ]
+ },
+ "40": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Hurray! For making it this far, we've been invited to our first tournament of the season! Tap the T1 tab to access the available matches!"
+  ]
+ },
+ "32": {
+  "CustomPopup": [
+   3
+  ],
+  "PopupText": []
+ },
+ "15": {
+  "CustomPopup": [],
+  "PopupText": [
+   "You Scored!!! Get more goals to ensure your victory!"
+  ]
+ },
+ "8": {
+  "CustomPopup": [],
+  "PopupText": [
+   "You've selected a DEFENDER position!",
+   "All slots in defense are currently full. But you can always shuffle them around."
+  ]
+ },
+ "24": {
+  "CustomPopup": [],
+  "PopupText": [
+   "You'll have to complete a number of matches each season, in order to progress.",
+   "Let's try this first training game against THE NEIGHBOURS! Tap PLAY to begin!"
+  ]
+ },
+ "9": {
+  "CustomPopup": [],
+  "PopupText": [
+   "You've selected a GOALKEEPER position!",
+   "You've already got ME in goal - but there might be better goalies here soon!"
+  ]
+ },
+ "33": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Alright! That's the end of training! We've been invited to join the Bootcamp Season!",
+   "The matches will be longer and tougher, so it's time to man up!",
+   "Go back to the previous screen and scroll on to SEASON ONE!"
+  ]
+ },
+ "16": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Your shot was saved! Let's try again soon!"
+  ]
+ },
+ "41": {
+  "CustomPopup": [],
+  "PopupText": [
+   "In TOURNAMENT mode, WIN each match to unlock the next. Each match has no reward, but HUGE CASH will be won in the FINALS!"
+  ]
+ },
+ "25": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Dice Soccer rules allow us to make as many SUBSTITUTIONS as we like during a game!",
+   "But we can only choose from 4 reserves at a time. TAP on the player whom you want to remove from the lineup. "
+  ]
+ },
+ "42": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Every time your forward line rolls a 3, one of your players will trigger the critical 2x ability. Use this power to boost your dice!"
+  ]
+ },
+ "34": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Ah Coach! You made it! Our team is here and warming up already.",
+   "There's so much more talent out here amongst the competition. We should try recruiting them as we go along!",
+   "Also, remember to add players to your BENCH before a match starts. Only these players can be accessed from the pause menu later."
+  ]
+ },
+ "17": {
+  "CustomPopup": [],
+  "PopupText": [
+   "They've scored! Let's try and fight back!"
+  ]
+ },
+ "43": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Season 3!! These are Professional teams we're taking on now, but fear not, I'm sure you've learnt plenty of tricks getting us here!"
+  ]
+ },
+ "26": {
+  "CustomPopup": [],
+  "PopupText": [
+   " Remember: The total of our dice and powers has to BEAT theirs! If the numbers are tied, nothing moves, and we all have to roll again."
+  ]
+ },
+ "50": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Welcome to Multiplayer mode! Challenge your friends via GameCenter of Bluetooth.",
+   "Get points as we win, level up and show off our cool trophies.",
+   " You can also manage your team from here. There's lots of big money to be won!"
+  ]
+ },
+ "35": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Tap the PLAY ON button to skip any re-rolls you have remaining. Use this feature ONLY when the outcome is inevitable!"
+  ]
+ },
+ "18": {
+  "CustomPopup": [],
+  "PopupText": [
+   "We lost! That's ok, it's still a long way to go.",
+   "You can always replay any games you've lost and try to improve your score!"
+  ]
+ },
+ "44": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Careful coach, this team's Captain's ability makes them to WIN every encounter that should be a TIE. Time to fight extra hard!"
+  ]
+ },
+ "27": {
+  "CustomPopup": [
+   2
+  ],
+  "PopupText": [
+   "Whoa! Looks like there's been some kind of mixup. This isn't the kind of football team we were expecting!",
+   "They look far too big and strong. That's fine though, we've got a wild card of our own!"
+  ]
+ },
+ "51": {
+  "CustomPopup": [],
+  "PopupText": [
+   "We could use all the help we can get coach. Hire up some new Entourage members via the Manage screen!"
+  ]
+ },
+ "36": {
+  "CustomPopup": [
+   3
+  ],
+  "PopupText": []
+ },
+ "19": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Good job. Let's try for a win next time!",
+   "Winning games will attract more players to offer us their services!",
+   "HIRE these new talents to strengthen our lineup."
+  ]
+ },
+ "45": {
+  "CustomPopup": [],
+  "PopupText": [
+   "This is where we get a PREVIEW of our opponents. We won't always know their entire lineup, but even the slightest info can be helpful.",
+   "Once you're done admiring the enemy team, tap on MANAGE to inspect our own squad."
+  ]
+ },
+ "28": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Great! Now you can choose from any of the available forwards or midfielders to take up his spot.",
+   "I suggest putting in our newly acquired midfielder. Find him under the green MID tab at the bottom of the screen!"
+  ]
+ },
+ "LastID": 51,
+ "37": {
+  "CustomPopup": [
+   7
+  ],
+  "PopupText": []
+ },
+ "46": {
+  "CustomPopup": [],
+  "PopupText": [
+   "The bench can hold up to 4 reserve players. These reserves can be swapped into their positions during a match."
+  ]
+ },
+ "29": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Good job! Now TAP on the Streaker, HIRE him, and SELECT him into our team!"
+  ]
+ },
+ "38": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Regular hiring of players is the best way to succeed as the matches get tougher. Tap on any player cards for more on their abilities."
+  ]
+ },
+ "47": {
+  "CustomPopup": [],
+  "PopupText": [
+   "This is a tough season, Coach. But we'll get THROUGH it! Just gotta find a way to beat these teams quick!",
+   "And it's ok if we lose a couple of matches on the way. We can always come back to win them later!"
+  ]
+ },
+ "39": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Some players have the THROUGH PASS ability. When this triggers, they'll immediately progress forward. Watch Out!"
+  ]
+ },
+ "48": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Would you look at that! There's a whole bandwagon of folks here to lend us their support!",
+   "I think we should bring a couple of them to our matches for some extra benefits!"
+  ]
+ },
+ "49": {
+  "CustomPopup": [],
+  "PopupText": [
+   "The Entourage! Hurray! Selecting these fans, officials and specators to come to our matches will be real fun!",
+   "It looks like we can use 2 of them per match for some extra bonuses!"
+  ]
+ },
+ "10": {
+  "CustomPopup": [],
+  "PopupText": [
+   "TAP on the card to read more about his abilties. Then HIRE and SELECT him."
+  ]
+ },
+ "1": {
+  "CustomPopup": [],
+  "PopupText": [
+   "This is the DECK, where you can review your players and UNLOCK, HIRE or SELL them!",
+   "TAP on a card to enlarge it, and TAP on the card once again to read about its abilities!"
+  ]
+ },
+ "11": {
+  "CustomPopup": [
+   5
+  ],
+  "PopupText": [
+   "The game is about to begin... OH WAIT - we haven't told you how we play yet!",
+   "It's quite simple actually, just Shake OR Tap your screen and we'll all transform into our DICE form!",
+   "We're playing from the left side - if our DICE numbers ADD up higher than theirs, then we get control of the ball and can move forward!"
+  ]
+ },
+ "2": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Welcome to the SHOP! Use external funding here to get us more CASH and some shiny new threads too."
+  ]
+ },
+ "20": {
+  "CustomPopup": [],
+  "PopupText": [
+   "Congrats! What a good start!",
+   "Scoring more goals will get us more stars!",
+   "Use the money we've earned to HIRE more players for our team!"
+  ]
+ }
+}

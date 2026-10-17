@@ -1,0 +1,41 @@
+{
+ "name": "SeasonCrest1",
+ "frames": [
+  {
+   "name": "SeasonCrestLock",
+   "sourceWidth": 300,
+   "sourceHeight": 288,
+   "offsetX": 5,
+   "offsetY": 3,
+   "textureX": 739,
+   "textureY": 1,
+   "textureWidth": 282,
+   "textureHeight": 290,
+   "rotated": true
+  },
+  {
+   "name": "MysterySeason",
+   "sourceWidth": 500,
+   "sourceHeight": 589,
+   "offsetX": 57,
+   "offsetY": 164,
+   "textureX": 375,
+   "textureY": 1,
+   "textureWidth": 363,
+   "textureHeight": 386,
+   "rotated": true
+  },
+  {
+   "name": "Season1Crest",
+   "sourceWidth": 500,
+   "sourceHeight": 589,
+   "offsetX": 26,
+   "offsetY": 125,
+   "textureX": 1,
+   "textureY": 1,
+   "textureWidth": 373,
+   "textureHeight": 446,
+   "rotated": true
+  }
+ ]
+}

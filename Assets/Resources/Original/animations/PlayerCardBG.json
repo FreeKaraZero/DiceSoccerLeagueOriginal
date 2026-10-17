@@ -1,0 +1,65 @@
+{
+ "name": "PlayerCardBG",
+ "frames": [
+  {
+   "name": "CardLocked",
+   "sourceWidth": 480,
+   "sourceHeight": 720,
+   "offsetX": 17,
+   "offsetY": 26,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 672,
+   "textureHeight": 446,
+   "rotated": true
+  },
+  {
+   "name": "CardBack",
+   "sourceWidth": 480,
+   "sourceHeight": 720,
+   "offsetX": 28,
+   "offsetY": 28,
+   "textureX": 2,
+   "textureY": 450,
+   "textureWidth": 664,
+   "textureHeight": 426,
+   "rotated": true
+  },
+  {
+   "name": "CardBorder",
+   "sourceWidth": 480,
+   "sourceHeight": 720,
+   "offsetX": 28,
+   "offsetY": 30,
+   "textureX": 1340,
+   "textureY": 2,
+   "textureWidth": 664,
+   "textureHeight": 426,
+   "rotated": true
+  },
+  {
+   "name": "CardHireMe",
+   "sourceWidth": 480,
+   "sourceHeight": 720,
+   "offsetX": 20,
+   "offsetY": 31,
+   "textureX": 676,
+   "textureY": 2,
+   "textureWidth": 662,
+   "textureHeight": 440,
+   "rotated": true
+  },
+  {
+   "name": "CardField",
+   "sourceWidth": 480,
+   "sourceHeight": 720,
+   "offsetX": 57,
+   "offsetY": 63,
+   "textureX": 668,
+   "textureY": 450,
+   "textureWidth": 602,
+   "textureHeight": 366,
+   "rotated": true
+  }
+ ]
+}

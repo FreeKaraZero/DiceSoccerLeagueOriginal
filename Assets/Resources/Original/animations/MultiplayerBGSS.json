@@ -1,0 +1,41 @@
+{
+ "name": "MultiplayerBGSS",
+ "frames": [
+  {
+   "name": "MultiplayerStreak",
+   "sourceWidth": 182,
+   "sourceHeight": 798,
+   "offsetX": 8,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 284,
+   "textureWidth": 784,
+   "textureHeight": 170,
+   "rotated": true
+  },
+  {
+   "name": "MultiplayerSunGlow",
+   "sourceWidth": 182,
+   "sourceHeight": 166,
+   "offsetX": 19,
+   "offsetY": 13,
+   "textureX": 788,
+   "textureY": 284,
+   "textureWidth": 142,
+   "textureHeight": 142,
+   "rotated": false
+  },
+  {
+   "name": "MatchFoundBar",
+   "sourceWidth": 1024,
+   "sourceHeight": 290,
+   "offsetX": 11,
+   "offsetY": 6,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 1006,
+   "textureHeight": 280,
+   "rotated": false
+  }
+ ]
+}

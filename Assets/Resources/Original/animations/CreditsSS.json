@@ -1,0 +1,65 @@
+{
+ "name": "CreditsSS",
+ "frames": [
+  {
+   "name": "Producers",
+   "sourceWidth": 454,
+   "sourceHeight": 376,
+   "offsetX": 9,
+   "offsetY": 6,
+   "textureX": 560,
+   "textureY": 2,
+   "textureWidth": 438,
+   "textureHeight": 368,
+   "rotated": false
+  },
+  {
+   "name": "Music",
+   "sourceWidth": 338,
+   "sourceHeight": 382,
+   "offsetX": 8,
+   "offsetY": 5,
+   "textureX": 2,
+   "textureY": 604,
+   "textureWidth": 326,
+   "textureHeight": 372,
+   "rotated": false
+  },
+  {
+   "name": "Art",
+   "sourceWidth": 516,
+   "sourceHeight": 282,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 328,
+   "textureWidth": 506,
+   "textureHeight": 274,
+   "rotated": false
+  },
+  {
+   "name": "Programmer",
+   "sourceWidth": 502,
+   "sourceHeight": 450,
+   "offsetX": 9,
+   "offsetY": 7,
+   "textureX": 510,
+   "textureY": 372,
+   "textureWidth": 486,
+   "textureHeight": 434,
+   "rotated": false
+  },
+  {
+   "name": "GameDesign",
+   "sourceWidth": 568,
+   "sourceHeight": 334,
+   "offsetX": 6,
+   "offsetY": 6,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 556,
+   "textureHeight": 324,
+   "rotated": false
+  }
+ ]
+}

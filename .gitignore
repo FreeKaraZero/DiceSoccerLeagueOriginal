@@ -1,0 +1,42 @@
+# Unity editor-generated data
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+MemoryCaptures/
+# Builds
+[Bb]uild/
+[Bb]uilds/
+!Builds/Android/DiceSoccer.apk
+!DiceSoccer.apk
+
+# Python cache
+**/__pycache__/
+
+# IDE and OS files
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.DS_Store
+Thumbs.db
+
+# Unity Android NDK / CMake / Ninja build artifacts
+**/Unity/.utmp/
+**/.utmp/
+*.ninja*
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json*

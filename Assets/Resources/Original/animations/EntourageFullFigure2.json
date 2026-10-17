@@ -1,0 +1,41 @@
+{
+ "name": "EntourageFullFigure2",
+ "frames": [
+  {
+   "name": "EntourageFullFigure15",
+   "sourceWidth": 250,
+   "sourceHeight": 340,
+   "offsetX": 34,
+   "offsetY": 41,
+   "textureX": 2,
+   "textureY": 318,
+   "textureWidth": 284,
+   "textureHeight": 190,
+   "rotated": true
+  },
+  {
+   "name": "EntourageFullFigure01",
+   "sourceWidth": 250,
+   "sourceHeight": 340,
+   "offsetX": 19,
+   "offsetY": 13,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 218,
+   "textureHeight": 314,
+   "rotated": false
+  },
+  {
+   "name": "EntourageFullFigure07",
+   "sourceWidth": 250,
+   "sourceHeight": 340,
+   "offsetX": 15,
+   "offsetY": 40,
+   "textureX": 222,
+   "textureY": 2,
+   "textureWidth": 212,
+   "textureHeight": 284,
+   "rotated": false
+  }
+ ]
+}

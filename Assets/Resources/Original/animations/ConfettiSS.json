@@ -1,0 +1,41 @@
+{
+ "name": "ConfettiSS",
+ "frames": [
+  {
+   "name": "Confetti3",
+   "sourceWidth": 42,
+   "sourceHeight": 42,
+   "offsetX": 7,
+   "offsetY": 8,
+   "textureX": 28,
+   "textureY": 2,
+   "textureWidth": 32,
+   "textureHeight": 28,
+   "rotated": false
+  },
+  {
+   "name": "Confetti2",
+   "sourceWidth": 42,
+   "sourceHeight": 42,
+   "offsetX": 10,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 24,
+   "textureHeight": 34,
+   "rotated": false
+  },
+  {
+   "name": "Confetti1",
+   "sourceWidth": 42,
+   "sourceHeight": 42,
+   "offsetX": 9,
+   "offsetY": 5,
+   "textureX": 28,
+   "textureY": 32,
+   "textureWidth": 26,
+   "textureHeight": 30,
+   "rotated": false
+  }
+ ]
+}

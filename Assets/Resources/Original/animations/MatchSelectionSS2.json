@@ -1,0 +1,137 @@
+{
+ "name": "MatchSelectionSS2",
+ "frames": [
+  {
+   "name": "MatchNo11",
+   "sourceWidth": 80,
+   "sourceHeight": 80,
+   "offsetX": 6,
+   "offsetY": 13,
+   "textureX": 418,
+   "textureY": 247,
+   "textureWidth": 56,
+   "textureHeight": 66,
+   "rotated": true
+  },
+  {
+   "name": "MatchNo14",
+   "sourceWidth": 80,
+   "sourceHeight": 80,
+   "offsetX": 2,
+   "offsetY": 13,
+   "textureX": 418,
+   "textureY": 170,
+   "textureWidth": 56,
+   "textureHeight": 76,
+   "rotated": true
+  },
+  {
+   "name": "PreviewButtonDisabled",
+   "sourceWidth": 240,
+   "sourceHeight": 93,
+   "offsetX": 8,
+   "offsetY": 3,
+   "textureX": 1,
+   "textureY": 399,
+   "textureWidth": 228,
+   "textureHeight": 87,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest1Design",
+   "sourceWidth": 184,
+   "sourceHeight": 190,
+   "offsetX": 9,
+   "offsetY": 6,
+   "textureX": 89,
+   "textureY": 1,
+   "textureWidth": 172,
+   "textureHeight": 168,
+   "rotated": true
+  },
+  {
+   "name": "ManagePlayButtonDisabled",
+   "sourceWidth": 240,
+   "sourceHeight": 93,
+   "offsetX": 8,
+   "offsetY": 3,
+   "textureX": 1,
+   "textureY": 1,
+   "textureWidth": 87,
+   "textureHeight": 228,
+   "rotated": true
+  },
+  {
+   "name": "EnemyCrest2Design",
+   "sourceWidth": 184,
+   "sourceHeight": 190,
+   "offsetX": 10,
+   "offsetY": 15,
+   "textureX": 262,
+   "textureY": 1,
+   "textureWidth": 168,
+   "textureHeight": 168,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest4Body",
+   "sourceWidth": 294,
+   "sourceHeight": 211,
+   "offsetX": 64,
+   "offsetY": 15,
+   "textureX": 1,
+   "textureY": 230,
+   "textureWidth": 179,
+   "textureHeight": 168,
+   "rotated": true
+  },
+  {
+   "name": "MatchNo12",
+   "sourceWidth": 80,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 13,
+   "textureX": 89,
+   "textureY": 170,
+   "textureWidth": 76,
+   "textureHeight": 56,
+   "rotated": false
+  },
+  {
+   "name": "PreviewButton",
+   "sourceWidth": 240,
+   "sourceHeight": 93,
+   "offsetX": 8,
+   "offsetY": 3,
+   "textureX": 181,
+   "textureY": 170,
+   "textureWidth": 87,
+   "textureHeight": 228,
+   "rotated": true
+  },
+  {
+   "name": "PreviewButtonPressed",
+   "sourceWidth": 240,
+   "sourceHeight": 93,
+   "offsetX": 8,
+   "offsetY": 3,
+   "textureX": 269,
+   "textureY": 342,
+   "textureWidth": 228,
+   "textureHeight": 87,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest4Design",
+   "sourceWidth": 294,
+   "sourceHeight": 211,
+   "offsetX": 74,
+   "offsetY": 16,
+   "textureX": 269,
+   "textureY": 170,
+   "textureWidth": 148,
+   "textureHeight": 171,
+   "rotated": false
+  }
+ ]
+}

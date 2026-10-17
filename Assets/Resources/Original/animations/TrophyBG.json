@@ -1,0 +1,65 @@
+{
+ "name": "TrophyBG",
+ "frames": [
+  {
+   "name": "TrophyBGLockedPressed",
+   "sourceWidth": 220,
+   "sourceHeight": 220,
+   "offsetX": 2,
+   "offsetY": 8,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 218,
+   "textureHeight": 212,
+   "rotated": false
+  },
+  {
+   "name": "TrophyBG",
+   "sourceWidth": 220,
+   "sourceHeight": 220,
+   "offsetX": 20,
+   "offsetY": 8,
+   "textureX": 632,
+   "textureY": 2,
+   "textureWidth": 188,
+   "textureHeight": 194,
+   "rotated": false
+  },
+  {
+   "name": "TrophyBGPressed",
+   "sourceWidth": 220,
+   "sourceHeight": 220,
+   "offsetX": 2,
+   "offsetY": 8,
+   "textureX": 222,
+   "textureY": 2,
+   "textureWidth": 218,
+   "textureHeight": 212,
+   "rotated": false
+  },
+  {
+   "name": "StraplessTrophyBG",
+   "sourceWidth": 220,
+   "sourceHeight": 220,
+   "offsetX": 20,
+   "offsetY": 42,
+   "textureX": 822,
+   "textureY": 2,
+   "textureWidth": 182,
+   "textureHeight": 158,
+   "rotated": false
+  },
+  {
+   "name": "TrophyBGLocked",
+   "sourceWidth": 220,
+   "sourceHeight": 220,
+   "offsetX": 20,
+   "offsetY": 8,
+   "textureX": 442,
+   "textureY": 2,
+   "textureWidth": 188,
+   "textureHeight": 194,
+   "rotated": false
+  }
+ ]
+}

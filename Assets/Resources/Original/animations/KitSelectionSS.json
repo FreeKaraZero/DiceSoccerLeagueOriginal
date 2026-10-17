@@ -1,0 +1,149 @@
+{
+ "name": "KitSelectionSS",
+ "frames": [
+  {
+   "name": "KitSelectionShirt",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 38,
+   "offsetY": 5,
+   "textureX": 212,
+   "textureY": 2,
+   "textureWidth": 154,
+   "textureHeight": 164,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionShorts",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 38,
+   "offsetY": 128,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 208,
+   "textureHeight": 212,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign3",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 38,
+   "offsetY": 35,
+   "textureX": 308,
+   "textureY": 216,
+   "textureWidth": 108,
+   "textureHeight": 122,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign6",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 83,
+   "offsetY": 5,
+   "textureX": 248,
+   "textureY": 372,
+   "textureWidth": 100,
+   "textureHeight": 136,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign1",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 57,
+   "offsetY": 5,
+   "textureX": 350,
+   "textureY": 372,
+   "textureWidth": 140,
+   "textureHeight": 132,
+   "rotated": true
+  },
+  {
+   "name": "DoneButton",
+   "sourceWidth": 142,
+   "sourceHeight": 72,
+   "offsetX": 2,
+   "offsetY": 3,
+   "textureX": 368,
+   "textureY": 2,
+   "textureWidth": 140,
+   "textureHeight": 66,
+   "rotated": false
+  },
+  {
+   "name": "DoneButtonPressed",
+   "sourceWidth": 142,
+   "sourceHeight": 72,
+   "offsetX": 2,
+   "offsetY": 3,
+   "textureX": 368,
+   "textureY": 70,
+   "textureWidth": 140,
+   "textureHeight": 66,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign4",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 38,
+   "offsetY": 13,
+   "textureX": 158,
+   "textureY": 216,
+   "textureWidth": 148,
+   "textureHeight": 150,
+   "rotated": true
+  },
+  {
+   "name": "KitSelectionSleeves",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 119,
+   "offsetY": 24,
+   "textureX": 418,
+   "textureY": 216,
+   "textureWidth": 90,
+   "textureHeight": 106,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign7",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 38,
+   "offsetY": 5,
+   "textureX": 2,
+   "textureY": 216,
+   "textureWidth": 154,
+   "textureHeight": 154,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign2",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 63,
+   "offsetY": 5,
+   "textureX": 124,
+   "textureY": 372,
+   "textureWidth": 122,
+   "textureHeight": 138,
+   "rotated": false
+  },
+  {
+   "name": "KitSelectionDesign5",
+   "sourceWidth": 260,
+   "sourceHeight": 350,
+   "offsetX": 47,
+   "offsetY": 5,
+   "textureX": 2,
+   "textureY": 372,
+   "textureWidth": 120,
+   "textureHeight": 138,
+   "rotated": true
+  }
+ ]
+}

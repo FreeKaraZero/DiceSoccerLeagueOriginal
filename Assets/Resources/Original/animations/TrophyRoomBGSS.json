@@ -1,0 +1,65 @@
+{
+ "name": "TrophyRoomBGSS",
+ "frames": [
+  {
+   "name": "GreenShelfBG",
+   "sourceWidth": 768,
+   "sourceHeight": 204,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 768,
+   "textureHeight": 204,
+   "rotated": false
+  },
+  {
+   "name": "RefreshButton",
+   "sourceWidth": 90,
+   "sourceHeight": 90,
+   "offsetX": 2,
+   "offsetY": 4,
+   "textureX": 170,
+   "textureY": 352,
+   "textureWidth": 82,
+   "textureHeight": 86,
+   "rotated": true
+  },
+  {
+   "name": "WoodenShelfBG",
+   "sourceWidth": 768,
+   "sourceHeight": 142,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 208,
+   "textureWidth": 768,
+   "textureHeight": 142,
+   "rotated": false
+  },
+  {
+   "name": "RefreshButtonDisabled",
+   "sourceWidth": 90,
+   "sourceHeight": 90,
+   "offsetX": 2,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 352,
+   "textureWidth": 82,
+   "textureHeight": 86,
+   "rotated": true
+  },
+  {
+   "name": "RefreshButtonPressed",
+   "sourceWidth": 90,
+   "sourceHeight": 90,
+   "offsetX": 2,
+   "offsetY": 4,
+   "textureX": 86,
+   "textureY": 352,
+   "textureWidth": 82,
+   "textureHeight": 86,
+   "rotated": true
+  }
+ ]
+}

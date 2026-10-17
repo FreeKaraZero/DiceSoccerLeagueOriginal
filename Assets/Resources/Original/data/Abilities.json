@@ -1,0 +1,676 @@
+{
+ "EndID": 82,
+ "Abilities": {
+  "39": {
+   "SpriteID": 39,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 4,
+   "BuffTrigger": 2,
+   "BuffType": 2,
+   "Name": "Critical Striker",
+   "AbilityDescription": "Choose a die and double its value. ACTIVATES when your team rolls a PAIR."
+  },
+  "54": {
+   "SpriteID": 39,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 4,
+   "BuffTrigger": 7,
+   "BuffType": 2,
+   "Name": "Critical Striker",
+   "AbilityDescription": "Select a die and double its value. ACTIVATES when your TOTAL is ODD."
+  },
+  "61": {
+   "SpriteID": 51,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 19,
+   "BuffType": 5,
+   "Name": "Assist",
+   "AbilityDescription": "Re-roll any one die of your choice. ACTIVATES when your team rolls a 1."
+  },
+  "47": {
+   "SpriteID": 47,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 3,
+   "BuffType": 2,
+   "Name": "Through Pass",
+   "AbilityDescription": "Instantly move forward! ACTIVATES on POSSESSION when ALL 3 dice are ODD."
+  },
+  "55": {
+   "SpriteID": 46,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 26,
+   "BuffType": 3,
+   "Name": "Feint",
+   "AbilityDescription": "Target one of YOUR OWN dice. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when your team rolls a 8."
+  },
+  "62": {
+   "SpriteID": 51,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 21,
+   "BuffType": 5,
+   "Name": "Parry",
+   "AbilityDescription": "Re-roll any die of your choice. ACTIVATES when your team rolls a 3."
+  },
+  "48": {
+   "SpriteID": 48,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 20,
+   "BuffType": 2,
+   "Name": "Shielding",
+   "AbilityDescription": "Clear all reductions from one die. ACTIVATES when your team rolls a 2."
+  },
+  "56": {
+   "SpriteID": 41,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 5,
+   "BuffTrigger": 21,
+   "BuffType": 4,
+   "Name": "Man Marking",
+   "AbilityDescription": "Strip one player of all his bonuses. ACTIVATES when your team rolls a 3."
+  },
+  "63": {
+   "SpriteID": 51,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 20,
+   "BuffType": 5,
+   "Name": "Assist",
+   "AbilityDescription": "Re-roll any one die of your choice. ACTIVATES when your team rolls a 2."
+  },
+  "49": {
+   "SpriteID": 49,
+   "LocalReroll": 0,
+   "BuffTarget": 3,
+   "BuffSlot": 6,
+   "BuffTrigger": 7,
+   "BuffType": 3,
+   "Name": "Feint",
+   "AbilityDescription": "Target ALL dice on your team. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when your team's total is ODD."
+  },
+  "70": {
+   "SpriteID": 19,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 21,
+   "BuffType": 0,
+   "Name": "Hard Tackle",
+   "AbilityDescription": "Reduce the value of any die by 2. ACTIVATES when your team rolls a 3."
+  },
+  "64": {
+   "SpriteID": 64,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 6,
+   "BuffType": 5,
+   "Name": "+5",
+   "AbilityDescription": "+5 on a triple, for entourage 1"
+  },
+  "57": {
+   "SpriteID": 22,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 5,
+   "BuffTrigger": 2,
+   "BuffType": 4,
+   "Name": "Zonal Marking",
+   "AbilityDescription": "Strip the other team of all their bonuses. ACTIVATES when your team rolls a PAIR."
+  },
+  "71": {
+   "SpriteID": 34,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 22,
+   "BuffType": 0,
+   "Name": "Hard Tackle",
+   "AbilityDescription": "Reduce the value of any die by 2. ACTIVATES when your team rolls a 4."
+  },
+  "65": {
+   "SpriteID": 65,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 20,
+   "BuffType": 0,
+   "Name": "Yellow Card",
+   "AbilityDescription": "Yellow Card for entourage 20"
+  },
+  "58": {
+   "SpriteID": 41,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 4,
+   "BuffTrigger": 22,
+   "BuffType": 4,
+   "Name": "Man Marking",
+   "AbilityDescription": "Strip one player of all his bonuses. ACTIVATES when your team rolls a 4."
+  },
+  "72": {
+   "SpriteID": 37,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 1,
+   "BuffTrigger": 8,
+   "BuffType": 0,
+   "Name": "Charge",
+   "AbilityDescription": "Reduce the value of a die by half. ACTIVATES when your TOTAL is EVEN."
+  },
+  "66": {
+   "SpriteID": 39,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 0,
+   "BuffTrigger": 22,
+   "BuffType": 2,
+   "Name": "Critical Striker",
+   "AbilityDescription": "Double the value of a target die. ACTIVATES when your team rolls a 4."
+  },
+  "59": {
+   "SpriteID": 27,
+   "LocalReroll": 0,
+   "BuffTarget": 3,
+   "BuffSlot": 5,
+   "BuffTrigger": 6,
+   "BuffType": 3,
+   "Name": "Defensive Wall",
+   "AbilityDescription": "Adds 1 to all players on your team. ACTIVATES when your team rolls a TRIPLE."
+  },
+  "73": {
+   "SpriteID": 37,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 1,
+   "BuffTrigger": 21,
+   "BuffType": 0,
+   "Name": "Charge",
+   "AbilityDescription": "Reduce the value of a die by half. ACTIVATES when your team rolls a 3."
+  },
+  "80": {
+   "SpriteID": 47,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 4,
+   "BuffType": 2,
+   "Name": "Through Pass",
+   "AbilityDescription": "Instantly move forward! ACTIVATES on POSSESSION when ALL 3 dice are EVEN."
+  },
+  "67": {
+   "SpriteID": 33,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 21,
+   "BuffType": 0,
+   "Name": "Tackle",
+   "AbilityDescription": "Reduce the value of any die by 1. ACTIVATES when your team rolls a 3."
+  },
+  "74": {
+   "SpriteID": 39,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 0,
+   "BuffTrigger": 20,
+   "BuffType": 2,
+   "Name": "Critical Striker",
+   "AbilityDescription": "Double the value of a target die. ACTIVATES when your team rolls a 2."
+  },
+  "81": {
+   "SpriteID": 43,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 22,
+   "BuffType": 0,
+   "Name": "Intercept",
+   "AbilityDescription": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a 4."
+  },
+  "68": {
+   "SpriteID": 33,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 22,
+   "BuffType": 0,
+   "Name": "Tackle",
+   "AbilityDescription": "Reduce the value of any die by 1. ACTIVATES when your team rolls a 4."
+  },
+  "75": {
+   "SpriteID": 39,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 4,
+   "BuffTrigger": 21,
+   "BuffType": 2,
+   "Name": "Critical Striker",
+   "AbilityDescription": "Double the value of a target die. ACTIVATES when your team rolls a 3."
+  },
+  "82": {
+   "SpriteID": 82,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 1,
+   "BuffType": 2,
+   "Name": "Captain",
+   "AbilityDescription": "Your team will win any turn that ends in a tie."
+  },
+  "69": {
+   "SpriteID": 34,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 20,
+   "BuffType": 0,
+   "Name": "Hard Tackle",
+   "AbilityDescription": "Reduce the value of any die by 2. ACTIVATES when your team rolls a 2."
+  },
+  "76": {
+   "SpriteID": 43,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 20,
+   "BuffType": 0,
+   "Name": "Intercept",
+   "AbilityDescription": "Remove all Re-rolls from a target die. ACTIVATES when your team rolls a 2."
+  },
+  "77": {
+   "SpriteID": 77,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 3,
+   "BuffTrigger": 3,
+   "BuffType": 0,
+   "Name": "Intercept",
+   "AbilityDescription": "Remove one Re-roll from all opponents. ACTIVATES when ALL 3 dice are ODD."
+  },
+  "78": {
+   "SpriteID": 43,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 24,
+   "BuffType": 0,
+   "Name": "Intercept",
+   "AbilityDescription": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a 6."
+  },
+  "79": {
+   "SpriteID": 43,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 21,
+   "BuffType": 0,
+   "Name": "Intercept",
+   "AbilityDescription": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a 3."
+  },
+  "20": {
+   "SpriteID": 20,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 2,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Sliding Tackle",
+   "AbilityDescription": "Subtracts 3 from all opponent dice. ACTIVATES when your team rolls a PAIR."
+  },
+  "21": {
+   "SpriteID": 21,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 4,
+   "BuffTrigger": 3,
+   "BuffType": 2,
+   "Name": "Critical Striker",
+   "AbilityDescription": "Multiply a target dice by 4. ACTIVATES when ALL your dice are ODD."
+  },
+  "22": {
+   "SpriteID": 22,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 4,
+   "BuffTrigger": 21,
+   "BuffType": 4,
+   "Name": "Zonal Marking",
+   "AbilityDescription": "Strip the enemy team of all its bonuses. ACTIVATES when your team rolls a 3."
+  },
+  "30": {
+   "SpriteID": 28,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 1,
+   "BuffTrigger": 21,
+   "BuffType": 1,
+   "Name": "Step-Over",
+   "AbilityDescription": "Clear all reductions from your team. ACTIVATES when your team rolls a 3."
+  },
+  "23": {
+   "SpriteID": 23,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 0,
+   "BuffType": 5,
+   "Name": "Assist",
+   "AbilityDescription": "Re-roll any one die of your choice."
+  },
+  "16": {
+   "SpriteID": 16,
+   "LocalReroll": 1,
+   "BuffTarget": 0,
+   "BuffSlot": 5,
+   "BuffTrigger": 0,
+   "BuffType": 3,
+   "Name": "Dribble +1",
+   "AbilityDescription": "Add 1 to your final roll. Roll this die again."
+  },
+  "31": {
+   "SpriteID": 31,
+   "LocalReroll": 0,
+   "BuffTarget": 0,
+   "BuffSlot": 0,
+   "BuffTrigger": 0,
+   "BuffType": 5,
+   "Name": "Total Footballer",
+   "AbilityDescription": "The Wild side adds no value to your total. Rather, it will help activate ANY COMBOS that your team mates possess."
+  },
+  "24": {
+   "SpriteID": 24,
+   "LocalReroll": 1,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 0,
+   "BuffType": 5,
+   "Name": "Cross",
+   "AbilityDescription": "Re-roll this die and any one die of your choice."
+  },
+  "17": {
+   "SpriteID": 17,
+   "LocalReroll": 1,
+   "BuffTarget": 0,
+   "BuffSlot": 5,
+   "BuffTrigger": 0,
+   "BuffType": 3,
+   "Name": "Dribble +2",
+   "AbilityDescription": "Add 2 to your final roll. Roll this die again."
+  },
+  "32": {
+   "SpriteID": 32,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 5,
+   "BuffTrigger": 0,
+   "BuffType": 5,
+   "Name": "God-like",
+   "AbilityDescription": "Houston, we have a problem. +1  to all opponents!"
+  },
+  "25": {
+   "SpriteID": 25,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 21,
+   "BuffType": 5,
+   "Name": "Perfect Cross",
+   "AbilityDescription": "Re-roll any TWO dice of your choice. ACTIVATES when your team rolls a 3."
+  },
+  "18": {
+   "SpriteID": 18,
+   "LocalReroll": 1,
+   "BuffTarget": 0,
+   "BuffSlot": 5,
+   "BuffTrigger": 0,
+   "BuffType": 3,
+   "Name": "Dribble +3",
+   "AbilityDescription": "Add 3 to your final roll. Roll this die again."
+  },
+  "40": {
+   "SpriteID": 40,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 4,
+   "BuffTrigger": 2,
+   "BuffType": 2,
+   "Name": "Bicycle Kick",
+   "AbilityDescription": "Choose a die and triple its value. ACTIVATES when you roll a PAIR."
+  },
+  "33": {
+   "SpriteID": 33,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 22,
+   "BuffType": 0,
+   "Name": "Tackle",
+   "AbilityDescription": "Reduces a die's value by 1. ACTIVATES when you roll a 4."
+  },
+  "26": {
+   "SpriteID": 26,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 0,
+   "BuffType": 1,
+   "Name": "Dive!",
+   "AbilityDescription": "Roll the Referee die after this play."
+  },
+  "19": {
+   "SpriteID": 19,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Hard Tackle",
+   "AbilityDescription": "Subtracts 3 from a target dice. ACTIVATES when your team rolls a PAIR."
+  },
+  "41": {
+   "SpriteID": 41,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 23,
+   "BuffType": 0,
+   "Name": "Man Marking",
+   "AbilityDescription": "Strip a player of all his bonuses. ACTIVATES when you roll a 5."
+  },
+  "34": {
+   "SpriteID": 34,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Hard Tackle",
+   "AbilityDescription": "Reduces a die's value by 2. ACTIVATES when your team rolls a PAIR."
+  },
+  "27": {
+   "SpriteID": 27,
+   "LocalReroll": 0,
+   "BuffTarget": 3,
+   "BuffSlot": 5,
+   "BuffTrigger": 22,
+   "BuffType": 3,
+   "Name": "Defensive Wall",
+   "AbilityDescription": "Adds 1 to all players on your team. ACTIVATES when your team rolls a 4."
+  },
+  "42": {
+   "SpriteID": 42,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Anchor",
+   "AbilityDescription": "Make one dice immune to ALL abilities. Triggers when your team rolls a PAIR."
+  },
+  "35": {
+   "SpriteID": 35,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 2,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Clearance",
+   "AbilityDescription": "Reduces all enemy dice by 1. ACTIVATES when your team rolls a PAIR."
+  },
+  "28": {
+   "SpriteID": 28,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 1,
+   "BuffTrigger": 5,
+   "BuffType": 1,
+   "Name": "Step-Over",
+   "AbilityDescription": "Clear all reductions from your team. ACTIVATES when your team rolls any 3 consecutive numbers."
+  },
+  "50": {
+   "SpriteID": 46,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 24,
+   "BuffType": 3,
+   "Name": "Feint",
+   "AbilityDescription": "Target one of YOUR OWN dice. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when your team rolls a 6."
+  },
+  "43": {
+   "SpriteID": 43,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Intercept",
+   "AbilityDescription": "Remove one Re-roll from a die of your choice. ACTIVATES when your team rolls a PAIR."
+  },
+  "36": {
+   "SpriteID": 36,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 2,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Sliding Tackle",
+   "AbilityDescription": "Reduces all enemy dice by 2. ACTIVATES when your team rolls a PAIR."
+  },
+  "29": {
+   "SpriteID": 28,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 1,
+   "BuffTrigger": 21,
+   "BuffType": 1,
+   "Name": "Step-Over",
+   "AbilityDescription": "Clear all reductions from your team. ACTIVATES when your team rolls a 3."
+  },
+  "51": {
+   "SpriteID": 51,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 3,
+   "BuffTrigger": 22,
+   "BuffType": 5,
+   "Name": "Parry",
+   "AbilityDescription": "Re-roll any one die of your choice. ACTIVATES when your team rolls a 4."
+  },
+  "44": {
+   "SpriteID": 44,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 0,
+   "BuffTrigger": 2,
+   "BuffType": 0,
+   "Name": "Saving Tackle",
+   "AbilityDescription": "Choose a die and switch its positive and negative bonuses. ACTIVATES when your team rolls a PAIR."
+  },
+  "37": {
+   "SpriteID": 37,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 1,
+   "BuffTrigger": 21,
+   "BuffType": 0,
+   "Name": "Charge",
+   "AbilityDescription": "Reduces the value of any one die by half. ACTIVATES when your team rolls a 3."
+  },
+  "52": {
+   "SpriteID": 42,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 23,
+   "BuffType": 0,
+   "Name": "Anchor",
+   "AbilityDescription": "Make one dice immune to ALL abilities. ACTIVATES when your team rolls a 5."
+  },
+  "45": {
+   "SpriteID": 45,
+   "LocalReroll": 0,
+   "BuffTarget": 0,
+   "BuffSlot": 6,
+   "BuffTrigger": 6,
+   "BuffType": 0,
+   "Name": "Dive!",
+   "AbilityDescription": "Roll the REFEREE die at the end of this play. ACTIVATES when your team rolls THREE identical numbers."
+  },
+  "38": {
+   "SpriteID": 38,
+   "LocalReroll": 0,
+   "BuffTarget": 2,
+   "BuffSlot": 1,
+   "BuffTrigger": 21,
+   "BuffType": 0,
+   "Name": "Offside Trap",
+   "AbilityDescription": "Reduces all enemy dice by half. ACTIVATES when your team rolls a 3."
+  },
+  "53": {
+   "SpriteID": 33,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 2,
+   "BuffTrigger": 20,
+   "BuffType": 0,
+   "Name": "Tackle",
+   "AbilityDescription": "Reduces a die's value by 1. ACTIVATES when your team rolls a 2."
+  },
+  "60": {
+   "SpriteID": 60,
+   "LocalReroll": 0,
+   "BuffTarget": 3,
+   "BuffSlot": 4,
+   "BuffTrigger": 3,
+   "BuffType": 0,
+   "Name": "Anchor",
+   "AbilityDescription": "Make ALL dice on opponent's team immune to ALL abilities. ACTIVATES when ALL 3 dice are ODD."
+  },
+  "46": {
+   "SpriteID": 46,
+   "LocalReroll": 0,
+   "BuffTarget": 1,
+   "BuffSlot": 6,
+   "BuffTrigger": 7,
+   "BuffType": 3,
+   "Name": "Feint",
+   "AbilityDescription": "Target one of YOUR OWN dice. Steal the opposite enemy's +ve and give him your -ve. ACTIVATES when total is ODD"
+  }
+ },
+ "StartID": 16
+}

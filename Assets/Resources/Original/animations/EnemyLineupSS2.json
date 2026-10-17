@@ -1,0 +1,17 @@
+{
+ "name": "EnemyLineupSS2",
+ "frames": [
+  {
+   "name": "UpButtonPressed",
+   "sourceWidth": 90,
+   "sourceHeight": 90,
+   "offsetX": 2,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 86,
+   "textureHeight": 82,
+   "rotated": false
+  }
+ ]
+}

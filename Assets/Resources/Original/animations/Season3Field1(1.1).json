@@ -1,0 +1,77 @@
+{
+ "name": "Season3Field1(1.1)",
+ "frames": [
+  {
+   "name": "Banner5",
+   "sourceWidth": 296,
+   "sourceHeight": 20,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 114,
+   "textureY": 24,
+   "textureWidth": 296,
+   "textureHeight": 20,
+   "rotated": false
+  },
+  {
+   "name": "Banner4",
+   "sourceWidth": 296,
+   "sourceHeight": 20,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 68,
+   "textureWidth": 296,
+   "textureHeight": 20,
+   "rotated": false
+  },
+  {
+   "name": "Banner3",
+   "sourceWidth": 296,
+   "sourceHeight": 20,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 90,
+   "textureWidth": 296,
+   "textureHeight": 20,
+   "rotated": false
+  },
+  {
+   "name": "Banner2",
+   "sourceWidth": 296,
+   "sourceHeight": 20,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 114,
+   "textureY": 2,
+   "textureWidth": 296,
+   "textureHeight": 20,
+   "rotated": false
+  },
+  {
+   "name": "Banner1",
+   "sourceWidth": 296,
+   "sourceHeight": 20,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 114,
+   "textureY": 46,
+   "textureWidth": 296,
+   "textureHeight": 20,
+   "rotated": false
+  },
+  {
+   "name": "Object1",
+   "sourceWidth": 114,
+   "sourceHeight": 66,
+   "offsetX": 1,
+   "offsetY": 2,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 110,
+   "textureHeight": 62,
+   "rotated": false
+  }
+ ]
+}

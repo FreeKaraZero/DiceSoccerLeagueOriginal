@@ -1,0 +1,101 @@
+{
+ "name": "EnemyCrest1",
+ "frames": [
+  {
+   "name": "EnemyCrest3Design",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 28,
+   "offsetY": 14,
+   "textureX": 59,
+   "textureY": 2,
+   "textureWidth": 41,
+   "textureHeight": 62,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest4Design",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 24,
+   "offsetY": 18,
+   "textureX": 177,
+   "textureY": 50,
+   "textureWidth": 51,
+   "textureHeight": 44,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest1Design",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 20,
+   "offsetY": 20,
+   "textureX": 118,
+   "textureY": 60,
+   "textureWidth": 57,
+   "textureHeight": 52,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest2Design",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 20,
+   "offsetY": 32,
+   "textureX": 159,
+   "textureY": 2,
+   "textureWidth": 57,
+   "textureHeight": 46,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest4Body",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 21,
+   "offsetY": 18,
+   "textureX": 102,
+   "textureY": 2,
+   "textureWidth": 55,
+   "textureHeight": 56,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest3Body",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 21,
+   "offsetY": 12,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 55,
+   "textureHeight": 64,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest1Body",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 20,
+   "offsetY": 19,
+   "textureX": 2,
+   "textureY": 68,
+   "textureWidth": 57,
+   "textureHeight": 58,
+   "rotated": false
+  },
+  {
+   "name": "EnemyCrest2Body",
+   "sourceWidth": 95,
+   "sourceHeight": 94,
+   "offsetX": 21,
+   "offsetY": 19,
+   "textureX": 61,
+   "textureY": 66,
+   "textureWidth": 55,
+   "textureHeight": 58,
+   "rotated": false
+  }
+ ]
+}

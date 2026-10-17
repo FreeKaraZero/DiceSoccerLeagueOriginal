@@ -1,0 +1,149 @@
+{
+ "name": "StartScreenLogoAnimation2",
+ "frames": [
+  {
+   "name": "NewsCheckItOutButtonPressed",
+   "sourceWidth": 215,
+   "sourceHeight": 66,
+   "offsetX": 2,
+   "offsetY": 2,
+   "textureX": 286,
+   "textureY": 2,
+   "textureWidth": 211,
+   "textureHeight": 62,
+   "rotated": false
+  },
+  {
+   "name": "NewsCountBG",
+   "sourceWidth": 68,
+   "sourceHeight": 68,
+   "offsetX": 4,
+   "offsetY": 4,
+   "textureX": 438,
+   "textureY": 130,
+   "textureWidth": 62,
+   "textureHeight": 62,
+   "rotated": false
+  },
+  {
+   "name": "NewsButtonPressed",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 110,
+   "textureY": 356,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  },
+  {
+   "name": "LogoShine07",
+   "sourceWidth": 640,
+   "sourceHeight": 640,
+   "offsetX": 241,
+   "offsetY": 184,
+   "textureX": 2,
+   "textureY": 92,
+   "textureWidth": 268,
+   "textureHeight": 262,
+   "rotated": true
+  },
+  {
+   "name": "NewsButton",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 2,
+   "textureY": 356,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  },
+  {
+   "name": "LoadingBarBit",
+   "sourceWidth": 40,
+   "sourceHeight": 92,
+   "offsetX": 2,
+   "offsetY": 16,
+   "textureX": 2,
+   "textureY": 468,
+   "textureWidth": 54,
+   "textureHeight": 36,
+   "rotated": true
+  },
+  {
+   "name": "SupportButtonDisabled",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 380,
+   "textureY": 238,
+   "textureWidth": 110,
+   "textureHeight": 106,
+   "rotated": false
+  },
+  {
+   "name": "SupportButton",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 272,
+   "textureY": 238,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  },
+  {
+   "name": "NewsButtonDisabled",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 218,
+   "textureY": 356,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  },
+  {
+   "name": "SupportButtonPressed",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 326,
+   "textureY": 130,
+   "textureWidth": 110,
+   "textureHeight": 106,
+   "rotated": false
+  },
+  {
+   "name": "LoadingBar",
+   "sourceWidth": 284,
+   "sourceHeight": 92,
+   "offsetX": 2,
+   "offsetY": 2,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 282,
+   "textureHeight": 88,
+   "rotated": false
+  },
+  {
+   "name": "NewsCheckItOutButton",
+   "sourceWidth": 215,
+   "sourceHeight": 66,
+   "offsetX": 2,
+   "offsetY": 2,
+   "textureX": 286,
+   "textureY": 66,
+   "textureWidth": 211,
+   "textureHeight": 62,
+   "rotated": false
+  }
+ ]
+}

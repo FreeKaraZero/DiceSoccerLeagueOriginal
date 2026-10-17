@@ -1,0 +1,149 @@
+{
+ "name": "Season1Field1(1.1)",
+ "frames": [
+  {
+   "name": "Object1",
+   "sourceWidth": 294,
+   "sourceHeight": 118,
+   "offsetX": 4,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 290,
+   "textureHeight": 114,
+   "rotated": false
+  },
+  {
+   "name": "Object5",
+   "sourceWidth": 240,
+   "sourceHeight": 80,
+   "offsetX": 2,
+   "offsetY": 4,
+   "textureX": 152,
+   "textureY": 436,
+   "textureWidth": 232,
+   "textureHeight": 74,
+   "rotated": false
+  },
+  {
+   "name": "Object9",
+   "sourceWidth": 116,
+   "sourceHeight": 60,
+   "offsetX": 0,
+   "offsetY": 4,
+   "textureX": 64,
+   "textureY": 336,
+   "textureWidth": 56,
+   "textureHeight": 112,
+   "rotated": true
+  },
+  {
+   "name": "Object2",
+   "sourceWidth": 282,
+   "sourceHeight": 110,
+   "offsetX": 7,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 118,
+   "textureWidth": 272,
+   "textureHeight": 102,
+   "rotated": false
+  },
+  {
+   "name": "Object6",
+   "sourceWidth": 228,
+   "sourceHeight": 104,
+   "offsetX": 3,
+   "offsetY": 2,
+   "textureX": 64,
+   "textureY": 222,
+   "textureWidth": 222,
+   "textureHeight": 98,
+   "rotated": false
+  },
+  {
+   "name": "Object3",
+   "sourceWidth": 274,
+   "sourceHeight": 180,
+   "offsetX": 4,
+   "offsetY": 6,
+   "textureX": 294,
+   "textureY": 64,
+   "textureWidth": 174,
+   "textureHeight": 270,
+   "rotated": true
+  },
+  {
+   "name": "Object12",
+   "sourceWidth": 92,
+   "sourceHeight": 64,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 64,
+   "textureY": 450,
+   "textureWidth": 86,
+   "textureHeight": 58,
+   "rotated": false
+  },
+  {
+   "name": "Object7",
+   "sourceWidth": 210,
+   "sourceHeight": 64,
+   "offsetX": 4,
+   "offsetY": 0,
+   "textureX": 294,
+   "textureY": 2,
+   "textureWidth": 202,
+   "textureHeight": 60,
+   "rotated": false
+  },
+  {
+   "name": "Object11",
+   "sourceWidth": 94,
+   "sourceHeight": 62,
+   "offsetX": 4,
+   "offsetY": 2,
+   "textureX": 176,
+   "textureY": 336,
+   "textureWidth": 58,
+   "textureHeight": 86,
+   "rotated": true
+  },
+  {
+   "name": "Object4",
+   "sourceWidth": 254,
+   "sourceHeight": 70,
+   "offsetX": 10,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 222,
+   "textureWidth": 60,
+   "textureHeight": 240,
+   "rotated": true
+  },
+  {
+   "name": "Object8",
+   "sourceWidth": 134,
+   "sourceHeight": 40,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 470,
+   "textureY": 64,
+   "textureWidth": 36,
+   "textureHeight": 128,
+   "rotated": true
+  },
+  {
+   "name": "Object10",
+   "sourceWidth": 102,
+   "sourceHeight": 54,
+   "offsetX": 2,
+   "offsetY": 1,
+   "textureX": 122,
+   "textureY": 336,
+   "textureWidth": 52,
+   "textureHeight": 98,
+   "rotated": true
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "name": "Season3Field2(1.1)",
+ "frames": [
+  {
+   "name": "Object1",
+   "sourceWidth": 80,
+   "sourceHeight": 47,
+   "offsetX": 1,
+   "offsetY": 2,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 78,
+   "textureHeight": 43,
+   "rotated": false
+  }
+ ]
+}

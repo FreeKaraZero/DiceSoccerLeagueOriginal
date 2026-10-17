@@ -1,0 +1,65 @@
+{
+ "name": "CustomPopup1",
+ "frames": [
+  {
+   "name": "Custom3",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 113,
+   "offsetY": 109,
+   "textureX": 2,
+   "textureY": 538,
+   "textureWidth": 337,
+   "textureHeight": 476,
+   "rotated": false
+  },
+  {
+   "name": "Custom2",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 111,
+   "offsetY": 109,
+   "textureX": 680,
+   "textureY": 526,
+   "textureWidth": 309,
+   "textureHeight": 396,
+   "rotated": false
+  },
+  {
+   "name": "Custom1",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 100,
+   "offsetY": 108,
+   "textureX": 341,
+   "textureY": 538,
+   "textureWidth": 337,
+   "textureHeight": 472,
+   "rotated": false
+  },
+  {
+   "name": "Custom6",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 21,
+   "offsetY": 94,
+   "textureX": 477,
+   "textureY": 2,
+   "textureWidth": 455,
+   "textureHeight": 522,
+   "rotated": false
+  },
+  {
+   "name": "Custom5",
+   "sourceWidth": 537,
+   "sourceHeight": 684,
+   "offsetX": 26,
+   "offsetY": 93,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 473,
+   "textureHeight": 534,
+   "rotated": false
+  }
+ ]
+}

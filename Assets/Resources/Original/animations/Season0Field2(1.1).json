@@ -1,0 +1,101 @@
+{
+ "name": "Season0Field2(1.1)",
+ "frames": [
+  {
+   "name": "Object10",
+   "sourceWidth": 54,
+   "sourceHeight": 31,
+   "offsetX": 1,
+   "offsetY": 2,
+   "textureX": 135,
+   "textureY": 482,
+   "textureWidth": 52,
+   "textureHeight": 27,
+   "rotated": false
+  },
+  {
+   "name": "Object4",
+   "sourceWidth": 39,
+   "sourceHeight": 26,
+   "offsetX": 1,
+   "offsetY": 1,
+   "textureX": 237,
+   "textureY": 482,
+   "textureWidth": 37,
+   "textureHeight": 24,
+   "rotated": false
+  },
+  {
+   "name": "Object13",
+   "sourceWidth": 31,
+   "sourceHeight": 31,
+   "offsetX": 0,
+   "offsetY": 2,
+   "textureX": 1,
+   "textureY": 482,
+   "textureWidth": 29,
+   "textureHeight": 29,
+   "rotated": false
+  },
+  {
+   "name": "Object3",
+   "sourceWidth": 55,
+   "sourceHeight": 30,
+   "offsetX": 1,
+   "offsetY": 0,
+   "textureX": 31,
+   "textureY": 482,
+   "textureWidth": 53,
+   "textureHeight": 28,
+   "rotated": false
+  },
+  {
+   "name": "Object2",
+   "sourceWidth": 51,
+   "sourceHeight": 30,
+   "offsetX": 1,
+   "offsetY": 1,
+   "textureX": 85,
+   "textureY": 482,
+   "textureWidth": 49,
+   "textureHeight": 28,
+   "rotated": false
+  },
+  {
+   "name": "Field",
+   "sourceWidth": 480,
+   "sourceHeight": 480,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 1,
+   "textureY": 1,
+   "textureWidth": 480,
+   "textureHeight": 480,
+   "rotated": false
+  },
+  {
+   "name": "Object7",
+   "sourceWidth": 33,
+   "sourceHeight": 25,
+   "offsetX": 1,
+   "offsetY": 2,
+   "textureX": 275,
+   "textureY": 482,
+   "textureWidth": 31,
+   "textureHeight": 23,
+   "rotated": false
+  },
+  {
+   "name": "Object6",
+   "sourceWidth": 48,
+   "sourceHeight": 27,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 188,
+   "textureY": 482,
+   "textureWidth": 48,
+   "textureHeight": 27,
+   "rotated": false
+  }
+ ]
+}

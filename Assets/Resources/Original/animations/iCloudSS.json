@@ -1,0 +1,149 @@
+{
+ "name": "iCloudSS",
+ "frames": [
+  {
+   "name": "UploadButton",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 315,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "iCloudLoadingRing",
+   "sourceWidth": 160,
+   "sourceHeight": 160,
+   "offsetX": 2,
+   "offsetY": 12,
+   "textureX": 319,
+   "textureY": 2,
+   "textureWidth": 156,
+   "textureHeight": 136,
+   "rotated": false
+  },
+  {
+   "name": "CancelButton",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 158,
+   "textureY": 314,
+   "textureWidth": 315,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "MPLoadingText",
+   "sourceWidth": 160,
+   "sourceHeight": 32,
+   "offsetX": 20,
+   "offsetY": 7,
+   "textureX": 477,
+   "textureY": 2,
+   "textureWidth": 20,
+   "textureHeight": 120,
+   "rotated": true
+  },
+  {
+   "name": "UploadButtonDisabled",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 2,
+   "textureY": 158,
+   "textureWidth": 76,
+   "textureHeight": 315,
+   "rotated": true
+  },
+  {
+   "name": "DownloadButton",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 158,
+   "textureY": 158,
+   "textureWidth": 315,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "DownloadButtonPressed",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 80,
+   "textureY": 158,
+   "textureWidth": 76,
+   "textureHeight": 315,
+   "rotated": true
+  },
+  {
+   "name": "UploadButtonPressed",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 2,
+   "textureY": 80,
+   "textureWidth": 315,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "iCloudButtonDisabled",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 158,
+   "textureY": 392,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  },
+  {
+   "name": "CancelButtonPressed",
+   "sourceWidth": 319,
+   "sourceHeight": 80,
+   "offsetX": 3,
+   "offsetY": 3,
+   "textureX": 158,
+   "textureY": 236,
+   "textureWidth": 315,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "iCloudButton",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 266,
+   "textureY": 392,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  },
+  {
+   "name": "iCloudButtonPressed",
+   "sourceWidth": 120,
+   "sourceHeight": 120,
+   "offsetX": 6,
+   "offsetY": 8,
+   "textureX": 374,
+   "textureY": 392,
+   "textureWidth": 106,
+   "textureHeight": 110,
+   "rotated": true
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+{
+ "name": "OptionsSS",
+ "frames": [
+  {
+   "name": "CreditsButton",
+   "sourceWidth": 322,
+   "sourceHeight": 82,
+   "offsetX": 4,
+   "offsetY": 3,
+   "textureX": 1,
+   "textureY": 1,
+   "textureWidth": 314,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "CreditsButtonPressed",
+   "sourceWidth": 322,
+   "sourceHeight": 82,
+   "offsetX": 4,
+   "offsetY": 3,
+   "textureX": 316,
+   "textureY": 1,
+   "textureWidth": 76,
+   "textureHeight": 314,
+   "rotated": true
+  },
+  {
+   "name": "OptionsTick",
+   "sourceWidth": 70,
+   "sourceHeight": 70,
+   "offsetX": 13,
+   "offsetY": 1,
+   "textureX": 454,
+   "textureY": 1,
+   "textureWidth": 44,
+   "textureHeight": 60,
+   "rotated": false
+  },
+  {
+   "name": "HandbookButtonPressed",
+   "sourceWidth": 322,
+   "sourceHeight": 82,
+   "offsetX": 4,
+   "offsetY": 3,
+   "textureX": 1,
+   "textureY": 155,
+   "textureWidth": 314,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "HandbookButton",
+   "sourceWidth": 322,
+   "sourceHeight": 82,
+   "offsetX": 4,
+   "offsetY": 3,
+   "textureX": 1,
+   "textureY": 78,
+   "textureWidth": 314,
+   "textureHeight": 76,
+   "rotated": false
+  },
+  {
+   "name": "OptionsTickBox",
+   "sourceWidth": 70,
+   "sourceHeight": 70,
+   "offsetX": 6,
+   "offsetY": 6,
+   "textureX": 393,
+   "textureY": 1,
+   "textureWidth": 60,
+   "textureHeight": 60,
+   "rotated": false
+  }
+ ]
+}

@@ -1,0 +1,125 @@
+{
+ "name": "MultiplayerTrophyNumbersSS",
+ "frames": [
+  {
+   "name": "TrophyNumber2",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 60,
+   "textureWidth": 68,
+   "textureHeight": 50,
+   "rotated": true
+  },
+  {
+   "name": "TrophyNumber7",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 112,
+   "textureWidth": 50,
+   "textureHeight": 68,
+   "rotated": false
+  },
+  {
+   "name": "TrophyNumber4",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 2,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 68,
+   "textureHeight": 56,
+   "rotated": true
+  },
+  {
+   "name": "TrophyNumber9",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 4,
+   "offsetY": 4,
+   "textureX": 54,
+   "textureY": 142,
+   "textureWidth": 68,
+   "textureHeight": 50,
+   "rotated": true
+  },
+  {
+   "name": "TrophyNumber1",
+   "sourceWidth": 36,
+   "sourceHeight": 76,
+   "offsetX": 3,
+   "offsetY": 4,
+   "textureX": 124,
+   "textureY": 72,
+   "textureWidth": 30,
+   "textureHeight": 68,
+   "rotated": false
+  },
+  {
+   "name": "TrophyNumber6",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 72,
+   "textureY": 72,
+   "textureWidth": 50,
+   "textureHeight": 68,
+   "rotated": false
+  },
+  {
+   "name": "TrophyNumber3",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 54,
+   "textureY": 194,
+   "textureWidth": 68,
+   "textureHeight": 50,
+   "rotated": true
+  },
+  {
+   "name": "TrophyNumber8",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 72,
+   "textureY": 2,
+   "textureWidth": 50,
+   "textureHeight": 68,
+   "rotated": false
+  },
+  {
+   "name": "TrophyNumber0",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 124,
+   "textureY": 2,
+   "textureWidth": 50,
+   "textureHeight": 68,
+   "rotated": false
+  },
+  {
+   "name": "TrophyNumber5",
+   "sourceWidth": 58,
+   "sourceHeight": 76,
+   "offsetX": 5,
+   "offsetY": 4,
+   "textureX": 2,
+   "textureY": 182,
+   "textureWidth": 50,
+   "textureHeight": 68,
+   "rotated": false
+  }
+ ]
+}

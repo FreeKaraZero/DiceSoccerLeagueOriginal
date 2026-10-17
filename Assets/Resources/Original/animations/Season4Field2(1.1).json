@@ -1,0 +1,65 @@
+{
+ "name": "Season4Field2(1.1)",
+ "frames": [
+  {
+   "name": "Object5",
+   "sourceWidth": 73,
+   "sourceHeight": 34,
+   "offsetX": 2,
+   "offsetY": 2,
+   "textureX": 2,
+   "textureY": 64,
+   "textureWidth": 69,
+   "textureHeight": 30,
+   "rotated": false
+  },
+  {
+   "name": "Object3",
+   "sourceWidth": 44,
+   "sourceHeight": 38,
+   "offsetX": 0,
+   "offsetY": 1,
+   "textureX": 61,
+   "textureY": 130,
+   "textureWidth": 44,
+   "textureHeight": 36,
+   "rotated": false
+  },
+  {
+   "name": "Object2",
+   "sourceWidth": 59,
+   "sourceHeight": 48,
+   "offsetX": 2,
+   "offsetY": 1,
+   "textureX": 2,
+   "textureY": 96,
+   "textureWidth": 57,
+   "textureHeight": 46,
+   "rotated": false
+  },
+  {
+   "name": "Object7",
+   "sourceWidth": 68,
+   "sourceHeight": 48,
+   "offsetX": 3,
+   "offsetY": 1,
+   "textureX": 73,
+   "textureY": 64,
+   "textureWidth": 46,
+   "textureHeight": 64,
+   "rotated": true
+  },
+  {
+   "name": "Object6",
+   "sourceWidth": 115,
+   "sourceHeight": 60,
+   "offsetX": 0,
+   "offsetY": 0,
+   "textureX": 2,
+   "textureY": 2,
+   "textureWidth": 115,
+   "textureHeight": 60,
+   "rotated": false
+  }
+ ]
+}
