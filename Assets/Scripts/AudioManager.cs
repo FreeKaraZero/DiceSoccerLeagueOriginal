@@ -21,7 +21,8 @@ namespace DiceSoccer
                 {
                     var go = new GameObject("DiceSoccer_AudioManager");
                     _instance = go.AddComponent<AudioManager>();
-                    DontDestroyOnLoad(go);
+                    if (Application.isPlaying)
+                        DontDestroyOnLoad(go);
                 }
                 return _instance;
             }
@@ -56,21 +57,35 @@ namespace DiceSoccer
             }
 
             _instance = this;
-            _bgmSource = gameObject.AddComponent<AudioSource>();
-            _bgmSource.loop = true;
-            _bgmSource.playOnAwake = false;
-
-            _crowdSource = gameObject.AddComponent<AudioSource>();
-            _crowdSource.loop = true;
-            _crowdSource.playOnAwake = false;
-            _crowdSource.volume = 0.4f;
-
-            _sfxSource = gameObject.AddComponent<AudioSource>();
-            _sfxSource.loop = false;
-            _sfxSource.playOnAwake = false;
+            EnsureInitialized();
 
             _soundEnabled = PlayerPrefs.GetInt("diceSoccer.sound", 1) != 0;
             AudioListener.volume = _soundEnabled ? 1f : 0f;
+        }
+
+        private void EnsureInitialized()
+        {
+            if (_bgmSource == null)
+            {
+                _bgmSource = gameObject.AddComponent<AudioSource>();
+                _bgmSource.loop = true;
+                _bgmSource.playOnAwake = false;
+            }
+
+            if (_crowdSource == null)
+            {
+                _crowdSource = gameObject.AddComponent<AudioSource>();
+                _crowdSource.loop = true;
+                _crowdSource.playOnAwake = false;
+                _crowdSource.volume = 0.4f;
+            }
+
+            if (_sfxSource == null)
+            {
+                _sfxSource = gameObject.AddComponent<AudioSource>();
+                _sfxSource.loop = false;
+                _sfxSource.playOnAwake = false;
+            }
         }
 
         public void PlayBgm(string trackName = "MainTheme", float volume = 0.5f)
@@ -78,6 +93,7 @@ namespace DiceSoccer
             var clip = LoadClip(trackName);
             if (clip == null) return;
 
+            EnsureInitialized();
             if (_bgmSource.clip == clip && _bgmSource.isPlaying) return;
 
             _bgmSource.clip = clip;

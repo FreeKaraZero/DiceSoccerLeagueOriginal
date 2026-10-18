@@ -10,6 +10,7 @@ MemoryCaptures/
 [Bb]uilds/
 !Builds/Android/DiceSoccer.apk
 !DiceSoccer.apk
+*.log
 
 # Python cache
 **/__pycache__/
