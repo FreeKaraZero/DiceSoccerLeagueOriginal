@@ -55,6 +55,7 @@ namespace DiceSoccer
         private int[] _lineupIds;
         private List<int> _ownedPlayerIds;
         private int _selectedFixtureIndex;
+        private int _hireCandidateIndex;
         private int _selectedLineupSlot;
         private int _seasonIndex;
         private int _fixtureIndex;
@@ -241,35 +242,34 @@ namespace DiceSoccer
             AddMenuBackdrop(true);
             AddMenuHeader($"SEASON {_seasonIndex}", null);
             AddMenuFooter();
-            AddResourceImage("StartScreenLogo", "Original/images/StartScreenLogo",
-                _safeArea, new Vector2(0.34f, 0.66f), new Vector2(0.66f, 0.9f));
 
-            var trophyBtn = AddSpriteButton("TrophiesHome", "Original/sprites/TrophyBG/TrophyBG",
-                "Original/sprites/TrophyBG/TrophyBGPressed", _safeArea,
-                new Vector2(0.86f, 0.78f), new Vector2(0.18f, 0.12f), ShowTrophyRoom);
-            var trophyIcon = AddResourceImage("TrophyHomeIcon", "Original/images/Trophy01", trophyBtn.transform,
-                new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
-            trophyIcon.preserveAspect = true;
-            trophyIcon.raycastTarget = false;
+            // Authentic hero logo centered and prominent matching original iOS frames
+            var logo = AddResourceImage("StartScreenLogo", "Original/images/StartScreenLogo",
+                _safeArea, new Vector2(0.18f, 0.55f), new Vector2(0.82f, 0.89f));
+            logo.preserveAspect = true;
+            logo.raycastTarget = false;
 
             var catalogAvailable = Resources.Load<TextAsset>("Original/data/UnityCatalog") != null;
             var campaign = AddSpriteButton("Campaign", "Original/images/MainMenuButtons01",
                 "Original/images/MainMenuButtons01Pressed", _safeArea,
-                new Vector2(0.5f, 0.58f), new Vector2(0.72f, 0.14f), StartCareerMatch);
+                new Vector2(0.5f, 0.44f), new Vector2(0.70f, 0.11f), StartCareerMatch);
             campaign.interactable = catalogAvailable;
+
             var mp = AddSpriteButton("Multiplayer", "Original/images/MainMenuButtons02Disabled",
                 "Original/images/MainMenuButtons02Disabled", _safeArea,
-                new Vector2(0.5f, 0.42f), new Vector2(0.72f, 0.14f), null);
+                new Vector2(0.5f, 0.32f), new Vector2(0.70f, 0.11f), null);
             mp.interactable = false;
+
             var manage = AddSpriteButton("Manage", "Original/images/MainMenuButtons03",
                 "Original/images/MainMenuButtons03Pressed", _safeArea,
-                new Vector2(0.5f, 0.26f), new Vector2(0.72f, 0.14f), ShowManage);
+                new Vector2(0.5f, 0.20f), new Vector2(0.70f, 0.11f), ShowManage);
             manage.interactable = catalogAvailable;
+
             if (!catalogAvailable)
             {
                 AddText("Run Tools/extract_assets.py to import the original game data.",
                     _safeArea, 16, new Color32(255, 193, 133, 255),
-                    new Vector2(0.05f, 0.17f), new Vector2(0.95f, 0.22f));
+                    new Vector2(0.05f, 0.14f), new Vector2(0.95f, 0.19f));
             }
         }
 
@@ -305,7 +305,15 @@ namespace DiceSoccer
             if (_seasonFixtures.Length == 0)
                 throw new InvalidDataException($"Season {_seasonIndex} has no League fixtures.");
             _fixtureIndex = LoadCompetitionProgress(_competitionName);
+            _selectedFixtureIndex = Mathf.Clamp(_fixtureIndex, 0, _seasonFixtures.Length - 1);
             ShowLeagueFixtures();
+        }
+
+        private string GetMatchNoSpritePath(int number)
+        {
+            if (number == 11 || number == 12 || number == 14)
+                return $"Original/sprites/MatchSelectionSS2/MatchNo{number}";
+            return $"Original/sprites/MatchSelectionSS1/MatchNo{number}";
         }
 
         private void ShowLeagueFixtures()
@@ -315,75 +323,173 @@ namespace DiceSoccer
 
             _match = null;
             ClearCanvas();
-            AddMenuBackdrop();
-            AddMenuHeader(_catalog.Data.seasons[_seasonIndex].name, ShowHome);
+            AddMenuBackdrop(false);
+            AddMenuHeader(null, ShowHome);
+
+            _selectedFixtureIndex = Mathf.Clamp(_selectedFixtureIndex, 0, _seasonFixtures.Length - 1);
+            var fixture = _seasonFixtures[_selectedFixtureIndex];
+            var tournament = _competitionName == "T1" || _competitionName == "T2";
+            var locked = _selectedFixtureIndex > _fixtureIndex ||
+                         (tournament && _selectedFixtureIndex == _fixtureIndex &&
+                          _fixtureIndex > 0 && !IsPreviousTournamentFixtureWon());
+            var isCompleted = _selectedFixtureIndex < _fixtureIndex;
+
+            // Match Title & Opponent in the sky
+            var matchTitle = AddText($"MATCH {_selectedFixtureIndex + 1}", _safeArea, 28, Ink,
+                new Vector2(0.1f, 0.83f), new Vector2(0.9f, 0.89f));
+            matchTitle.alignment = TextAnchor.MiddleCenter;
+            matchTitle.fontStyle = FontStyle.Bold;
+
+            var vsText = AddText($"vs. {fixture.teamName.ToUpperInvariant()}", _safeArea, 20, Ink,
+                new Vector2(0.1f, 0.77f), new Vector2(0.9f, 0.83f));
+            vsText.alignment = TextAnchor.MiddleCenter;
+            vsText.fontStyle = FontStyle.Bold;
+
+            var statusStr = locked
+                ? "LOCKED"
+                : (isCompleted
+                    ? "WIN  •  REPLAY AVAILABLE"
+                    : $"WIN {fixture.cashWin:N0}   DRAW {fixture.cashDraw:N0}   LOSS {fixture.cashLose:N0}");
+            Color statusColor = locked ? (Color)new Color32(100, 100, 100, 255) : (isCompleted ? Grass : Ink);
+            var infoText = AddText(statusStr, _safeArea, 15, statusColor,
+                new Vector2(0.05f, 0.71f), new Vector2(0.95f, 0.77f));
+            infoText.alignment = TextAnchor.MiddleCenter;
+            infoText.fontStyle = FontStyle.Bold;
+
+            // Giant Soccer Ball in Center (Left half + Flipped Right half meeting seamlessly at container center)
+            var ballSprite = locked
+                ? "Original/sprites/MatchSelectionSS1/SoccerBallButtonLocked"
+                : "Original/sprites/MatchSelectionSS1/SoccerBallButton";
+
+            var ballContainer = new GameObject("SoccerBallContainer", typeof(RectTransform));
+            ballContainer.transform.SetParent(_safeArea, false);
+            var containerRect = ballContainer.GetComponent<RectTransform>();
+            containerRect.anchorMin = new Vector2(0.5f, 0.52f);
+            containerRect.anchorMax = new Vector2(0.5f, 0.52f);
+            containerRect.sizeDelta = new Vector2(300f, 300f);
+            containerRect.pivot = new Vector2(0.5f, 0.5f);
+
+            float halfW = 300f * (96f / 190f); // 151.6f
+            float halfH = 300f;
+
+            var ballLeft = AddResourceImage("BallLeft", ballSprite, ballContainer.transform,
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            ballLeft.preserveAspect = false;
+            ballLeft.rectTransform.pivot = new Vector2(1f, 0.5f);
+            ballLeft.rectTransform.anchoredPosition = Vector2.zero;
+            ballLeft.rectTransform.sizeDelta = new Vector2(halfW, halfH);
+
+            var ballRight = AddResourceImage("BallRight", ballSprite, ballContainer.transform,
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            ballRight.preserveAspect = false;
+            ballRight.rectTransform.pivot = new Vector2(1f, 0.5f);
+            ballRight.rectTransform.anchoredPosition = Vector2.zero;
+            ballRight.rectTransform.sizeDelta = new Vector2(halfW, halfH);
+            ballRight.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+
+            // Match Number on the ball
+            var matchNum = _selectedFixtureIndex + 1;
+            var matchNumPath = GetMatchNoSpritePath(matchNum);
+            var matchNumImg = AddResourceImage("MatchNumber", matchNumPath, ballContainer.transform,
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            if (matchNumImg != null && matchNumImg.sprite != null)
+            {
+                matchNumImg.rectTransform.sizeDelta = new Vector2(80f, 80f);
+                matchNumImg.preserveAspect = true;
+            }
+            else
+            {
+                if (matchNumImg != null) Destroy(matchNumImg.gameObject);
+                var numTxt = AddText(matchNum.ToString(), ballContainer.transform, 44, Color.black,
+                    new Vector2(0.2f, 0.2f), new Vector2(0.8f, 0.8f));
+                numTxt.alignment = TextAnchor.MiddleCenter;
+                numTxt.fontStyle = FontStyle.Bold;
+            }
+
+            // Left & Right Navigation Chevrons
+            var canPrev = _selectedFixtureIndex > 0;
+            var leftArrow = AddSpriteButton("LeftArrow",
+                canPrev ? "Original/images/LeftArrow" : "Original/images/LeftArrowDisabled",
+                canPrev ? "Original/images/LeftArrowSelected" : "Original/images/LeftArrowDisabled",
+                _safeArea, new Vector2(0.12f, 0.52f), new Vector2(0.10f, 0.12f),
+                canPrev ? () => { _selectedFixtureIndex--; ShowLeagueFixtures(); } : null);
+            leftArrow.interactable = canPrev;
+
+            var canNext = _selectedFixtureIndex < _seasonFixtures.Length - 1;
+            var rightArrow = AddSpriteButton("RightArrow",
+                canNext ? "Original/images/RightArrow" : "Original/images/RightArrowDisabled",
+                canNext ? "Original/images/RightArrowSelected" : "Original/images/RightArrowDisabled",
+                _safeArea, new Vector2(0.88f, 0.52f), new Vector2(0.10f, 0.12f),
+                canNext ? () => { _selectedFixtureIndex++; ShowLeagueFixtures(); } : null);
+            rightArrow.interactable = canNext;
+
+            // 3 Stars below ball overlapping bottom rim
+            var starSprite = isCompleted
+                ? "Original/sprites/MatchSelectionSS1/GoldStar"
+                : "Original/sprites/MatchSelectionSS1/EmptyStar";
+
+            var starLeft = AddResourceImage("StarLeft", starSprite, ballContainer.transform,
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            starLeft.rectTransform.anchoredPosition = new Vector2(-55f, -115f);
+            starLeft.rectTransform.sizeDelta = new Vector2(70f, 70f);
+            starLeft.preserveAspect = true;
+
+            var starRight = AddResourceImage("StarRight", starSprite, ballContainer.transform,
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            starRight.rectTransform.anchoredPosition = new Vector2(55f, -115f);
+            starRight.rectTransform.sizeDelta = new Vector2(70f, 70f);
+            starRight.preserveAspect = true;
+
+            var starMid = AddResourceImage("StarMid", starSprite, ballContainer.transform,
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            starMid.rectTransform.anchoredPosition = new Vector2(0f, -125f);
+            starMid.rectTransform.sizeDelta = new Vector2(85f, 85f);
+            starMid.preserveAspect = true;
+            starMid.transform.SetAsLastSibling();
+
+            // Action Buttons: MANAGE and PLAY!
+            AddSpriteButton("ManageBtn", "Original/sprites/EnemyLineupSS1/ManageButton",
+                "Original/sprites/EnemyLineupSS1/ManageButtonPressed", _safeArea,
+                new Vector2(0.35f, 0.24f), new Vector2(0.28f, 0.085f), ShowManage);
+
+            var playNormal = locked
+                ? "Original/sprites/MatchSelectionSS2/ManagePlayButtonDisabled"
+                : "Original/sprites/MatchSelectionSS1/ManagePlayButton";
+            var playPressed = locked
+                ? "Original/sprites/MatchSelectionSS2/ManagePlayButtonDisabled"
+                : "Original/sprites/MatchSelectionSS1/ManagePlayButtonPressed";
+            var capturedMatchIdx = _selectedFixtureIndex;
+            var playBtn = AddSpriteButton("PlayBtn", playNormal, playPressed, _safeArea,
+                new Vector2(0.65f, 0.24f), new Vector2(0.28f, 0.085f),
+                locked ? null : () => StartFixture(capturedMatchIdx));
+            playBtn.interactable = !locked;
+
+            // Bottom yellow bar & competition tabs
+            var footerBar = AddResourceImage("FixtureFooter", "Original/images/FooterBG", _safeArea,
+                new Vector2(0f, 0f), new Vector2(1f, 0.08f));
+            footerBar.preserveAspect = false;
+            footerBar.raycastTarget = false;
 
             var competitions = _catalog.GetCompetitions(_seasonIndex);
-            var availableCompetitions = new List<CompetitionData>();
-            foreach (var competition in competitions)
+            var availableComps = new List<CompetitionData>();
+            foreach (var comp in competitions)
             {
-                if (competition.fixtures != null && competition.fixtures.Length > 0)
-                    availableCompetitions.Add(competition);
-            }
-            var tabWidth = 0.88f / availableCompetitions.Count;
-            for (var index = 0; index < availableCompetitions.Count; index++)
-            {
-                var competition = availableCompetitions[index];
-                var capturedName = competition.name;
-                var centerX = 0.06f + tabWidth * (index + 0.5f);
-                var selected = competition.name == _competitionName;
-                var tabPath = $"Original/sprites/MatchSelectionSS1/Campaign{competition.name}Tab";
-                var tabButton = AddSpriteButton(competition.name,
-                    tabPath + (selected ? "Selected" : string.Empty),
-                    tabPath + (selected ? "Selected" : string.Empty), _safeArea,
-                    new Vector2(centerX, 0.83f), new Vector2(Mathf.Min(tabWidth - 0.02f, 0.28f), 0.12f),
-                    () => SelectCompetition(capturedName));
-                tabButton.interactable = IsCompetitionAvailable(competition.name);
+                if (comp.fixtures != null && comp.fixtures.Length > 0)
+                    availableComps.Add(comp);
             }
 
-            var status = _competitionName == "League"
-                ? _fixtureIndex >= _seasonFixtures.Length
-                    ? "LEAGUE COMPLETE - REPLAY ANY MATCH"
-                    : $"LEAGUE MATCH {_fixtureIndex + 1} OF {_seasonFixtures.Length} AVAILABLE"
-                : _fixtureIndex >= _seasonFixtures.Length
-                    ? $"{_competitionName} COMPLETE - REPLAY ANY MATCH"
-                    : $"{_competitionName} MATCH {_fixtureIndex + 1} OF {_seasonFixtures.Length} AVAILABLE";
-            AddText(status, _safeArea, 14, Ink,
-                new Vector2(0.05f, 0.715f), new Vector2(0.95f, 0.76f));
-
-            var rowHeight = 96f;
-            var content = CreateScrollList("League fixtures", _safeArea,
-                new Vector2(0.04f, 0.15f), new Vector2(0.96f, 0.70f),
-                _seasonFixtures.Length * rowHeight);
-            for (var index = 0; index < _seasonFixtures.Length; index++)
+            var tabWidth = 0.22f;
+            for (var i = 0; i < availableComps.Count; i++)
             {
-                var fixture = _seasonFixtures[index];
-                var capturedIndex = index;
-                var yMin = 1f - (index + 1) / (float)_seasonFixtures.Length;
-                var yMax = 1f - index / (float)_seasonFixtures.Length;
-                var tournament = _competitionName == "T1" || _competitionName == "T2";
-                var locked = index > _fixtureIndex ||
-                             (tournament && index == _fixtureIndex &&
-                              _fixtureIndex > 0 && !IsPreviousTournamentFixtureWon());
-                var label = locked
-                    ? $"MATCH {index + 1}  —  LOCKED\nWin the previous tournament match"
-                    : $"{_competitionName} {index + 1}  —  {fixture.teamName}\n" +
-                      (tournament
-                          ? index < _fixtureIndex ? "Replay tournament match" : "Win to unlock the next match"
-                          : index < _fixtureIndex ? $"Replay  |  Win {fixture.cashWin:N0}  Draw {fixture.cashDraw:N0}  Loss {fixture.cashLose:N0}"
-                          : $"Play  |  Win {fixture.cashWin:N0}  Draw {fixture.cashDraw:N0}  Loss {fixture.cashLose:N0}");
-                var button = AddButton(label, content,
-                    locked ? new Color32(49, 55, 58, 255) : new Color32(68, 79, 84, 255),
-                    new Vector2(0.5f, (yMin + yMax) * 0.5f),
-                    new Vector2(0.96f, yMax - yMin),
-                    () => StartFixture(capturedIndex));
-                button.interactable = !locked;
-            }
-
-            if (_fixtureIndex >= _seasonFixtures.Length && _competitionName == "League")
-            {
-                AddButton("SEASON SUMMARY", _safeArea, Grass,
-                    new Vector2(0.5f, 0.08f), new Vector2(0.7f, 0.06f), ShowSeasonCompletion);
+                var comp = availableComps[i];
+                var cName = comp.name;
+                var isSel = cName == _competitionName;
+                var tabPath = $"Original/sprites/MatchSelectionSS1/Campaign{cName}Tab" + (isSel ? "Selected" : string.Empty);
+                var xCenter = 0.15f + i * 0.24f;
+                var tabBtn = AddSpriteButton($"Tab_{cName}", tabPath, tabPath, _safeArea,
+                    new Vector2(xCenter, 0.045f), new Vector2(tabWidth, 0.08f),
+                    () => SelectCompetition(cName));
+                tabBtn.interactable = IsCompetitionAvailable(cName);
             }
 
             if (_seasonIndex == 0 && _fixtureIndex == 0 && PlayerPrefs.GetInt("diceSoccer.tutorial.5", 0) == 0)
@@ -406,6 +512,7 @@ namespace DiceSoccer
             _competitionName = competitionName;
             _seasonFixtures = fixtures;
             _fixtureIndex = LoadCompetitionProgress(competitionName);
+            _selectedFixtureIndex = Mathf.Clamp(_fixtureIndex, 0, _seasonFixtures.Length - 1);
             ShowLeagueFixtures();
         }
 
@@ -521,55 +628,12 @@ namespace DiceSoccer
             bgObj.raycastTarget = false;
             _safeArea.SetAsLastSibling();
 
-            // 1. Top HUD: Scoreboard (scoreboardBG: [0, 0.865] to [1, 1])
-            var scoreboard = AddResourceImage("MatchScoreboard",
-                "Original/images/scoreboardBG", _safeArea,
-                new Vector2(0f, 0.865f), new Vector2(1f, 1f));
-            scoreboard.preserveAspect = false;
-            scoreboard.raycastTarget = false;
-
-            // Competition Header at top:
-            AddText($"SEASON {_seasonIndex}  -  {_competitionName.ToUpperInvariant()} {_selectedFixtureIndex + 1}/{_seasonFixtures.Length}",
-                _safeArea, 12, Ink,
-                new Vector2(0.05f, 0.965f), new Vector2(0.95f, 0.995f));
-
-            // Home player head / crest:
-            var homeCaptainId = homeLineup.Length > 0 && homeLineup[0].id >= 1 && homeLineup[0].id <= 96 ? homeLineup[0].id : 0;
-            var homeHeadPath = ResolvePlayerHeadPath(homeCaptainId);
-            var homeHead = AddResourceImage("HomeHead", homeHeadPath, _safeArea,
-                new Vector2(0.03f, 0.88f), new Vector2(0.12f, 0.96f));
-            homeHead.preserveAspect = true;
-            homeHead.raycastTarget = false;
-            AddText("YOUR TEAM", _safeArea, 12, Ink,
-                new Vector2(0.12f, 0.89f), new Vector2(0.34f, 0.94f));
-
-            // Away opponent head / crest:
-            var awayLineup = _catalog.ResolveLineup(_currentFixture.lineup);
-            var awayCaptainId = awayLineup.Length > 0 && awayLineup[0].id >= 1 && awayLineup[0].id <= 96 ? awayLineup[0].id : 0;
-            var awayHeadPath = ResolvePlayerHeadPath(awayCaptainId);
-            var awayHead = AddResourceImage("AwayHead", awayHeadPath, _safeArea,
-                new Vector2(0.88f, 0.88f), new Vector2(0.97f, 0.96f));
-            awayHead.preserveAspect = true;
-            awayHead.raycastTarget = false;
-            awayHead.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
-            AddText(_currentFixture.teamName.ToUpperInvariant(), _safeArea, 12, Ink,
-                new Vector2(0.66f, 0.89f), new Vector2(0.88f, 0.94f));
-
-            // Center Scoreboard Scores:
-            _matchScore = AddText($"{_match.HomeScore}   -   {_match.AwayScore}", _safeArea, 34, Ink,
-                new Vector2(0.35f, 0.90f), new Vector2(0.65f, 0.965f));
-
-            // Pause button at center under score:
-            AddSpriteButton("Pause", "Original/images/PauseButton",
-                "Original/images/PauseButtonPressed", _safeArea,
-                new Vector2(0.50f, 0.875f), new Vector2(0.09f, 0.045f), ShowPauseMenu);
-
-            // 2. Pitch Field (spans from y=0.08 to y=0.865):
+            // 1. Pitch Field (fills full 640x960 safe area from top to bottom):
             var fieldGo = new GameObject("FieldContainer", typeof(RectTransform), typeof(RectMask2D));
             fieldGo.transform.SetParent(_safeArea, false);
             var fieldRect = fieldGo.GetComponent<RectTransform>();
-            fieldRect.anchorMin = new Vector2(0f, 0.08f);
-            fieldRect.anchorMax = new Vector2(1f, 0.865f);
+            fieldRect.anchorMin = Vector2.zero;
+            fieldRect.anchorMax = Vector2.one;
             fieldRect.offsetMin = fieldRect.offsetMax = Vector2.zero;
             _field = fieldRect;
 
@@ -577,37 +641,50 @@ namespace DiceSoccer
             var pitchRootGo = new GameObject("FieldPitchRoot", typeof(RectTransform));
             pitchRootGo.transform.SetParent(_field, false);
             _fieldPitchRoot = pitchRootGo.GetComponent<RectTransform>();
-            _fieldPitchRoot.anchorMin = new Vector2(0.5f, 0f);
-            _fieldPitchRoot.anchorMax = new Vector2(0.5f, 1f);
-            _fieldPitchRoot.sizeDelta = new Vector2(1480f, 0f);
+            _fieldPitchRoot.anchorMin = new Vector2(0.5f, 0.5f);
+            _fieldPitchRoot.anchorMax = new Vector2(0.5f, 0.5f);
+            _fieldPitchRoot.sizeDelta = new Vector2(1920f, 960f);
             _fieldPitchRoot.anchoredPosition = new Vector2(GetPitchOffsetForLocation(_match.Location), 0f);
 
             // Left half of pitch (goal on left, center circle on right):
-            var leftField = AddResourceImage("FieldLeft", "Original/sprites/Season0Field2(1.1)/Field",
-                _fieldPitchRoot, new Vector2(0f, 0f), new Vector2(0.5f, 1f));
-            leftField.preserveAspect = false;
-            leftField.raycastTarget = false;
+            var leftFieldGo = new GameObject("FieldLeft", typeof(RectTransform), typeof(Image));
+            leftFieldGo.transform.SetParent(_fieldPitchRoot, false);
+            var leftRect = leftFieldGo.GetComponent<RectTransform>();
+            leftRect.anchorMin = leftRect.anchorMax = new Vector2(0.5f, 0.5f);
+            leftRect.pivot = new Vector2(1f, 0.5f);
+            leftRect.sizeDelta = new Vector2(960f, 960f);
+            leftRect.anchoredPosition = Vector2.zero;
+            var leftImg = leftFieldGo.GetComponent<Image>();
+            leftImg.sprite = GetUiSprite("Original/sprites/Season0Field2(1.1)/Field");
+            leftImg.preserveAspect = false;
+            leftImg.raycastTarget = false;
 
             // Right half of pitch (flipped horizontally to form full pitch):
-            var rightField = AddResourceImage("FieldRight", "Original/sprites/Season0Field2(1.1)/Field",
-                _fieldPitchRoot, new Vector2(0.5f, 0f), new Vector2(1f, 1f));
-            rightField.preserveAspect = false;
-            rightField.raycastTarget = false;
-            rightField.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+            var rightFieldGo = new GameObject("FieldRight", typeof(RectTransform), typeof(Image));
+            rightFieldGo.transform.SetParent(_fieldPitchRoot, false);
+            var rightRect = rightFieldGo.GetComponent<RectTransform>();
+            rightRect.anchorMin = rightRect.anchorMax = new Vector2(0.5f, 0.5f);
+            rightRect.pivot = new Vector2(1f, 0.5f);
+            rightRect.sizeDelta = new Vector2(960f, 960f);
+            rightRect.anchoredPosition = Vector2.zero;
+            rightRect.localScale = new Vector3(-1f, 1f, 1f);
+            var rightImg = rightFieldGo.GetComponent<Image>();
+            rightImg.sprite = GetUiSprite("Original/sprites/Season0Field2(1.1)/Field");
+            rightImg.preserveAspect = false;
+            rightImg.raycastTarget = false;
 
-            // Field decorations from Season0Field1:
-            var skullDeco = AddResourceImage("SkullDeco", "Original/sprites/Season0Field1(1.1)/Object1",
-                _fieldPitchRoot, new Vector2(0.18f, 0.82f), new Vector2(0.25f, 0.90f));
-            skullDeco.preserveAspect = true;
-            skullDeco.raycastTarget = false;
-
+            // Field decorations from Season0Field1 (matches authentic trailer):
             var signDeco = AddResourceImage("SignDeco", "Original/sprites/Season0Field1(1.1)/Object9",
-                _fieldPitchRoot, new Vector2(0.75f, 0.82f), new Vector2(0.82f, 0.92f));
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            signDeco.rectTransform.anchoredPosition = new Vector2(180f, 260f);
+            signDeco.rectTransform.sizeDelta = new Vector2(75f, 70f);
             signDeco.preserveAspect = true;
             signDeco.raycastTarget = false;
 
-            var grassDeco = AddResourceImage("GrassDeco", "Original/sprites/Season0Field1(1.1)/Object8",
-                _fieldPitchRoot, new Vector2(0.46f, 0.35f), new Vector2(0.54f, 0.45f));
+            var grassDeco = AddResourceImage("CenterGrassDeco", "Original/sprites/Season0Field1(1.1)/Object8",
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            grassDeco.rectTransform.anchoredPosition = new Vector2(0f, -78f);
+            grassDeco.rectTransform.sizeDelta = new Vector2(34f, 28f);
             grassDeco.preserveAspect = true;
             grassDeco.raycastTarget = false;
 
@@ -625,72 +702,128 @@ namespace DiceSoccer
             _ballMarker = ball;
 
             // Formation players:
+            var awayLineup = _catalog.ResolveLineup(_currentFixture.lineup);
             _homePlayers = AddFormationPlayers(homeLineup, _field, true);
             _awayPlayers = AddFormationPlayers(awayLineup, _field, false);
 
             // Dice on Field:
             CreateFieldDice(_field);
 
-            // Duel Totals:
-            _homeTotalText = AddText("", _field, 38, Gold,
-                new Vector2(0.04f, 0.22f), new Vector2(0.22f, 0.34f));
+            // Duel Totals next to bottom dice:
+            _homeTotalText = AddText("", _field, 42, Color.white,
+                new Vector2(0.04f, 0.22f), new Vector2(0.24f, 0.36f));
             _homeTotalText.fontStyle = FontStyle.Bold;
-            _homeTotalText.gameObject.AddComponent<Shadow>().effectColor = Color.black;
+            _homeTotalText.alignment = TextAnchor.MiddleCenter;
+            var hShadow = _homeTotalText.gameObject.AddComponent<Shadow>();
+            hShadow.effectColor = Color.black;
+            hShadow.effectDistance = new Vector2(2f, -2f);
             _homeTotalText.enabled = false;
 
-            _awayTotalText = AddText("", _field, 38, new Color32(240, 70, 70, 255),
-                new Vector2(0.78f, 0.22f), new Vector2(0.96f, 0.34f));
+            _awayTotalText = AddText("", _field, 42, Color.white,
+                new Vector2(0.76f, 0.22f), new Vector2(0.96f, 0.36f));
             _awayTotalText.fontStyle = FontStyle.Bold;
-            _awayTotalText.gameObject.AddComponent<Shadow>().effectColor = Color.black;
+            _awayTotalText.alignment = TextAnchor.MiddleCenter;
+            var aShadow = _awayTotalText.gameObject.AddComponent<Shadow>();
+            aShadow.effectColor = Color.black;
+            aShadow.effectDistance = new Vector2(2f, -2f);
             _awayTotalText.enabled = false;
 
-            // Shake prompt banner in center:
+            // Shake button & prompt in center:
             _shakePrompt = AddResourceImage("ShakePrompt", "Original/sprites/Prompt1/Shake",
                 _field, new Vector2(0.5f, 0.52f), new Vector2(0.5f, 0.52f));
-            _shakePrompt.rectTransform.sizeDelta = new Vector2(170f, 96f);
+            _shakePrompt.rectTransform.sizeDelta = new Vector2(175f, 100f);
             _shakePrompt.preserveAspect = true;
-            _shakePrompt.raycastTarget = false;
+            _shakePrompt.raycastTarget = true;
+            var shakeBtn = _shakePrompt.gameObject.AddComponent<Button>();
+            shakeBtn.transition = Selectable.Transition.None;
+            shakeBtn.onClick.AddListener(PlayEncounter);
+
+            // Invisible full-field tap trigger for rolling:
+            var tapFieldGo = new GameObject("FieldTapTrigger", typeof(RectTransform), typeof(Button));
+            tapFieldGo.transform.SetParent(_field, false);
+            tapFieldGo.transform.SetAsFirstSibling();
+            var tapFieldRect = tapFieldGo.GetComponent<RectTransform>();
+            tapFieldRect.anchorMin = Vector2.zero;
+            tapFieldRect.anchorMax = Vector2.one;
+            tapFieldRect.offsetMin = tapFieldRect.offsetMax = Vector2.zero;
+            var tapFieldBtn = tapFieldGo.GetComponent<Button>();
+            tapFieldBtn.transition = Selectable.Transition.None;
+            tapFieldBtn.onClick.AddListener(PlayEncounter);
+            _encounterButton = tapFieldBtn;
 
             UpdatePlayerPositions();
             SetBallPosition(_match.Location, _match.Possession, false);
 
-            // Match Report ticker:
-            _matchReport = AddText(GetEncounterPreviewText(), _field,
-                13, Ink, new Vector2(0.06f, 0.175f), new Vector2(0.94f, 0.225f));
-            _matchReport.resizeTextForBestFit = true;
-            _matchReport.resizeTextMinSize = 10;
-            _matchReport.resizeTextMaxSize = 14;
-            _matchReport.verticalOverflow = VerticalWrapMode.Truncate;
+            // Keep match report tracker (hidden to avoid pitch clutter):
+            _matchReport = AddText("", _field, 12, Ink, Vector2.zero, Vector2.zero);
+            _matchReport.enabled = false;
 
-            // Buttons:
-            _substitutionButton = AddSpriteButton("Substitute",
-                "Original/images/SubstitutionButton",
-                "Original/images/SubstitutionButtonPressed",
-                _field,
-                new Vector2(0.18f, 0.125f), new Vector2(0.32f, 0.055f),
-                ShowSubstitutionSlots);
-            _substitutionButton.interactable = !_match.IsFinished && _ownedPlayerIds.Count > 7;
+            // 2. Top HUD: Authentic Scoreboard (scoreboardBG sits at the very top):
+            var scoreboard = AddResourceImage("MatchScoreboard",
+                "Original/images/scoreboardBG", _safeArea,
+                new Vector2(0f, 0.865f), new Vector2(1f, 1f));
+            scoreboard.preserveAspect = false;
+            scoreboard.raycastTarget = false;
 
-            _encounterButton = AddSpriteButton("RollButton",
-                "Original/images/PlayOnButton",
-                "Original/images/PlayOnButtonPressed",
-                _field,
-                new Vector2(0.50f, 0.125f), new Vector2(0.32f, 0.055f),
-                PlayEncounter);
+            // Home Team Crest Box (Golden Frame with Shield):
+            var homeCrestBox = AddResourceImage("HomeCrestBox", "Original/images/CustomCrestBox", _safeArea,
+                new Vector2(0.08f, 0.935f), new Vector2(0.08f, 0.935f));
+            homeCrestBox.rectTransform.sizeDelta = new Vector2(48f, 48f);
+            homeCrestBox.preserveAspect = true;
+            homeCrestBox.raycastTarget = false;
+            var homeCrestShield = AddResourceImage("HomeShield", "Original/images/CustomCrest1", homeCrestBox.transform,
+                new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
+            homeCrestShield.preserveAspect = true;
+            homeCrestShield.raycastTarget = false;
 
-            // 3. Bottom Grass Strip & Digital Clock (anchors [0, 0] to [1, 0.08]):
-            var bottomGrass = AddResourceImage("BottomGrass", "Original/sprites/Season0Field2(1.1)/Field",
-                _safeArea, new Vector2(0f, 0f), new Vector2(1f, 0.08f));
-            bottomGrass.color = new Color32(80, 140, 20, 255);
-            bottomGrass.preserveAspect = false;
-            bottomGrass.raycastTarget = false;
+            var homeNameText = AddText("YOUR TEAM", _safeArea, 12, Ink,
+                new Vector2(0.01f, 0.875f), new Vector2(0.24f, 0.915f));
+            homeNameText.fontStyle = FontStyle.Bold;
+            homeNameText.alignment = TextAnchor.MiddleCenter;
 
-            _matchClock = AddText(_match.ClockText(), _safeArea, 24, Color.white,
+            // Away Team Crest Box (Red Box with Crest Design):
+            var awayCrestBox = AddResourceImage("AwayCrestBox", "Original/sprites/GoalAnimationSS4/EnemyCrest", _safeArea,
+                new Vector2(0.92f, 0.935f), new Vector2(0.92f, 0.935f));
+            awayCrestBox.rectTransform.sizeDelta = new Vector2(48f, 48f);
+            awayCrestBox.preserveAspect = true;
+            awayCrestBox.raycastTarget = false;
+            var awayCrestDesign = AddResourceImage("AwayDesign", "Original/sprites/EnemyCrest1/EnemyCrest1Design", awayCrestBox.transform,
+                new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
+            awayCrestDesign.preserveAspect = true;
+            awayCrestDesign.raycastTarget = false;
+
+            var awayNameText = AddText(_currentFixture.teamName.ToUpperInvariant(), _safeArea, 10, Ink,
+                new Vector2(0.70f, 0.875f), new Vector2(0.99f, 0.915f));
+            awayNameText.fontStyle = FontStyle.Bold;
+            awayNameText.alignment = TextAnchor.MiddleCenter;
+            awayNameText.horizontalOverflow = HorizontalWrapMode.Overflow;
+
+            // Center Scoreboard Scores:
+            _matchScore = AddText($"{_match.HomeScore} - {_match.AwayScore}", _safeArea, 34, Ink,
+                new Vector2(0.30f, 0.920f), new Vector2(0.70f, 0.975f));
+            _matchScore.fontStyle = FontStyle.Bold;
+            _matchScore.alignment = TextAnchor.MiddleCenter;
+            _matchScore.horizontalOverflow = HorizontalWrapMode.Overflow;
+
+            // Pause button at center directly under score:
+            AddSpriteButton("Pause", "Original/images/PauseButton",
+                "Original/images/PauseButtonPressed", _safeArea,
+                new Vector2(0.50f, 0.880f), new Vector2(0.10f, 0.042f), ShowPauseMenu);
+
+            // 3. Digital Clock on the Bottom Grass:
+            _matchClock = AddText(_match.ClockText(), _safeArea, 25, new Color32(216, 255, 176, 255),
                 new Vector2(0.3f, 0.015f), new Vector2(0.7f, 0.065f));
             _matchClock.fontStyle = FontStyle.Bold;
+            _matchClock.alignment = TextAnchor.MiddleCenter;
             var clockShadow = _matchClock.gameObject.AddComponent<Shadow>();
             clockShadow.effectColor = Color.black;
             clockShadow.effectDistance = new Vector2(2f, -2f);
+
+            // Substitution button state tracker (interactive via pause menu):
+            var subBtnGo = new GameObject("SubButtonTracker", typeof(RectTransform), typeof(Button));
+            subBtnGo.transform.SetParent(_safeArea, false);
+            subBtnGo.SetActive(false);
+            _substitutionButton = subBtnGo.GetComponent<Button>();
 
             // Overlay container for animations (Kickoff, Goal, Save, etc.):
             var overlayGo = new GameObject("OverlayContainer", typeof(RectTransform));
@@ -789,10 +922,22 @@ namespace DiceSoccer
 
         private static string GetPlayerFigurePath(PlayerData player, int fallbackId = 1)
         {
-            var figId = (player != null && player.imageId > 0)
-                ? player.imageId
-                : ((player != null && player.id >= 1 && player.id <= 96) ? player.id : (fallbackId >= 1 && fallbackId <= 96 ? fallbackId : 1));
-            var path = $"Original/sprites/PlayerFullFigureSS/PlayerFullFigure{figId:000}";
+            int id = 1;
+            if (player != null)
+            {
+                if (player.id >= 1 && player.id <= 96)
+                    id = player.id;
+                else if (player.id >= 1000)
+                    id = ((player.id - 1000) % 96) + 1;
+                else if (player.imageId > 0 && player.imageId <= 96)
+                    id = player.imageId;
+            }
+            else if (fallbackId >= 1 && fallbackId <= 96)
+            {
+                id = fallbackId;
+            }
+
+            var path = $"Original/sprites/PlayerFullFigureSS/PlayerFullFigure{id:000}";
             if (TryGetUiSprite(path) != null)
                 return path;
             return "Original/sprites/PlayerFullFigureSS/PlayerFullFigure001";
@@ -818,16 +963,16 @@ namespace DiceSoccer
 
             var border = AddResourceImage("Border", "Original/sprites/PlayerCardBG/CardBorder", root.transform,
                 Vector2.zero, Vector2.one);
-            border.color = GetCardBorderColor(player.id);
+            border.color = GetPositionColor(player.position);
             border.preserveAspect = false;
 
             var field = AddResourceImage("Field", "Original/sprites/PlayerCardBG/CardField", border.transform,
                 new Vector2(0.045f, 0.035f), new Vector2(0.955f, 0.965f));
             field.preserveAspect = false;
 
-            // Number badge
+            // Number badge (Top Left)
             var numBase = AddResourceImage("NumberBase", "Original/sprites/Card3/PlayerNumberBase", field.transform,
-                new Vector2(0.06f, 0.77f), new Vector2(0.33f, 0.95f));
+                new Vector2(0.04f, 0.79f), new Vector2(0.24f, 0.96f));
             numBase.color = GetPositionColor(player.position);
             numBase.preserveAspect = true;
 
@@ -851,26 +996,62 @@ namespace DiceSoccer
                     new Vector2(0.50f, 0.2f), new Vector2(0.88f, 0.8f)).preserveAspect = true;
             }
 
-            // Position badge
+            // Position badge (Top Right)
             var posPath = $"Original/sprites/Card6/{player.position}Type";
             var posImg = AddResourceImage("PositionType", posPath, field.transform,
-                new Vector2(0.70f, 0.81f), new Vector2(0.93f, 0.94f));
+                new Vector2(0.76f, 0.81f), new Vector2(0.96f, 0.95f));
             posImg.preserveAspect = true;
 
-            // Player figure & shadow
+            // Name Tag Banner (Top Center between number & position)
+            var nameBox = new GameObject("NameBox", typeof(RectTransform), typeof(Image));
+            nameBox.transform.SetParent(field.transform, false);
+            var nameBoxRect = nameBox.GetComponent<RectTransform>();
+            nameBoxRect.anchorMin = new Vector2(0.23f, 0.82f);
+            nameBoxRect.anchorMax = new Vector2(0.77f, 0.94f);
+            nameBoxRect.offsetMin = nameBoxRect.offsetMax = Vector2.zero;
+            var nameBoxImg = nameBox.GetComponent<Image>();
+            nameBoxImg.color = new Color32(245, 245, 240, 255);
+            var nameOutline = nameBox.AddComponent<Outline>();
+            nameOutline.effectColor = new Color32(40, 40, 40, 255);
+            nameOutline.effectDistance = new Vector2(1, -1);
+
+            var nameText = AddText(player.name.ToUpperInvariant(), nameBox.transform, 10, Ink,
+                new Vector2(0.04f, 0.05f), new Vector2(0.96f, 0.95f));
+            nameText.alignment = TextAnchor.MiddleCenter;
+            nameText.fontStyle = FontStyle.Bold;
+            nameText.horizontalOverflow = HorizontalWrapMode.Wrap;
+            nameText.verticalOverflow = VerticalWrapMode.Truncate;
+            nameText.resizeTextForBestFit = true;
+            nameText.resizeTextMinSize = 5;
+            nameText.resizeTextMaxSize = 10;
+
+            // Player figure & shadow standing on the grass
             var shadow = AddResourceImage("FigureShadow", "Original/sprites/PlayerFullFigureSS/PlayerFullFigureShadow", field.transform,
-                new Vector2(0.20f, 0.32f), new Vector2(0.80f, 0.78f));
+                new Vector2(0.18f, 0.18f), new Vector2(0.82f, 0.78f));
             shadow.preserveAspect = true;
             shadow.color = new Color(0, 0, 0, 0.45f);
 
             var figPath = GetPlayerFigurePath(player.id);
             var figure = AddResourceImage("Figure", figPath, field.transform,
-                new Vector2(0.20f, 0.33f), new Vector2(0.80f, 0.79f));
+                new Vector2(0.18f, 0.19f), new Vector2(0.82f, 0.79f));
             figure.preserveAspect = true;
 
-            // Dice bar
+            // Superpower Box (Bottom Right, above dice bar)
+            var spIconPath = GetSuperpowerIconPath(player.superpower);
+            if (!string.IsNullOrEmpty(spIconPath))
+            {
+                var spBox = AddResourceImage("SPBox", "Original/sprites/Card6/SPBox", field.transform,
+                    new Vector2(0.78f, 0.18f), new Vector2(0.96f, 0.32f));
+                spBox.preserveAspect = true;
+
+                var spIcon = AddResourceImage("SPIcon", spIconPath, spBox.transform,
+                    new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
+                spIcon.preserveAspect = true;
+            }
+
+            // Dice bar at bottom
             var diceBarColour = AddResourceImage("DiceBarColour", "Original/sprites/Card3/DiceBarColour", field.transform,
-                new Vector2(0.06f, 0.17f), new Vector2(0.94f, 0.31f));
+                new Vector2(0.05f, 0.04f), new Vector2(0.95f, 0.17f));
             diceBarColour.color = GetPositionColor(player.position);
             diceBarColour.preserveAspect = false;
 
@@ -881,50 +1062,36 @@ namespace DiceSoccer
             for (var i = 0; i < 6; i++)
             {
                 var w = 1f / 6f;
-                var minX = i * w + 0.02f;
-                var maxX = (i + 1) * w - 0.02f;
+                var minX = i * w + 0.015f;
+                var maxX = (i + 1) * w - 0.015f;
                 var side = (player.diceSides != null && i < player.diceSides.Length) ? player.diceSides[i] : 1;
                 var sidePath = GetDiceSideSpritePath(side);
                 var sideImg = AddResourceImage($"DiceSide{i + 1}", sidePath, diceBarColour.transform,
-                    new Vector2(minX, 0.16f), new Vector2(maxX, 0.84f));
+                    new Vector2(minX, 0.12f), new Vector2(maxX, 0.88f));
                 sideImg.preserveAspect = true;
             }
-
-            // Superpower Box & Name
-            var spBox = AddResourceImage("SPBox", "Original/sprites/Card6/SPBox", field.transform,
-                new Vector2(0.07f, 0.04f), new Vector2(0.25f, 0.16f));
-            spBox.preserveAspect = true;
-
-            var spIconPath = GetSuperpowerIconPath(player.superpower);
-            if (!string.IsNullOrEmpty(spIconPath))
-            {
-                var spIcon = AddResourceImage("SPIcon", spIconPath, spBox.transform,
-                    new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
-                spIcon.preserveAspect = true;
-            }
-
-            var nameText = AddText(player.name.ToUpperInvariant(), field.transform, 17, Ink,
-                new Vector2(0.27f, 0.04f), new Vector2(0.93f, 0.16f));
-            nameText.alignment = TextAnchor.MiddleCenter;
-            nameText.fontStyle = FontStyle.Bold;
-            nameText.resizeTextForBestFit = true;
-            nameText.resizeTextMinSize = 10;
-            nameText.resizeTextMaxSize = 17;
 
             if (isHire)
             {
                 var hireImg = AddResourceImage("HireMe", "Original/sprites/PlayerCardBG/CardHireMe", border.transform,
                     Vector2.zero, Vector2.one);
                 hireImg.preserveAspect = false;
-                var costText = AddText($"{player.cost:N0}", hireImg.transform, 24, Paper,
-                    new Vector2(0.2f, 0.42f), new Vector2(0.8f, 0.52f));
+                var costText = AddText($"{player.cost:N0}", hireImg.transform, 22, Ink,
+                    new Vector2(0.48f, 0.40f), new Vector2(0.84f, 0.49f));
+                costText.alignment = TextAnchor.MiddleCenter;
                 costText.fontStyle = FontStyle.Bold;
             }
 
             if (isInteractive)
             {
+                border.raycastTarget = true;
                 var btn = root.AddComponent<Button>();
+                btn.targetGraphic = border;
                 btn.onClick.AddListener(() => onClick?.Invoke());
+            }
+            else
+            {
+                border.raycastTarget = false;
             }
 
             return root;
@@ -1311,36 +1478,82 @@ namespace DiceSoccer
             _catalog ??= GameCatalog.Load();
             EnsureLineupLoaded();
             ClearCanvas();
-            AddMenuBackdrop(true);
-            AddMenuHeader("PLAYERS", ShowHome);
-            AddText("Tap a card to inspect stats, or press Change to swap.",
-                _safeArea, 15, Ink, new Vector2(0.05f, 0.83f), new Vector2(0.95f, 0.88f));
 
-            var content = CreateScrollList("Lineup slots", _safeArea,
-                new Vector2(0.04f, 0.18f), new Vector2(0.96f, 0.82f), 7 * 96f);
+            // Vertical Soccer Pitch Backdrop (GreenField left mirrored + right normal)
+            var pitchLeft = AddResourceImage("PitchLeft", "Original/images/GreenField", _canvas.transform,
+                new Vector2(0f, 0f), new Vector2(0.5f, 0.92f));
+            pitchLeft.preserveAspect = false;
+            pitchLeft.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+            pitchLeft.raycastTarget = false;
+
+            var pitchRight = AddResourceImage("PitchRight", "Original/images/GreenField", _canvas.transform,
+                new Vector2(0.5f, 0f), new Vector2(1f, 0.92f));
+            pitchRight.preserveAspect = false;
+            pitchRight.raycastTarget = false;
+
+            _safeArea.SetAsLastSibling();
+            AddMenuHeader(null, ShowHome);
+
             var lineup = _catalog.ResolveLineup(_lineupIds);
+
+            // 1-3-3 Formation Positions:
+            // Top row: 3 Forwards (Slots 4, 5, 6)
+            // Middle row: 3 Defenders / Midfielders (Slots 1, 2, 3)
+            // Bottom row: 1 Goalkeeper (Slot 0)
+            var slotPositions = new Vector2[]
+            {
+                new Vector2(0.50f, 0.22f), // Slot 0: GK
+                new Vector2(0.20f, 0.46f), // Slot 1: Left DEF
+                new Vector2(0.50f, 0.46f), // Slot 2: Center DEF
+                new Vector2(0.80f, 0.46f), // Slot 3: Right DEF
+                new Vector2(0.20f, 0.70f), // Slot 4: Left FWD
+                new Vector2(0.50f, 0.70f), // Slot 5: Center Striker (Striker Star)
+                new Vector2(0.80f, 0.70f), // Slot 6: Right FWD
+            };
+
+            var cardHalfWidth = 0.135f;
+            var cardHalfHeight = 0.095f;
+
             for (var slot = 0; slot < lineup.Length; slot++)
             {
                 var capturedSlot = slot;
                 var player = lineup[slot];
-                var yMin = 1f - (slot + 1) / 7f;
-                var yMax = 1f - slot / 7f;
-                AddPlayerCardRow(player, content,
-                    new Vector2(0.02f, yMin + 0.005f), new Vector2(0.98f, yMax - 0.005f),
-                    "CHANGE", slot == _selectedLineupSlot ? Gold : new Color32(68, 79, 84, 255), true,
-                    () => ShowPlayerPicker(capturedSlot),
-                    () => ShowCardModal(player),
-                    false, SlotName(slot));
+                var center = slotPositions[slot];
+
+                // If Center Striker (slot 5), add StrikerStar frame behind it
+                if (slot == 5)
+                {
+                    var strikerStar = AddResourceImage("StrikerStar",
+                        "Original/sprites/EnemyLineupSS1/StrikerStar", _safeArea,
+                        new Vector2(center.x - 0.145f, center.y - 0.105f),
+                        new Vector2(center.x + 0.145f, center.y + 0.125f));
+                    strikerStar.preserveAspect = false;
+                    strikerStar.raycastTarget = false;
+                }
+
+                CreatePlayerCardFront(player, _safeArea,
+                    new Vector2(center.x - cardHalfWidth, center.y - cardHalfHeight),
+                    new Vector2(center.x + cardHalfWidth, center.y + cardHalfHeight),
+                    false, true, () => ShowPlayerPicker(capturedSlot));
             }
 
-            AddButton("HIRE PLAYERS", _safeArea, Grass,
-                new Vector2(0.26f, 0.115f), new Vector2(0.44f, 0.052f), ShowHiring);
-            AddButton("ENTOURAGE", _safeArea, new Color32(40, 110, 180, 255),
-                new Vector2(0.74f, 0.115f), new Vector2(0.44f, 0.052f), ShowEntourage);
-            AddButton("CUSTOMIZE KIT", _safeArea, new Color32(180, 80, 40, 255),
-                new Vector2(0.26f, 0.055f), new Vector2(0.44f, 0.052f), ShowKitSelection);
-            AddButton("TROPHY ROOM", _safeArea, Gold,
-                new Vector2(0.74f, 0.055f), new Vector2(0.44f, 0.052f), ShowTrophyRoom);
+            // Left Side: Shop & Kit (matching post_360.jpg)
+            AddSpriteButton("ShopBtn", "Original/sprites/EnemyLineupSS1/FormationShopButton",
+                "Original/sprites/EnemyLineupSS1/FormationShopButtonPressed", _safeArea,
+                new Vector2(0.09f, 0.24f), new Vector2(0.12f, 0.08f), ShowShop);
+
+            AddSpriteButton("KitBtn", "Original/sprites/EnemyLineupSS1/KitButton",
+                "Original/sprites/EnemyLineupSS1/KitButtonPressed", _safeArea,
+                new Vector2(0.09f, 0.14f), new Vector2(0.12f, 0.08f), ShowKitSelection);
+
+            // Right Side: Bench & Play (matching post_360.jpg)
+            AddSpriteButton("BenchBtn", "Original/sprites/EnemyLineupSS1/BenchButton",
+                "Original/sprites/EnemyLineupSS1/BenchButtonPressed", _safeArea,
+                new Vector2(0.84f, 0.24f), new Vector2(0.24f, 0.08f), () => ShowPlayerPicker(0));
+
+            AddSpriteButton("PlayBtn", "Original/sprites/EnemyLineupSS1/FormationPlayButton",
+                "Original/sprites/EnemyLineupSS1/FormationPlayButtonPressed", _safeArea,
+                new Vector2(0.84f, 0.14f), new Vector2(0.28f, 0.085f), StartCareerMatch);
         }
 
         private void ShowPlayerPicker(int slot)
@@ -1348,13 +1561,13 @@ namespace DiceSoccer
             _selectedLineupSlot = slot;
             var currentPlayer = _catalog.GetPlayer(_lineupIds[slot]);
             ClearCanvas();
-            AddMenuBackdrop();
+            AddMenuBackdrop(false);
             AddMenuHeader($"CHOOSE {SlotName(slot)}", ShowManage);
             AddText($"Current: {currentPlayer.name}  |  {currentPlayer.position}",
-                _safeArea, 15, Ink, new Vector2(0.05f, 0.82f), new Vector2(0.95f, 0.87f));
+                _safeArea, 15, Ink, new Vector2(0.05f, 0.83f), new Vector2(0.95f, 0.88f));
 
             var rosterContent = CreateScrollList("Owned roster", _safeArea,
-                new Vector2(0.04f, 0.15f), new Vector2(0.96f, 0.80f),
+                new Vector2(0.04f, 0.15f), new Vector2(0.96f, 0.82f),
                 _ownedPlayerIds.Count * 96f);
             for (var rosterIndex = 0; rosterIndex < _ownedPlayerIds.Count; rosterIndex++)
             {
@@ -1383,10 +1596,8 @@ namespace DiceSoccer
             _catalog ??= GameCatalog.Load();
             EnsureLineupLoaded();
             ClearCanvas();
-            AddMenuBackdrop();
-            AddMenuHeader("MANAGE", ShowHome);
-            AddText("Players available to hire",
-                _safeArea, 14, Ink, new Vector2(0.04f, 0.83f), new Vector2(0.96f, 0.89f));
+            AddMenuBackdrop(false);
+            AddMenuHeader(null, ShowManage);
 
             var candidates = new List<PlayerData>();
             foreach (var player in _catalog.Data.players)
@@ -1398,36 +1609,63 @@ namespace DiceSoccer
             }
             if (candidates.Count == 0)
             {
-                AddText("No additional players are currently available to hire.",
-                    _safeArea, 16, Paper, new Vector2(0.08f, 0.48f), new Vector2(0.92f, 0.58f));
-            }
-            else
-            {
-                var rowHeight = 98f;
-                var content = CreateScrollList("Hire candidates", _safeArea,
-                    new Vector2(0.04f, 0.15f), new Vector2(0.96f, 0.81f),
-                    candidates.Count * rowHeight);
-                for (var i = 0; i < candidates.Count; i++)
-                {
-                    var candidate = candidates[i];
-                    var capturedPlayerId = candidate.id;
-                    var yMin = 1f - (i + 1) / (float)candidates.Count;
-                    var yMax = 1f - i / (float)candidates.Count;
-                    var canAfford = _careerCash >= candidate.cost;
-                    var btnColor = canAfford ? Grass : (Color)new Color32(50, 55, 60, 255);
-                    AddPlayerCardRow(candidate, content,
-                        new Vector2(0.02f, yMin + 0.005f), new Vector2(0.98f, yMax - 0.005f),
-                        $"{candidate.cost:N0}", btnColor, canAfford,
-                        () => HirePlayer(capturedPlayerId),
-                        () => ShowCardModal(candidate, canAfford ? () => HirePlayer(capturedPlayerId) : null,
-                            canAfford ? $"HIRE FOR {candidate.cost:N0} CASH" : $"NEED {candidate.cost:N0} CASH",
-                            isHire: true),
-                        isHire: true);
-                }
+                AddText("NO PLAYERS AVAILABLE TO HIRE",
+                    _safeArea, 20, Ink, new Vector2(0.08f, 0.48f), new Vector2(0.92f, 0.58f));
+                return;
             }
 
-            AddButton("BACK TO TEAM", _safeArea, new Color32(68, 79, 84, 255),
-                new Vector2(0.5f, 0.08f), new Vector2(0.7f, 0.06f), ShowManage);
+            _hireCandidateIndex = Mathf.Clamp(_hireCandidateIndex, 0, candidates.Count - 1);
+            var candidate = candidates[_hireCandidateIndex];
+            var canAfford = _careerCash >= candidate.cost;
+            var capturedPlayerId = candidate.id;
+
+            // Centered player card matching post_355.jpg / sec_0433.jpg
+            var cardWidth = 0.64f;
+            var cardHeight = 0.52f;
+            var cardCenter = new Vector2(0.5f, 0.55f);
+            CreatePlayerCardFront(candidate, _safeArea,
+                cardCenter - new Vector2(cardWidth * 0.5f, cardHeight * 0.5f),
+                cardCenter + new Vector2(cardWidth * 0.5f, cardHeight * 0.5f),
+                true, true, () => ShowCardModal(candidate));
+
+            // Left & Right Navigation Chevrons
+            var canPrev = _hireCandidateIndex > 0;
+            var leftArrow = AddSpriteButton("LeftArrow",
+                canPrev ? "Original/images/LeftArrow" : "Original/images/LeftArrowDisabled",
+                canPrev ? "Original/images/LeftArrowSelected" : "Original/images/LeftArrowDisabled",
+                _safeArea, new Vector2(0.10f, 0.55f), new Vector2(0.10f, 0.12f),
+                canPrev ? () => { _hireCandidateIndex--; ShowHiring(); } : null);
+            leftArrow.interactable = canPrev;
+
+            var canNext = _hireCandidateIndex < candidates.Count - 1;
+            var rightArrow = AddSpriteButton("RightArrow",
+                canNext ? "Original/images/RightArrow" : "Original/images/RightArrowDisabled",
+                canNext ? "Original/images/RightArrowSelected" : "Original/images/RightArrowDisabled",
+                _safeArea, new Vector2(0.90f, 0.55f), new Vector2(0.10f, 0.12f),
+                canNext ? () => { _hireCandidateIndex++; ShowHiring(); } : null);
+            rightArrow.interactable = canNext;
+
+            // Authentic HIRE Button (BuyButton.png)
+            var hireBtn = AddSpriteButton("HireBtn", "Original/images/BuyButton",
+                "Original/images/BuyButtonPressed", _safeArea,
+                new Vector2(0.50f, 0.21f), new Vector2(0.42f, 0.08f),
+                canAfford ? () => HirePlayer(capturedPlayerId) : null);
+            hireBtn.interactable = canAfford;
+            if (!canAfford)
+            {
+                var hireImg = hireBtn.GetComponent<Image>();
+                if (hireImg != null) hireImg.color = new Color(0.5f, 0.5f, 0.5f, 0.7f);
+            }
+
+            // Bottom Footer & Back to Manage
+            var footerBar = AddResourceImage("HiringFooter", "Original/images/FooterBG", _safeArea,
+                new Vector2(0f, 0f), new Vector2(1f, 0.08f));
+            footerBar.preserveAspect = false;
+            footerBar.raycastTarget = false;
+
+            AddSpriteButton("BackToManage", "Original/sprites/EnemyLineupSS1/ManageButton",
+                "Original/sprites/EnemyLineupSS1/ManageButtonPressed", _safeArea,
+                new Vector2(0.5f, 0.04f), new Vector2(0.30f, 0.07f), ShowManage);
         }
 
         private void HirePlayer(int playerId)
@@ -2299,8 +2537,9 @@ namespace DiceSoccer
                     {
                         _homeDieRoots[i].SetActive(true);
                         float y = homeFaces.Length == 1 ? 0.48f : ys[i];
+                        float x = homeFaces.Length == 1 ? 0.35f : 0.32f;
                         _homeDieRoots[i].GetComponent<RectTransform>().anchorMin =
-                            _homeDieRoots[i].GetComponent<RectTransform>().anchorMax = new Vector2(0.36f, y);
+                            _homeDieRoots[i].GetComponent<RectTransform>().anchorMax = new Vector2(x, y);
                         if (_homeDice[i] != null) _homeDice[i].enabled = false;
                     }
                     else if (_homeDieRoots[i] != null) _homeDieRoots[i].SetActive(false);
@@ -2309,8 +2548,9 @@ namespace DiceSoccer
                     {
                         _awayDieRoots[i].SetActive(true);
                         float y = awayFaces.Length == 1 ? 0.48f : ys[i];
+                        float x = awayFaces.Length == 1 ? 0.72f : 0.68f;
                         _awayDieRoots[i].GetComponent<RectTransform>().anchorMin =
-                            _awayDieRoots[i].GetComponent<RectTransform>().anchorMax = new Vector2(0.64f, y);
+                            _awayDieRoots[i].GetComponent<RectTransform>().anchorMax = new Vector2(x, y);
                         if (_awayDice[i] != null) _awayDice[i].enabled = false;
                     }
                     else if (_awayDieRoots[i] != null) _awayDieRoots[i].SetActive(false);
@@ -3473,7 +3713,7 @@ namespace DiceSoccer
                 var hRoot = new GameObject($"HomeDie{i + 1}", typeof(RectTransform), typeof(Image));
                 hRoot.transform.SetParent(parent, false);
                 var hRect = hRoot.GetComponent<RectTransform>();
-                hRect.anchorMin = hRect.anchorMax = new Vector2(0.36f, ys[i]);
+                hRect.anchorMin = hRect.anchorMax = new Vector2(0.32f, ys[i]);
                 hRect.sizeDelta = new Vector2(82f, 82f);
                 var hImg = hRoot.GetComponent<Image>();
                 hImg.sprite = GetUiSprite("Original/sprites/PlayerBody3/DiceRoll00");
@@ -3499,7 +3739,7 @@ namespace DiceSoccer
                 var aRoot = new GameObject($"AwayDie{i + 1}", typeof(RectTransform), typeof(Image));
                 aRoot.transform.SetParent(parent, false);
                 var aRect = aRoot.GetComponent<RectTransform>();
-                aRect.anchorMin = aRect.anchorMax = new Vector2(0.64f, ys[i]);
+                aRect.anchorMin = aRect.anchorMax = new Vector2(0.68f, ys[i]);
                 aRect.sizeDelta = new Vector2(82f, 82f);
                 var aImg = aRoot.GetComponent<Image>();
                 aImg.sprite = GetUiSprite("Original/sprites/PlayerBody3/DiceRoll00");
@@ -3674,7 +3914,7 @@ namespace DiceSoccer
                 var p = _homePlayers[slot];
                 p.gameObject.SetActive(true);
                 float y = activeHome.Length == 1 ? 0.48f : ys[i];
-                float x = activeHome.Length == 1 ? 0.28f : 0.22f;
+                float x = activeHome.Length == 1 ? 0.35f : 0.32f;
                 p.rectTransform.anchorMin = p.rectTransform.anchorMax = new Vector2(x, y);
                 p.rectTransform.anchoredPosition = Vector2.zero;
                 p.rectTransform.localScale = Vector3.one;
@@ -3687,7 +3927,7 @@ namespace DiceSoccer
                 var p = _awayPlayers[slot];
                 p.gameObject.SetActive(true);
                 float y = activeAway.Length == 1 ? 0.48f : ys[i];
-                float x = activeAway.Length == 1 ? 0.72f : 0.78f;
+                float x = activeAway.Length == 1 ? 0.72f : 0.68f;
                 p.rectTransform.anchorMin = p.rectTransform.anchorMax = new Vector2(x, y);
                 p.rectTransform.anchoredPosition = Vector2.zero;
                 p.rectTransform.localScale = new Vector3(-1f, 1f, 1f); // Facing left
@@ -3826,32 +4066,54 @@ namespace DiceSoccer
             if (backAction != null)
                 AddSpriteButton("Back", "Original/images/MenuHeaderBackButton",
                     "Original/images/MenuHeaderBackButtonPressed", _safeArea,
-                    new Vector2(0.075f, 0.96f), new Vector2(0.13f, 0.085f), backAction);
+                    new Vector2(0.08f, 0.96f), new Vector2(0.12f, 0.075f), backAction);
 
-            AddText(title.ToUpperInvariant(), _safeArea, 20, Ink,
-                new Vector2(0.2f, 0.935f), new Vector2(0.72f, 0.99f));
-            AddResourceImage("CareerCoin", "Original/images/CoinSmall", _safeArea,
-                new Vector2(0.78f, 0.94f), new Vector2(0.84f, 0.99f)).raycastTarget = false;
-            AddText(_careerCash.ToString("N0"), _safeArea, 16, Ink,
-                new Vector2(0.83f, 0.935f), new Vector2(0.99f, 0.99f));
+            if (!string.IsNullOrEmpty(title))
+            {
+                var titleText = AddText(title.ToUpperInvariant(), _safeArea, 18, Ink,
+                    new Vector2(backAction != null ? 0.16f : 0.05f, 0.93f), new Vector2(0.45f, 0.99f));
+                titleText.alignment = TextAnchor.MiddleLeft;
+                titleText.fontStyle = FontStyle.Bold;
+            }
+
+            var cashText = AddText(_careerCash.ToString("N0"), _safeArea, 18, Ink,
+                new Vector2(0.40f, 0.93f), new Vector2(0.68f, 0.99f));
+            cashText.alignment = TextAnchor.MiddleRight;
+            cashText.fontStyle = FontStyle.Bold;
+
+            var coinImg = AddResourceImage("CareerCoin", "Original/images/CoinSmall", _safeArea,
+                new Vector2(0.69f, 0.935f), new Vector2(0.76f, 0.985f));
+            coinImg.preserveAspect = true;
+            coinImg.raycastTarget = false;
+
+            // Authentic crest frame on top-right
+            var crestBox = AddResourceImage("HeaderCrestBox", "Original/images/CustomCrestBox", _safeArea,
+                new Vector2(0.85f, 0.925f), new Vector2(0.97f, 0.995f));
+            crestBox.preserveAspect = true;
+            crestBox.raycastTarget = false;
+
+            var crestDesign = AddResourceImage("HeaderCrestDesign", "Original/images/CustomCrest1", crestBox.transform,
+                new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
+            crestDesign.preserveAspect = true;
+            crestDesign.raycastTarget = false;
         }
 
         private void AddMenuFooter()
         {
             var footer = AddResourceImage("MenuFooter", "Original/images/FooterBG",
-                _safeArea, new Vector2(0f, 0f), new Vector2(1f, 0.14f));
+                _safeArea, new Vector2(0f, 0f), new Vector2(1f, 0.12f));
             footer.preserveAspect = false;
             footer.raycastTarget = false;
 
             AddSpriteButton("Shop", "Original/images/BottomTab01",
                 "Original/images/BottomTab01Pressed", _safeArea,
-                new Vector2(0.23f, 0.075f), new Vector2(0.25f, 0.11f), ShowShop);
-            AddSpriteButton("Campaigns", "Original/images/BottomTab02",
+                new Vector2(0.32f, 0.06f), new Vector2(0.18f, 0.09f), ShowShop);
+            AddSpriteButton("Trophies", "Original/images/BottomTab02",
                 "Original/images/BottomTab02Pressed", _safeArea,
-                new Vector2(0.5f, 0.075f), new Vector2(0.25f, 0.11f), StartCareerMatch);
+                new Vector2(0.50f, 0.06f), new Vector2(0.18f, 0.09f), ShowTrophyRoom);
             AddSpriteButton("Options", "Original/images/BottomTab03",
                 "Original/images/BottomTab03Pressed", _safeArea,
-                new Vector2(0.77f, 0.075f), new Vector2(0.25f, 0.11f), ShowOptions);
+                new Vector2(0.68f, 0.06f), new Vector2(0.18f, 0.09f), ShowOptions);
         }
 
         private static Button AddSpriteButton(string objectName, string resourcePath,
