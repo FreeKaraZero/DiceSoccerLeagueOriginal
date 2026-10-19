@@ -336,17 +336,17 @@ namespace DiceSoccer
             AddButton(_soundEnabled ? "SOUND: ON" : "SOUND: OFF", _safeArea, Gold,
                 new Vector2(0.5f, 0.65f), new Vector2(0.75f, 0.08f), ToggleSound);
 
-            AddButton("★ SBLOCCA TUTTO GRATIS (FAN PACK)", _safeArea, Grass,
+            AddButton("★ UNLOCK EVERYTHING FREE", _safeArea, Grass,
                 new Vector2(0.5f, 0.52f), new Vector2(0.75f, 0.08f), () =>
                 {
                     UnlockAllContent(false);
                     ShowDonationModal();
                 });
 
-            AddButton("☕ OFFRI UN CAFFÈ (PAYPAL)", _safeArea, new Color32(0, 112, 186, 255),
+            AddButton("☕ BUY A COFFEE (PAYPAL)", _safeArea, new Color32(0, 112, 186, 255),
                 new Vector2(0.5f, 0.40f), new Vector2(0.75f, 0.08f), ShowDonationModal);
 
-            AddText("SHAKE OR TAP THE SCREEN EDGE TO ROLL\nREMASTER 100% GRATUITO — NESSUNA PUBBLICITÀ",
+            AddText("SHAKE OR TAP THE SCREEN EDGE TO ROLL\n100% FREE FAN REMASTER — NO ADS",
                 _safeArea, 13, Ink, new Vector2(0.08f, 0.22f), new Vector2(0.92f, 0.34f));
 
             AddButton("BACK TO MENU", _safeArea, new Color32(68, 79, 84, 255),
@@ -429,22 +429,22 @@ namespace DiceSoccer
             title.fontStyle = FontStyle.Bold;
 
             var desc = AddText(
-                "Dice Soccer Remaster è un tributo 100% gratuito e no-profit per preservare questo classico del 2012 su Android moderno.\n\n" +
-                "Tutti i 96 personaggi, kit, monete e stagioni sono completamente sbloccati e gratuiti per tutti!\n\n" +
-                "Se apprezzi il remake e desideri supportare il lavoro svolto, puoi offrire un caffè con una donazione libera su PayPal:",
+                "Dice Soccer Remaster is a 100% free non-profit fan project preserving this 2012 iOS classic on modern Android.\n\n" +
+                "All 96 authentic players, kits, coins and seasons are fully unlocked and free for everyone!\n\n" +
+                "If you enjoy the remaster and wish to support the work, feel free to buy a coffee via PayPal:",
                 box.transform, 13, Ink,
                 new Vector2(0.08f, 0.36f), new Vector2(0.92f, 0.82f));
             desc.alignment = TextAnchor.UpperCenter;
 
             // PayPal Button
-            AddButton("☕ DONA CON PAYPAL", box.transform, new Color32(0, 112, 186, 255),
+            AddButton("☕ BUY A COFFEE (PAYPAL)", box.transform, new Color32(0, 112, 186, 255),
                 new Vector2(0.5f, 0.28f), new Vector2(0.80f, 0.08f), () =>
                 {
-                    Application.OpenURL("https://www.paypal.com/paypalme/");
+                    Application.OpenURL("https://paypal.me/Freekara3");
                 });
 
             // Re-unlock Button
-            AddButton("★ SBLOCCA TUTTO GRATIS", box.transform, Grass,
+            AddButton("★ UNLOCK EVERYTHING FREE", box.transform, Grass,
                 new Vector2(0.5f, 0.18f), new Vector2(0.80f, 0.08f), () =>
                 {
                     UnlockAllContent(false);
@@ -452,7 +452,7 @@ namespace DiceSoccer
                 });
 
             // Close Button
-            AddButton("CHIUDI", box.transform, new Color32(68, 79, 84, 255),
+            AddButton("CLOSE", box.transform, new Color32(68, 79, 84, 255),
                 new Vector2(0.5f, 0.08f), new Vector2(0.50f, 0.06f), () =>
                 {
                     Destroy(backdrop.gameObject);
@@ -520,16 +520,16 @@ namespace DiceSoccer
 
             // Instructions Box
             var infoBox = AddResourceImage("InfoBox", "Original/sprites/AchievementsSS4/LongDialogBox", _safeArea,
-                new Vector2(0.08f, 0.27f), new Vector2(0.92f, 0.44f));
+                new Vector2(0.08f, 0.25f), new Vector2(0.92f, 0.44f));
             infoBox.preserveAspect = false;
 
             var infoText = AddText(
-                "Sfida un amico sullo stesso schermo!\n\n" +
-                "• P1 tocca il lato sinistro dello schermo per tirare i dadi Rossi\n" +
-                "• P2 tocca il lato destro dello schermo per tirare i dadi Blu\n" +
-                "• Nessun server richiesto, gioca ovunque offline!",
-                infoBox.transform, 13, Ink,
-                new Vector2(0.06f, 0.06f), new Vector2(0.94f, 0.94f));
+                "Challenge a friend on this device!\n\n" +
+                "• P1 taps the left half of the screen to roll Red dice\n" +
+                "• P2 taps the right half of the screen to roll Blue dice\n" +
+                "• No server required — play anywhere completely offline!",
+                infoBox.transform, 12, Ink,
+                new Vector2(0.06f, 0.05f), new Vector2(0.94f, 0.88f));
             infoText.alignment = TextAnchor.MiddleCenter;
 
             // Start Match Button
@@ -2254,7 +2254,7 @@ namespace DiceSoccer
                     new Vector2(0.32f, 0.15f), new Vector2(0.70f, 0.85f));
 
                 var capturedOption = option;
-                AddButton("GRATIS", box.transform, Grass,
+                AddButton("FREE", box.transform, Grass,
                     new Vector2(0.83f, 0.5f), new Vector2(0.24f, 0.48f), () =>
                     {
                         _careerCash += capturedOption.coins;
@@ -2266,7 +2266,7 @@ namespace DiceSoccer
 
             RenderShopPagination(maxPages, () => ShowShop(), 0.22f);
 
-            AddButton("☕ DONA CON PAYPAL", _safeArea, new Color32(0, 112, 186, 255),
+            AddButton("☕ BUY A COFFEE (PAYPAL)", _safeArea, new Color32(0, 112, 186, 255),
                 new Vector2(0.5f, 0.135f), new Vector2(0.75f, 0.055f), ShowDonationModal);
         }
 
