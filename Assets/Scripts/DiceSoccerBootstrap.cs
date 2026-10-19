@@ -139,6 +139,18 @@ namespace DiceSoccer
                 _shakePrompt.rectTransform.localScale = new Vector3(pulse, pulse, 1f);
             }
 
+            if (_homePlayers != null && _awayPlayers != null && !_inEncounterAnimation)
+            {
+                var bob = 1f + 0.025f * Mathf.Sin(Time.unscaledTime * 3.5f);
+                for (var i = 0; i < _homePlayers.Length; i++)
+                {
+                    if (_homePlayers[i] != null && _homePlayers[i].gameObject.activeSelf)
+                        _homePlayers[i].rectTransform.localScale = new Vector3(1f, bob, 1f);
+                    if (_awayPlayers[i] != null && _awayPlayers[i].gameObject.activeSelf)
+                        _awayPlayers[i].rectTransform.localScale = new Vector3(-1f, bob, 1f);
+                }
+            }
+
             DetectShake();
             DetectEdgeTap();
         }
@@ -673,20 +685,51 @@ namespace DiceSoccer
             rightImg.preserveAspect = false;
             rightImg.raycastTarget = false;
 
-            // Field decorations from Season0Field1 (matches authentic trailer):
+            // Field decorations (Season 0 authentic props):
+            // Center circle props:
             var signDeco = AddResourceImage("SignDeco", "Original/sprites/Season0Field1(1.1)/Object9",
                 _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
-            signDeco.rectTransform.anchoredPosition = new Vector2(105f, 230f);
+            signDeco.rectTransform.anchoredPosition = new Vector2(105f, 225f);
             signDeco.rectTransform.sizeDelta = new Vector2(75f, 70f);
             signDeco.preserveAspect = true;
             signDeco.raycastTarget = false;
 
             var grassDeco = AddResourceImage("CenterGrassDeco", "Original/sprites/Season0Field1(1.1)/Object8",
                 _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
-            grassDeco.rectTransform.anchoredPosition = new Vector2(0f, -70f);
-            grassDeco.rectTransform.sizeDelta = new Vector2(34f, 28f);
+            grassDeco.rectTransform.anchoredPosition = new Vector2(-25f, -80f);
+            grassDeco.rectTransform.sizeDelta = new Vector2(45f, 32f);
             grassDeco.preserveAspect = true;
             grassDeco.raycastTarget = false;
+
+            var boneDeco = AddResourceImage("CenterBoneDeco", "Original/sprites/Season0Field1(1.1)/Object3",
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            boneDeco.rectTransform.anchoredPosition = new Vector2(-170f, 210f);
+            boneDeco.rectTransform.sizeDelta = new Vector2(48f, 26f);
+            boneDeco.preserveAspect = true;
+            boneDeco.raycastTarget = false;
+
+            // Away goal area props (right side):
+            var awaySkullDeco = AddResourceImage("AwaySkullDeco", "Original/sprites/Season0Field1(1.1)/Object11",
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            awaySkullDeco.rectTransform.anchoredPosition = new Vector2(570f, -40f);
+            awaySkullDeco.rectTransform.sizeDelta = new Vector2(40f, 30f);
+            awaySkullDeco.preserveAspect = true;
+            awaySkullDeco.raycastTarget = false;
+
+            // Home goal area props (left side):
+            var homeShoeDeco = AddResourceImage("HomeShoeDeco", "Original/sprites/Season0Field1(1.1)/Object1",
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            homeShoeDeco.rectTransform.anchoredPosition = new Vector2(-510f, -190f);
+            homeShoeDeco.rectTransform.sizeDelta = new Vector2(52f, 34f);
+            homeShoeDeco.preserveAspect = true;
+            homeShoeDeco.raycastTarget = false;
+
+            var homeSkullDeco = AddResourceImage("HomeSkullDeco", "Original/sprites/Season0Field1(1.1)/Object11",
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            homeSkullDeco.rectTransform.anchoredPosition = new Vector2(-570f, -40f);
+            homeSkullDeco.rectTransform.sizeDelta = new Vector2(40f, 30f);
+            homeSkullDeco.preserveAspect = true;
+            homeSkullDeco.raycastTarget = false;
 
             // Soccer ball with shadow:
             var ballShadow = AddResourceImage("BallShadow", "Original/sprites/PlayerBody3/GameSoccerBallShadow",
@@ -728,10 +771,10 @@ namespace DiceSoccer
             aOutline.effectDistance = new Vector2(2.5f, -2.5f);
             _awayTotalText.enabled = false;
 
-            // Shake button & prompt in center:
+            // Shake button & prompt above soccer ball:
             _shakePrompt = AddResourceImage("ShakePrompt", "Original/sprites/Prompt1/Shake",
-                _field, new Vector2(0.5f, 0.52f), new Vector2(0.5f, 0.52f));
-            _shakePrompt.rectTransform.sizeDelta = new Vector2(175f, 100f);
+                _field, new Vector2(0.5f, 0.58f), new Vector2(0.5f, 0.58f));
+            _shakePrompt.rectTransform.sizeDelta = new Vector2(165f, 95f);
             _shakePrompt.preserveAspect = true;
             _shakePrompt.raycastTarget = true;
             var shakeBtn = _shakePrompt.gameObject.AddComponent<Button>();
@@ -761,54 +804,51 @@ namespace DiceSoccer
             // 2. Top HUD: Authentic Scoreboard (scoreboardBG sits at the very top):
             var scoreboard = AddResourceImage("MatchScoreboard",
                 "Original/images/scoreboardBG", _safeArea,
-                new Vector2(0f, 0.865f), new Vector2(1f, 1f));
+                new Vector2(0f, 0.870f), new Vector2(1f, 1f));
             scoreboard.preserveAspect = false;
             scoreboard.raycastTarget = false;
 
-            // Home Team Crest Box (Golden Frame with Shield):
-            var homeCrestBox = AddResourceImage("HomeCrestBox", "Original/images/CustomCrestBox", _safeArea,
-                new Vector2(0.08f, 0.935f), new Vector2(0.08f, 0.935f));
-            homeCrestBox.rectTransform.sizeDelta = new Vector2(48f, 48f);
-            homeCrestBox.preserveAspect = true;
-            homeCrestBox.raycastTarget = false;
-            var homeCrestShield = AddResourceImage("HomeShield", "Original/images/CustomCrest1", homeCrestBox.transform,
-                new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
+            // Home Team Crest Shield centered in the left yellow box of scoreboardBG:
+            var homeCrestShield = AddResourceImage("HomeShield", "Original/images/CustomCrest1", _safeArea,
+                new Vector2(0.086f, 0.942f), new Vector2(0.086f, 0.942f));
+            homeCrestShield.rectTransform.sizeDelta = new Vector2(42f, 42f);
             homeCrestShield.preserveAspect = true;
             homeCrestShield.raycastTarget = false;
 
-            var homeNameText = AddText("YOUR TEAM", _safeArea, 12, Ink,
-                new Vector2(0.01f, 0.875f), new Vector2(0.24f, 0.915f));
+            var homeNameText = AddText("SANUKU", _safeArea, 12, Ink,
+                new Vector2(0.01f, 0.872f), new Vector2(0.22f, 0.912f));
             homeNameText.fontStyle = FontStyle.Bold;
             homeNameText.alignment = TextAnchor.MiddleCenter;
 
-            // Away Team Crest Box (Red Box with Crest Design):
-            var awayCrestBox = AddResourceImage("AwayCrestBox", "Original/sprites/GoalAnimationSS4/EnemyCrest", _safeArea,
-                new Vector2(0.92f, 0.935f), new Vector2(0.92f, 0.935f));
-            awayCrestBox.rectTransform.sizeDelta = new Vector2(48f, 48f);
-            awayCrestBox.preserveAspect = true;
-            awayCrestBox.raycastTarget = false;
-            var awayCrestDesign = AddResourceImage("AwayDesign", "Original/sprites/EnemyCrest1/EnemyCrest1Design", awayCrestBox.transform,
-                new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
+            // Away Team Crest centered in the right red box of scoreboardBG:
+            var awayCrestBody = AddResourceImage("AwayCrestBody", "Original/sprites/EnemyCrest1/EnemyCrest1Body", _safeArea,
+                new Vector2(0.914f, 0.942f), new Vector2(0.914f, 0.942f));
+            awayCrestBody.rectTransform.sizeDelta = new Vector2(40f, 40f);
+            awayCrestBody.preserveAspect = true;
+            awayCrestBody.raycastTarget = false;
+
+            var awayCrestDesign = AddResourceImage("AwayDesign", "Original/sprites/EnemyCrest1/EnemyCrest1Design", awayCrestBody.transform,
+                new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
             awayCrestDesign.preserveAspect = true;
             awayCrestDesign.raycastTarget = false;
 
             var awayNameText = AddText(_currentFixture.teamName.ToUpperInvariant(), _safeArea, 10, Ink,
-                new Vector2(0.70f, 0.875f), new Vector2(0.99f, 0.915f));
+                new Vector2(0.78f, 0.872f), new Vector2(0.99f, 0.912f));
             awayNameText.fontStyle = FontStyle.Bold;
             awayNameText.alignment = TextAnchor.MiddleCenter;
             awayNameText.horizontalOverflow = HorizontalWrapMode.Overflow;
 
             // Center Scoreboard Scores:
-            _matchScore = AddText($"{_match.HomeScore} - {_match.AwayScore}", _safeArea, 34, Ink,
-                new Vector2(0.30f, 0.920f), new Vector2(0.70f, 0.975f));
+            _matchScore = AddText($"{_match.HomeScore} - {_match.AwayScore}", _safeArea, 36, Ink,
+                new Vector2(0.35f, 0.925f), new Vector2(0.65f, 0.985f));
             _matchScore.fontStyle = FontStyle.Bold;
             _matchScore.alignment = TextAnchor.MiddleCenter;
             _matchScore.horizontalOverflow = HorizontalWrapMode.Overflow;
 
-            // Pause button at center directly under score:
+            // Pause button at center directly docked under score:
             AddSpriteButton("Pause", "Original/images/PauseButton",
                 "Original/images/PauseButtonPressed", _safeArea,
-                new Vector2(0.50f, 0.880f), new Vector2(0.10f, 0.042f), ShowPauseMenu);
+                new Vector2(0.50f, 0.892f), new Vector2(0.09f, 0.052f), ShowPauseMenu);
 
             // 3. Digital Clock on the Bottom Grass:
             _matchClock = AddText(_match.ClockText(), _safeArea, 25, new Color32(216, 255, 176, 255),
@@ -2557,6 +2597,7 @@ namespace DiceSoccer
                 }
 
                 // 3. Tumble rolling dice animation (DiceRoll01..DiceRoll13)
+                AudioManager.Instance.PlayDiceRoll();
                 for (var frame = 1; frame <= 13; frame++)
                 {
                     var rollSprite = GetUiSprite($"Original/sprites/PlayerBody3/DiceRoll{frame:00}");
@@ -2568,6 +2609,7 @@ namespace DiceSoccer
                 }
 
                 // 4. Settle dice on final faces
+                AudioManager.Instance.PlayTap();
                 var diceBaseSprite = GetUiSprite("Original/sprites/PlayerBody3/DiceRoll00");
                 for (var i = 0; i < homeFaces.Length; i++)
                 {
@@ -2584,6 +2626,7 @@ namespace DiceSoccer
             var oldHomeScore = _match.HomeScore;
             var oldAwayScore = _match.AwayScore;
             var oldLocation = _match.Location;
+            var oldPossession = _match.Possession;
 
             var report = _match.CompleteEncounter();
             report = CompactMatchReport(report, _match.ClockText());
@@ -2649,6 +2692,10 @@ namespace DiceSoccer
             else if (report.Contains("Through Pass"))
             {
                 yield return StartCoroutine(PlayThroughPassAnimation(_match.Possession == 0));
+            }
+            else if (oldPossession != _match.Possession)
+            {
+                yield return StartCoroutine(PlayPossessionChangeAnimation(_match.Possession == 0));
             }
             else
             {
@@ -2920,6 +2967,7 @@ namespace DiceSoccer
             if (_overlayContainer == null) yield break;
             AudioManager.Instance.PlayCrowdApplause();
             AudioManager.Instance.PlayWhistle();
+            StartCoroutine(PlayPoofAtPosition(new Vector2(0.5f, 0.55f)));
             var banner = AddResourceImage("TieBanner",
                 "Original/sprites/Prompt1/Tie", _overlayContainer,
                 new Vector2(0.5f, 0.55f), new Vector2(0.5f, 0.55f));
@@ -2966,6 +3014,48 @@ namespace DiceSoccer
                 yield return null;
             }
             yield return new WaitForSeconds(0.35f);
+            if (banner != null) Destroy(banner.gameObject);
+        }
+
+        private IEnumerator PlayPossessionChangeAnimation(bool homeGainedPossession)
+        {
+            if (_overlayContainer == null) yield break;
+            var path = homeGainedPossession
+                ? "Original/sprites/Prompt1/PossessionChangeGreen"
+                : "Original/sprites/Prompt1/PossessionChangeRed";
+            var banner = AddResourceImage("PossessionChangeBanner", path, _overlayContainer,
+                new Vector2(0.5f, 0.55f), new Vector2(0.5f, 0.55f));
+            banner.rectTransform.sizeDelta = new Vector2(440f, 240f);
+            banner.preserveAspect = true;
+
+            if (homeGainedPossession)
+                AudioManager.Instance.PlayWhistle();
+            else
+                AudioManager.Instance.PlayDisappoint();
+
+            var elapsed = 0f;
+            while (elapsed < 0.25f)
+            {
+                elapsed += Time.deltaTime;
+                banner.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 1.05f, elapsed / 0.25f);
+                yield return null;
+            }
+            elapsed = 0f;
+            while (elapsed < 0.10f)
+            {
+                elapsed += Time.deltaTime;
+                banner.rectTransform.localScale = Vector3.Lerp(Vector3.one * 1.05f, Vector3.one, elapsed / 0.10f);
+                yield return null;
+            }
+            yield return new WaitForSeconds(0.40f);
+            elapsed = 0f;
+            var col = banner.color;
+            while (elapsed < 0.25f)
+            {
+                elapsed += Time.deltaTime;
+                banner.color = new Color(col.r, col.g, col.b, 1f - elapsed / 0.25f);
+                yield return null;
+            }
             if (banner != null) Destroy(banner.gameObject);
         }
 
