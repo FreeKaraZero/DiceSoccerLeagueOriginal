@@ -115,10 +115,6 @@ namespace DiceSoccer
             CreateCanvas();
             ApplySafeArea();
             LoadCareerProgress();
-            if (PlayerPrefs.GetInt("diceSoccer.allUnlocked", 0) == 0)
-            {
-                UnlockAllContent(false);
-            }
             ShowHome();
         }
 
@@ -1001,6 +997,13 @@ namespace DiceSoccer
             boneDeco.preserveAspect = true;
             boneDeco.raycastTarget = false;
 
+            var boneDeco2 = AddResourceImage("BottomBoneDeco", "Original/sprites/Season0Field1(1.1)/Object3",
+                _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
+            boneDeco2.rectTransform.anchoredPosition = new Vector2(-140f, -220f);
+            boneDeco2.rectTransform.sizeDelta = new Vector2(48f, 26f);
+            boneDeco2.preserveAspect = true;
+            boneDeco2.raycastTarget = false;
+
             // Away goal area props (right side):
             var awaySkullDeco = AddResourceImage("AwaySkullDeco", "Original/sprites/Season0Field1(1.1)/Object11",
                 _fieldPitchRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f));
@@ -1058,9 +1061,6 @@ namespace DiceSoccer
             _homeTotalText.rectTransform.sizeDelta = new Vector2(90f, 70f);
             _homeTotalText.fontStyle = FontStyle.Bold;
             _homeTotalText.alignment = TextAnchor.MiddleCenter;
-            var hOutline = _homeTotalText.gameObject.AddComponent<Outline>();
-            hOutline.effectColor = Color.white;
-            hOutline.effectDistance = new Vector2(2.5f, -2.5f);
             _homeTotalText.enabled = false;
 
             _awayTotalText = AddText("", _field, 50, new Color32(50, 45, 40, 255),
@@ -1068,9 +1068,6 @@ namespace DiceSoccer
             _awayTotalText.rectTransform.sizeDelta = new Vector2(90f, 70f);
             _awayTotalText.fontStyle = FontStyle.Bold;
             _awayTotalText.alignment = TextAnchor.MiddleCenter;
-            var aOutline = _awayTotalText.gameObject.AddComponent<Outline>();
-            aOutline.effectColor = Color.white;
-            aOutline.effectDistance = new Vector2(2.5f, -2.5f);
             _awayTotalText.enabled = false;
 
             // Authentic Buff Belt Tray (matching media_1792421110113_45d0305f.png):
@@ -1865,16 +1862,17 @@ namespace DiceSoccer
             EnsureLineupLoaded();
             ClearCanvas();
 
-            // Vertical Soccer Pitch Backdrop (GreenField left mirrored + right normal)
+            // Vertical Soccer Pitch Backdrop (GreenField left normal + right mirrored horizontally)
             var pitchLeft = AddResourceImage("PitchLeft", "Original/images/GreenField", _canvas.transform,
                 new Vector2(0f, 0f), new Vector2(0.5f, 0.92f));
             pitchLeft.preserveAspect = false;
-            pitchLeft.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+            pitchLeft.rectTransform.localScale = Vector3.one;
             pitchLeft.raycastTarget = false;
 
             var pitchRight = AddResourceImage("PitchRight", "Original/images/GreenField", _canvas.transform,
-                new Vector2(0.5f, 0.5f - 0.5f), new Vector2(1f, 0.92f));
+                new Vector2(0.5f, 0f), new Vector2(1f, 0.92f));
             pitchRight.preserveAspect = false;
+            pitchRight.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
             pitchRight.raycastTarget = false;
 
             _safeArea.SetAsLastSibling();
@@ -1883,18 +1881,18 @@ namespace DiceSoccer
             var lineup = _catalog.ResolveLineup(_lineupIds);
 
             // 1-3-3 Formation Positions (matching media_1792421110223_f7c56db8.png):
-            // Top row: 3 Forwards (Slots 4, 5, 6)
-            // Middle row: 3 Defenders / Midfielders (Slots 1, 2, 3)
-            // Bottom row: 1 Goalkeeper (Slot 0)
+            // Top row: 3 Forwards (Left #8 Jerry, Center #6 David inside StrikerStar, Right #7 Justin)
+            // Middle row: 3 Defenders (Left #4 Sherman, Center #3 Jo, Right #2 Ernest)
+            // Bottom row: 1 Goalkeeper (Center #1 Willy)
             var slotPositions = new Vector2[]
             {
-                new Vector2(0.50f, 0.20f), // Slot 0: GK
-                new Vector2(0.26f, 0.49f), // Slot 1: Left DEF
-                new Vector2(0.50f, 0.49f), // Slot 2: Center DEF
-                new Vector2(0.74f, 0.49f), // Slot 3: Right DEF
-                new Vector2(0.26f, 0.77f), // Slot 4: Left FWD
-                new Vector2(0.50f, 0.77f), // Slot 5: Center Striker (Striker Star)
-                new Vector2(0.74f, 0.77f), // Slot 6: Right FWD
+                new Vector2(0.50f, 0.20f), // Slot 0: GK (#1 Willy The Kid)
+                new Vector2(0.74f, 0.49f), // Slot 1: Right DEF (#2 Ernest Milligan)
+                new Vector2(0.50f, 0.49f), // Slot 2: Center DEF (#3 Jo Lee-Roger)
+                new Vector2(0.26f, 0.49f), // Slot 3: Left DEF (#4 Sherman Tank)
+                new Vector2(0.74f, 0.77f), // Slot 4: Right FWD (#7 Justin Huff)
+                new Vector2(0.50f, 0.77f), // Slot 5: Center Striker (#6 David Little, Striker Star)
+                new Vector2(0.26f, 0.77f), // Slot 6: Left FWD (#8 Jerry Hat-trick)
             };
 
             var cardHalfWidth = 0.125f;
@@ -2007,16 +2005,19 @@ namespace DiceSoccer
                 }
             }
 
-            // 2. Pagination: 4 cards per page (2 columns x 2 rows)
+            // Sort candidates by Player ID (matching authentic Cocos2d catalog ordering: 5, 13, 21, 29, 37...)
+            candidates.Sort((a, b) => a.id.CompareTo(b.id));
+
+            // 2. Pagination: 4 cards per page (2 columns x 2 rows, filled column-by-column)
             const int cardsPerPage = 4;
             int totalPages = Mathf.Max(1, Mathf.CeilToInt(candidates.Count / (float)cardsPerPage));
             _deckPage = Mathf.Clamp(_deckPage, 0, totalPages - 1);
 
             Vector2[] cardCenters = {
-                new Vector2(0.30f, 0.62f), // Top Left
-                new Vector2(0.70f, 0.62f), // Top Right
-                new Vector2(0.30f, 0.33f), // Bottom Left
-                new Vector2(0.70f, 0.33f)  // Bottom Right
+                new Vector2(0.30f, 0.62f), // Column 1 Top (matching #5 in media_1792421110155_320ad894.png)
+                new Vector2(0.30f, 0.33f), // Column 1 Bottom (matching #13 in media_1792421110155_320ad894.png)
+                new Vector2(0.70f, 0.62f), // Column 2 Top (matching #21 in media_1792421110155_320ad894.png)
+                new Vector2(0.70f, 0.33f)  // Column 2 Bottom (matching #29 in media_1792421110155_320ad894.png)
             };
             float cardHalfW = 0.180f;
             float cardHalfH = 0.132f;

@@ -21,6 +21,8 @@ namespace DiceSoccer.Editor
             {
                 PlayerPrefs.SetInt($"diceSoccer.tutorial.{i}", 1);
             }
+            PlayerPrefs.DeleteKey("diceSoccer.allUnlocked");
+            PlayerPrefs.DeleteKey("diceSoccer.roster");
             PlayerPrefs.Save();
 
             var awakeMethod = typeof(DiceSoccerBootstrap).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -153,8 +155,15 @@ namespace DiceSoccer.Editor
             // 5b. Kit Selection
             try { Call("ShowKitSelection"); SaveScreen("KitSelection"); } catch (Exception e) { Debug.LogWarning(e); }
 
-            // 5c. Player Picker / Deck Roster
-            try { Call("ShowPlayerPicker", 0); SaveScreen("PlayerPicker"); } catch (Exception e) { Debug.LogWarning(e); }
+            // 5c. Player Picker / Deck Roster (MID tab matching media_1792421110155_320ad894.png)
+            try
+            {
+                var deckFilterField = typeof(DiceSoccerBootstrap).GetField("_deckCategoryFilter", BindingFlags.Instance | BindingFlags.NonPublic);
+                deckFilterField?.SetValue(bootstrap, 1);
+                Call("ShowPlayerPicker", -1);
+                SaveScreen("PlayerPicker");
+            }
+            catch (Exception e) { Debug.LogWarning(e); }
 
             // 6. Hiring
             try { Call("ShowHiring"); SaveScreen("Hiring"); } catch (Exception e) { Debug.LogWarning(e); }
