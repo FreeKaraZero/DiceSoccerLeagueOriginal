@@ -81,6 +81,7 @@ namespace DiceSoccer
         private Image _ballShadow;
         private bool _inEncounterAnimation;
         private Coroutine _idleBobbingCoroutine;
+        private bool _isLocalMultiplayer;
         private bool _isKickoffPlayed;
         private int _lastSubstitutedSlot = -1;
         private int _remainingSubs = 3;
@@ -103,6 +104,10 @@ namespace DiceSoccer
             CreateCanvas();
             ApplySafeArea();
             LoadCareerProgress();
+            if (PlayerPrefs.GetInt("diceSoccer.allUnlocked", 0) == 0)
+            {
+                UnlockAllContent(false);
+            }
             ShowHome();
         }
 
@@ -200,7 +205,32 @@ namespace DiceSoccer
                 !_encounterButton.interactable || _inEncounterAnimation)
                 return;
 
+            if (_isLocalMultiplayer)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    PlayEncounter();
+                    return;
+                }
+                foreach (var touch in Input.touches)
+                {
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        PlayEncounter();
+                        return;
+                    }
+                }
+                return;
+            }
+
             var edgeWidth = Screen.width * EdgeTapWidth;
+            if (Input.GetMouseButtonDown(0) &&
+                (Input.mousePosition.x <= edgeWidth || Input.mousePosition.x >= Screen.width - edgeWidth))
+            {
+                PlayEncounter();
+                return;
+            }
+
             foreach (var touch in Input.touches)
             {
                 if (touch.phase == TouchPhase.Began &&
@@ -249,6 +279,7 @@ namespace DiceSoccer
         {
             _match = null;
             _encounterButton = null;
+            _isLocalMultiplayer = false;
             AudioManager.Instance.PlayBgm("MainTheme", 0.5f);
             AudioManager.Instance.StopCrowd();
             ClearCanvas();
@@ -276,10 +307,10 @@ namespace DiceSoccer
                 new Vector2(0.5f, 0.44f), new Vector2(0.70f, 0.11f), StartCareerMatch);
             campaign.interactable = catalogAvailable;
 
-            var mp = AddSpriteButton("Multiplayer", "Original/images/MainMenuButtons02Disabled",
-                "Original/images/MainMenuButtons02Disabled", _safeArea,
-                new Vector2(0.5f, 0.32f), new Vector2(0.70f, 0.11f), null);
-            mp.interactable = false;
+            var mp = AddSpriteButton("Multiplayer", "Original/images/MainMenuButtons02",
+                "Original/images/MainMenuButtons02Pressed", _safeArea,
+                new Vector2(0.5f, 0.32f), new Vector2(0.70f, 0.11f), ShowMultiplayer);
+            mp.interactable = catalogAvailable;
 
             var manage = AddSpriteButton("Manage", "Original/images/MainMenuButtons03",
                 "Original/images/MainMenuButtons03Pressed", _safeArea,
@@ -299,12 +330,27 @@ namespace DiceSoccer
             ClearCanvas();
             AddMenuBackdrop();
             AddMenuHeader("OPTIONS", ShowHome);
-            AddText("SOUND", _safeArea, 20, Ink,
-                new Vector2(0.1f, 0.67f), new Vector2(0.9f, 0.74f));
-            AddButton(_soundEnabled ? "SOUND ON" : "SOUND OFF", _safeArea, Gold,
-                new Vector2(0.5f, 0.59f), new Vector2(0.75f, 0.09f), ToggleSound);
-            AddText("SHAKE OR TAP THE SCREEN EDGE TO ROLL",
-                _safeArea, 15, Ink, new Vector2(0.08f, 0.43f), new Vector2(0.92f, 0.52f));
+
+            AddText("AUDIO SETTINGS", _safeArea, 18, Ink,
+                new Vector2(0.1f, 0.72f), new Vector2(0.9f, 0.78f));
+            AddButton(_soundEnabled ? "SOUND: ON" : "SOUND: OFF", _safeArea, Gold,
+                new Vector2(0.5f, 0.65f), new Vector2(0.75f, 0.08f), ToggleSound);
+
+            AddButton("★ SBLOCCA TUTTO GRATIS (FAN PACK)", _safeArea, Grass,
+                new Vector2(0.5f, 0.52f), new Vector2(0.75f, 0.08f), () =>
+                {
+                    UnlockAllContent(false);
+                    ShowDonationModal();
+                });
+
+            AddButton("☕ OFFRI UN CAFFÈ (PAYPAL)", _safeArea, new Color32(0, 112, 186, 255),
+                new Vector2(0.5f, 0.40f), new Vector2(0.75f, 0.08f), ShowDonationModal);
+
+            AddText("SHAKE OR TAP THE SCREEN EDGE TO ROLL\nREMASTER 100% GRATUITO — NESSUNA PUBBLICITÀ",
+                _safeArea, 13, Ink, new Vector2(0.08f, 0.22f), new Vector2(0.92f, 0.34f));
+
+            AddButton("BACK TO MENU", _safeArea, new Color32(68, 79, 84, 255),
+                new Vector2(0.5f, 0.12f), new Vector2(0.55f, 0.06f), ShowHome);
         }
 
         private void ToggleSound()
@@ -316,10 +362,236 @@ namespace DiceSoccer
             ShowOptions();
         }
 
+        private void UnlockAllContent(bool showNotice = true)
+        {
+            _catalog ??= GameCatalog.Load();
+            _ownedPlayerIds = new List<int>();
+            foreach (var p in _catalog.Data.players)
+            {
+                if (p.id > 0 && p.id < 1000 && !_ownedPlayerIds.Contains(p.id))
+                    _ownedPlayerIds.Add(p.id);
+            }
+            _careerCash = 999999;
+
+            if (_catalog.Data.shirts != null)
+            {
+                foreach (var s in _catalog.Data.shirts)
+                {
+                    if (s != null && s.id > 0) _unlockedShirtIds.Add(s.id);
+                }
+            }
+            if (_catalog.Data.colours != null)
+            {
+                foreach (var c in _catalog.Data.colours)
+                {
+                    if (c != null && c.id > 0) _unlockedPantsIds.Add(c.id);
+                }
+            }
+            if (_catalog.Data.achievements != null)
+            {
+                foreach (var a in _catalog.Data.achievements)
+                {
+                    if (a != null && a.id > 0) _unlockedAchievementIds.Add(a.id);
+                }
+            }
+            if (_catalog.Data.entourage != null)
+            {
+                foreach (var e in _catalog.Data.entourage)
+                {
+                    if (e != null && e.id > 0) _unlockedEntourageIds.Add(e.id);
+                }
+            }
+
+            PlayerPrefs.SetString(RosterPreferenceKey, string.Join(",", _ownedPlayerIds));
+            PlayerPrefs.SetInt("diceSoccer.cash", _careerCash);
+            PlayerPrefs.SetString("diceSoccer.unlockedShirts", string.Join(",", _unlockedShirtIds));
+            PlayerPrefs.SetString("diceSoccer.unlockedPants", string.Join(",", _unlockedPantsIds));
+            PlayerPrefs.SetString("diceSoccer.achievements", string.Join(",", _unlockedAchievementIds));
+            PlayerPrefs.SetString("diceSoccer.unlockedEntourage", string.Join(",", _unlockedEntourageIds));
+            PlayerPrefs.SetInt("diceSoccer.allUnlocked", 1);
+            PlayerPrefs.Save();
+            if (showNotice) AudioManager.Instance.PlayCash();
+        }
+
+        private void ShowDonationModal()
+        {
+            var backdrop = AddPanel("DonationBackdrop", _safeArea,
+                new Color(0f, 0f, 0f, 0.88f), new Vector2(0.5f, 0.5f), Vector2.one);
+            backdrop.raycastTarget = true;
+
+            var box = AddResourceImage("DonationBox", "Original/sprites/AchievementsSS4/LongDialogBox", backdrop.transform,
+                new Vector2(0.5f, 0.52f), new Vector2(0.5f, 0.52f));
+            box.rectTransform.sizeDelta = new Vector2(380f, 520f);
+            box.preserveAspect = false;
+
+            var title = AddText("DICE SOCCER REMASTER", box.transform, 20, Ink,
+                new Vector2(0.08f, 0.83f), new Vector2(0.92f, 0.91f));
+            title.fontStyle = FontStyle.Bold;
+
+            var desc = AddText(
+                "Dice Soccer Remaster è un tributo 100% gratuito e no-profit per preservare questo classico del 2012 su Android moderno.\n\n" +
+                "Tutti i 96 personaggi, kit, monete e stagioni sono completamente sbloccati e gratuiti per tutti!\n\n" +
+                "Se apprezzi il remake e desideri supportare il lavoro svolto, puoi offrire un caffè con una donazione libera su PayPal:",
+                box.transform, 13, Ink,
+                new Vector2(0.08f, 0.36f), new Vector2(0.92f, 0.82f));
+            desc.alignment = TextAnchor.UpperCenter;
+
+            // PayPal Button
+            AddButton("☕ DONA CON PAYPAL", box.transform, new Color32(0, 112, 186, 255),
+                new Vector2(0.5f, 0.28f), new Vector2(0.80f, 0.08f), () =>
+                {
+                    Application.OpenURL("https://www.paypal.com/paypalme/");
+                });
+
+            // Re-unlock Button
+            AddButton("★ SBLOCCA TUTTO GRATIS", box.transform, Grass,
+                new Vector2(0.5f, 0.18f), new Vector2(0.80f, 0.08f), () =>
+                {
+                    UnlockAllContent(false);
+                    Destroy(backdrop.gameObject);
+                });
+
+            // Close Button
+            AddButton("CHIUDI", box.transform, new Color32(68, 79, 84, 255),
+                new Vector2(0.5f, 0.08f), new Vector2(0.50f, 0.06f), () =>
+                {
+                    Destroy(backdrop.gameObject);
+                });
+        }
+
+        private void ShowMultiplayer()
+        {
+            _catalog ??= GameCatalog.Load();
+            EnsureLineupLoaded();
+            ClearCanvas();
+            AddMenuBackdrop(false);
+
+            var sunGlow = AddResourceImage("SunGlow", "Original/sprites/MultiplayerBGSS/MultiplayerSunGlow",
+                _canvas.transform, new Vector2(0.5f, 0.70f), new Vector2(0.5f, 0.70f));
+            sunGlow.rectTransform.sizeDelta = new Vector2(600f, 400f);
+            sunGlow.preserveAspect = true;
+            sunGlow.raycastTarget = false;
+
+            _safeArea.SetAsLastSibling();
+            AddMenuHeader("1 VS 1", ShowHome);
+
+            var subTitle = AddText("1 VS 1 PASS & PLAY ON THIS DEVICE", _safeArea, 14, Ink,
+                new Vector2(0.05f, 0.81f), new Vector2(0.95f, 0.86f));
+            subTitle.fontStyle = FontStyle.Bold;
+
+            // Player 1 Team Box (Left)
+            var p1Box = AddResourceImage("P1Box", "Original/sprites/ShopSS/ShopBox", _safeArea,
+                new Vector2(0.06f, 0.48f), new Vector2(0.48f, 0.78f));
+            p1Box.preserveAspect = false;
+
+            var p1Badge = AddResourceImage("P1Badge", "Original/images/CustomCrest1", p1Box.transform,
+                new Vector2(0.5f, 0.70f), new Vector2(0.5f, 0.70f));
+            p1Badge.rectTransform.sizeDelta = new Vector2(64f, 64f);
+            p1Badge.preserveAspect = true;
+
+            var p1Title = AddText("PLAYER 1\n(RED TEAM)", p1Box.transform, 15, Ink,
+                new Vector2(0.08f, 0.32f), new Vector2(0.92f, 0.56f));
+            p1Title.fontStyle = FontStyle.Bold;
+
+            AddText("Tap Left Edge to Roll", p1Box.transform, 12, new Color32(80, 80, 80, 255),
+                new Vector2(0.05f, 0.08f), new Vector2(0.95f, 0.28f));
+
+            // VS Label
+            var vsText = AddText("VS", _safeArea, 34, Ink,
+                new Vector2(0.44f, 0.58f), new Vector2(0.56f, 0.68f));
+            vsText.fontStyle = FontStyle.Bold;
+
+            // Player 2 Team Box (Right)
+            var p2Box = AddResourceImage("P2Box", "Original/sprites/ShopSS/ShopBox", _safeArea,
+                new Vector2(0.52f, 0.48f), new Vector2(0.94f, 0.78f));
+            p2Box.preserveAspect = false;
+
+            var p2Badge = AddResourceImage("P2Badge", "Original/images/CustomCrest2", p2Box.transform,
+                new Vector2(0.5f, 0.70f), new Vector2(0.5f, 0.70f));
+            p2Badge.rectTransform.sizeDelta = new Vector2(64f, 64f);
+            p2Badge.preserveAspect = true;
+
+            var p2Title = AddText("PLAYER 2\n(BLUE TEAM)", p2Box.transform, 15, Ink,
+                new Vector2(0.08f, 0.32f), new Vector2(0.92f, 0.56f));
+            p2Title.fontStyle = FontStyle.Bold;
+
+            AddText("Tap Right Edge to Roll", p2Box.transform, 12, new Color32(80, 80, 80, 255),
+                new Vector2(0.05f, 0.08f), new Vector2(0.95f, 0.28f));
+
+            // Instructions Box
+            var infoBox = AddResourceImage("InfoBox", "Original/sprites/AchievementsSS4/LongDialogBox", _safeArea,
+                new Vector2(0.08f, 0.27f), new Vector2(0.92f, 0.44f));
+            infoBox.preserveAspect = false;
+
+            var infoText = AddText(
+                "Sfida un amico sullo stesso schermo!\n\n" +
+                "• P1 tocca il lato sinistro dello schermo per tirare i dadi Rossi\n" +
+                "• P2 tocca il lato destro dello schermo per tirare i dadi Blu\n" +
+                "• Nessun server richiesto, gioca ovunque offline!",
+                infoBox.transform, 13, Ink,
+                new Vector2(0.06f, 0.06f), new Vector2(0.94f, 0.94f));
+            infoText.alignment = TextAnchor.MiddleCenter;
+
+            // Start Match Button
+            AddSpriteButton("Start1v1Btn", "Original/sprites/EnemyLineupSS1/FormationPlayButton",
+                "Original/sprites/EnemyLineupSS1/FormationPlayButtonPressed", _safeArea,
+                new Vector2(0.50f, 0.16f), new Vector2(0.38f, 0.09f), StartLocalMultiplayerMatch);
+
+            AddButton("BACK TO MENU", _safeArea, new Color32(68, 79, 84, 255),
+                new Vector2(0.50f, 0.06f), new Vector2(0.55f, 0.055f), ShowHome);
+        }
+
+        private void StartLocalMultiplayerMatch()
+        {
+            _catalog ??= GameCatalog.Load();
+            EnsureLineupLoaded();
+            _isLocalMultiplayer = true;
+
+            var p1Lineup = _catalog.ResolveLineup(_lineupIds);
+
+            // Rival team for Player 2
+            var fixtures = _catalog.GetFixtures(0, "League");
+            var p2Lineup = (fixtures != null && fixtures.Length > 2)
+                ? _catalog.ResolveLineup(fixtures[2].lineup)
+                : _catalog.ResolveLineup(new int[] { 8, 9, 10, 11, 12, 13, 14 });
+
+            _currentFixture = new FixtureData
+            {
+                id = 999,
+                teamName = "PLAYER 2",
+                lineup = p2Lineup.Select(p => p.id).ToArray(),
+                cashWin = 1000,
+                cashDraw = 500,
+                cashLose = 200,
+                shirt = 2,
+                pants = 2
+            };
+
+            _currentResultRecorded = false;
+            _shakeArmed = true;
+            _shakeQuietSince = -1f;
+            _hasAccelerationSample = false;
+            _isKickoffPlayed = false;
+            _lastSubstitutedSlot = -1;
+            _remainingSubs = 3;
+            _match = new MatchSimulation(
+                p1Lineup,
+                p2Lineup,
+                "PLAYER 2",
+                0,
+                Array.Empty<int>(),
+                Array.Empty<int>(),
+                0,
+                0);
+
+            ShowMatchScreen(p1Lineup);
+        }
+
         private void StartCareerMatch()
         {
             _catalog ??= GameCatalog.Load();
             EnsureLineupLoaded();
+            _isLocalMultiplayer = false;
             _seasonIndex = Mathf.Clamp(_seasonIndex, 0, _catalog.Data.seasons.Length - 1);
             _competitionName = "League";
             _seasonFixtures = _catalog.GetFixtures(_seasonIndex, _competitionName);
@@ -834,7 +1106,8 @@ namespace DiceSoccer
             homeCrestShield.preserveAspect = true;
             homeCrestShield.raycastTarget = false;
 
-            var homeNameText = AddText("SANUKU", _safeArea, 12, Ink,
+            var homeTitle = _isLocalMultiplayer ? "PLAYER 1" : "SANUKU";
+            var homeNameText = AddText(homeTitle, _safeArea, 12, Ink,
                 new Vector2(0.01f, 0.872f), new Vector2(0.22f, 0.912f));
             homeNameText.fontStyle = FontStyle.Bold;
             homeNameText.alignment = TextAnchor.MiddleCenter;
@@ -1825,6 +2098,14 @@ namespace DiceSoccer
                 _ownedPlayerIds = string.IsNullOrEmpty(savedRoster)
                     ? new List<int>(_catalog.Data.initialLineup)
                     : ParsePlayerIds(savedRoster, "saved roster");
+                if (PlayerPrefs.GetInt("diceSoccer.allUnlocked", 0) != 0)
+                {
+                    foreach (var p in _catalog.Data.players)
+                    {
+                        if (p.id > 0 && p.id < 1000 && !_ownedPlayerIds.Contains(p.id))
+                            _ownedPlayerIds.Add(p.id);
+                    }
+                }
                 if (_ownedPlayerIds.Count == 0 || _ownedPlayerIds.Contains(0) ||
                     _ownedPlayerIds.Count != new HashSet<int>(_ownedPlayerIds).Count)
                     throw new InvalidDataException("The saved roster contains missing or duplicate player IDs.");
@@ -1951,7 +2232,7 @@ namespace DiceSoccer
 
             var startIdx = _shopPage * perPage;
             var count = Mathf.Min(perPage, cashList.Length - startIdx);
-            var boxYs = new[] { 0.71f, 0.51f, 0.31f };
+            var boxYs = new[] { 0.73f, 0.54f, 0.35f };
 
             for (var i = 0; i < count; i++)
             {
@@ -1959,7 +2240,7 @@ namespace DiceSoccer
                 var boxY = boxYs[i];
 
                 var box = AddResourceImage($"ShopBox_{i}", "Original/sprites/ShopSS/ShopBox", _safeArea,
-                    new Vector2(0.06f, boxY - 0.085f), new Vector2(0.94f, boxY + 0.085f));
+                    new Vector2(0.06f, boxY - 0.082f), new Vector2(0.94f, boxY + 0.082f));
                 box.preserveAspect = false;
 
                 var iconPath = option.price >= 9.99f
@@ -1973,7 +2254,7 @@ namespace DiceSoccer
                     new Vector2(0.32f, 0.15f), new Vector2(0.70f, 0.85f));
 
                 var capturedOption = option;
-                AddButton($"${option.price:F2}", box.transform, Grass,
+                AddButton("GRATIS", box.transform, Grass,
                     new Vector2(0.83f, 0.5f), new Vector2(0.24f, 0.48f), () =>
                     {
                         _careerCash += capturedOption.coins;
@@ -1983,7 +2264,10 @@ namespace DiceSoccer
                     });
             }
 
-            RenderShopPagination(maxPages, () => ShowShop());
+            RenderShopPagination(maxPages, () => ShowShop(), 0.22f);
+
+            AddButton("☕ DONA CON PAYPAL", _safeArea, new Color32(0, 112, 186, 255),
+                new Vector2(0.5f, 0.135f), new Vector2(0.75f, 0.055f), ShowDonationModal);
         }
 
         private void RenderShopShirts()
@@ -2123,10 +2407,9 @@ namespace DiceSoccer
             RenderShopPagination(maxPages, () => ShowShop());
         }
 
-        private void RenderShopPagination(int maxPages, UnityEngine.Events.UnityAction onRefresh)
+        private void RenderShopPagination(int maxPages, UnityEngine.Events.UnityAction onRefresh, float y = 0.175f)
         {
             if (maxPages <= 1) return;
-            const float y = 0.175f;
 
             if (_shopPage > 0)
             {
@@ -3276,6 +3559,89 @@ namespace DiceSoccer
         private void ShowGameOverModal()
         {
             if (_overlayContainer == null) return;
+
+            if (_isLocalMultiplayer)
+            {
+                var p1Won = _match.HomeScore > _match.AwayScore;
+                var p2Won = _match.AwayScore > _match.HomeScore;
+                var isDraw = _match.HomeScore == _match.AwayScore;
+
+                if (p1Won || p2Won)
+                {
+                    AudioManager.Instance.PlayMedalCeremonyLong();
+                    AudioManager.Instance.PlayEffect("KidsCheering", 1f, 1f);
+                }
+                else
+                {
+                    AudioManager.Instance.PlayEffect("ChildrenAaaah", 1f, 0.9f);
+                }
+
+                var mpBackdrop = AddPanel("GameOverBackdrop", _overlayContainer,
+                    new Color(0f, 0f, 0f, 0.88f), new Vector2(0.5f, 0.5f), Vector2.one);
+                mpBackdrop.raycastTarget = true;
+
+                var mpBox = AddResourceImage("GameOverBox",
+                    isDraw ? "Original/sprites/GameOver/GameOverDrawBox" : "Original/sprites/GameOver/GameOverVictoryBox",
+                    mpBackdrop.transform,
+                    new Vector2(0.5f, 0.52f), new Vector2(0.5f, 0.52f));
+                mpBox.rectTransform.sizeDelta = new Vector2(390f, 560f);
+                mpBox.preserveAspect = true;
+
+                StartCoroutine(PopInBounceAnimation(mpBox.rectTransform));
+
+                var winnerText = isDraw
+                    ? "IT'S A DRAW!"
+                    : (p1Won ? "PLAYER 1 (RED) WINS!" : "PLAYER 2 (BLUE) WINS!");
+                var winnerColor = isDraw ? (Color)Paper : (Color)(p1Won ? new Color32(235, 60, 60, 255) : new Color32(60, 140, 235, 255));
+
+                var mpTitle = AddText(winnerText, mpBox.transform, 22, winnerColor,
+                    new Vector2(0.05f, 0.84f), new Vector2(0.95f, 0.94f));
+                mpTitle.fontStyle = FontStyle.Bold;
+                mpTitle.alignment = TextAnchor.MiddleCenter;
+
+                var scoreText = AddText($"P1 (RED)  {_match.HomeScore} - {_match.AwayScore}  P2 (BLUE)", mpBox.transform, 24, Paper,
+                    new Vector2(0.05f, 0.68f), new Vector2(0.95f, 0.78f));
+                scoreText.fontStyle = FontStyle.Bold;
+                scoreText.alignment = TextAnchor.MiddleCenter;
+
+                var subTitle = AddText(isDraw ? "Great battle between both managers!" : (p1Won ? "Player 1 takes the victory!" : "Player 2 takes the victory!"),
+                    mpBox.transform, 14, Ink,
+                    new Vector2(0.08f, 0.50f), new Vector2(0.92f, 0.62f));
+                subTitle.alignment = TextAnchor.MiddleCenter;
+
+                // Rematch button
+                AddButton("⚔ REMATCH (1v1)", mpBox.transform, Grass,
+                    new Vector2(0.5f, 0.36f), new Vector2(0.75f, 0.09f), () =>
+                    {
+                        StartLocalMultiplayerMatch();
+                    });
+
+                // Main menu button
+                AddButton("MAIN MENU", mpBox.transform, new Color32(68, 79, 84, 255),
+                    new Vector2(0.5f, 0.22f), new Vector2(0.75f, 0.08f), () =>
+                    {
+                        _isLocalMultiplayer = false;
+                        ShowHome();
+                    });
+
+                if (p1Won || p2Won)
+                {
+                    for (var i = 0; i < 24; i++)
+                    {
+                        var cId = UnityEngine.Random.Range(1, 4);
+                        var x = UnityEngine.Random.Range(0.05f, 0.95f);
+                        var y = UnityEngine.Random.Range(0.40f, 0.95f);
+                        var cImg = AddResourceImage($"VictoryConfetti{i}",
+                            $"Original/sprites/ConfettiSS/Confetti{cId}", mpBackdrop.transform,
+                            new Vector2(x, y), new Vector2(x, y));
+                        cImg.rectTransform.sizeDelta = new Vector2(22f, 22f);
+                        cImg.rectTransform.localEulerAngles = new Vector3(0f, 0f, UnityEngine.Random.Range(0f, 360f));
+                        cImg.raycastTarget = false;
+                    }
+                }
+                return;
+            }
+
             var won = _match.HomeScore > _match.AwayScore;
             var drew = _match.HomeScore == _match.AwayScore;
 
@@ -3727,6 +4093,12 @@ namespace DiceSoccer
 
         private void RecordFixtureResult()
         {
+            if (_isLocalMultiplayer)
+            {
+                _lastPayout = 0;
+                return;
+            }
+
             var won = _match.HomeScore > _match.AwayScore;
             var drew = _match.HomeScore == _match.AwayScore;
             _lastPayout = _competitionName == "League"
@@ -4328,6 +4700,34 @@ namespace DiceSoccer
         private string GetEncounterPreviewText()
         {
             if (_match == null) return "Shake or tap either screen edge to roll.";
+
+            if (_isLocalMultiplayer)
+            {
+                switch (_match.Location)
+                {
+                    case 0:
+                        return "MIDFIELD BATTLE: P1 (RED) VS P2 (BLUE) — TAP TO ROLL!";
+                    case 1:
+                        return _match.Possession == 0
+                            ? "P1 ATTACKING BLUE DEFENSE! — TAP TO ROLL"
+                            : "P2 COUNTER-ATTACKING FROM MIDFIELD! — TAP TO ROLL";
+                    case 2:
+                        return _match.Possession == 0
+                            ? "P1 1-ON-1 SHOT ON GOAL! — P1 vs P2 GOALKEEPER"
+                            : "P2 DEFENSIVE CLEARANCE! — TAP TO ROLL";
+                    case -1:
+                        return _match.Possession == 1
+                            ? "P2 ATTACKING RED DEFENSE! — TAP TO ROLL"
+                            : "P1 COUNTER-ATTACKING FROM RED DEFENSE! — TAP TO ROLL";
+                    case -2:
+                        return _match.Possession == 1
+                            ? "P2 1-ON-1 SHOT ON GOAL! — P2 vs P1 GOALKEEPER"
+                            : "P1 DEFENSIVE CLEARANCE! — TAP TO ROLL";
+                    default:
+                        return "P1 (RED) VS P2 (BLUE) — TAP TO ROLL!";
+                }
+            }
+
             switch (_match.Location)
             {
                 case 0:
@@ -4580,10 +4980,12 @@ namespace DiceSoccer
 
             if (!string.IsNullOrEmpty(title))
             {
-                var titleText = AddText(title.ToUpperInvariant(), _safeArea, 18, Ink,
-                    new Vector2(backAction != null ? 0.16f : 0.05f, 0.93f), new Vector2(0.45f, 0.99f));
+                var fontSize = title.Length > 9 ? 14 : 18;
+                var titleText = AddText(title.ToUpperInvariant(), _safeArea, fontSize, Ink,
+                    new Vector2(backAction != null ? 0.16f : 0.05f, 0.93f), new Vector2(0.48f, 0.99f));
                 titleText.alignment = TextAnchor.MiddleLeft;
                 titleText.fontStyle = FontStyle.Bold;
+                titleText.horizontalOverflow = HorizontalWrapMode.Overflow;
             }
 
             var cashText = AddText(_careerCash.ToString("N0"), _safeArea, 18, Ink,

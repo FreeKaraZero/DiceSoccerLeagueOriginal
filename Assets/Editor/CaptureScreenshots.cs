@@ -148,6 +148,13 @@ namespace DiceSoccer.Editor
             // 8. Trophies
             try { Call("ShowTrophyRoom"); SaveScreen("Trophies"); } catch (Exception e) { Debug.LogWarning(e); }
 
+            // 9. Multiplayer
+            try { Call("ShowMultiplayer"); SaveScreen("Multiplayer"); } catch (Exception e) { Debug.LogWarning(e); }
+
+            // 10. Options & Donation Modal
+            try { Call("ShowOptions"); SaveScreen("Options"); } catch (Exception e) { Debug.LogWarning(e); }
+            try { Call("ShowDonationModal"); SaveScreen("DonationModal"); } catch (Exception e) { Debug.LogWarning(e); }
+
             RenderTexture.active = null;
             cam.targetTexture = null;
             UnityEngine.Object.DestroyImmediate(rt);

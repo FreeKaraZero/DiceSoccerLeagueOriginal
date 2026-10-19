@@ -82,7 +82,7 @@ namespace DiceSoccer.Editor
                 round++;
                 beginEncounterMethod.Invoke(match, null);
                 string report = completeEncounterMethod.Invoke(match, null) as string;
-                updatePlayerPositions?.Invoke(bootstrap, null);
+                updatePlayerPositions?.Invoke(bootstrap, new object[] { null });
                 Debug.Log($"[TEST] Encounter {round}: Clock={match.ClockText()}, Score={match.HomeScore}-{match.AwayScore}, Loc={match.Location}, Report={report}");
             }
 

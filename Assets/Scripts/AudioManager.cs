@@ -112,10 +112,14 @@ namespace DiceSoccer
             var clip = LoadClip("StadiumCrowdChant");
             if (clip == null) return;
 
-            _crowdSource.clip = clip;
-            _crowdSource.volume = volume;
-            if (_soundEnabled)
-                _crowdSource.Play();
+            EnsureInitialized();
+            if (_crowdSource != null)
+            {
+                _crowdSource.clip = clip;
+                _crowdSource.volume = volume;
+                if (_soundEnabled)
+                    _crowdSource.Play();
+            }
         }
 
         public void StopCrowd()
@@ -127,7 +131,10 @@ namespace DiceSoccer
         {
             if (!_soundEnabled) return;
             var clip = LoadClip(effectName);
-            if (clip != null)
+            if (clip == null) return;
+
+            EnsureInitialized();
+            if (_sfxSource != null)
             {
                 _sfxSource.pitch = pitch;
                 _sfxSource.PlayOneShot(clip, volume);
