@@ -23,6 +23,18 @@ namespace DiceSoccer.Editor
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS,
                 "com.karazero.dicesoccer");
             PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel26;
+            PlayerSettings.Android.targetSdkVersion = AndroidSdkVersions.AndroidApiLevel34;
+            PlayerSettings.Android.preferredInstallLocation = AndroidPreferredInstallLocation.Auto;
+
+            string keystorePath = Path.GetFullPath("Keystores/DiceSoccer.keystore");
+            if (File.Exists(keystorePath))
+            {
+                PlayerSettings.Android.useCustomKeystore = true;
+                PlayerSettings.Android.keystoreName = keystorePath;
+                PlayerSettings.Android.keystorePass = "dicesoccer";
+                PlayerSettings.Android.keyaliasName = "dicesoccer";
+                PlayerSettings.Android.keyaliasPass = "dicesoccer";
+            }
 
             EditorPrefs.SetBool("SdkUseEmbedded", true);
             EditorPrefs.SetBool("NdkUseEmbedded", true);
@@ -43,7 +55,7 @@ namespace DiceSoccer.Editor
 
             EditorUserBuildSettings.buildAppBundle = false;
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
-            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
+            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
 
             // Setup high-resolution AppIcons
             var bgPath = "Assets/AppIcons/AppIcon_Adaptive_Background.png";
@@ -132,7 +144,30 @@ namespace DiceSoccer.Editor
                 throw new InvalidOperationException(
                     $"Android build failed with result {report.summary.result}.");
 
-            Debug.Log($"Android APK created at {outputPath}.");
+            SignApk(outputPath);
+            Debug.Log($"Android APK created and signed at {outputPath}.");
+        }
+
+        private static void SignApk(string apkPath)
+        {
+            string keystorePath = Path.GetFullPath("Keystores/DiceSoccer.keystore");
+            if (!File.Exists(keystorePath)) return;
+
+            string contentsPath = EditorApplication.applicationContentsPath;
+            string apksignerPath = Path.Combine(contentsPath, "PlaybackEngines/AndroidPlayer/SDK/build-tools/36.0.0/apksigner");
+            if (!File.Exists(apksignerPath)) return;
+
+            var psi = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = apksignerPath,
+                Arguments = $"sign --ks \"{keystorePath}\" --ks-pass pass:dicesoccer --ks-key-alias dicesoccer --key-pass pass:dicesoccer --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled true \"{apkPath}\"",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            var proc = System.Diagnostics.Process.Start(psi);
+            proc.WaitForExit();
+            Debug.Log($"apksigner result: {proc.ExitCode}");
         }
     }
 }
