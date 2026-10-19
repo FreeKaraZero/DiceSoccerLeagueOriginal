@@ -99,6 +99,34 @@ namespace DiceSoccer.Editor
                 showMatchScreenMethod?.Invoke(bootstrap, new object[] { homeLineup });
                 SaveScreen("Match");
 
+                // Capture Offensive Zone
+                var locField = typeof(MatchSimulation).GetField("_location", BindingFlags.Instance | BindingFlags.NonPublic);
+                var updatePositionsMethod = typeof(DiceSoccerBootstrap).GetMethod("UpdatePlayerPositions", BindingFlags.Instance | BindingFlags.NonPublic);
+                var setBallMethod = typeof(DiceSoccerBootstrap).GetMethod("SetBallPosition", BindingFlags.Instance | BindingFlags.NonPublic);
+                var pitchRootField = typeof(DiceSoccerBootstrap).GetField("_fieldPitchRoot", BindingFlags.Instance | BindingFlags.NonPublic);
+                var pitchRoot = (RectTransform)pitchRootField?.GetValue(bootstrap);
+
+                if (locField != null && pitchRoot != null)
+                {
+                    locField.SetValue(match, 1);
+                    pitchRoot.anchoredPosition = new Vector2(-375f, 0f);
+                    updatePositionsMethod?.Invoke(bootstrap, new object[] { null });
+                    setBallMethod?.Invoke(bootstrap, new object[] { 1, 0, false });
+                    SaveScreen("Match_Offensive");
+
+                    locField.SetValue(match, 2);
+                    pitchRoot.anchoredPosition = new Vector2(-640f, 0f);
+                    updatePositionsMethod?.Invoke(bootstrap, new object[] { null });
+                    setBallMethod?.Invoke(bootstrap, new object[] { 2, 0, false });
+                    SaveScreen("Match_1v1");
+
+                    // Reset back to midfield
+                    locField.SetValue(match, 0);
+                    pitchRoot.anchoredPosition = Vector2.zero;
+                    updatePositionsMethod?.Invoke(bootstrap, new object[] { null });
+                    setBallMethod?.Invoke(bootstrap, new object[] { 0, 0, false });
+                }
+
                 // 4. Pause Menu
                 Call("ShowPauseMenu");
                 SaveScreen("PauseMenu");
