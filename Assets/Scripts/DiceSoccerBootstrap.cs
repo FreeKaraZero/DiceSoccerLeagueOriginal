@@ -1126,27 +1126,30 @@ namespace DiceSoccer
             // 2. Top HUD: Authentic Scoreboard (scoreboardBG sits at the very top):
             var scoreboard = AddResourceImage("MatchScoreboard",
                 "Original/images/scoreboardBG", _safeArea,
-                new Vector2(0f, 0.870f), new Vector2(1f, 1f));
+                new Vector2(0f, 1f), new Vector2(1f, 1f));
+            scoreboard.rectTransform.pivot = new Vector2(0.5f, 1f);
+            scoreboard.rectTransform.anchoredPosition = Vector2.zero;
+            scoreboard.rectTransform.sizeDelta = new Vector2(0f, 150f);
             scoreboard.preserveAspect = false;
             scoreboard.raycastTarget = false;
 
             // Home Team Crest Shield centered in the left yellow box of scoreboardBG:
             var homeCrestShield = AddResourceImage("HomeShield", $"Original/images/CustomCrest{_currentCrestId}", _safeArea,
-                new Vector2(0.086f, 0.942f), new Vector2(0.086f, 0.942f));
-            homeCrestShield.rectTransform.sizeDelta = new Vector2(42f, 42f);
+                new Vector2(0.087f, 0.953f), new Vector2(0.087f, 0.953f));
+            homeCrestShield.rectTransform.sizeDelta = new Vector2(70f, 70f);
             homeCrestShield.preserveAspect = true;
             homeCrestShield.raycastTarget = false;
 
             var homeTitle = _isLocalMultiplayer ? "PLAYER 1" : "SANUKU";
             var homeNameText = AddText(homeTitle, _safeArea, 12, Ink,
-                new Vector2(0.01f, 0.872f), new Vector2(0.22f, 0.912f));
+                new Vector2(0.01f, 0.874f), new Vector2(0.165f, 0.910f));
             homeNameText.fontStyle = FontStyle.Bold;
             homeNameText.alignment = TextAnchor.MiddleCenter;
 
             // Away Team Crest centered in the right red box of scoreboardBG:
             var awayCrestBody = AddResourceImage("AwayCrestBody", "Original/sprites/EnemyCrest1/EnemyCrest1Body", _safeArea,
-                new Vector2(0.914f, 0.942f), new Vector2(0.914f, 0.942f));
-            awayCrestBody.rectTransform.sizeDelta = new Vector2(40f, 40f);
+                new Vector2(0.913f, 0.953f), new Vector2(0.913f, 0.953f));
+            awayCrestBody.rectTransform.sizeDelta = new Vector2(70f, 70f);
             awayCrestBody.preserveAspect = true;
             awayCrestBody.raycastTarget = false;
 
@@ -1156,7 +1159,7 @@ namespace DiceSoccer
             awayCrestDesign.raycastTarget = false;
 
             var awayNameText = AddText(_currentFixture.teamName.ToUpperInvariant(), _safeArea, 10, Ink,
-                new Vector2(0.78f, 0.872f), new Vector2(0.99f, 0.912f));
+                new Vector2(0.835f, 0.874f), new Vector2(0.99f, 0.910f));
             awayNameText.fontStyle = FontStyle.Bold;
             awayNameText.alignment = TextAnchor.MiddleCenter;
             awayNameText.horizontalOverflow = HorizontalWrapMode.Overflow;
@@ -1254,7 +1257,8 @@ namespace DiceSoccer
                 if (TryGetUiSprite(abilityPath) != null)
                     return abilityPath;
             }
-            return $"Original/sprites/Card6/DiceNumber{Mathf.Clamp(sideValue, 1, 14):02}";
+            int clamped = Mathf.Clamp(sideValue, 1, 14);
+            return $"Original/sprites/Card6/DiceNumber{clamped:00}";
         }
 
         private static string GetSuperpowerIconPath(int superpowerId)
@@ -1313,6 +1317,21 @@ namespace DiceSoccer
             return GetPlayerFigurePath(p, playerId);
         }
 
+        private static float GetPlayerFigureVisualScale(int playerId)
+        {
+            // Junior squad players (1, 2, 3, 4, 6) were drawn with ~100px blank headroom in the 340px canvas.
+            // Calibrate visual scale so they stand uniformly alongside adult/varsity figures without extreme discrepancy.
+            switch (playerId)
+            {
+                case 1: return 1.25f; // Willy the Kid (GK)
+                case 2: return 1.28f; // Earnest Mulligan (DEF)
+                case 3: return 1.22f; // Jo Lee-Roger (DEF)
+                case 4: return 1.26f; // Sherman 'Tank' (DEF)
+                case 6: return 1.24f; // David Little (FWD)
+                default: return 1.0f;
+            }
+        }
+
         private GameObject CreatePlayerCardFront(PlayerData player, Transform parent,
             Vector2 anchorMin, Vector2 anchorMax, bool isHire = false, bool isInteractive = true,
             UnityEngine.Events.UnityAction onClick = null, bool isLocked = false)
@@ -1326,7 +1345,7 @@ namespace DiceSoccer
 
             var border = AddResourceImage("Border", "Original/sprites/PlayerCardBG/CardBorder", root.transform,
                 Vector2.zero, Vector2.one);
-            border.color = isLocked ? new Color32(160, 165, 170, 255) : new Color32(148, 200, 56, 255);
+            border.color = isLocked ? new Color32(160, 165, 170, 255) : Color.white;
             border.preserveAspect = false;
 
             var field = AddResourceImage("Field", "Original/sprites/PlayerCardBG/CardField", border.transform,
@@ -1389,15 +1408,27 @@ namespace DiceSoccer
             nameText.resizeTextMaxSize = 10;
 
             // Player figure & shadow standing on the grass
-            var shadow = AddResourceImage("FigureShadow", "Original/sprites/PlayerFullFigureSS/PlayerFullFigureShadow", field.transform,
-                new Vector2(0.18f, 0.18f), new Vector2(0.82f, 0.78f));
-            shadow.preserveAspect = true;
-            shadow.color = new Color(0, 0, 0, 0.45f);
-
             var figPath = GetPlayerFigurePath(player.id);
             var figure = AddResourceImage("Figure", figPath, field.transform,
-                new Vector2(0.18f, 0.19f), new Vector2(0.82f, 0.79f));
+                new Vector2(0.5f, 0.22f), new Vector2(0.5f, 0.22f));
+            figure.rectTransform.pivot = new Vector2(0.5f, 0.032f);
+            figure.rectTransform.sizeDelta = new Vector2(85f, 144.5f);
+            float cardVScale = GetPlayerFigureVisualScale(player.id);
+            figure.rectTransform.localScale = new Vector3(cardVScale, cardVScale, 1f);
             figure.preserveAspect = true;
+
+            var shadowGo = new GameObject("FigureShadow", typeof(RectTransform), typeof(Image));
+            shadowGo.transform.SetParent(figure.transform, false);
+            var shadowRect = shadowGo.GetComponent<RectTransform>();
+            shadowRect.anchorMin = Vector2.zero;
+            shadowRect.anchorMax = Vector2.one;
+            shadowRect.offsetMin = shadowRect.offsetMax = Vector2.zero;
+            var shadowImg = shadowGo.GetComponent<Image>();
+            shadowImg.sprite = GetUiSprite("Original/sprites/PlayerFullFigureSS/PlayerFullFigureShadow");
+            shadowImg.color = new Color(0, 0, 0, 0.45f);
+            shadowImg.preserveAspect = true;
+            shadowImg.raycastTarget = false;
+            shadowGo.transform.SetAsFirstSibling();
 
             // Superpower Box (Bottom Right, above dice bar)
             var spIconPath = GetSuperpowerIconPath(player.superpower);
@@ -1412,27 +1443,56 @@ namespace DiceSoccer
                 spIcon.preserveAspect = true;
             }
 
-            // Dice bar at bottom
-            var diceBarColour = AddResourceImage("DiceBarColour", "Original/sprites/Card3/DiceBarColour", field.transform,
-                new Vector2(0.05f, 0.04f), new Vector2(0.95f, 0.17f));
-            diceBarColour.color = GetPositionColor(player.position);
-            diceBarColour.preserveAspect = false;
+            // Authentic Dice bar at bottom with 6 white square dice slots (matching media_1792421110223_f7c56db8.png)
+            var diceBarRoot = new GameObject("DiceBar", typeof(RectTransform));
+            diceBarRoot.transform.SetParent(field.transform, false);
+            var barRect = diceBarRoot.GetComponent<RectTransform>();
+            barRect.anchorMin = new Vector2(0.04f, 0.035f);
+            barRect.anchorMax = new Vector2(0.96f, 0.170f);
+            barRect.offsetMin = barRect.offsetMax = Vector2.zero;
 
-            var diceBarBorder = AddResourceImage("DiceBarBorder", "Original/sprites/Card3/DiceBarBorder", diceBarColour.transform,
+            // Layer 1: Base border with white cutout slots and dividers
+            var diceBarBorder = AddResourceImage("DiceBarBorder", "Original/sprites/Card3/DiceBarBorder", diceBarRoot.transform,
                 Vector2.zero, Vector2.one);
             diceBarBorder.preserveAspect = false;
+            diceBarBorder.raycastTarget = false;
 
+            // Cutouts in 400x100 DiceBarBorder are at exact normalized x coordinates:
+            float[] slotMinXs = { 0.0650f, 0.2100f, 0.3600f, 0.5100f, 0.6600f, 0.8075f };
+            float[] slotMaxXs = { 0.1875f, 0.3350f, 0.4825f, 0.6350f, 0.7850f, 0.9325f };
+
+            // Layer 2: White die tiles & pips inside the 6 slots
             for (var i = 0; i < 6; i++)
             {
-                var w = 1f / 6f;
-                var minX = i * w + 0.015f;
-                var maxX = (i + 1) * w - 0.015f;
+                var minX = slotMinXs[i];
+                var maxX = slotMaxXs[i];
                 var side = (player.diceSides != null && i < player.diceSides.Length) ? player.diceSides[i] : 1;
                 var sidePath = GetDiceSideSpritePath(side);
-                var sideImg = AddResourceImage($"DiceSide{i + 1}", sidePath, diceBarColour.transform,
-                    new Vector2(minX, 0.12f), new Vector2(maxX, 0.88f));
+
+                // Crisp white square die backing inside cutout
+                var tileGo = new GameObject($"SlotTile{i + 1}", typeof(RectTransform), typeof(Image));
+                tileGo.transform.SetParent(diceBarRoot.transform, false);
+                var tileRect = tileGo.GetComponent<RectTransform>();
+                tileRect.anchorMin = new Vector2(minX, 0.08f);
+                tileRect.anchorMax = new Vector2(maxX, 0.92f);
+                tileRect.offsetMin = tileRect.offsetMax = Vector2.zero;
+                var tileImg = tileGo.GetComponent<Image>();
+                tileImg.color = Color.white;
+                tileImg.raycastTarget = false;
+
+                // Mini die face (dots 1..14 or ability icon >= 16)
+                var sideImg = AddResourceImage($"DiceSide{i + 1}", sidePath, tileGo.transform,
+                    new Vector2(0.04f, 0.04f), new Vector2(0.96f, 0.96f));
                 sideImg.preserveAspect = true;
+                sideImg.raycastTarget = false;
             }
+
+            // Layer 3: Position-colored bar overlay (transparent over slots, tinted over outer frame & dividers)
+            var diceBarColour = AddResourceImage("DiceBarColour", "Original/sprites/Card3/DiceBarColour", diceBarRoot.transform,
+                Vector2.zero, Vector2.one);
+            diceBarColour.color = GetPositionColor(player.position);
+            diceBarColour.preserveAspect = false;
+            diceBarColour.raycastTarget = false;
 
             if (isLocked)
             {
@@ -1744,8 +1804,18 @@ namespace DiceSoccer
                 {
                     var side = player.diceSides[i];
                     var sidePath = GetDiceSideSpritePath(side);
-                    var diceImg = AddResourceImage($"Dice{i}", sidePath, diceBarObj.transform,
-                        new Vector2(i * slotW + 0.01f, 0.05f), new Vector2((i + 1) * slotW - 0.01f, 0.95f));
+                    var tileGo = new GameObject($"SlotTile{i}", typeof(RectTransform), typeof(Image));
+                    tileGo.transform.SetParent(diceBarObj.transform, false);
+                    var tileRect = tileGo.GetComponent<RectTransform>();
+                    tileRect.anchorMin = new Vector2(i * slotW + 0.02f, 0.05f);
+                    tileRect.anchorMax = new Vector2((i + 1) * slotW - 0.02f, 0.95f);
+                    tileRect.offsetMin = tileRect.offsetMax = Vector2.zero;
+                    var tileImg = tileGo.GetComponent<Image>();
+                    tileImg.color = Color.white;
+                    tileImg.raycastTarget = false;
+
+                    var diceImg = AddResourceImage($"Dice{i}", sidePath, tileGo.transform,
+                        new Vector2(0.08f, 0.08f), new Vector2(0.92f, 0.92f));
                     diceImg.preserveAspect = true;
                     diceImg.raycastTarget = false;
                 }
@@ -1886,17 +1956,17 @@ namespace DiceSoccer
             // Bottom row: 1 Goalkeeper (Center #1 Willy)
             var slotPositions = new Vector2[]
             {
-                new Vector2(0.50f, 0.20f), // Slot 0: GK (#1 Willy The Kid)
-                new Vector2(0.74f, 0.49f), // Slot 1: Right DEF (#2 Ernest Milligan)
-                new Vector2(0.50f, 0.49f), // Slot 2: Center DEF (#3 Jo Lee-Roger)
-                new Vector2(0.26f, 0.49f), // Slot 3: Left DEF (#4 Sherman Tank)
-                new Vector2(0.74f, 0.77f), // Slot 4: Right FWD (#7 Justin Huff)
-                new Vector2(0.50f, 0.77f), // Slot 5: Center Striker (#6 David Little, Striker Star)
-                new Vector2(0.26f, 0.77f), // Slot 6: Left FWD (#8 Jerry Hat-trick)
+                new Vector2(0.500f, 0.205f), // Slot 0: GK (#1 Willy The Kid)
+                new Vector2(0.755f, 0.475f), // Slot 1: Right DEF (#2 Ernest Milligan)
+                new Vector2(0.500f, 0.475f), // Slot 2: Center DEF (#3 Jo Lee-Roger)
+                new Vector2(0.245f, 0.475f), // Slot 3: Left DEF (#4 Sherman Tank)
+                new Vector2(0.755f, 0.745f), // Slot 4: Right FWD (#7 Justin Huff)
+                new Vector2(0.500f, 0.745f), // Slot 5: Center Striker (#6 David Little, Striker Star)
+                new Vector2(0.245f, 0.745f), // Slot 6: Left FWD (#8 Jerry Hat-trick)
             };
 
-            var cardHalfWidth = 0.125f;
-            var cardHalfHeight = 0.092f;
+            var cardHalfWidth = 0.118f;
+            var cardHalfHeight = 0.118f;
 
             for (var slot = 0; slot < lineup.Length; slot++)
             {
@@ -1904,15 +1974,25 @@ namespace DiceSoccer
                 var player = lineup[slot];
                 var center = slotPositions[slot];
 
-                // If Center Striker (slot 5), add StrikerStar frame behind it
+                // If Center Striker (slot 5), add StrikerStar frame behind it; otherwise subtle white card slot border
                 if (slot == 5)
                 {
                     var strikerStar = AddResourceImage("StrikerStar",
                         "Original/sprites/EnemyLineupSS1/StrikerStar", _safeArea,
-                        new Vector2(center.x - 0.138f, center.y - 0.098f),
-                        new Vector2(center.x + 0.138f, center.y + 0.122f));
+                        new Vector2(center.x - cardHalfWidth - 0.018f, center.y - cardHalfHeight - 0.014f),
+                        new Vector2(center.x + cardHalfWidth + 0.018f, center.y + cardHalfHeight + 0.038f));
                     strikerStar.preserveAspect = false;
                     strikerStar.raycastTarget = false;
+                }
+                else
+                {
+                    var slotBorder = AddResourceImage($"SlotBorder_{slot}",
+                        "Original/sprites/PlayerCardBG/CardBorder", _safeArea,
+                        new Vector2(center.x - cardHalfWidth - 0.005f, center.y - cardHalfHeight - 0.005f),
+                        new Vector2(center.x + cardHalfWidth + 0.005f, center.y + cardHalfHeight + 0.005f));
+                    slotBorder.color = new Color(1f, 1f, 1f, 0.45f);
+                    slotBorder.preserveAspect = false;
+                    slotBorder.raycastTarget = false;
                 }
 
                 CreatePlayerCardFront(player, _safeArea,
@@ -3099,18 +3179,18 @@ namespace DiceSoccer
 
             var loc = _match.Location;
             var (activeHome, activeAway) = GetActiveDuelSlots(loc);
-            float[] ys = { 0.28f, 0.49f, 0.70f };
+            float[] ys = { 0.25f, 0.50f, 0.75f };
 
             // 1. Poof smoke on active players before rolling
             for (var i = 0; i < activeHome.Length; i++)
             {
                 var p = _homePlayers[activeHome[i]];
-                if (p != null) StartCoroutine(PlayPoofAtPosition(p.rectTransform.anchorMin));
+                if (p != null) StartCoroutine(PlayPoofAtPosition(new Vector2(p.rectTransform.anchorMin.x, p.rectTransform.anchorMin.y + 0.12f)));
             }
             for (var i = 0; i < activeAway.Length; i++)
             {
                 var p = _awayPlayers[activeAway[i]];
-                if (p != null) StartCoroutine(PlayPoofAtPosition(p.rectTransform.anchorMin));
+                if (p != null) StartCoroutine(PlayPoofAtPosition(new Vector2(p.rectTransform.anchorMin.x, p.rectTransform.anchorMin.y + 0.12f)));
             }
             yield return new WaitForSeconds(0.12f);
 
@@ -3125,7 +3205,7 @@ namespace DiceSoccer
                     if (i < homeFaces.Length && _homeDieRoots[i] != null)
                     {
                         _homeDieRoots[i].SetActive(true);
-                        float y = homeFaces.Length == 1 ? 0.49f : ys[i];
+                        float y = homeFaces.Length == 1 ? 0.50f : ys[i];
                         float x = homeFaces.Length == 1 ? 0.35f : 0.31f;
                         _homeDieRoots[i].GetComponent<RectTransform>().anchorMin =
                             _homeDieRoots[i].GetComponent<RectTransform>().anchorMax = new Vector2(x, y);
@@ -3136,7 +3216,7 @@ namespace DiceSoccer
                     if (i < awayFaces.Length && _awayDieRoots[i] != null)
                     {
                         _awayDieRoots[i].SetActive(true);
-                        float y = awayFaces.Length == 1 ? 0.49f : ys[i];
+                        float y = awayFaces.Length == 1 ? 0.50f : ys[i];
                         float x = awayFaces.Length == 1 ? 0.65f : 0.70f;
                         _awayDieRoots[i].GetComponent<RectTransform>().anchorMin =
                             _awayDieRoots[i].GetComponent<RectTransform>().anchorMax = new Vector2(x, y);
@@ -4711,7 +4791,7 @@ namespace DiceSoccer
             _homeDieRoots = new GameObject[3];
             _awayDieRoots = new GameObject[3];
 
-            float[] ys = { 0.28f, 0.49f, 0.70f };
+            float[] ys = { 0.25f, 0.50f, 0.75f };
 
             for (var i = 0; i < 3; i++)
             {
@@ -4720,7 +4800,7 @@ namespace DiceSoccer
                 hRoot.transform.SetParent(parent, false);
                 var hRect = hRoot.GetComponent<RectTransform>();
                 hRect.anchorMin = hRect.anchorMax = new Vector2(0.31f, ys[i]);
-                hRect.sizeDelta = new Vector2(85f, 85f);
+                hRect.sizeDelta = new Vector2(92f, 92f);
                 var hImg = hRoot.GetComponent<Image>();
                 hImg.sprite = GetUiSprite("Original/sprites/Buff6/DiceBackground");
                 hImg.preserveAspect = true;
@@ -4746,7 +4826,7 @@ namespace DiceSoccer
                 aRoot.transform.SetParent(parent, false);
                 var aRect = aRoot.GetComponent<RectTransform>();
                 aRect.anchorMin = aRect.anchorMax = new Vector2(0.70f, ys[i]);
-                aRect.sizeDelta = new Vector2(85f, 85f);
+                aRect.sizeDelta = new Vector2(92f, 92f);
                 var aImg = aRoot.GetComponent<Image>();
                 aImg.sprite = GetUiSprite("Original/sprites/Buff6/DiceBackground");
                 aImg.preserveAspect = true;
@@ -4947,26 +5027,26 @@ namespace DiceSoccer
                 slotIndex = _match != null ? _match.BallHolderSlotIndex : 1;
             }
 
-            // In 1v1 encounters (location 2 or -2), striker and GK face off at y = 0.48f
+            // In 1v1 encounters (location 2 or -2), striker and GK face off at y = 0.38f
             if (Mathf.Abs(location) == 2)
             {
                 if (location == 2) // Home Striker attacking Away GK
                 {
-                    return possession == 0 ? new Vector2(0.435f, 0.48f) : new Vector2(0.565f, 0.48f);
+                    return possession == 0 ? new Vector2(0.435f, 0.395f) : new Vector2(0.565f, 0.395f);
                 }
                 else // Away Striker attacking Home GK
                 {
-                    return possession == 1 ? new Vector2(0.565f, 0.48f) : new Vector2(0.435f, 0.48f);
+                    return possession == 1 ? new Vector2(0.565f, 0.395f) : new Vector2(0.435f, 0.395f);
                 }
             }
 
             // In 3v3 outfield encounters (locations -1, 0, 1):
-            // The 3 players are positioned at y = 0.24f (bottom winger), 0.48f (center), 0.72f (top winger)
+            // Ball rests right next to the boots of the active ball holder:
             float y = slotIndex switch
             {
-                0 => 0.24f,
-                2 => 0.72f,
-                _ => 0.48f
+                0 => 0.145f,
+                2 => 0.645f,
+                _ => 0.395f
             };
 
             float x = possession == 0 ? 0.435f : 0.565f;
@@ -5055,28 +5135,33 @@ namespace DiceSoccer
             {
                 var pData = lineup[slot];
                 var resourcePath = GetPlayerFigurePath(pData);
+                var pId = pData != null ? pData.id : (slot + 1);
 
                 var playerGo = new GameObject($"{(home ? "Home" : "Away")}Player{slot + 1}", typeof(RectTransform), typeof(Image));
                 playerGo.transform.SetParent(parent, false);
                 var player = playerGo.GetComponent<Image>();
                 player.sprite = GetUiSprite(resourcePath);
-                player.rectTransform.sizeDelta = new Vector2(74f, 126f);
+                // Pin pivot to boot soles (y=330 in 200x340 sprite => normalized 0.032f)
+                player.rectTransform.pivot = new Vector2(0.5f, 0.032f);
+                player.rectTransform.sizeDelta = new Vector2(140f, 238f);
                 player.color = Color.white;
                 player.raycastTarget = false;
                 player.preserveAspect = true;
-                // Home faces right (-1f), Away faces left (1f)
-                player.rectTransform.localScale = new Vector3(home ? -1f : 1f, 1f, 1f);
 
-                // Add shadow under player feet
+                // Calibrate visual height so junior squad members stand uniformly alongside adult figures
+                float vScale = GetPlayerFigureVisualScale(pId);
+                player.rectTransform.localScale = new Vector3((home ? -1f : 1f) * vScale, vScale, 1f);
+
+                // Add shadow under player feet (1:1 overlay with 200x340 sprite)
                 var shadowGo = new GameObject("Shadow", typeof(RectTransform), typeof(Image));
                 shadowGo.transform.SetParent(player.transform, false);
                 var shadowRect = shadowGo.GetComponent<RectTransform>();
-                shadowRect.anchorMin = shadowRect.anchorMax = new Vector2(0.5f, 0.05f);
-                shadowRect.sizeDelta = new Vector2(74f, 25f);
-                shadowRect.anchoredPosition = new Vector2(0f, -55f);
+                shadowRect.anchorMin = Vector2.zero;
+                shadowRect.anchorMax = Vector2.one;
+                shadowRect.offsetMin = shadowRect.offsetMax = Vector2.zero;
                 var shadowImg = shadowGo.GetComponent<Image>();
                 shadowImg.sprite = GetUiSprite("Original/sprites/PlayerFullFigureSS/PlayerFullFigureShadow");
-                shadowImg.color = Color.white;
+                shadowImg.color = new Color(1f, 1f, 1f, 0.85f);
                 shadowImg.preserveAspect = true;
                 shadowImg.raycastTarget = false;
                 shadowGo.transform.SetAsFirstSibling();
@@ -5093,7 +5178,9 @@ namespace DiceSoccer
             var loc = overrideLocation.HasValue ? overrideLocation.Value : _match.Location;
             var (activeHome, activeAway) = GetActiveDuelSlots(loc);
 
-            float[] ys = { 0.24f, 0.48f, 0.72f };
+            // Ground baseline Ys matching media_1792421110195_880f72c3.png:
+            // Row 0 (bottom): 0.13f, Row 1 (center): 0.38f, Row 2 (top): 0.63f
+            float[] ys = { 0.13f, 0.38f, 0.63f };
 
             // Inactive slots hidden
             for (var slot = 0; slot < 7; slot++)
@@ -5102,30 +5189,32 @@ namespace DiceSoccer
                 _awayPlayers[slot].gameObject.SetActive(false);
             }
 
-            // Position active Home players (always face right towards opponent/goal)
+            // Position active Home players (face right towards opponent/goal)
             for (var i = 0; i < activeHome.Length; i++)
             {
                 var slot = activeHome[i];
                 var p = _homePlayers[slot];
                 p.gameObject.SetActive(true);
-                float y = activeHome.Length == 1 ? 0.48f : ys[i];
+                float y = activeHome.Length == 1 ? 0.38f : ys[i];
                 float x = activeHome.Length == 1 ? (loc == 2 ? 0.38f : 0.42f) : 0.395f;
                 p.rectTransform.anchorMin = p.rectTransform.anchorMax = new Vector2(x, y);
                 p.rectTransform.anchoredPosition = Vector2.zero;
-                p.rectTransform.localScale = new Vector3(-1f, 1f, 1f);
+                float currentScale = Mathf.Abs(p.rectTransform.localScale.y);
+                p.rectTransform.localScale = new Vector3(-currentScale, currentScale, 1f);
             }
 
-            // Position active Away players (always face left towards opponent/goal)
+            // Position active Away players (face left towards opponent/goal)
             for (var i = 0; i < activeAway.Length; i++)
             {
                 var slot = activeAway[i];
                 var p = _awayPlayers[slot];
                 p.gameObject.SetActive(true);
-                float y = activeAway.Length == 1 ? 0.48f : ys[i];
+                float y = activeAway.Length == 1 ? 0.38f : ys[i];
                 float x = activeAway.Length == 1 ? (loc == 2 ? 0.58f : 0.62f) : 0.605f;
                 p.rectTransform.anchorMin = p.rectTransform.anchorMax = new Vector2(x, y);
                 p.rectTransform.anchoredPosition = Vector2.zero;
-                p.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+                float currentScale = Mathf.Abs(p.rectTransform.localScale.y);
+                p.rectTransform.localScale = new Vector3(currentScale, currentScale, 1f);
             }
 
             if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();

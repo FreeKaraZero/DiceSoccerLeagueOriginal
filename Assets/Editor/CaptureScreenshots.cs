@@ -124,20 +124,20 @@ namespace DiceSoccer.Editor
                     locField.SetValue(match, 1);
                     pitchRoot.anchoredPosition = new Vector2(-375f, 0f);
                     updatePositionsMethod?.Invoke(bootstrap, new object[] { null });
-                    setBallMethod?.Invoke(bootstrap, new object[] { 1, 0, false });
+                    setBallMethod?.Invoke(bootstrap, new object[] { 1, 0, false, -1 });
                     SaveScreen("Match_Offensive");
 
                     locField.SetValue(match, 2);
                     pitchRoot.anchoredPosition = new Vector2(-640f, 0f);
                     updatePositionsMethod?.Invoke(bootstrap, new object[] { null });
-                    setBallMethod?.Invoke(bootstrap, new object[] { 2, 0, false });
+                    setBallMethod?.Invoke(bootstrap, new object[] { 2, 0, false, -1 });
                     SaveScreen("Match_1v1");
 
                     // Reset back to midfield
                     locField.SetValue(match, 0);
                     pitchRoot.anchoredPosition = Vector2.zero;
                     updatePositionsMethod?.Invoke(bootstrap, new object[] { null });
-                    setBallMethod?.Invoke(bootstrap, new object[] { 0, 0, false });
+                    setBallMethod?.Invoke(bootstrap, new object[] { 0, 0, false, -1 });
                 }
 
                 // 4. Pause Menu
