@@ -140,6 +140,12 @@ namespace DiceSoccer
             PlayEffect($"Tap{r}", Random.Range(0.95f, 1.05f), 0.7f);
         }
 
+        public void PlayKick()
+        {
+            int r = Random.Range(1, 4);
+            PlayEffect($"Tap{r}", Random.Range(0.75f, 0.85f), 0.9f);
+        }
+
         public void PlayDiceRoll()
         {
             int r = Random.Range(1, 4); // DiceRoll1, DiceRoll2, DiceRoll3
