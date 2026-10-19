@@ -80,6 +80,7 @@ namespace DiceSoccer
         private RectTransform _overlayContainer;
         private Image _ballShadow;
         private bool _inEncounterAnimation;
+        private Coroutine _idleBobbingCoroutine;
         private bool _isKickoffPlayed;
         private int _lastSubstitutedSlot = -1;
         private int _remainingSubs = 3;
@@ -261,6 +262,14 @@ namespace DiceSoccer
             logo.preserveAspect = true;
             logo.raycastTarget = false;
 
+            // Signature metallic crystal shine overlay from original iOS title
+            var logoShine = AddResourceImage("StartScreenLogoShine", "Original/sprites/StartScreenLogoAnimation/LogoShine01",
+                logo.transform, Vector2.zero, Vector2.one);
+            logoShine.preserveAspect = true;
+            logoShine.raycastTarget = false;
+            logoShine.enabled = false;
+            StartCoroutine(AnimateLogoShine(logoShine));
+
             var catalogAvailable = Resources.Load<TextAsset>("Original/data/UnityCatalog") != null;
             var campaign = AddSpriteButton("Campaign", "Original/images/MainMenuButtons01",
                 "Original/images/MainMenuButtons01Pressed", _safeArea,
@@ -380,6 +389,7 @@ namespace DiceSoccer
             containerRect.anchorMax = new Vector2(0.5f, 0.52f);
             containerRect.sizeDelta = new Vector2(300f, 300f);
             containerRect.pivot = new Vector2(0.5f, 0.5f);
+            StartCoroutine(AnimatePulse(containerRect));
 
             float halfW = 300f * (96f / 190f); // 151.6f
             float halfH = 300f;
@@ -731,16 +741,16 @@ namespace DiceSoccer
             homeSkullDeco.preserveAspect = true;
             homeSkullDeco.raycastTarget = false;
 
-            // Soccer ball with shadow:
+            // Soccer ball with shadow (sized to authentic proportions):
             var ballShadow = AddResourceImage("BallShadow", "Original/sprites/PlayerBody3/GameSoccerBallShadow",
                 _field, Vector2.zero, Vector2.zero);
-            ballShadow.rectTransform.sizeDelta = new Vector2(34f, 34f);
+            ballShadow.rectTransform.sizeDelta = new Vector2(36f, 18f);
             ballShadow.raycastTarget = false;
             _ballShadow = ballShadow;
 
             var ball = AddResourceImage("Ball", "Original/sprites/PlayerBody3/GameSoccerBall",
                 _field, Vector2.zero, Vector2.zero);
-            ball.rectTransform.sizeDelta = new Vector2(34f, 34f);
+            ball.rectTransform.sizeDelta = new Vector2(38f, 38f);
             ball.raycastTarget = false;
             _ballMarker = ball;
 
@@ -748,6 +758,13 @@ namespace DiceSoccer
             var awayLineup = _catalog.ResolveLineup(_currentFixture.lineup);
             _homePlayers = AddFormationPlayers(homeLineup, _field, true);
             _awayPlayers = AddFormationPlayers(awayLineup, _field, false);
+
+            // Ball and shadow always stay crisp above pitch elements and boots
+            if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
+            if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
+
+            if (_idleBobbingCoroutine != null) StopCoroutine(_idleBobbingCoroutine);
+            _idleBobbingCoroutine = StartCoroutine(IdlePlayerBobbing());
 
             // Dice on Field:
             CreateFieldDice(_field);
@@ -1005,7 +1022,7 @@ namespace DiceSoccer
 
             var border = AddResourceImage("Border", "Original/sprites/PlayerCardBG/CardBorder", root.transform,
                 Vector2.zero, Vector2.one);
-            border.color = GetPositionColor(player.position);
+            border.color = GetCardBorderColor(player.id);
             border.preserveAspect = false;
 
             var field = AddResourceImage("Field", "Original/sprites/PlayerCardBG/CardField", border.transform,
@@ -1576,7 +1593,7 @@ namespace DiceSoccer
                 CreatePlayerCardFront(player, _safeArea,
                     new Vector2(center.x - cardHalfWidth, center.y - cardHalfHeight),
                     new Vector2(center.x + cardHalfWidth, center.y + cardHalfHeight),
-                    false, true, () => ShowPlayerPicker(capturedSlot));
+                    false, true, () => ShowCardModal(player, () => ShowPlayerPicker(capturedSlot), $"SWAP {SlotName(capturedSlot)}"));
             }
 
             // Left Side: Shop & Kit (matching post_360.jpg)
@@ -2724,24 +2741,10 @@ namespace DiceSoccer
                     striker.rectTransform.anchoredPosition = new Vector2(kickDir, 0f);
                 }
 
-                // Animate ball shooting into the goal net
-                var ballStart = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : (homeScored ? new Vector2(0.435f, 0.44f) : new Vector2(0.565f, 0.44f));
+                // Animate ball shooting into the goal net with arc and rapid spin
+                var ballStart = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : (homeScored ? new Vector2(0.435f, 0.418f) : new Vector2(0.565f, 0.418f));
                 var ballTarget = homeScored ? new Vector2(0.78f, 0.50f) : new Vector2(0.22f, 0.50f);
-
-                float shootElapsed = 0f;
-                float shootDur = 0.22f;
-                while (shootElapsed < shootDur)
-                {
-                    shootElapsed += Time.deltaTime;
-                    float st = Mathf.Clamp01(shootElapsed / shootDur);
-                    var curPos = Vector2.Lerp(ballStart, ballTarget, st);
-                    if (_ballMarker != null)
-                        _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = curPos;
-                    if (_ballShadow != null)
-                        _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax =
-                            new Vector2(curPos.x, curPos.y - 0.015f);
-                    yield return null;
-                }
+                yield return StartCoroutine(SmoothPassBall(ballStart, ballTarget, 0.24f, true));
 
                 // Goalkeeper reacts defeated
                 if (goalie != null)
@@ -2777,22 +2780,9 @@ namespace DiceSoccer
                 }
 
                 // Ball shoots towards goalkeeper
-                var ballStart = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : (homeShooting ? new Vector2(0.435f, 0.44f) : new Vector2(0.565f, 0.44f));
-                var ballTarget = homeShooting ? new Vector2(0.53f, 0.48f) : new Vector2(0.47f, 0.48f);
-                float shootElapsed = 0f;
-                float shootDur = 0.20f;
-                while (shootElapsed < shootDur)
-                {
-                    shootElapsed += Time.deltaTime;
-                    float st = Mathf.Clamp01(shootElapsed / shootDur);
-                    var curPos = Vector2.Lerp(ballStart, ballTarget, st);
-                    if (_ballMarker != null)
-                        _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = curPos;
-                    if (_ballShadow != null)
-                        _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax =
-                            new Vector2(curPos.x, curPos.y - 0.015f);
-                    yield return null;
-                }
+                var ballStart = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : (homeShooting ? new Vector2(0.435f, 0.418f) : new Vector2(0.565f, 0.418f));
+                var ballTarget = homeShooting ? new Vector2(0.54f, 0.45f) : new Vector2(0.46f, 0.45f);
+                yield return StartCoroutine(SmoothPassBall(ballStart, ballTarget, 0.20f, false));
 
                 if (striker != null) striker.rectTransform.anchoredPosition = Vector2.zero;
                 if (goalie != null)
@@ -3183,44 +3173,82 @@ namespace DiceSoccer
 
         private IEnumerator PlayPossessionChangeAnimation(bool homeGainedPossession)
         {
-            if (_overlayContainer == null) yield break;
-            var path = homeGainedPossession
-                ? "Original/sprites/Prompt1/PossessionChangeGreen"
-                : "Original/sprites/Prompt1/PossessionChangeRed";
-            var banner = AddResourceImage("PossessionChangeBanner", path, _overlayContainer,
-                new Vector2(0.5f, 0.55f), new Vector2(0.5f, 0.55f));
-            banner.rectTransform.sizeDelta = new Vector2(440f, 240f);
-            banner.preserveAspect = true;
+            // 1. Identify tackling player
+            var (activeHome, activeAway) = GetActiveDuelSlots(_match != null ? _match.Location : 0);
+            Image tackler = null;
+            float lungeDir = homeGainedPossession ? 22f : -22f;
 
-            if (homeGainedPossession)
-                AudioManager.Instance.PlayWhistle();
-            else
-                AudioManager.Instance.PlayDisappoint();
+            if (homeGainedPossession && activeHome.Length > 0 && _homePlayers != null)
+            {
+                int slot = activeHome[activeHome.Length / 2];
+                if (slot >= 0 && slot < _homePlayers.Length) tackler = _homePlayers[slot];
+            }
+            else if (!homeGainedPossession && activeAway.Length > 0 && _awayPlayers != null)
+            {
+                int slot = activeAway[activeAway.Length / 2];
+                if (slot >= 0 && slot < _awayPlayers.Length) tackler = _awayPlayers[slot];
+            }
 
-            var elapsed = 0f;
-            while (elapsed < 0.25f)
+            // 2. Tackler lunges forward and dispossesses opponent
+            AudioManager.Instance.PlayKick();
+            if (tackler != null)
             {
-                elapsed += Time.deltaTime;
-                banner.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 1.05f, elapsed / 0.25f);
-                yield return null;
+                tackler.rectTransform.anchoredPosition = new Vector2(lungeDir, 0f);
             }
-            elapsed = 0f;
-            while (elapsed < 0.10f)
+
+            // 3. Ball smoothly slides & rolls to winning player's feet
+            int loc = _match != null ? _match.Location : 0;
+            Vector2 fromPos = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : GetBallPosition(loc, homeGainedPossession ? 1 : 0);
+            Vector2 toPos = GetBallPosition(loc, homeGainedPossession ? 0 : 1);
+            yield return StartCoroutine(SmoothPassBall(fromPos, toPos, 0.28f, false));
+
+            // 4. Tackler recovers to normal stance
+            if (tackler != null)
             {
-                elapsed += Time.deltaTime;
-                banner.rectTransform.localScale = Vector3.Lerp(Vector3.one * 1.05f, Vector3.one, elapsed / 0.10f);
-                yield return null;
+                tackler.rectTransform.anchoredPosition = Vector2.zero;
             }
-            yield return new WaitForSeconds(0.40f);
-            elapsed = 0f;
-            var col = banner.color;
-            while (elapsed < 0.25f)
+
+            // 5. Possession change banner animation
+            if (_overlayContainer != null)
             {
-                elapsed += Time.deltaTime;
-                banner.color = new Color(col.r, col.g, col.b, 1f - elapsed / 0.25f);
-                yield return null;
+                var path = homeGainedPossession
+                    ? "Original/sprites/Prompt1/PossessionChangeGreen"
+                    : "Original/sprites/Prompt1/PossessionChangeRed";
+                var banner = AddResourceImage("PossessionChangeBanner", path, _overlayContainer,
+                    new Vector2(0.5f, 0.55f), new Vector2(0.5f, 0.55f));
+                banner.rectTransform.sizeDelta = new Vector2(440f, 240f);
+                banner.preserveAspect = true;
+
+                if (homeGainedPossession)
+                    AudioManager.Instance.PlayWhistle();
+                else
+                    AudioManager.Instance.PlayDisappoint();
+
+                var elapsed = 0f;
+                while (elapsed < 0.22f)
+                {
+                    elapsed += Time.deltaTime;
+                    banner.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 1.05f, elapsed / 0.22f);
+                    yield return null;
+                }
+                elapsed = 0f;
+                while (elapsed < 0.10f)
+                {
+                    elapsed += Time.deltaTime;
+                    banner.rectTransform.localScale = Vector3.Lerp(Vector3.one * 1.05f, Vector3.one, elapsed / 0.10f);
+                    yield return null;
+                }
+                yield return new WaitForSeconds(0.35f);
+                elapsed = 0f;
+                var col = banner.color;
+                while (elapsed < 0.22f)
+                {
+                    elapsed += Time.deltaTime;
+                    banner.color = new Color(col.r, col.g, col.b, 1f - elapsed / 0.22f);
+                    yield return null;
+                }
+                if (banner != null) Destroy(banner.gameObject);
             }
-            if (banner != null) Destroy(banner.gameObject);
         }
 
         private IEnumerator PlayPoofAnimation(int slot)
@@ -4098,6 +4126,11 @@ namespace DiceSoccer
             var elapsed = 0f;
             const float duration = 0.50f;
 
+            if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
+            if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
+
+            float rollSpin = (targetPitchX < startPitchX) ? -1f : 1f;
+
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
@@ -4110,6 +4143,7 @@ namespace DiceSoccer
                 if (_ballMarker != null)
                 {
                     _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = ballPos;
+                    _ballMarker.rectTransform.Rotate(0f, 0f, rollSpin * 450f * Time.deltaTime);
                 }
                 if (_ballShadow != null)
                 {
@@ -4149,6 +4183,109 @@ namespace DiceSoccer
             if (_awayPlayers != null)
                 for (int i = 0; i < _awayPlayers.Length; i++)
                     if (_awayPlayers[i] != null) _awayPlayers[i].rectTransform.anchoredPosition = Vector2.zero;
+
+            if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
+            if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
+        }
+
+        private IEnumerator SmoothPassBall(Vector2 start, Vector2 target, float duration, bool withArc = false)
+        {
+            if (_ballMarker == null) yield break;
+            if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
+            _ballMarker.transform.SetAsLastSibling();
+
+            float elapsed = 0f;
+            float spinDir = target.x >= start.x ? -1f : 1f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                float smoothT = Mathf.SmoothStep(0f, 1f, t);
+                var cur = Vector2.Lerp(start, target, smoothT);
+                float arcY = withArc ? Mathf.Sin(smoothT * Mathf.PI) * 0.06f : 0f;
+
+                _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = new Vector2(cur.x, cur.y + arcY);
+                _ballMarker.rectTransform.Rotate(0f, 0f, spinDir * 900f * Time.deltaTime);
+
+                if (_ballShadow != null)
+                {
+                    _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax = new Vector2(cur.x, cur.y - 0.015f);
+                    float shadowScale = withArc ? Mathf.Lerp(1f, 0.75f, Mathf.Sin(smoothT * Mathf.PI)) : 1f;
+                    _ballShadow.rectTransform.localScale = new Vector3(shadowScale, shadowScale, 1f);
+                }
+
+                yield return null;
+            }
+
+            _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = target;
+            if (_ballShadow != null)
+            {
+                _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax = new Vector2(target.x, target.y - 0.015f);
+                _ballShadow.rectTransform.localScale = Vector3.one;
+            }
+        }
+
+        private IEnumerator IdlePlayerBobbing()
+        {
+            while (true)
+            {
+                if (!_inEncounterAnimation && _homePlayers != null && _awayPlayers != null)
+                {
+                    float t = Time.time * 3f;
+                    for (int i = 0; i < _homePlayers.Length; i++)
+                    {
+                        if (_homePlayers[i] != null && _homePlayers[i].gameObject.activeSelf)
+                        {
+                            float bob = Mathf.Sin(t + i * 0.7f) * 2.2f;
+                            _homePlayers[i].rectTransform.anchoredPosition = new Vector2(0f, bob);
+                        }
+                    }
+                    for (int i = 0; i < _awayPlayers.Length; i++)
+                    {
+                        if (_awayPlayers[i] != null && _awayPlayers[i].gameObject.activeSelf)
+                        {
+                            float bob = Mathf.Sin(t + i * 0.7f + 1.2f) * 2.2f;
+                            _awayPlayers[i].rectTransform.anchoredPosition = new Vector2(0f, bob);
+                        }
+                    }
+                }
+                yield return null;
+            }
+        }
+
+        private static Sprite GetLogoShineSprite(int frame)
+        {
+            if (frame == 7)
+                return GetUiSprite("Original/sprites/StartScreenLogoAnimation2/LogoShine07");
+            return GetUiSprite($"Original/sprites/StartScreenLogoAnimation/LogoShine{frame:00}");
+        }
+
+        private IEnumerator AnimateLogoShine(Image shineOverlay)
+        {
+            while (shineOverlay != null)
+            {
+                yield return new WaitForSeconds(3.5f);
+                if (shineOverlay == null) yield break;
+                shineOverlay.enabled = true;
+                for (int frame = 1; frame <= 11; frame++)
+                {
+                    if (shineOverlay == null) yield break;
+                    shineOverlay.sprite = GetLogoShineSprite(frame);
+                    yield return new WaitForSeconds(0.055f);
+                }
+                if (shineOverlay != null) shineOverlay.enabled = false;
+            }
+        }
+
+        private IEnumerator AnimatePulse(RectTransform targetRect)
+        {
+            while (targetRect != null)
+            {
+                float scale = 1f + Mathf.Sin(Time.time * 2.2f) * 0.025f;
+                targetRect.localScale = new Vector3(scale, scale, 1f);
+                yield return null;
+            }
         }
 
         private static Vector2 GetBallPosition(int location, int possession)
@@ -4156,17 +4293,17 @@ namespace DiceSoccer
             switch (location)
             {
                 case 0:
-                    return possession == 0 ? new Vector2(0.46f, 0.48f) : new Vector2(0.54f, 0.48f);
+                    return possession == 0 ? new Vector2(0.44f, 0.418f) : new Vector2(0.56f, 0.418f);
                 case 1:
-                    return possession == 0 ? new Vector2(0.435f, 0.24f) : new Vector2(0.565f, 0.24f);
+                    return possession == 0 ? new Vector2(0.44f, 0.418f) : new Vector2(0.56f, 0.418f);
                 case -1:
-                    return possession == 0 ? new Vector2(0.435f, 0.24f) : new Vector2(0.565f, 0.24f);
+                    return possession == 0 ? new Vector2(0.44f, 0.418f) : new Vector2(0.56f, 0.418f);
                 case 2:
-                    return new Vector2(0.435f, 0.44f);
+                    return possession == 0 ? new Vector2(0.435f, 0.418f) : new Vector2(0.56f, 0.45f);
                 case -2:
-                    return new Vector2(0.565f, 0.44f);
+                    return possession == 1 ? new Vector2(0.565f, 0.418f) : new Vector2(0.44f, 0.45f);
                 default:
-                    return new Vector2(0.50f, 0.48f);
+                    return new Vector2(0.50f, 0.418f);
             }
         }
 
@@ -4181,9 +4318,11 @@ namespace DiceSoccer
             if (_ballShadow != null)
             {
                 _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax =
-                    new Vector2(target.x, target.y - 0.015f);
+                    new Vector2(target.x, target.y - 0.012f);
                 _ballShadow.rectTransform.anchoredPosition = Vector2.zero;
             }
+            if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
+            if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
         }
 
         private string GetEncounterPreviewText()
@@ -4294,6 +4433,9 @@ namespace DiceSoccer
                 p.rectTransform.anchoredPosition = Vector2.zero;
                 p.rectTransform.localScale = new Vector3(1f, 1f, 1f);
             }
+
+            if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
+            if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
         }
 
         private IEnumerator PlayPoofAtPosition(Vector2 anchorPos)
@@ -4335,6 +4477,12 @@ namespace DiceSoccer
 
         private void ClearCanvas()
         {
+            if (_idleBobbingCoroutine != null)
+            {
+                StopCoroutine(_idleBobbingCoroutine);
+                _idleBobbingCoroutine = null;
+            }
+
             for (var i = _canvas.transform.childCount - 1; i >= 0; i--)
             {
                 var child = _canvas.transform.GetChild(i);
@@ -4469,13 +4617,13 @@ namespace DiceSoccer
 
             AddSpriteButton("Shop", "Original/images/BottomTab01",
                 "Original/images/BottomTab01Pressed", _safeArea,
-                new Vector2(0.32f, 0.06f), new Vector2(0.18f, 0.09f), ShowShop);
+                new Vector2(0.17f, 0.06f), new Vector2(0.32f, 0.10f), ShowShop);
             AddSpriteButton("Trophies", "Original/images/BottomTab02",
                 "Original/images/BottomTab02Pressed", _safeArea,
-                new Vector2(0.50f, 0.06f), new Vector2(0.18f, 0.09f), ShowTrophyRoom);
+                new Vector2(0.50f, 0.06f), new Vector2(0.32f, 0.10f), ShowTrophyRoom);
             AddSpriteButton("Options", "Original/images/BottomTab03",
                 "Original/images/BottomTab03Pressed", _safeArea,
-                new Vector2(0.68f, 0.06f), new Vector2(0.18f, 0.09f), ShowOptions);
+                new Vector2(0.83f, 0.06f), new Vector2(0.32f, 0.10f), ShowOptions);
         }
 
         private static Button AddSpriteButton(string objectName, string resourcePath,
