@@ -45,14 +45,62 @@ namespace DiceSoccer.Editor
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
 
-            var appIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(
-                "Assets/Resources/Original/images/Icon@2x.png");
-            if (appIcon != null)
+            // Setup high-resolution AppIcons
+            var bgPath = "Assets/AppIcons/AppIcon_Adaptive_Background.png";
+            var fgPath = "Assets/AppIcons/AppIcon_Adaptive_Foreground.png";
+            var legacyPath = "Assets/AppIcons/AppIcon_Legacy.png";
+            var roundPath = "Assets/AppIcons/AppIcon_Round.png";
+
+            foreach (var p in new[] { bgPath, fgPath, legacyPath, roundPath })
             {
-                PlayerSettings.SetIcons(NamedBuildTarget.Android, new[] { appIcon },
-                    IconKind.Application);
-                PlayerSettings.SetIcons(NamedBuildTarget.iOS, new[] { appIcon },
-                    IconKind.Application);
+                var importer = AssetImporter.GetAtPath(p) as TextureImporter;
+                if (importer != null)
+                {
+                    bool changed = false;
+                    if (importer.textureType != TextureImporterType.Default) { importer.textureType = TextureImporterType.Default; changed = true; }
+                    if (importer.npotScale != TextureImporterNPOTScale.None) { importer.npotScale = TextureImporterNPOTScale.None; changed = true; }
+                    if (!importer.alphaIsTransparency) { importer.alphaIsTransparency = true; changed = true; }
+                    if (importer.mipmapEnabled) { importer.mipmapEnabled = false; changed = true; }
+                    if (importer.filterMode != FilterMode.Bilinear) { importer.filterMode = FilterMode.Bilinear; changed = true; }
+                    if (importer.textureCompression != TextureImporterCompression.Uncompressed) { importer.textureCompression = TextureImporterCompression.Uncompressed; changed = true; }
+                    if (changed) importer.SaveAndReimport();
+                }
+            }
+
+            var bgIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(bgPath);
+            var fgIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(fgPath);
+            var legacyIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(legacyPath);
+            var roundIcon = AssetDatabase.LoadAssetAtPath<Texture2D>(roundPath);
+
+            if (legacyIcon != null)
+            {
+                PlayerSettings.SetIcons(NamedBuildTarget.Android, new[] { legacyIcon }, IconKind.Application);
+                PlayerSettings.SetIcons(NamedBuildTarget.iOS, new[] { legacyIcon }, IconKind.Application);
+            }
+
+            // Configure modern Android Adaptive Icons (Pixel 10 / Android 8.0-15+)
+            if (bgIcon != null && fgIcon != null)
+            {
+                var supportedKinds = PlayerSettings.GetSupportedIconKinds(NamedBuildTarget.Android);
+                foreach (var kind in supportedKinds)
+                {
+                    var icons = PlayerSettings.GetPlatformIcons(NamedBuildTarget.Android, kind);
+                    if (icons != null && icons.Length > 0)
+                    {
+                        foreach (var icon in icons)
+                        {
+                            if (icon.maxLayerCount >= 2)
+                            {
+                                icon.SetTextures(new[] { bgIcon, fgIcon });
+                            }
+                            else if (legacyIcon != null)
+                            {
+                                icon.SetTextures(new[] { legacyIcon });
+                            }
+                        }
+                        PlayerSettings.SetPlatformIcons(NamedBuildTarget.Android, kind, icons);
+                    }
+                }
             }
 
             EditorBuildSettings.scenes = new[]
@@ -61,7 +109,7 @@ namespace DiceSoccer.Editor
             };
 
             AssetDatabase.SaveAssets();
-            Debug.Log("Dice Soccer mobile settings configured for portrait Android and iOS.");
+            Debug.Log("Dice Soccer mobile settings configured with high-res Adaptive Icons for Android and iOS.");
         }
 
         public static void BuildAndroid()
