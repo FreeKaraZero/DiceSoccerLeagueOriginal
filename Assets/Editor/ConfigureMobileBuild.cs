@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace DiceSoccer.Editor
 {
-    internal static class ConfigureMobileBuild
+    public static class ConfigureMobileBuild
     {
         [MenuItem("Dice Soccer/Configure Android and iOS")]
         public static void Configure()

@@ -59,6 +59,7 @@ namespace DiceSoccer
         public int AwayScore { get; private set; }
         public int SecondsRemaining { get; private set; }
         public int Possession => _possession;
+        public int BallHolderSlotIndex { get; private set; } = 1; // 0 = bottom, 1 = center, 2 = top
         public bool IsFinished => SecondsRemaining <= 0;
 
         // BallZone 0..4 maps location (-2..+2) + 2 for 100% backward compatibility with HUD
@@ -202,7 +203,9 @@ namespace DiceSoccer
                 homeRoll.Faces,
                 awayRoll.Faces,
                 homeSlots,
-                awaySlots);
+                awaySlots,
+                FinalFaces(homeRoll.Rolls),
+                FinalFaces(awayRoll.Rolls));
         }
 
         public string CompleteEncounter()
@@ -285,6 +288,7 @@ namespace DiceSoccer
                     HomeScore++;
                     _location = 0; // Reset to midfield
                     _possession = 1; // Away kickoff
+                    BallHolderSlotIndex = 1; // Centered for kickoff
                     LastGoalCelebration = (GoalCelebrationType)UnityEngine.Random.Range(0, 3);
                     return $"GOAL! {HomeName} striker scores with {encounter.HomeTotal} " +
                            $"against {AwayName} goalkeeper's {encounter.AwayTotal}!";
@@ -293,6 +297,7 @@ namespace DiceSoccer
                 // Goalkeeper save (runSaveAnimation & goalieToDefenderAnimation)
                 _possession = 1; // Away GK takes ball
                 _location = 1; // Cleared to defending half
+                BallHolderSlotIndex = UnityEngine.Random.Range(0, 3); // Cleared out to defender
                 return $"SAVED! {AwayName}'s goalkeeper denies the shot ({encounter.AwayTotal} vs {encounter.HomeTotal}). Ball cleared.";
             }
             else // _location == -2: Away CF shooting on Home GK
@@ -305,6 +310,7 @@ namespace DiceSoccer
                     AwayScore++;
                     _location = 0; // Reset to midfield
                     _possession = 0; // Home kickoff
+                    BallHolderSlotIndex = 1; // Centered for kickoff
                     LastGoalCelebration = (GoalCelebrationType)UnityEngine.Random.Range(0, 3);
                     return $"GOAL! {AwayName} score with {encounter.AwayTotal} " +
                            $"against {HomeName} goalkeeper's {encounter.HomeTotal}!";
@@ -313,6 +319,7 @@ namespace DiceSoccer
                 // Goalkeeper save
                 _possession = 0; // Home GK takes ball
                 _location = -1; // Cleared to defending half
+                BallHolderSlotIndex = UnityEngine.Random.Range(0, 3); // Cleared out to defender
                 return $"SAVED! {HomeName}'s goalkeeper pulls off a brilliant save ({encounter.HomeTotal} vs {encounter.AwayTotal}).";
             }
         }
@@ -327,6 +334,7 @@ namespace DiceSoccer
 
             if (homeTotal > awayTotal || (homeTotal == awayTotal && homeWinsTie))
             {
+                BallHolderSlotIndex = GetBestRollIndex(encounter.HomeRollFaces);
                 if (_possession == 0)
                 {
                     // Home had ball: advance field (shiftFieldRight, location++)
@@ -342,6 +350,7 @@ namespace DiceSoccer
             }
             else if (awayTotal > homeTotal || (homeTotal == awayTotal && awayWinsTie))
             {
+                BallHolderSlotIndex = GetBestRollIndex(encounter.AwayRollFaces);
                 if (_possession == 1)
                 {
                     // Away had ball: advance field (shiftFieldLeft, location--)
@@ -358,6 +367,7 @@ namespace DiceSoccer
             else
             {
                 // Tie (runTieAnimation): ball stays put, current possession retained
+                BallHolderSlotIndex = (BallHolderSlotIndex + 1) % 3;
                 return $"{header} Both teams cancel each other out in a hard-fought draw. Possession holds.";
             }
         }
@@ -537,6 +547,8 @@ namespace DiceSoccer
             public readonly string AwayFaces;
             public readonly int[] HomeSlots;
             public readonly int[] AwaySlots;
+            public readonly int[] HomeRollFaces;
+            public readonly int[] AwayRollFaces;
 
             public PendingEncounter(
                 bool isShot,
@@ -546,7 +558,9 @@ namespace DiceSoccer
                 string homeFaces,
                 string awayFaces,
                 int[] homeSlots,
-                int[] awaySlots)
+                int[] awaySlots,
+                int[] homeRollFaces = null,
+                int[] awayRollFaces = null)
             {
                 IsShot = isShot;
                 Attacker = attacker;
@@ -556,7 +570,25 @@ namespace DiceSoccer
                 AwayFaces = awayFaces;
                 HomeSlots = homeSlots;
                 AwaySlots = awaySlots;
+                HomeRollFaces = homeRollFaces ?? Array.Empty<int>();
+                AwayRollFaces = awayRollFaces ?? Array.Empty<int>();
             }
+        }
+
+        private static int GetBestRollIndex(int[] faces)
+        {
+            if (faces == null || faces.Length == 0) return 1;
+            int bestIdx = 1;
+            int bestVal = -1;
+            for (int i = 0; i < faces.Length; i++)
+            {
+                if (faces[i] > bestVal)
+                {
+                    bestVal = faces[i];
+                    bestIdx = i;
+                }
+            }
+            return bestIdx;
         }
 
         private readonly struct DieRoll

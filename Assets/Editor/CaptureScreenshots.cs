@@ -139,6 +139,12 @@ namespace DiceSoccer.Editor
             // 5. Manage
             try { Call("ShowManage"); SaveScreen("Manage"); } catch (Exception e) { Debug.LogWarning(e); }
 
+            // 5b. Kit Selection
+            try { Call("ShowKitSelection"); SaveScreen("KitSelection"); } catch (Exception e) { Debug.LogWarning(e); }
+
+            // 5c. Player Picker / Deck Roster
+            try { Call("ShowPlayerPicker", 0); SaveScreen("PlayerPicker"); } catch (Exception e) { Debug.LogWarning(e); }
+
             // 6. Hiring
             try { Call("ShowHiring"); SaveScreen("Hiring"); } catch (Exception e) { Debug.LogWarning(e); }
 

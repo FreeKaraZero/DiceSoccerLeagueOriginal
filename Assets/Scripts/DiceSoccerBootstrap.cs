@@ -64,6 +64,14 @@ namespace DiceSoccer
         private HashSet<int> _unlockedPantsIds = new HashSet<int> { 1 };
         private int _currentShirtId = 1;
         private int _currentPantsId = 1;
+        private int _currentCrestId = 1;
+        private int _currentPatternStyle = 0;
+        private int _currentShirtColorId = 1;
+        private int _currentPatternColorId = 10;
+        private int _currentSleeveColorId = 1;
+        private int _deckCategoryFilter = -1; // -1 = Auto/Target slot role, 0 = ALL, 1 = GK, 2 = DEF, 3 = MID, 4 = FWD
+        private int _deckPage = 0;
+        private int _kitEditTab = 0; // 0 = Jersey, 1 = Pattern, 2 = Shorts, 3 = Sleeves
         private HashSet<int> _unlockedAchievementIds = new HashSet<int>();
         private HashSet<int> _unlockedEntourageIds = new HashSet<int>();
         private List<int> _equippedEntourageIds = new List<int>();
@@ -1100,7 +1108,7 @@ namespace DiceSoccer
             scoreboard.raycastTarget = false;
 
             // Home Team Crest Shield centered in the left yellow box of scoreboardBG:
-            var homeCrestShield = AddResourceImage("HomeShield", "Original/images/CustomCrest1", _safeArea,
+            var homeCrestShield = AddResourceImage("HomeShield", $"Original/images/CustomCrest{_currentCrestId}", _safeArea,
                 new Vector2(0.086f, 0.942f), new Vector2(0.086f, 0.942f));
             homeCrestShield.rectTransform.sizeDelta = new Vector2(42f, 42f);
             homeCrestShield.preserveAspect = true;
@@ -1570,16 +1578,30 @@ namespace DiceSoccer
 
             if (onAction != null && !string.IsNullOrEmpty(actionLabel))
             {
-                AddButton(actionLabel, modalBackdrop.transform, Grass,
-                    new Vector2(0.5f, 0.18f), new Vector2(0.78f, 0.07f), () =>
-                    {
-                        Destroy(modalBackdrop.gameObject);
-                        onAction.Invoke();
-                    });
+                if (actionLabel.Contains("HIRE") || isHire)
+                {
+                    AddSpriteButton("HireBtn", "Original/images/BuyButton", "Original/images/BuyButtonPressed",
+                        modalBackdrop.transform, new Vector2(0.5f, 0.18f), new Vector2(0.48f, 0.075f), () =>
+                        {
+                            Destroy(modalBackdrop.gameObject);
+                            onAction.Invoke();
+                        });
+                }
+                else
+                {
+                    AddSpriteButton("AssignBtn", "Original/sprites/EnemyLineupSS1/AssignPlayerButton",
+                        "Original/sprites/EnemyLineupSS1/AssignPlayerButtonPressed",
+                        modalBackdrop.transform, new Vector2(0.5f, 0.18f), new Vector2(0.48f, 0.075f), () =>
+                        {
+                            Destroy(modalBackdrop.gameObject);
+                            onAction.Invoke();
+                        });
+                }
             }
 
-            AddButton("CLOSE", modalBackdrop.transform, new Color32(68, 79, 84, 255),
-                new Vector2(0.5f, 0.09f), new Vector2(0.55f, 0.06f), () =>
+            AddSpriteButton("CloseBtn", "Original/sprites/KitSelectionSS/DoneButton",
+                "Original/sprites/KitSelectionSS/DoneButtonPressed", modalBackdrop.transform,
+                new Vector2(0.5f, 0.09f), new Vector2(0.36f, 0.065f), () =>
                 {
                     Destroy(modalBackdrop.gameObject);
                 });
@@ -1866,7 +1888,7 @@ namespace DiceSoccer
                 CreatePlayerCardFront(player, _safeArea,
                     new Vector2(center.x - cardHalfWidth, center.y - cardHalfHeight),
                     new Vector2(center.x + cardHalfWidth, center.y + cardHalfHeight),
-                    false, true, () => ShowCardModal(player, () => ShowPlayerPicker(capturedSlot), $"SWAP {SlotName(capturedSlot)}"));
+                    false, true, () => ShowPlayerPicker(capturedSlot));
             }
 
             // Left Side: Shop & Kit (matching post_360.jpg)
@@ -1881,7 +1903,7 @@ namespace DiceSoccer
             // Right Side: Bench & Play (matching post_360.jpg)
             AddSpriteButton("BenchBtn", "Original/sprites/EnemyLineupSS1/BenchButton",
                 "Original/sprites/EnemyLineupSS1/BenchButtonPressed", _safeArea,
-                new Vector2(0.84f, 0.24f), new Vector2(0.24f, 0.08f), () => ShowPlayerPicker(0));
+                new Vector2(0.84f, 0.24f), new Vector2(0.24f, 0.08f), () => ShowPlayerPicker(-1));
 
             AddSpriteButton("PlayBtn", "Original/sprites/EnemyLineupSS1/FormationPlayButton",
                 "Original/sprites/EnemyLineupSS1/FormationPlayButtonPressed", _safeArea,
@@ -1890,37 +1912,219 @@ namespace DiceSoccer
 
         private void ShowPlayerPicker(int slot)
         {
+            _catalog ??= GameCatalog.Load();
+            EnsureLineupLoaded();
             _selectedLineupSlot = slot;
-            var currentPlayer = _catalog.GetPlayer(_lineupIds[slot]);
+
             ClearCanvas();
             AddMenuBackdrop(false);
-            AddMenuHeader($"CHOOSE {SlotName(slot)}", ShowManage);
-            AddText($"Current: {currentPlayer.name}  |  {currentPlayer.position}",
-                _safeArea, 15, Ink, new Vector2(0.05f, 0.83f), new Vector2(0.95f, 0.88f));
 
-            var rosterContent = CreateScrollList("Owned roster", _safeArea,
-                new Vector2(0.04f, 0.15f), new Vector2(0.96f, 0.82f),
-                _ownedPlayerIds.Count * 96f);
-            for (var rosterIndex = 0; rosterIndex < _ownedPlayerIds.Count; rosterIndex++)
+            string title = slot >= 0 ? $"CHOOSE {SlotName(slot)}" : "TEAM ROSTER";
+            AddMenuHeader(title, ShowManage);
+
+            // Determine active category filter:
+            // 0 = ALL, 1 = GK, 2 = DEF, 3 = MID, 4 = FWD
+            int defaultFilter = slot switch
             {
-                var candidate = _catalog.GetPlayer(_ownedPlayerIds[rosterIndex]);
-                var capturedPlayerId = candidate.id;
-                var yMin = 1f - (rosterIndex + 1) / (float)_ownedPlayerIds.Count;
-                var yMax = 1f - rosterIndex / (float)_ownedPlayerIds.Count;
-                var canAssign = CanAssignPlayer(capturedPlayerId, slot);
-                var isCurrent = _lineupIds[slot] == candidate.id;
-                var btnLabel = isCurrent ? "CURRENT" : "EQUIP";
-                var btnColor = isCurrent ? Gold : (canAssign ? Grass : (Color)new Color32(50, 55, 60, 255));
-                AddPlayerCardRow(candidate, rosterContent,
-                    new Vector2(0.02f, yMin + 0.005f), new Vector2(0.98f, yMax - 0.005f),
-                    btnLabel, btnColor, canAssign && !isCurrent,
-                    () => AssignPlayerToSlot(slot, capturedPlayerId),
-                    () => ShowCardModal(candidate, canAssign && !isCurrent ? () => AssignPlayerToSlot(slot, capturedPlayerId) : null,
-                        canAssign && !isCurrent ? $"EQUIP FOR {SlotName(slot)}" : null));
+                0 => 1,
+                1 or 2 or 3 => 2,
+                4 or 5 or 6 => 4,
+                _ => 0
+            };
+            int activeFilter = _deckCategoryFilter >= 0 ? _deckCategoryFilter : defaultFilter;
+
+            // 1. Position Category Tabs: ALL | GK | DEF | MID | FWD
+            string[] tabLabels = { "ALL", "GK", "DEF", "MID", "FWD" };
+            float tabWidth = 0.17f;
+            float tabSpacing = 0.015f;
+            float startTabX = 0.5f - (5 * tabWidth + 4 * tabSpacing) * 0.5f + tabWidth * 0.5f;
+
+            for (int t = 0; t < tabLabels.Length; t++)
+            {
+                int tabIdx = t;
+                bool isSelected = (activeFilter == tabIdx);
+                float tabCenterX = startTabX + t * (tabWidth + tabSpacing);
+                Color tabBgColor = isSelected ? Grass : new Color32(42, 52, 60, 240);
+
+                var tabBtn = AddButton(tabLabels[t], _safeArea, tabBgColor,
+                    new Vector2(tabCenterX, 0.81f), new Vector2(tabWidth, 0.045f), () =>
+                    {
+                        _deckCategoryFilter = tabIdx;
+                        _deckPage = 0;
+                        AudioManager.Instance.PlayTap();
+                        ShowPlayerPicker(slot);
+                    });
+                if (isSelected)
+                {
+                    var outline = tabBtn.gameObject.AddComponent<Outline>();
+                    outline.effectColor = Gold;
+                    outline.effectDistance = new Vector2(2f, -2f);
+                }
             }
 
-            AddButton("BACK TO LINEUP", _safeArea, new Color32(68, 79, 84, 255),
-                new Vector2(0.5f, 0.08f), new Vector2(0.7f, 0.06f), ShowManage);
+            // 2. Filter candidates (Owned players first, hireable unowned second)
+            var candidates = new List<PlayerData>();
+
+            bool MatchesFilter(PlayerData p, int filter)
+            {
+                return filter switch
+                {
+                    1 => p.position == "GK",
+                    2 => p.position == "DEF",
+                    3 => p.position == "MID",
+                    4 => p.position == "FWD",
+                    _ => true
+                };
+            }
+
+            foreach (var pId in _ownedPlayerIds)
+            {
+                var p = _catalog.GetPlayer(pId);
+                if (p != null && MatchesFilter(p, activeFilter))
+                    candidates.Add(p);
+            }
+
+            foreach (var p in _catalog.Data.players)
+            {
+                if (p.id > 0 && p.id < 1000 && p.cost > 0 &&
+                    string.IsNullOrWhiteSpace(p.unlockCriteria) &&
+                    !_ownedPlayerIds.Contains(p.id) &&
+                    MatchesFilter(p, activeFilter))
+                {
+                    candidates.Add(p);
+                }
+            }
+
+            if (candidates.Count == 0)
+            {
+                AddText("NO PLAYERS FOUND IN THIS CATEGORY", _safeArea, 16, Paper,
+                    new Vector2(0.1f, 0.45f), new Vector2(0.9f, 0.55f));
+            }
+            else
+            {
+                // 3. Pagination (4 cards per page, 2x2 grid)
+                const int cardsPerPage = 4;
+                int totalPages = Mathf.Max(1, Mathf.CeilToInt(candidates.Count / (float)cardsPerPage));
+                _deckPage = Mathf.Clamp(_deckPage, 0, totalPages - 1);
+
+                Vector2[] cardMins = {
+                    new Vector2(0.06f, 0.505f),
+                    new Vector2(0.54f, 0.505f),
+                    new Vector2(0.06f, 0.165f),
+                    new Vector2(0.54f, 0.165f)
+                };
+                Vector2[] cardMaxs = {
+                    new Vector2(0.46f, 0.785f),
+                    new Vector2(0.94f, 0.785f),
+                    new Vector2(0.46f, 0.445f),
+                    new Vector2(0.94f, 0.445f)
+                };
+                Vector2[] btnCenters = {
+                    new Vector2(0.26f, 0.465f),
+                    new Vector2(0.74f, 0.465f),
+                    new Vector2(0.26f, 0.125f),
+                    new Vector2(0.74f, 0.125f)
+                };
+                Vector2 btnSize = new Vector2(0.38f, 0.050f);
+
+                int startIdx = _deckPage * cardsPerPage;
+                for (int i = 0; i < cardsPerPage && (startIdx + i) < candidates.Count; i++)
+                {
+                    var player = candidates[startIdx + i];
+                    var capturedPlayer = player;
+                    var pId = player.id;
+                    bool isOwned = _ownedPlayerIds.Contains(pId);
+                    bool isEquippedInSlot = slot >= 0 && _lineupIds[slot] == pId;
+                    int otherLineupSlot = Array.IndexOf(_lineupIds, pId);
+                    bool isInOtherSlot = slot >= 0 && otherLineupSlot >= 0 && otherLineupSlot != slot;
+                    bool canAssign = slot >= 0 && CanAssignPlayer(pId, slot);
+
+                    // Authentic Player Card Front
+                    CreatePlayerCardFront(player, _safeArea, cardMins[i], cardMaxs[i],
+                        isHire: !isOwned, isInteractive: true,
+                        onClick: () =>
+                        {
+                            ShowCardModal(capturedPlayer, canAssign ? () => AssignPlayerToSlot(slot, pId) : null,
+                                canAssign ? $"ASSIGN TO {SlotName(slot)}" : null, !isOwned);
+                        });
+
+                    // Action Button or Badge directly below card
+                    if (isEquippedInSlot)
+                    {
+                        var badge = AddPanel("EquippedBadge", _safeArea, Grass, btnCenters[i], btnSize);
+                        var bt = AddText("EQUIPPED", badge.transform, 13, Paper, Vector2.zero, Vector2.one);
+                        bt.fontStyle = FontStyle.Bold;
+                    }
+                    else if (isInOtherSlot)
+                    {
+                        var badge = AddPanel("InSquadBadge", _safeArea, new Color32(200, 150, 30, 255), btnCenters[i], btnSize);
+                        var bt = AddText($"IN SQUAD ({SlotName(otherLineupSlot)})", badge.transform, 11, Paper, Vector2.zero, Vector2.one);
+                        bt.fontStyle = FontStyle.Bold;
+                    }
+                    else if (isOwned)
+                    {
+                        if (canAssign)
+                        {
+                            AddButton("EQUIP", _safeArea, Grass, btnCenters[i], btnSize, () =>
+                            {
+                                AssignPlayerToSlot(slot, pId);
+                            });
+                        }
+                        else
+                        {
+                            var badge = AddPanel("BenchBadge", _safeArea, new Color32(70, 80, 90, 255), btnCenters[i], btnSize);
+                            var bt = AddText(slot >= 0 ? "WRONG ROLE" : "BENCH", badge.transform, 12, Paper, Vector2.zero, Vector2.one);
+                            bt.fontStyle = FontStyle.Bold;
+                        }
+                    }
+                    else
+                    {
+                        bool canAfford = _careerCash >= player.cost;
+                        var btnColor = (Color)(canAfford ? Gold : (Color)new Color32(75, 80, 85, 255));
+                        var btnLabel = canAfford ? $"HIRE  ${player.cost:N0}" : $"NEED  ${player.cost:N0}";
+                        AddButton(btnLabel, _safeArea, btnColor, btnCenters[i], btnSize, () =>
+                        {
+                            if (canAfford)
+                            {
+                                HirePlayer(pId);
+                                ShowPlayerPicker(slot);
+                            }
+                            else
+                            {
+                                AudioManager.Instance.PlayTap();
+                            }
+                        });
+                    }
+                }
+
+                // 4. Page Navigation & Manage Button
+                bool canPrev = _deckPage > 0;
+                var leftArrow = AddSpriteButton("LeftArrow",
+                    canPrev ? "Original/images/LeftArrow" : "Original/images/LeftArrowDisabled",
+                    canPrev ? "Original/images/LeftArrowSelected" : "Original/images/LeftArrowDisabled",
+                    _safeArea, new Vector2(0.12f, 0.055f), new Vector2(0.10f, 0.055f),
+                    canPrev ? () => { _deckPage--; AudioManager.Instance.PlayTap(); ShowPlayerPicker(slot); } : null);
+                leftArrow.interactable = canPrev;
+
+                AddText($"PAGE {_deckPage + 1} / {totalPages}", _safeArea, 14, Gold,
+                    new Vector2(0.19f, 0.035f), new Vector2(0.47f, 0.075f)).fontStyle = FontStyle.Bold;
+
+                bool canNext = _deckPage < totalPages - 1;
+                var rightArrow = AddSpriteButton("RightArrow",
+                    canNext ? "Original/images/RightArrow" : "Original/images/RightArrowDisabled",
+                    canNext ? "Original/images/RightArrowSelected" : "Original/images/RightArrowDisabled",
+                    _safeArea, new Vector2(0.54f, 0.055f), new Vector2(0.10f, 0.055f),
+                    canNext ? () => { _deckPage++; AudioManager.Instance.PlayTap(); ShowPlayerPicker(slot); } : null);
+                rightArrow.interactable = canNext;
+
+                AddSpriteButton("ManageBtn", "Original/sprites/EnemyLineupSS1/ManageButton",
+                    "Original/sprites/EnemyLineupSS1/ManageButtonPressed", _safeArea,
+                    new Vector2(0.80f, 0.055f), new Vector2(0.32f, 0.075f), () =>
+                    {
+                        AudioManager.Instance.PlayTap();
+                        ShowManage();
+                    });
+            }
         }
 
         private void ShowHiring()
@@ -2441,105 +2645,317 @@ namespace DiceSoccer
         {
             _catalog ??= GameCatalog.Load();
             ClearCanvas();
-            AddResourceImage("KitBG", "Original/images/KitSelectionBG", _safeArea,
-                Vector2.zero, Vector2.one).preserveAspect = false;
-            AddMenuHeader("KIT SELECTION", ShowManage);
+
+            // Background fills safe area
+            var bg = AddResourceImage("KitBG", "Original/images/KitSelectionBG", _safeArea,
+                Vector2.zero, Vector2.one);
+            bg.preserveAspect = false;
+
+            // Authentic top menu header with back button that saves kit configuration
+            AddMenuHeader("KIT SELECTION", () =>
+            {
+                SaveCareerState();
+                AudioManager.Instance.PlayTap();
+                ShowManage();
+            });
 
             if (PlayerPrefs.GetInt("diceSoccer.tutorial.3", 0) == 0)
                 ShowTutorialPopup(3);
 
-            var currentShirt = _catalog.GetShirt(_currentShirtId) ?? _catalog.Data.shirts[0];
-
+            // ==========================================
+            // CENTER: Character Kit Preview (Pixel-perfect match on locker character)
+            // ==========================================
             var kitBox = new GameObject("CenterKitPreview", typeof(RectTransform));
             kitBox.transform.SetParent(_safeArea, false);
             var kitRect = kitBox.GetComponent<RectTransform>();
-            kitRect.anchorMin = new Vector2(0.2f, 0.44f);
-            kitRect.anchorMax = new Vector2(0.8f, 0.88f);
+            // Derived from OpenCV template match at (185, 527) with size 260x350 on 640x960 BG:
+            kitRect.anchorMin = new Vector2(185f / 640f, (960f - 527f - 350f) / 960f); // (0.2890625f, 0.08645833f)
+            kitRect.anchorMax = new Vector2((185f + 260f) / 640f, (960f - 527f) / 960f); // (0.6953125f, 0.45104167f)
             kitRect.offsetMin = Vector2.zero;
             kitRect.offsetMax = Vector2.zero;
 
+            // Layer 1: Shorts
             var shorts = AddResourceImage("Shorts", "Original/sprites/KitSelectionSS/KitSelectionShorts", kitBox.transform,
                 Vector2.zero, Vector2.one);
             shorts.preserveAspect = true;
             shorts.color = _catalog.GetColourRgb(_currentPantsId);
 
+            // Layer 2: Shirt Body
             var shirt = AddResourceImage("Shirt", "Original/sprites/KitSelectionSS/KitSelectionShirt", kitBox.transform,
                 Vector2.zero, Vector2.one);
             shirt.preserveAspect = true;
-            shirt.color = _catalog.GetColourRgb(currentShirt.shirtColour);
+            shirt.color = _catalog.GetColourRgb(_currentShirtColorId);
 
+            // Layer 3: Sleeves
             var sleeves = AddResourceImage("Sleeves", "Original/sprites/KitSelectionSS/KitSelectionSleeves", kitBox.transform,
                 Vector2.zero, Vector2.one);
             sleeves.preserveAspect = true;
-            sleeves.color = _catalog.GetColourRgb(currentShirt.sleeveColour);
+            sleeves.color = _catalog.GetColourRgb(_currentSleeveColorId);
 
-            if (currentShirt.shirtStyle > 0 && currentShirt.shirtStyle <= 7)
+            // Layer 4: Pattern Design (if style > 0)
+            if (_currentPatternStyle > 0 && _currentPatternStyle <= 7)
             {
-                var pat = AddResourceImage("Pattern", $"Original/sprites/KitSelectionSS/KitSelectionDesign{currentShirt.shirtStyle}", kitBox.transform,
+                var pat = AddResourceImage("Pattern", $"Original/sprites/KitSelectionSS/KitSelectionDesign{_currentPatternStyle}", kitBox.transform,
                     Vector2.zero, Vector2.one);
                 pat.preserveAspect = true;
-                pat.color = _catalog.GetColourRgb(currentShirt.styleColour);
+                pat.color = _catalog.GetColourRgb(_currentPatternColorId);
             }
+
+            // ==========================================
+            // LEFT COLUMN (Locker Door): Crest, Kit Preset & Pattern Cycler
+            // ==========================================
+            // 1. Team Crest Box
+            var crestTitle = AddText("TEAM CREST", _safeArea, 13, Paper,
+                new Vector2(0.04f, 0.84f), new Vector2(0.28f, 0.88f));
+            crestTitle.fontStyle = FontStyle.Bold;
+            crestTitle.alignment = TextAnchor.MiddleCenter;
+
+            var crestBox = AddResourceImage("CrestBox", "Original/images/CustomCrestBox", _safeArea,
+                new Vector2(0.06f, 0.68f), new Vector2(0.26f, 0.83f));
+            crestBox.preserveAspect = true;
+
+            var crestShield = AddResourceImage("CrestShield", $"Original/images/CustomCrest{_currentCrestId}", crestBox.transform,
+                new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
+            crestShield.preserveAspect = true;
+
+            // Allow tapping the box directly to cycle crests
+            var crestBtn = crestBox.gameObject.AddComponent<Button>();
+            crestBtn.targetGraphic = crestBox;
+            crestBtn.onClick.AddListener(() =>
+            {
+                _currentCrestId = (_currentCrestId % 3) + 1;
+                SaveCareerState();
+                AudioManager.Instance.PlayTap();
+                ShowKitSelection();
+            });
+
+            // Crest left/right navigation
+            AddSpriteButton("CrestLeft", "Original/images/LeftArrow", "Original/images/LeftArrowSelected", _safeArea,
+                new Vector2(0.06f, 0.63f), new Vector2(0.07f, 0.045f), () =>
+                {
+                    _currentCrestId = _currentCrestId == 1 ? 3 : _currentCrestId - 1;
+                    SaveCareerState();
+                    AudioManager.Instance.PlayTap();
+                    ShowKitSelection();
+                });
+
+            var crestNum = AddText($"CREST {_currentCrestId}/3", _safeArea, 12, Gold,
+                new Vector2(0.09f, 0.61f), new Vector2(0.23f, 0.65f));
+            crestNum.fontStyle = FontStyle.Bold;
+            crestNum.alignment = TextAnchor.MiddleCenter;
+
+            AddSpriteButton("CrestRight", "Original/images/RightArrow", "Original/images/RightArrowSelected", _safeArea,
+                new Vector2(0.25f, 0.63f), new Vector2(0.07f, 0.045f), () =>
+                {
+                    _currentCrestId = _currentCrestId == 3 ? 1 : _currentCrestId + 1;
+                    SaveCareerState();
+                    AudioManager.Instance.PlayTap();
+                    ShowKitSelection();
+                });
+
+            // 2. Official Kit Presets
+            var presetTitle = AddText("KIT PRESET", _safeArea, 13, Paper,
+                new Vector2(0.02f, 0.52f), new Vector2(0.28f, 0.56f));
+            presetTitle.fontStyle = FontStyle.Bold;
+            presetTitle.alignment = TextAnchor.MiddleCenter;
+
+            var presetNum = AddText($"KIT #{_currentShirtId}", _safeArea, 12, Gold,
+                new Vector2(0.02f, 0.465f), new Vector2(0.28f, 0.505f));
+            presetNum.fontStyle = FontStyle.Bold;
+            presetNum.alignment = TextAnchor.MiddleCenter;
 
             var unlockedShirts = new List<int>(_unlockedShirtIds);
             unlockedShirts.Sort();
-            var unlockedPants = new List<int>(_unlockedPantsIds);
-            unlockedPants.Sort();
+            if (unlockedShirts.Count == 0) unlockedShirts.Add(1);
 
-            const float shirtY = 0.35f;
-            AddSpriteButton("ShirtLeft", "Original/images/LeftArrow", "Original/images/LeftArrowSelected", _safeArea,
-                new Vector2(0.18f, shirtY), new Vector2(0.12f, 0.055f), () =>
+            AddSpriteButton("PresetLeft", "Original/images/LeftArrow", "Original/images/LeftArrowSelected", _safeArea,
+                new Vector2(0.08f, 0.415f), new Vector2(0.08f, 0.045f), () =>
                 {
                     var idx = unlockedShirts.IndexOf(_currentShirtId);
                     idx = (idx - 1 + unlockedShirts.Count) % unlockedShirts.Count;
                     _currentShirtId = unlockedShirts[idx];
+                    var s = _catalog.GetShirt(_currentShirtId);
+                    if (s != null)
+                    {
+                        _currentShirtColorId = s.shirtColour;
+                        _currentSleeveColorId = s.sleeveColour;
+                        _currentPatternStyle = s.shirtStyle;
+                        _currentPatternColorId = s.styleColour;
+                    }
                     SaveCareerState();
                     AudioManager.Instance.PlayTap();
                     ShowKitSelection();
                 });
 
-            AddText($"SHIRT KIT #{_currentShirtId}", _safeArea, 18, Paper,
-                new Vector2(0.28f, shirtY - 0.025f), new Vector2(0.72f, shirtY + 0.025f));
-
-            AddSpriteButton("ShirtRight", "Original/images/RightArrow", "Original/images/RightArrowSelected", _safeArea,
-                new Vector2(0.82f, shirtY), new Vector2(0.12f, 0.055f), () =>
+            AddSpriteButton("PresetRight", "Original/images/RightArrow", "Original/images/RightArrowSelected", _safeArea,
+                new Vector2(0.22f, 0.415f), new Vector2(0.08f, 0.045f), () =>
                 {
                     var idx = unlockedShirts.IndexOf(_currentShirtId);
                     idx = (idx + 1) % unlockedShirts.Count;
                     _currentShirtId = unlockedShirts[idx];
+                    var s = _catalog.GetShirt(_currentShirtId);
+                    if (s != null)
+                    {
+                        _currentShirtColorId = s.shirtColour;
+                        _currentSleeveColorId = s.sleeveColour;
+                        _currentPatternStyle = s.shirtStyle;
+                        _currentPatternColorId = s.styleColour;
+                    }
                     SaveCareerState();
                     AudioManager.Instance.PlayTap();
                     ShowKitSelection();
                 });
 
-            const float shortsY = 0.25f;
-            AddSpriteButton("ShortsLeft", "Original/images/LeftArrow", "Original/images/LeftArrowSelected", _safeArea,
-                new Vector2(0.18f, shortsY), new Vector2(0.12f, 0.055f), () =>
+            // 3. Shirt Pattern Style Cycler
+            var patTitle = AddText("PATTERN", _safeArea, 13, Paper,
+                new Vector2(0.02f, 0.33f), new Vector2(0.28f, 0.37f));
+            patTitle.fontStyle = FontStyle.Bold;
+            patTitle.alignment = TextAnchor.MiddleCenter;
+
+            string[] patternNames = { "PLAIN", "HOOPS", "STRIPES", "SASH", "HALF", "BAND", "CHEVRON", "SPLIT" };
+            var patNameStr = (_currentPatternStyle >= 0 && _currentPatternStyle < patternNames.Length)
+                ? patternNames[_currentPatternStyle]
+                : $"STYLE {_currentPatternStyle}";
+
+            var patLabel = AddText(patNameStr, _safeArea, 12, Ink,
+                new Vector2(0.02f, 0.275f), new Vector2(0.28f, 0.315f));
+            patLabel.fontStyle = FontStyle.Bold;
+            patLabel.alignment = TextAnchor.MiddleCenter;
+
+            AddSpriteButton("PatLeft", "Original/images/LeftArrow", "Original/images/LeftArrowSelected", _safeArea,
+                new Vector2(0.08f, 0.225f), new Vector2(0.08f, 0.045f), () =>
                 {
-                    var idx = unlockedPants.IndexOf(_currentPantsId);
-                    idx = (idx - 1 + unlockedPants.Count) % unlockedPants.Count;
-                    _currentPantsId = unlockedPants[idx];
+                    _currentPatternStyle = (_currentPatternStyle + 7) % 8;
                     SaveCareerState();
                     AudioManager.Instance.PlayTap();
                     ShowKitSelection();
                 });
 
-            AddText($"SHORTS COLOR #{_currentPantsId}", _safeArea, 18, Paper,
-                new Vector2(0.28f, shortsY - 0.025f), new Vector2(0.72f, shortsY + 0.025f));
-
-            AddSpriteButton("ShortsRight", "Original/images/RightArrow", "Original/images/RightArrowSelected", _safeArea,
-                new Vector2(0.82f, shortsY), new Vector2(0.12f, 0.055f), () =>
+            AddSpriteButton("PatRight", "Original/images/RightArrow", "Original/images/RightArrowSelected", _safeArea,
+                new Vector2(0.22f, 0.225f), new Vector2(0.08f, 0.045f), () =>
                 {
-                    var idx = unlockedPants.IndexOf(_currentPantsId);
-                    idx = (idx + 1) % unlockedPants.Count;
-                    _currentPantsId = unlockedPants[idx];
+                    _currentPatternStyle = (_currentPatternStyle + 1) % 8;
                     SaveCareerState();
                     AudioManager.Instance.PlayTap();
                     ShowKitSelection();
                 });
 
-            AddSpriteButton("DoneKit", "Original/sprites/KitSelectionSS/DoneButton", "Original/sprites/KitSelectionSS/DoneButtonPressed", _safeArea,
-                new Vector2(0.5f, 0.12f), new Vector2(0.48f, 0.075f), () =>
+            // ==========================================
+            // RIGHT COLUMN (Shelves): Target Part Tabs & Authentic Color Swatches
+            // ==========================================
+            var shelfBacking = AddPanel("ShelfBacking", _safeArea, new Color32(20, 26, 32, 210),
+                new Vector2(0.835f, 0.52f), new Vector2(0.31f, 0.74f));
+            shelfBacking.raycastTarget = false;
+
+            var customTitle = AddText("CUSTOMIZE", _safeArea, 13, Paper,
+                new Vector2(0.70f, 0.84f), new Vector2(0.97f, 0.88f));
+            customTitle.fontStyle = FontStyle.Bold;
+            customTitle.alignment = TextAnchor.MiddleCenter;
+
+            // 2x2 Part Category Tabs:
+            // Row 1: SHIRT (0), PATTERN (1)
+            // Row 2: SHORTS (2), SLEEVES (3)
+            string[] tabNames = { "SHIRT", "PATTERN", "SHORTS", "SLEEVES" };
+            Vector2[] tabPositions =
+            {
+                new Vector2(0.765f, 0.785f),
+                new Vector2(0.905f, 0.785f),
+                new Vector2(0.765f, 0.715f),
+                new Vector2(0.905f, 0.715f)
+            };
+
+            for (var t = 0; t < 4; t++)
+            {
+                var tabIdx = t;
+                var isActive = _kitEditTab == tabIdx;
+                var tabColor = (Color)(isActive ? Gold : (Color)new Color32(40, 48, 54, 255));
+                AddButton(tabNames[tabIdx], _safeArea, tabColor, tabPositions[tabIdx], new Vector2(0.135f, 0.055f), () =>
+                {
+                    _kitEditTab = tabIdx;
+                    AudioManager.Instance.PlayTap();
+                    ShowKitSelection();
+                });
+            }
+
+            // Subtitle of active part
+            string[] editLabels = { "PICK SHIRT COLOR", "PICK PATTERN COLOR", "PICK SHORTS COLOR", "PICK SLEEVE COLOR" };
+            var activePartLabel = AddText(editLabels[_kitEditTab], _safeArea, 11, Gold,
+                new Vector2(0.70f, 0.64f), new Vector2(0.97f, 0.675f));
+            activePartLabel.fontStyle = FontStyle.Bold;
+            activePartLabel.alignment = TextAnchor.MiddleCenter;
+
+            // Authentic Color Swatches from Colour.plist (10 authentic kit colors)
+            var activeColorId = _kitEditTab switch
+            {
+                0 => _currentShirtColorId,
+                1 => _currentPatternColorId,
+                2 => _currentPantsId,
+                3 => _currentSleeveColorId,
+                _ => 1
+            };
+
+            // 10 authentic colors: IDs 1..10 in 5 rows x 2 columns
+            int[] paletteColors = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            float[] rowYs = { 0.565f, 0.475f, 0.385f, 0.295f, 0.205f };
+            float[] colXs = { 0.765f, 0.905f };
+
+            for (var i = 0; i < paletteColors.Length; i++)
+            {
+                var colId = paletteColors[i];
+                var cRgb = _catalog.GetColourRgb(colId);
+                var row = i / 2;
+                var col = i % 2;
+                var centerPos = new Vector2(colXs[col], rowYs[row]);
+
+                var isSelected = activeColorId == colId;
+
+                // Swatch Button container
+                var swatchGo = new GameObject($"ColorSwatch_{colId}", typeof(RectTransform), typeof(Image), typeof(Button));
+                swatchGo.transform.SetParent(_safeArea, false);
+                var sRect = swatchGo.GetComponent<RectTransform>();
+                sRect.anchorMin = sRect.anchorMax = centerPos;
+                sRect.sizeDelta = new Vector2(42f, 32f);
+
+                var sImg = swatchGo.GetComponent<Image>();
+                sImg.color = cRgb;
+
+                // Border: Gold outline if selected, subtle dark outline if not
+                var borderGo = new GameObject("Border", typeof(RectTransform), typeof(Outline));
+                borderGo.transform.SetParent(swatchGo.transform, false);
+                var outline = borderGo.GetComponent<Outline>();
+                outline.effectColor = isSelected ? (Color)Gold : new Color(0, 0, 0, 0.85f);
+                outline.effectDistance = isSelected ? new Vector2(3f, 3f) : new Vector2(1.5f, 1.5f);
+
+                if (isSelected)
+                {
+                    var checkText = AddText("✓", swatchGo.transform, 16, (colId == 1 || colId == 4 || colId == 6) ? Ink : Paper,
+                        Vector2.zero, Vector2.one);
+                    checkText.fontStyle = FontStyle.Bold;
+                    checkText.alignment = TextAnchor.MiddleCenter;
+                }
+
+                var sBtn = swatchGo.GetComponent<Button>();
+                sBtn.targetGraphic = sImg;
+                sBtn.onClick.AddListener(() =>
+                {
+                    switch (_kitEditTab)
+                    {
+                        case 0: _currentShirtColorId = colId; break;
+                        case 1: _currentPatternColorId = colId; break;
+                        case 2: _currentPantsId = colId; break;
+                        case 3: _currentSleeveColorId = colId; break;
+                    }
+                    SaveCareerState();
+                    AudioManager.Instance.PlayTap();
+                    ShowKitSelection();
+                });
+            }
+
+            // ==========================================
+            // BOTTOM: Authentic Done Button
+            // ==========================================
+            AddSpriteButton("DoneKit", "Original/sprites/KitSelectionSS/DoneButton", "Original/sprites/KitSelectionSS/DoneButtonPressed",
+                _safeArea, new Vector2(0.50f, 0.045f), new Vector2(0.32f, 0.065f), () =>
                 {
                     SaveCareerState();
                     AudioManager.Instance.PlayTap();
@@ -2900,17 +3316,18 @@ namespace DiceSoccer
 
                 // 3. Tumble rolling dice animation (DiceRoll01..DiceRoll13)
                 AudioManager.Instance.PlayDiceRoll();
-                for (var frame = 1; frame <= 13; frame++)
+                for (var frame = 1; frame <= 14; frame++)
                 {
-                    var rollSprite = GetUiSprite($"Original/sprites/PlayerBody3/DiceRoll{frame:00}");
+                    int rollIdx = ((frame - 1) % 13) + 1;
+                    var rollSprite = GetUiSprite($"Original/sprites/PlayerBody3/DiceRoll{rollIdx:00}");
                     for (var i = 0; i < homeFaces.Length; i++)
                         if (_homeDieRoots[i] != null) _homeDieRoots[i].GetComponent<Image>().sprite = rollSprite;
                     for (var i = 0; i < awayFaces.Length; i++)
                         if (_awayDieRoots[i] != null) _awayDieRoots[i].GetComponent<Image>().sprite = rollSprite;
-                    yield return new WaitForSeconds(0.045f);
+                    yield return new WaitForSeconds(0.055f);
                 }
 
-                // 4. Settle dice on final faces
+                // 4. Settle dice on final faces with impact
                 AudioManager.Instance.PlayTap();
                 var diceBaseSprite = GetUiSprite("Original/sprites/PlayerBody3/DiceRoll00");
                 for (var i = 0; i < homeFaces.Length; i++)
@@ -2925,6 +3342,10 @@ namespace DiceSoccer
                 }
             }
 
+            // SUSPENSE HOLD: Keep dice visible so player can manually count dots and feel suspense!
+            _matchReport.text = "Counting the dice...";
+            yield return new WaitForSeconds(1.20f);
+
             var oldHomeScore = _match.HomeScore;
             var oldAwayScore = _match.AwayScore;
             var oldLocation = _match.Location;
@@ -2933,7 +3354,8 @@ namespace DiceSoccer
             var report = _match.CompleteEncounter();
             report = CompactMatchReport(report, _match.ClockText());
 
-            // 5. Show duel totals aligned to duel layout
+            // 5. Reveal duel totals with punch impact
+            AudioManager.Instance.PlayTap();
             if (_homeTotalText != null && _awayTotalText != null)
             {
                 _homeTotalText.text = _match.LastHomeTotal.ToString();
@@ -2947,6 +3369,12 @@ namespace DiceSoccer
                 _homeTotalText.rectTransform.anchoredPosition = Vector2.zero;
                 _awayTotalText.rectTransform.anchoredPosition = Vector2.zero;
 
+                bool homeWon = _match.LastHomeTotal > _match.LastAwayTotal || (_match.LastHomeTotal == _match.LastAwayTotal && _match.HomeWinOnTie);
+                bool awayWon = _match.LastAwayTotal > _match.LastHomeTotal || (_match.LastHomeTotal == _match.LastAwayTotal && _match.AwayWinOnTie);
+
+                _homeTotalText.color = homeWon ? new Color32(245, 215, 60, 255) : new Color32(180, 180, 180, 255);
+                _awayTotalText.color = awayWon ? new Color32(245, 215, 60, 255) : new Color32(180, 180, 180, 255);
+
                 _homeTotalText.enabled = true;
                 _awayTotalText.enabled = true;
             }
@@ -2954,6 +3382,9 @@ namespace DiceSoccer
             _matchScore.text = $"{_match.HomeScore}   -   {_match.AwayScore}";
             _matchClock.text = _match.ClockText();
             _matchReport.text = report;
+
+            // Pause on revealed totals for dramatic outcome appreciation
+            yield return new WaitForSeconds(0.80f);
 
             // 6. Check for ability triggers (e.g. Critical Striker on 3, Pair, etc.)
             bool hasPair = false;
@@ -2969,15 +3400,17 @@ namespace DiceSoccer
             {
                 Vector2 burstPos = _homeDieRoots[threeIdx].GetComponent<RectTransform>().anchorMin;
                 yield return StartCoroutine(PlayAbilityBurst(burstPos, "Original/sprites/BuffTrigger/Trigger21", "Critical Striker"));
+                yield return new WaitForSeconds(0.85f);
             }
             else if (hasPair && _homeDieRoots != null && _homeDieRoots[0] != null)
             {
                 Vector2 burstPos = _homeDieRoots[0].GetComponent<RectTransform>().anchorMin;
-                yield return StartCoroutine(PlayAbilityBurst(burstPos, "Original/sprites/BuffTrigger1/Trigger2", "Critical Striker"));
+                yield return StartCoroutine(PlayAbilityBurst(burstPos, "Original/sprites/BuffTrigger1/Trigger2", "Pair Boost"));
+                yield return new WaitForSeconds(0.85f);
             }
             else
             {
-                yield return new WaitForSeconds(0.45f);
+                yield return new WaitForSeconds(0.35f);
             }
 
             // 7. Smoke poof on dice before hiding them
@@ -3115,7 +3548,9 @@ namespace DiceSoccer
                 }
                 else
                 {
-                    SetBallPosition(_match.Location, _match.Possession, false);
+                    var fromPos = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : GetBallPosition(oldLocation, oldPossession);
+                    var toPos = GetBallPosition(_match.Location, _match.Possession, _match.BallHolderSlotIndex);
+                    yield return StartCoroutine(SmoothPassBall(fromPos, toPos, 0.32f, false));
                 }
             }
 
@@ -3461,14 +3896,18 @@ namespace DiceSoccer
             Image tackler = null;
             float lungeDir = homeGainedPossession ? 22f : -22f;
 
+            int winnerSlot = _match != null ? _match.BallHolderSlotIndex : 1;
+
             if (homeGainedPossession && activeHome.Length > 0 && _homePlayers != null)
             {
-                int slot = activeHome[activeHome.Length / 2];
+                int slotIdx = Mathf.Clamp(winnerSlot, 0, activeHome.Length - 1);
+                int slot = activeHome[slotIdx];
                 if (slot >= 0 && slot < _homePlayers.Length) tackler = _homePlayers[slot];
             }
             else if (!homeGainedPossession && activeAway.Length > 0 && _awayPlayers != null)
             {
-                int slot = activeAway[activeAway.Length / 2];
+                int slotIdx = Mathf.Clamp(winnerSlot, 0, activeAway.Length - 1);
+                int slot = activeAway[slotIdx];
                 if (slot >= 0 && slot < _awayPlayers.Length) tackler = _awayPlayers[slot];
             }
 
@@ -3482,8 +3921,8 @@ namespace DiceSoccer
             // 3. Ball smoothly slides & rolls to winning player's feet
             int loc = _match != null ? _match.Location : 0;
             Vector2 fromPos = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : GetBallPosition(loc, homeGainedPossession ? 1 : 0);
-            Vector2 toPos = GetBallPosition(loc, homeGainedPossession ? 0 : 1);
-            yield return StartCoroutine(SmoothPassBall(fromPos, toPos, 0.28f, false));
+            Vector2 toPos = GetBallPosition(loc, homeGainedPossession ? 0 : 1, winnerSlot);
+            yield return StartCoroutine(SmoothPassBall(fromPos, toPos, 0.32f, false));
 
             // 4. Tackler recovers to normal stance
             if (tackler != null)
@@ -4183,6 +4622,11 @@ namespace DiceSoccer
             _careerCash = Mathf.Max(0, PlayerPrefs.GetInt("diceSoccer.cash", 0));
             _currentShirtId = Mathf.Max(1, PlayerPrefs.GetInt("diceSoccer.currentShirt", 1));
             _currentPantsId = Mathf.Max(1, PlayerPrefs.GetInt("diceSoccer.currentPants", 1));
+            _currentCrestId = Mathf.Clamp(PlayerPrefs.GetInt("diceSoccer.currentCrest", 1), 1, 3);
+            _currentPatternStyle = Mathf.Clamp(PlayerPrefs.GetInt("diceSoccer.currentPatternStyle", 0), 0, 7);
+            _currentShirtColorId = Mathf.Max(1, PlayerPrefs.GetInt("diceSoccer.currentShirtColor", 1));
+            _currentPatternColorId = Mathf.Max(1, PlayerPrefs.GetInt("diceSoccer.currentPatternColor", 10));
+            _currentSleeveColorId = Mathf.Max(1, PlayerPrefs.GetInt("diceSoccer.currentSleeveColor", 1));
 
             _unlockedShirtIds = LoadIntSet("diceSoccer.unlockedShirts", new[] { 1 });
             _unlockedPantsIds = LoadIntSet("diceSoccer.unlockedPants", new[] { 1 });
@@ -4214,6 +4658,11 @@ namespace DiceSoccer
             PlayerPrefs.SetInt("diceSoccer.cash", _careerCash);
             PlayerPrefs.SetInt("diceSoccer.currentShirt", _currentShirtId);
             PlayerPrefs.SetInt("diceSoccer.currentPants", _currentPantsId);
+            PlayerPrefs.SetInt("diceSoccer.currentCrest", _currentCrestId);
+            PlayerPrefs.SetInt("diceSoccer.currentPatternStyle", _currentPatternStyle);
+            PlayerPrefs.SetInt("diceSoccer.currentShirtColor", _currentShirtColorId);
+            PlayerPrefs.SetInt("diceSoccer.currentPatternColor", _currentPatternColorId);
+            PlayerPrefs.SetInt("diceSoccer.currentSleeveColor", _currentSleeveColorId);
             PlayerPrefs.SetString("diceSoccer.unlockedShirts", string.Join(",", _unlockedShirtIds));
             PlayerPrefs.SetString("diceSoccer.unlockedPants", string.Join(",", _unlockedPantsIds));
             PlayerPrefs.SetString("diceSoccer.achievements", string.Join(",", _unlockedAchievementIds));
@@ -4493,8 +4942,8 @@ namespace DiceSoccer
         {
             var startPitchX = GetPitchOffsetForLocation(fromLoc);
             var targetPitchX = GetPitchOffsetForLocation(toLoc);
-            var startBallPos = GetBallPosition(fromLoc, possession);
-            var targetBallPos = GetBallPosition(toLoc, possession);
+            var startBallPos = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : GetBallPosition(fromLoc, possession);
+            var targetBallPos = GetBallPosition(toLoc, possession, _match != null ? _match.BallHolderSlotIndex : 1);
             var elapsed = 0f;
             const float duration = 0.50f;
 
@@ -4660,28 +5109,42 @@ namespace DiceSoccer
             }
         }
 
-        private static Vector2 GetBallPosition(int location, int possession)
+        private Vector2 GetBallPosition(int location, int possession, int slotIndex = -1)
         {
-            switch (location)
+            if (slotIndex < 0)
             {
-                case 0:
-                    return possession == 0 ? new Vector2(0.44f, 0.418f) : new Vector2(0.56f, 0.418f);
-                case 1:
-                    return possession == 0 ? new Vector2(0.44f, 0.418f) : new Vector2(0.56f, 0.418f);
-                case -1:
-                    return possession == 0 ? new Vector2(0.44f, 0.418f) : new Vector2(0.56f, 0.418f);
-                case 2:
-                    return possession == 0 ? new Vector2(0.435f, 0.418f) : new Vector2(0.56f, 0.45f);
-                case -2:
-                    return possession == 1 ? new Vector2(0.565f, 0.418f) : new Vector2(0.44f, 0.45f);
-                default:
-                    return new Vector2(0.50f, 0.418f);
+                slotIndex = _match != null ? _match.BallHolderSlotIndex : 1;
             }
+
+            // In 1v1 encounters (location 2 or -2), striker and GK face off at y = 0.48f
+            if (Mathf.Abs(location) == 2)
+            {
+                if (location == 2) // Home Striker attacking Away GK
+                {
+                    return possession == 0 ? new Vector2(0.435f, 0.48f) : new Vector2(0.565f, 0.48f);
+                }
+                else // Away Striker attacking Home GK
+                {
+                    return possession == 1 ? new Vector2(0.565f, 0.48f) : new Vector2(0.435f, 0.48f);
+                }
+            }
+
+            // In 3v3 outfield encounters (locations -1, 0, 1):
+            // The 3 players are positioned at y = 0.24f (bottom winger), 0.48f (center), 0.72f (top winger)
+            float y = slotIndex switch
+            {
+                0 => 0.24f,
+                2 => 0.72f,
+                _ => 0.48f
+            };
+
+            float x = possession == 0 ? 0.435f : 0.565f;
+            return new Vector2(x, y);
         }
 
-        private void SetBallPosition(int location, int possession, bool smooth)
+        private void SetBallPosition(int location, int possession, bool smooth, int slotIndex = -1)
         {
-            var target = GetBallPosition(location, possession);
+            var target = GetBallPosition(location, possession, slotIndex);
             if (_ballMarker != null)
             {
                 _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = target;
@@ -4980,12 +5443,16 @@ namespace DiceSoccer
 
             if (!string.IsNullOrEmpty(title))
             {
-                var fontSize = title.Length > 9 ? 14 : 18;
+                var fontSize = title.Length > 12 ? 11 : (title.Length > 9 ? 13 : 18);
                 var titleText = AddText(title.ToUpperInvariant(), _safeArea, fontSize, Ink,
-                    new Vector2(backAction != null ? 0.16f : 0.05f, 0.93f), new Vector2(0.48f, 0.99f));
+                    new Vector2(backAction != null ? 0.16f : 0.05f, 0.93f), new Vector2(0.39f, 0.99f));
                 titleText.alignment = TextAnchor.MiddleLeft;
                 titleText.fontStyle = FontStyle.Bold;
-                titleText.horizontalOverflow = HorizontalWrapMode.Overflow;
+                titleText.horizontalOverflow = HorizontalWrapMode.Wrap;
+                titleText.verticalOverflow = VerticalWrapMode.Truncate;
+                titleText.resizeTextForBestFit = true;
+                titleText.resizeTextMinSize = 8;
+                titleText.resizeTextMaxSize = fontSize;
             }
 
             var cashText = AddText(_careerCash.ToString("N0"), _safeArea, 18, Ink,
@@ -5004,7 +5471,7 @@ namespace DiceSoccer
             crestBox.preserveAspect = true;
             crestBox.raycastTarget = false;
 
-            var crestDesign = AddResourceImage("HeaderCrestDesign", "Original/images/CustomCrest1", crestBox.transform,
+            var crestDesign = AddResourceImage("HeaderCrestDesign", $"Original/images/CustomCrest{_currentCrestId}", crestBox.transform,
                 new Vector2(0.15f, 0.15f), new Vector2(0.85f, 0.85f));
             crestDesign.preserveAspect = true;
             crestDesign.raycastTarget = false;
@@ -5173,7 +5640,7 @@ namespace DiceSoccer
             var text = AddText(label, image.transform, 17, Paper, Vector2.zero, Vector2.one);
             text.fontStyle = FontStyle.Bold;
             text.resizeTextForBestFit = true;
-            text.resizeTextMinSize = 11;
+            text.resizeTextMinSize = 8;
             text.resizeTextMaxSize = 17;
             return button;
         }
