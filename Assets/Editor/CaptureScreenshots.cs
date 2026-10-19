@@ -45,6 +45,17 @@ namespace DiceSoccer.Editor
 
             var rt = new RenderTexture(width, height, 24);
             cam.targetTexture = rt;
+
+            var safeAreaField = typeof(DiceSoccerBootstrap).GetField("_safeArea", BindingFlags.Instance | BindingFlags.NonPublic);
+            var safeArea = safeAreaField?.GetValue(bootstrap) as RectTransform;
+            if (safeArea != null)
+            {
+                safeArea.anchorMin = Vector2.zero;
+                safeArea.anchorMax = Vector2.one;
+                safeArea.offsetMin = Vector2.zero;
+                safeArea.offsetMax = Vector2.zero;
+            }
+
             Directory.CreateDirectory("Screenshots");
 
             void SaveScreen(string name)
