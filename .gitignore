@@ -8,8 +8,7 @@ MemoryCaptures/
 # Builds
 [Bb]uild/
 [Bb]uilds/
-!Builds/Android/DiceSoccer.apk
-!DiceSoccer.apk
+*.apk
 *.log
 
 # Python cache

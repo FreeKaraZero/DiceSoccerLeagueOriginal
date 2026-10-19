@@ -14,14 +14,14 @@ namespace DiceSoccer.Editor
         [MenuItem("Dice Soccer/Configure Android and iOS")]
         public static void Configure()
         {
-            PlayerSettings.companyName = "Dice Soccer Revival";
+            PlayerSettings.companyName = "KaraZero";
             PlayerSettings.productName = "Dice Soccer";
-            PlayerSettings.bundleVersion = "0.1.0";
+            PlayerSettings.bundleVersion = "1.0.0";
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android,
-                "com.dicesoccer.revival");
+                "com.karazero.dicesoccer");
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS,
-                "com.dicesoccer.revival");
+                "com.karazero.dicesoccer");
             PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel26;
 
             EditorPrefs.SetBool("SdkUseEmbedded", true);

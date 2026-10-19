@@ -2,8 +2,8 @@
 
 This branch contains the complete, self-contained Unity project reproducing the 2012 iOS game *Dice Soccer* (1:1 reverse-engineered mechanics, Cocos2d asset pipeline, rules, audio, and UI).
 
-The prebuilt, installable Android package is included directly in this repository:
-- [`DiceSoccer.apk`](file:///home/kara/Scrivania/Personal/DevApp/Antigravity/DiceSoccerOriginal/DiceSoccer.apk) (ARM64, IL2CPP, API Level 26+)
+The prebuilt, installable Android package is available in the [GitHub Releases](https://github.com/FreeKaraZero/DiceSoccerOriginal/releases) section:
+- **`DiceSoccer.apk`** (ARM64, IL2CPP, Package: `com.karazero.dicesoccer`, Android 8.0+)
 
 ## Open the project in Unity
 
