@@ -46,6 +46,7 @@ namespace DiceSoccer
         private Image _ballMarker;
         private Transform _field;
         private RectTransform _fieldPitchRoot;
+        private RectTransform _matchPlayRoot;
         private Image _shakePrompt;
         private Text _homeTotalText;
         private Text _awayTotalText;
@@ -1056,23 +1057,32 @@ namespace DiceSoccer
             homeSkullDeco.preserveAspect = true;
             homeSkullDeco.raycastTarget = false;
 
+            // 2. Play Area Container (Fixed 640x960 reference box centered in pitch, preserving 1:1 tactical layout in all aspect ratios)
+            var playRootGo = new GameObject("MatchPlayRoot", typeof(RectTransform));
+            playRootGo.transform.SetParent(_field, false);
+            _matchPlayRoot = playRootGo.GetComponent<RectTransform>();
+            _matchPlayRoot.anchorMin = new Vector2(0.5f, 0.5f);
+            _matchPlayRoot.anchorMax = new Vector2(0.5f, 0.5f);
+            _matchPlayRoot.sizeDelta = new Vector2(640f, 960f);
+            _matchPlayRoot.anchoredPosition = Vector2.zero;
+
             // Soccer ball with shadow (sized to authentic proportions):
             var ballShadow = AddResourceImage("BallShadow", "Original/sprites/PlayerBody3/GameSoccerBallShadow",
-                _field, Vector2.zero, Vector2.zero);
+                _matchPlayRoot, Vector2.zero, Vector2.zero);
             ballShadow.rectTransform.sizeDelta = new Vector2(36f, 18f);
             ballShadow.raycastTarget = false;
             _ballShadow = ballShadow;
 
             var ball = AddResourceImage("Ball", "Original/sprites/PlayerBody3/GameSoccerBall",
-                _field, Vector2.zero, Vector2.zero);
+                _matchPlayRoot, Vector2.zero, Vector2.zero);
             ball.rectTransform.sizeDelta = new Vector2(38f, 38f);
             ball.raycastTarget = false;
             _ballMarker = ball;
 
             // Formation players:
             var awayLineup = _catalog.ResolveLineup(_currentFixture.lineup);
-            _homePlayers = AddFormationPlayers(homeLineup, _field, true);
-            _awayPlayers = AddFormationPlayers(awayLineup, _field, false);
+            _homePlayers = AddFormationPlayers(homeLineup, _matchPlayRoot, true);
+            _awayPlayers = AddFormationPlayers(awayLineup, _matchPlayRoot, false);
 
             // Ball and shadow always stay crisp above pitch elements and boots
             if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
@@ -1082,18 +1092,18 @@ namespace DiceSoccer
             _idleBobbingCoroutine = StartCoroutine(IdlePlayerBobbing());
 
             // Dice on Field:
-            CreateFieldDice(_field);
+            CreateFieldDice(_matchPlayRoot);
 
             // Duel Totals on sides of dice (matching media_1792421110113_45d0305f.png):
-            _homeTotalText = AddText("", _field, 50, new Color32(50, 45, 40, 255),
-                new Vector2(0.18f, 0.20f), new Vector2(0.18f, 0.20f));
+            _homeTotalText = AddText("", _matchPlayRoot, 50, new Color32(50, 45, 40, 255),
+                new Vector2(0.18f, 0.50f), new Vector2(0.18f, 0.50f));
             _homeTotalText.rectTransform.sizeDelta = new Vector2(90f, 70f);
             _homeTotalText.fontStyle = FontStyle.Bold;
             _homeTotalText.alignment = TextAnchor.MiddleCenter;
             _homeTotalText.enabled = false;
 
-            _awayTotalText = AddText("", _field, 50, new Color32(50, 45, 40, 255),
-                new Vector2(0.83f, 0.20f), new Vector2(0.83f, 0.20f));
+            _awayTotalText = AddText("", _matchPlayRoot, 50, new Color32(50, 45, 40, 255),
+                new Vector2(0.83f, 0.50f), new Vector2(0.83f, 0.50f));
             _awayTotalText.rectTransform.sizeDelta = new Vector2(90f, 70f);
             _awayTotalText.fontStyle = FontStyle.Bold;
             _awayTotalText.alignment = TextAnchor.MiddleCenter;
@@ -1103,9 +1113,10 @@ namespace DiceSoccer
             _buffBeltGo = new GameObject("BuffBelt", typeof(RectTransform), typeof(Image));
             _buffBeltGo.transform.SetParent(_safeArea, false);
             var bbRect = _buffBeltGo.GetComponent<RectTransform>();
-            bbRect.anchorMin = new Vector2(0.12f, 0.005f);
-            bbRect.anchorMax = new Vector2(0.88f, 0.125f);
-            bbRect.offsetMin = bbRect.offsetMax = Vector2.zero;
+            bbRect.anchorMin = new Vector2(0.5f, 0f);
+            bbRect.anchorMax = new Vector2(0.5f, 0f);
+            bbRect.anchoredPosition = new Vector2(0f, 85f);
+            bbRect.sizeDelta = new Vector2(480f, 96f);
             var bbImg = _buffBeltGo.GetComponent<Image>();
             bbImg.sprite = GetUiSprite("Original/images/BuffBelt");
             bbImg.preserveAspect = true;
@@ -1124,7 +1135,7 @@ namespace DiceSoccer
 
             // Shake button & prompt in field center circle:
             _shakePrompt = AddResourceImage("ShakePrompt", "Original/sprites/Prompt1/Shake",
-                _field, new Vector2(0.5f, 0.40f), new Vector2(0.5f, 0.40f));
+                _matchPlayRoot, new Vector2(0.5f, 0.50f), new Vector2(0.5f, 0.50f));
             _shakePrompt.rectTransform.sizeDelta = new Vector2(360f, 295f);
             _shakePrompt.preserveAspect = true;
             _shakePrompt.raycastTarget = true;
@@ -1155,59 +1166,88 @@ namespace DiceSoccer
             // 2. Top HUD: Authentic Scoreboard (scoreboardBG sits at the very top):
             var scoreboard = AddResourceImage("MatchScoreboard",
                 "Original/images/scoreboardBG", _safeArea,
-                new Vector2(0f, 1f), new Vector2(1f, 1f));
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
             scoreboard.rectTransform.pivot = new Vector2(0.5f, 1f);
             scoreboard.rectTransform.anchoredPosition = Vector2.zero;
-            scoreboard.rectTransform.sizeDelta = new Vector2(0f, 150f);
+            scoreboard.rectTransform.sizeDelta = new Vector2(640f, 150f);
             scoreboard.preserveAspect = false;
             scoreboard.raycastTarget = false;
 
             // Home Team Crest Shield centered in the left yellow box of scoreboardBG:
-            var homeCrestShield = AddResourceImage("HomeShield", $"Original/images/CustomCrest{_currentCrestId}", _safeArea,
-                new Vector2(0.087f, 0.953f), new Vector2(0.087f, 0.953f));
-            homeCrestShield.rectTransform.sizeDelta = new Vector2(70f, 70f);
+            // Box is x=15..95 (center 55), y=5..85 (center 45) -> relative to top-center: (-265, -45)
+            var homeCrestShield = AddResourceImage("HomeShield", $"Original/images/CustomCrest{_currentCrestId}", scoreboard.transform,
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
+            homeCrestShield.rectTransform.anchoredPosition = new Vector2(-265f, -45f);
+            homeCrestShield.rectTransform.sizeDelta = new Vector2(74f, 74f);
             homeCrestShield.preserveAspect = true;
             homeCrestShield.raycastTarget = false;
 
             var homeTitle = _isLocalMultiplayer ? "PLAYER 1" : "SANUKU";
-            var homeNameText = AddText(homeTitle, _safeArea, 12, Ink,
-                new Vector2(0.01f, 0.874f), new Vector2(0.165f, 0.910f));
+            var homeNameText = AddText(homeTitle, scoreboard.transform, 12, Ink,
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
+            homeNameText.rectTransform.anchoredPosition = new Vector2(-265f, -107f);
+            homeNameText.rectTransform.sizeDelta = new Vector2(110f, 24f);
             homeNameText.fontStyle = FontStyle.Bold;
             homeNameText.alignment = TextAnchor.MiddleCenter;
 
             // Away Team Crest centered in the right red box of scoreboardBG:
-            var awayCrestBody = AddResourceImage("AwayCrestBody", "Original/sprites/EnemyCrest1/EnemyCrest1Body", _safeArea,
-                new Vector2(0.913f, 0.953f), new Vector2(0.913f, 0.953f));
-            awayCrestBody.rectTransform.sizeDelta = new Vector2(70f, 70f);
+            // Box is x=545..625 (center 585), y=5..85 (center 45) -> relative to top-center: (+265, -45)
+            var awayCrestBody = AddResourceImage("AwayCrestBody", "Original/sprites/EnemyCrest1/EnemyCrest1Body", scoreboard.transform,
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
+            awayCrestBody.rectTransform.anchoredPosition = new Vector2(265f, -45f);
+            awayCrestBody.rectTransform.sizeDelta = new Vector2(74f, 74f);
             awayCrestBody.preserveAspect = true;
             awayCrestBody.raycastTarget = false;
 
             var awayCrestDesign = AddResourceImage("AwayDesign", "Original/sprites/EnemyCrest1/EnemyCrest1Design", awayCrestBody.transform,
-                new Vector2(0.12f, 0.12f), new Vector2(0.88f, 0.88f));
+                Vector2.zero, Vector2.one);
+            awayCrestDesign.rectTransform.offsetMin = awayCrestDesign.rectTransform.offsetMax = Vector2.zero;
             awayCrestDesign.preserveAspect = true;
             awayCrestDesign.raycastTarget = false;
 
-            var awayNameText = AddText(_currentFixture.teamName.ToUpperInvariant(), _safeArea, 10, Ink,
-                new Vector2(0.835f, 0.874f), new Vector2(0.99f, 0.910f));
+            var awayNameText = AddText(_currentFixture.teamName.ToUpperInvariant(), scoreboard.transform, 11, Ink,
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
+            awayNameText.rectTransform.anchoredPosition = new Vector2(265f, -107f);
+            awayNameText.rectTransform.sizeDelta = new Vector2(110f, 24f);
             awayNameText.fontStyle = FontStyle.Bold;
             awayNameText.alignment = TextAnchor.MiddleCenter;
             awayNameText.horizontalOverflow = HorizontalWrapMode.Overflow;
 
-            // Center Scoreboard Scores:
-            _matchScore = AddText($"{_match.HomeScore} - {_match.AwayScore}", _safeArea, 36, Ink,
-                new Vector2(0.35f, 0.925f), new Vector2(0.65f, 0.985f));
+            // Center Scoreboard Scores (center box is at x=0, y=-48 from top-center):
+            _matchScore = AddText($"{_match.HomeScore} - {_match.AwayScore}", scoreboard.transform, 44, Ink,
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
+            _matchScore.rectTransform.anchoredPosition = new Vector2(0f, -48f);
+            _matchScore.rectTransform.sizeDelta = new Vector2(180f, 50f);
             _matchScore.fontStyle = FontStyle.Bold;
             _matchScore.alignment = TextAnchor.MiddleCenter;
             _matchScore.horizontalOverflow = HorizontalWrapMode.Overflow;
 
-            // Pause button at center directly docked under score:
-            AddSpriteButton("Pause", "Original/images/PauseButton",
-                "Original/images/PauseButtonPressed", _safeArea,
-                new Vector2(0.50f, 0.892f), new Vector2(0.09f, 0.052f), ShowPauseMenu);
+            // Pause button at center directly docked under score (overlapping bottom border):
+            var pauseImg = AddResourceImage("Pause", "Original/images/PauseButton", scoreboard.transform,
+                new Vector2(0.5f, 1f), new Vector2(0.5f, 1f));
+            var pauseRect = pauseImg.rectTransform;
+            pauseRect.anchoredPosition = new Vector2(0f, -124f);
+            pauseRect.sizeDelta = new Vector2(58f, 52f);
+            pauseImg.preserveAspect = true;
+            pauseImg.raycastTarget = true;
+            var pauseBtn = pauseImg.gameObject.AddComponent<Button>();
+            pauseBtn.targetGraphic = pauseImg;
+            pauseBtn.onClick.AddListener(() =>
+            {
+                AudioManager.Instance.PlayTap();
+                ShowPauseMenu();
+            });
+            pauseBtn.transition = Selectable.Transition.SpriteSwap;
+            var pauseSpriteState = pauseBtn.spriteState;
+            pauseSpriteState.highlightedSprite = GetUiSprite("Original/images/PauseButtonPressed");
+            pauseSpriteState.pressedSprite = GetUiSprite("Original/images/PauseButtonPressed");
+            pauseBtn.spriteState = pauseSpriteState;
 
             // 3. Digital Clock on the Bottom Grass:
             _matchClock = AddText(_match.ClockText(), _safeArea, 25, new Color32(216, 255, 176, 255),
-                new Vector2(0.3f, 0.015f), new Vector2(0.7f, 0.065f));
+                new Vector2(0.5f, 0f), new Vector2(0.5f, 0f));
+            _matchClock.rectTransform.anchoredPosition = new Vector2(0f, 32f);
+            _matchClock.rectTransform.sizeDelta = new Vector2(200f, 40f);
             _matchClock.fontStyle = FontStyle.Bold;
             _matchClock.alignment = TextAnchor.MiddleCenter;
             var clockShadow = _matchClock.gameObject.AddComponent<Shadow>();
@@ -3254,20 +3294,24 @@ namespace DiceSoccer
                     else if (_awayDieRoots[i] != null) _awayDieRoots[i].SetActive(false);
                 }
 
-                // 3. Tumble rolling dice animation (DiceRoll01..DiceRoll13)
+                // 3. Tumble rolling dice animation with realistic deceleration (physics ease-out)
                 AudioManager.Instance.PlayDiceRoll();
-                for (var frame = 1; frame <= 14; frame++)
+                float[] tumbleDelays = {
+                    0.035f, 0.035f, 0.038f, 0.040f, 0.042f, 0.045f,
+                    0.050f, 0.056f, 0.065f, 0.076f, 0.090f, 0.110f, 0.130f
+                };
+                for (var frame = 0; frame < tumbleDelays.Length; frame++)
                 {
-                    int rollIdx = ((frame - 1) % 13) + 1;
+                    int rollIdx = (frame % 13) + 1;
                     var rollSprite = GetUiSprite($"Original/sprites/PlayerBody3/DiceRoll{rollIdx:00}");
                     for (var i = 0; i < homeFaces.Length; i++)
                         if (_homeDieRoots[i] != null) _homeDieRoots[i].GetComponent<Image>().sprite = rollSprite;
                     for (var i = 0; i < awayFaces.Length; i++)
                         if (_awayDieRoots[i] != null) _awayDieRoots[i].GetComponent<Image>().sprite = rollSprite;
-                    yield return new WaitForSeconds(0.055f);
+                    yield return new WaitForSeconds(tumbleDelays[frame]);
                 }
 
-                // 4. Settle dice on final faces with impact
+                // 4. Settle dice on final faces with impact punch
                 AudioManager.Instance.PlayTap();
                 var diceBaseSprite = GetUiSprite("Original/sprites/Buff6/DiceBackground");
                 for (var i = 0; i < homeFaces.Length; i++)
@@ -3280,12 +3324,28 @@ namespace DiceSoccer
                     if (_awayDieRoots[i] != null) _awayDieRoots[i].GetComponent<Image>().sprite = diceBaseSprite;
                     if (_awayDice[i] != null) SetDieFace(_awayDice[i], awayFaces[i]);
                 }
+
+                // Elastic settle bounce on landing
+                for (int f = 0; f < 6; f++)
+                {
+                    float p = f / 5f;
+                    float punch = 1f + Mathf.Sin(p * Mathf.PI) * 0.18f;
+                    for (var i = 0; i < homeFaces.Length; i++)
+                        if (_homeDieRoots[i] != null) _homeDieRoots[i].transform.localScale = new Vector3(punch, punch, 1f);
+                    for (var i = 0; i < awayFaces.Length; i++)
+                        if (_awayDieRoots[i] != null) _awayDieRoots[i].transform.localScale = new Vector3(punch, punch, 1f);
+                    yield return new WaitForSeconds(0.025f);
+                }
+                for (var i = 0; i < homeFaces.Length; i++)
+                    if (_homeDieRoots[i] != null) _homeDieRoots[i].transform.localScale = Vector3.one;
+                for (var i = 0; i < awayFaces.Length; i++)
+                    if (_awayDieRoots[i] != null) _awayDieRoots[i].transform.localScale = Vector3.one;
             }
 
-            // SUSPENSE HOLD: Keep dice visible so player can manually count dots and feel suspense!
+            // SUSPENSE HOLD: Brief pause to read dice faces before counting
             _matchReport.text = "Counting the dice...";
             if (_buffBeltText != null) _buffBeltText.text = "COUNTING THE DICE...";
-            yield return new WaitForSeconds(1.20f);
+            yield return new WaitForSeconds(0.65f);
 
             var oldHomeScore = _match.HomeScore;
             var oldAwayScore = _match.AwayScore;
@@ -3295,15 +3355,11 @@ namespace DiceSoccer
             var report = _match.CompleteEncounter();
             report = CompactMatchReport(report, _match.ClockText());
 
-            // 5. Reveal duel totals with punch impact (matching media_1792421110113_45d0305f.png)
-            AudioManager.Instance.PlayTap();
+            // 5. Reveal duel totals with counting animation (matching arcade dice games)
             if (_homeTotalText != null && _awayTotalText != null)
             {
-                _homeTotalText.text = _match.LastHomeTotal.ToString();
-                _awayTotalText.text = _match.LastAwayTotal.ToString();
-
-                Vector2 hTotPos = new Vector2(0.18f, 0.20f);
-                Vector2 aTotPos = new Vector2(0.83f, 0.20f);
+                Vector2 hTotPos = new Vector2(0.18f, 0.50f);
+                Vector2 aTotPos = new Vector2(0.83f, 0.50f);
 
                 _homeTotalText.rectTransform.anchorMin = _homeTotalText.rectTransform.anchorMax = hTotPos;
                 _awayTotalText.rectTransform.anchorMin = _awayTotalText.rectTransform.anchorMax = aTotPos;
@@ -3315,15 +3371,40 @@ namespace DiceSoccer
 
                 _homeTotalText.enabled = true;
                 _awayTotalText.enabled = true;
+
+                int targetH = _match.LastHomeTotal;
+                int targetA = _match.LastAwayTotal;
+                int maxTot = Mathf.Max(targetH, targetA);
+                int countSteps = Mathf.Clamp(maxTot, 4, 10);
+
+                for (int step = 1; step <= countSteps; step++)
+                {
+                    float t = (float)step / countSteps;
+                    int curH = Mathf.RoundToInt(Mathf.Lerp(1, targetH, t));
+                    int curA = Mathf.RoundToInt(Mathf.Lerp(1, targetA, t));
+                    _homeTotalText.text = curH.ToString();
+                    _awayTotalText.text = curA.ToString();
+
+                    AudioManager.Instance.PlayTap();
+                    float punch = 1f + 0.12f * (1f - (float)step / countSteps);
+                    _homeTotalText.rectTransform.localScale = new Vector3(punch, punch, 1f);
+                    _awayTotalText.rectTransform.localScale = new Vector3(punch, punch, 1f);
+                    yield return new WaitForSeconds(0.055f);
+                }
+
+                _homeTotalText.text = targetH.ToString();
+                _awayTotalText.text = targetA.ToString();
+                _homeTotalText.rectTransform.localScale = Vector3.one;
+                _awayTotalText.rectTransform.localScale = Vector3.one;
             }
 
-            _matchScore.text = $"{_match.HomeScore}   -   {_match.AwayScore}";
+            _matchScore.text = $"{_match.HomeScore} - {_match.AwayScore}";
             _matchClock.text = _match.ClockText();
             _matchReport.text = report;
             if (_buffBeltText != null) _buffBeltText.text = report;
 
             // Pause on revealed totals for dramatic outcome appreciation
-            yield return new WaitForSeconds(0.80f);
+            yield return new WaitForSeconds(0.70f);
 
             // 6. Check for ability triggers (e.g. Critical Striker on 3, Pair, etc.)
             bool hasPair = false;
@@ -3389,30 +3470,37 @@ namespace DiceSoccer
                 Image striker = homeScored ? _homePlayers[5] : _awayPlayers[5];
                 Image goalie = homeScored ? _awayPlayers[0] : _homePlayers[0];
 
-                // Striker kick lunge animation + PlayKick()
-                AudioManager.Instance.PlayKick();
+                // Striker anticipation wind-up & shot lunge:
+                float kickDir = homeScored ? 32f : -32f;
                 if (striker != null)
                 {
-                    float kickDir = homeScored ? 28f : -28f;
+                    striker.rectTransform.anchoredPosition = new Vector2(-kickDir * 0.35f, 0f);
+                    yield return new WaitForSeconds(0.09f);
                     striker.rectTransform.anchoredPosition = new Vector2(kickDir, 0f);
+                    AudioManager.Instance.PlayKick();
                 }
 
-                // Animate ball shooting into the goal net with arc and rapid spin
+                // Animate ball shooting into the goal net with arc and rapid spin (0.42s flight)
                 var ballStart = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : (homeScored ? new Vector2(0.435f, 0.418f) : new Vector2(0.565f, 0.418f));
-                var ballTarget = homeScored ? new Vector2(0.78f, 0.50f) : new Vector2(0.22f, 0.50f);
-                yield return StartCoroutine(SmoothPassBall(ballStart, ballTarget, 0.24f, true));
+                var ballTarget = homeScored ? new Vector2(0.80f, 0.50f) : new Vector2(0.20f, 0.50f);
+                yield return StartCoroutine(SmoothPassBall(ballStart, ballTarget, 0.42f, true));
 
-                // Goalkeeper reacts defeated
+                // Goalkeeper reacts defeated / beaten dive
                 if (goalie != null)
                 {
-                    float fallDir = homeScored ? 25f : -25f;
-                    goalie.rectTransform.anchoredPosition = new Vector2(fallDir, -10f);
+                    float fallDir = homeScored ? 20f : -20f;
+                    goalie.rectTransform.anchoredPosition = new Vector2(fallDir, -14f);
+                    goalie.rectTransform.localEulerAngles = new Vector3(0f, 0f, homeScored ? -16f : 16f);
                 }
                 if (striker != null) striker.rectTransform.anchoredPosition = Vector2.zero;
 
-                yield return new WaitForSeconds(0.18f);
+                yield return new WaitForSeconds(0.22f);
 
-                if (goalie != null) goalie.rectTransform.anchoredPosition = Vector2.zero;
+                if (goalie != null)
+                {
+                    goalie.rectTransform.anchoredPosition = Vector2.zero;
+                    goalie.rectTransform.localEulerAngles = Vector3.zero;
+                }
 
                 // Authentic GOAL celebration animation
                 yield return StartCoroutine(PlayGoalAnimation(homeScored));
@@ -3428,28 +3516,39 @@ namespace DiceSoccer
                 Image striker = homeShooting ? _homePlayers[5] : _awayPlayers[5];
                 Image goalie = homeShooting ? _awayPlayers[0] : _homePlayers[0];
 
-                AudioManager.Instance.PlayKick();
+                float kickDir = homeShooting ? 25f : -25f;
                 if (striker != null)
                 {
-                    float kickDir = homeShooting ? 20f : -20f;
+                    striker.rectTransform.anchoredPosition = new Vector2(-kickDir * 0.3f, 0f);
+                    yield return new WaitForSeconds(0.08f);
                     striker.rectTransform.anchoredPosition = new Vector2(kickDir, 0f);
+                    AudioManager.Instance.PlayKick();
                 }
 
                 // Ball shoots towards goalkeeper
                 var ballStart = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : (homeShooting ? new Vector2(0.435f, 0.418f) : new Vector2(0.565f, 0.418f));
-                var ballTarget = homeShooting ? new Vector2(0.54f, 0.45f) : new Vector2(0.46f, 0.45f);
-                yield return StartCoroutine(SmoothPassBall(ballStart, ballTarget, 0.20f, false));
+                var ballTarget = homeShooting ? new Vector2(0.56f, 0.45f) : new Vector2(0.44f, 0.45f);
 
-                if (striker != null) striker.rectTransform.anchoredPosition = Vector2.zero;
+                // Goalkeeper leaps to parry the shot
                 if (goalie != null)
                 {
-                    float diveDir = homeShooting ? -15f : 15f;
-                    goalie.rectTransform.anchoredPosition = new Vector2(diveDir, 0f);
+                    float diveDir = homeShooting ? -18f : 18f;
+                    goalie.rectTransform.anchoredPosition = new Vector2(diveDir, 14f);
+                    goalie.rectTransform.localEulerAngles = new Vector3(0f, 0f, homeShooting ? 12f : -12f);
                 }
+
+                yield return StartCoroutine(SmoothPassBall(ballStart, ballTarget, 0.38f, false));
+
+                AudioManager.Instance.PlayTap();
+                if (striker != null) striker.rectTransform.anchoredPosition = Vector2.zero;
 
                 yield return StartCoroutine(PlaySaveAnimation());
 
-                if (goalie != null) goalie.rectTransform.anchoredPosition = Vector2.zero;
+                if (goalie != null)
+                {
+                    goalie.rectTransform.anchoredPosition = Vector2.zero;
+                    goalie.rectTransform.localEulerAngles = Vector3.zero;
+                }
 
                 // Pitch shifts smoothly to cleared half
                 yield return StartCoroutine(SmoothShiftFieldAndBall(oldLocation, _match.Location, _match.Possession));
@@ -3561,13 +3660,14 @@ namespace DiceSoccer
 
         private IEnumerator PlayAbilityBurst(Vector2 anchorPos, string triggerBadgePath, string abilityName)
         {
-            if (_field == null) yield break;
+            Transform parent = _matchPlayRoot != null ? _matchPlayRoot : _field;
+            if (parent == null) yield break;
 
             AudioManager.Instance.PlayPowerup(1);
             AudioManager.Instance.PlayBuff();
 
             var burstContainer = new GameObject("AbilityBurstContainer", typeof(RectTransform));
-            burstContainer.transform.SetParent(_field, false);
+            burstContainer.transform.SetParent(parent, false);
             var containerRect = burstContainer.GetComponent<RectTransform>();
             containerRect.anchorMin = containerRect.anchorMax = anchorPos;
             containerRect.anchoredPosition = new Vector2(0f, 30f);
@@ -3713,24 +3813,33 @@ namespace DiceSoccer
             if (runnerImg != null) runnerImg.preserveAspect = true;
 
             var elapsed = 0f;
-            const float totalDuration = 1.6f;
+            const float totalDuration = 2.4f;
             while (elapsed < totalDuration)
             {
                 elapsed += Time.deltaTime;
                 var progress = Mathf.Clamp01(elapsed / totalDuration);
 
                 if (sunburst != null)
-                    sunburst.rectTransform.Rotate(0f, 0f, 75f * Time.deltaTime);
+                    sunburst.rectTransform.Rotate(0f, 0f, 55f * Time.deltaTime);
 
-                if (progress < 0.25f)
-                    banner.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 1.15f, progress / 0.25f);
-                else if (progress < 0.40f)
-                    banner.rectTransform.localScale = Vector3.Lerp(Vector3.one * 1.15f, Vector3.one, (progress - 0.25f) / 0.15f);
+                // Elastic overshoot banner entrance
+                if (progress < 0.18f)
+                {
+                    float p = progress / 0.18f;
+                    float scale = Mathf.Lerp(0f, 1.20f, p);
+                    banner.rectTransform.localScale = new Vector3(scale, scale, 1f);
+                }
+                else if (progress < 0.28f)
+                {
+                    float p = (progress - 0.18f) / 0.10f;
+                    float scale = Mathf.Lerp(1.20f, 1.0f, p);
+                    banner.rectTransform.localScale = new Vector3(scale, scale, 1f);
+                }
 
                 if (runnerImg != null)
                 {
                     var runX = Mathf.Lerp(0.02f, 0.98f, progress);
-                    var bob = Mathf.Abs(Mathf.Sin(elapsed * 12f)) * 0.035f;
+                    var bob = Mathf.Abs(Mathf.Sin(elapsed * 9f)) * 0.030f;
                     runnerImg.rectTransform.anchorMin = runnerImg.rectTransform.anchorMax = new Vector2(runX, 0.36f + bob);
                     if (runnerChoice == 2)
                     {
@@ -3745,8 +3854,9 @@ namespace DiceSoccer
                     if (c != null)
                     {
                         var p = c.rectTransform.anchorMin;
-                        c.rectTransform.anchorMin = c.rectTransform.anchorMax = new Vector2(p.x, p.y - Time.deltaTime * 0.22f);
-                        c.rectTransform.Rotate(0f, 0f, 150f * Time.deltaTime);
+                        float driftX = Mathf.Sin(elapsed * 3f + i) * 0.0008f;
+                        c.rectTransform.anchorMin = c.rectTransform.anchorMax = new Vector2(p.x + driftX, p.y - Time.deltaTime * 0.15f);
+                        c.rectTransform.Rotate(0f, 0f, 110f * Time.deltaTime);
                     }
                 }
                 yield return null;
@@ -3768,14 +3878,26 @@ namespace DiceSoccer
             banner.rectTransform.sizeDelta = new Vector2(440f, 280f);
             banner.preserveAspect = true;
 
+            // Elastic overshoot pop in
             var elapsed = 0f;
-            while (elapsed < 0.35f)
+            while (elapsed < 0.25f)
             {
                 elapsed += Time.deltaTime;
-                banner.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, elapsed / 0.35f);
+                float scale = Mathf.Lerp(0f, 1.15f, elapsed / 0.25f);
+                banner.rectTransform.localScale = new Vector3(scale, scale, 1f);
                 yield return null;
             }
-            yield return new WaitForSeconds(0.45f);
+            elapsed = 0f;
+            while (elapsed < 0.12f)
+            {
+                elapsed += Time.deltaTime;
+                float scale = Mathf.Lerp(1.15f, 1.0f, elapsed / 0.12f);
+                banner.rectTransform.localScale = new Vector3(scale, scale, 1f);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.65f);
+
             elapsed = 0f;
             var col = banner.color;
             while (elapsed < 0.35f)
@@ -3800,19 +3922,30 @@ namespace DiceSoccer
             banner.preserveAspect = true;
 
             var elapsed = 0f;
-            while (elapsed < 0.35f)
+            while (elapsed < 0.25f)
             {
                 elapsed += Time.deltaTime;
-                banner.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, elapsed / 0.35f);
+                float scale = Mathf.Lerp(0f, 1.15f, elapsed / 0.25f);
+                banner.rectTransform.localScale = new Vector3(scale, scale, 1f);
                 yield return null;
             }
-            yield return new WaitForSeconds(0.45f);
             elapsed = 0f;
-            var col = banner.color;
-            while (elapsed < 0.3f)
+            while (elapsed < 0.12f)
             {
                 elapsed += Time.deltaTime;
-                banner.color = new Color(col.r, col.g, col.b, 1f - elapsed / 0.3f);
+                float scale = Mathf.Lerp(1.15f, 1.0f, elapsed / 0.12f);
+                banner.rectTransform.localScale = new Vector3(scale, scale, 1f);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(0.65f);
+
+            elapsed = 0f;
+            var col = banner.color;
+            while (elapsed < 0.30f)
+            {
+                elapsed += Time.deltaTime;
+                banner.color = new Color(col.r, col.g, col.b, 1f - elapsed / 0.30f);
                 yield return null;
             }
             if (banner != null) Destroy(banner.gameObject);
@@ -4900,7 +5033,7 @@ namespace DiceSoccer
             var startBallPos = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : GetBallPosition(fromLoc, possession);
             var targetBallPos = GetBallPosition(toLoc, possession, _match != null ? _match.BallHolderSlotIndex : 1);
             var elapsed = 0f;
-            const float duration = 0.50f;
+            const float duration = 0.75f;
 
             if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
             if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
@@ -4927,19 +5060,26 @@ namespace DiceSoccer
                         new Vector2(ballPos.x, ballPos.y - 0.015f);
                 }
 
-                // Running bounce on visible players during pitch transition
-                float bounce = Mathf.Abs(Mathf.Sin(elapsed * 20f)) * 7f;
+                // Running bounce and natural lean on visible players during pitch transition
+                float bounce = Mathf.Abs(Mathf.Sin(elapsed * 12f)) * 4.5f;
+                float tilt = Mathf.Sin(elapsed * 12f) * 2.5f;
                 if (_homePlayers != null)
                 {
                     for (int i = 0; i < _homePlayers.Length; i++)
                         if (_homePlayers[i] != null && _homePlayers[i].gameObject.activeSelf)
+                        {
                             _homePlayers[i].rectTransform.anchoredPosition = new Vector2(0f, bounce);
+                            _homePlayers[i].rectTransform.localEulerAngles = new Vector3(0f, 0f, -tilt);
+                        }
                 }
                 if (_awayPlayers != null)
                 {
                     for (int i = 0; i < _awayPlayers.Length; i++)
                         if (_awayPlayers[i] != null && _awayPlayers[i].gameObject.activeSelf)
+                        {
                             _awayPlayers[i].rectTransform.anchoredPosition = new Vector2(0f, bounce);
+                            _awayPlayers[i].rectTransform.localEulerAngles = new Vector3(0f, 0f, tilt);
+                        }
                 }
 
                 yield return null;
@@ -4948,17 +5088,28 @@ namespace DiceSoccer
             if (_fieldPitchRoot != null)
                 _fieldPitchRoot.anchoredPosition = new Vector2(targetPitchX, 0f);
             if (_ballMarker != null)
+            {
                 _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = targetBallPos;
+                _ballMarker.rectTransform.localEulerAngles = Vector3.zero;
+            }
             if (_ballShadow != null)
                 _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax =
                     new Vector2(targetBallPos.x, targetBallPos.y - 0.015f);
 
             if (_homePlayers != null)
                 for (int i = 0; i < _homePlayers.Length; i++)
-                    if (_homePlayers[i] != null) _homePlayers[i].rectTransform.anchoredPosition = Vector2.zero;
+                    if (_homePlayers[i] != null)
+                    {
+                        _homePlayers[i].rectTransform.anchoredPosition = Vector2.zero;
+                        _homePlayers[i].rectTransform.localEulerAngles = Vector3.zero;
+                    }
             if (_awayPlayers != null)
                 for (int i = 0; i < _awayPlayers.Length; i++)
-                    if (_awayPlayers[i] != null) _awayPlayers[i].rectTransform.anchoredPosition = Vector2.zero;
+                    if (_awayPlayers[i] != null)
+                    {
+                        _awayPlayers[i].rectTransform.anchoredPosition = Vector2.zero;
+                        _awayPlayers[i].rectTransform.localEulerAngles = Vector3.zero;
+                    }
 
             if (_ballShadow != null) _ballShadow.transform.SetAsLastSibling();
             if (_ballMarker != null) _ballMarker.transform.SetAsLastSibling();
@@ -4995,6 +5146,7 @@ namespace DiceSoccer
             }
 
             _ballMarker.rectTransform.anchorMin = _ballMarker.rectTransform.anchorMax = target;
+            _ballMarker.rectTransform.localEulerAngles = Vector3.zero;
             if (_ballShadow != null)
             {
                 _ballShadow.rectTransform.anchorMin = _ballShadow.rectTransform.anchorMax = new Vector2(target.x, target.y - 0.015f);
@@ -5272,9 +5424,10 @@ namespace DiceSoccer
 
         private IEnumerator PlayPoofAtPosition(Vector2 anchorPos)
         {
-            if (_field == null) yield break;
+            Transform parent = _matchPlayRoot != null ? _matchPlayRoot : _field;
+            if (parent == null) yield break;
             var poofObj = new GameObject("PoofEffect", typeof(RectTransform), typeof(Image));
-            poofObj.transform.SetParent(_field, false);
+            poofObj.transform.SetParent(parent, false);
             var rect = poofObj.GetComponent<RectTransform>();
             rect.anchorMin = rect.anchorMax = anchorPos;
             rect.anchoredPosition = Vector2.zero;
@@ -5347,6 +5500,7 @@ namespace DiceSoccer
             _awayDieRoots = null;
             _homePlayerScales = null;
             _awayPlayerScales = null;
+            _matchPlayRoot = null;
         }
 
         private void ApplySafeArea()
