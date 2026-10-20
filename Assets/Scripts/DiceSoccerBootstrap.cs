@@ -41,6 +41,8 @@ namespace DiceSoccer
         private GameObject[] _awayDieRoots;
         private Image[] _homePlayers;
         private Image[] _awayPlayers;
+        private float[] _homePlayerScales;
+        private float[] _awayPlayerScales;
         private Image _ballMarker;
         private Transform _field;
         private RectTransform _fieldPitchRoot;
@@ -158,9 +160,15 @@ namespace DiceSoccer
                 for (var i = 0; i < _homePlayers.Length; i++)
                 {
                     if (_homePlayers[i] != null && _homePlayers[i].gameObject.activeSelf)
-                        _homePlayers[i].rectTransform.localScale = new Vector3(-1f, bob, 1f); // Home faces right towards opponent
+                    {
+                        float baseScale = (_homePlayerScales != null && i < _homePlayerScales.Length) ? _homePlayerScales[i] : 1f;
+                        _homePlayers[i].rectTransform.localScale = new Vector3(-baseScale, baseScale * bob, 1f); // Home faces right towards opponent
+                    }
                     if (_awayPlayers[i] != null && _awayPlayers[i].gameObject.activeSelf)
-                        _awayPlayers[i].rectTransform.localScale = new Vector3(1f, bob, 1f); // Away faces left towards home
+                    {
+                        float baseScale = (_awayPlayerScales != null && i < _awayPlayerScales.Length) ? _awayPlayerScales[i] : 1f;
+                        _awayPlayers[i].rectTransform.localScale = new Vector3(baseScale, baseScale * bob, 1f); // Away faces left towards home
+                    }
                 }
             }
 
@@ -338,26 +346,39 @@ namespace DiceSoccer
             AddMenuBackdrop();
             AddMenuHeader("OPTIONS", ShowHome);
 
-            AddText("AUDIO SETTINGS", _safeArea, 18, Ink,
-                new Vector2(0.1f, 0.72f), new Vector2(0.9f, 0.78f));
+            AddText("GAME SETTINGS", _safeArea, 18, Ink,
+                new Vector2(0.1f, 0.74f), new Vector2(0.9f, 0.80f));
             AddButton(_soundEnabled ? "SOUND: ON" : "SOUND: OFF", _safeArea, Gold,
-                new Vector2(0.5f, 0.65f), new Vector2(0.75f, 0.08f), ToggleSound);
+                new Vector2(0.5f, 0.67f), new Vector2(0.75f, 0.07f), ToggleSound);
+
+            bool fullScreen = PlayerPrefs.GetInt("diceSoccer.fullscreen", 0) == 1;
+            AddButton(fullScreen ? "DISPLAY: FILL SCREEN" : "DISPLAY: CLASSIC 2:3", _safeArea, new Color32(50, 120, 180, 255),
+                new Vector2(0.5f, 0.58f), new Vector2(0.75f, 0.07f), ToggleDisplayMode);
 
             AddButton("★ UNLOCK EVERYTHING FREE", _safeArea, Grass,
-                new Vector2(0.5f, 0.52f), new Vector2(0.75f, 0.08f), () =>
+                new Vector2(0.5f, 0.48f), new Vector2(0.75f, 0.07f), () =>
                 {
                     UnlockAllContent(false);
                     ShowDonationModal();
                 });
 
             AddButton("☕ BUY A COFFEE (PAYPAL)", _safeArea, new Color32(0, 112, 186, 255),
-                new Vector2(0.5f, 0.40f), new Vector2(0.75f, 0.08f), ShowDonationModal);
+                new Vector2(0.5f, 0.38f), new Vector2(0.75f, 0.07f), ShowDonationModal);
 
             AddText("SHAKE OR TAP THE SCREEN EDGE TO ROLL\n100% FREE FAN REMASTER — NO ADS",
-                _safeArea, 13, Ink, new Vector2(0.08f, 0.22f), new Vector2(0.92f, 0.34f));
+                _safeArea, 13, Ink, new Vector2(0.08f, 0.22f), new Vector2(0.92f, 0.32f));
 
             AddButton("BACK TO MENU", _safeArea, new Color32(68, 79, 84, 255),
                 new Vector2(0.5f, 0.12f), new Vector2(0.55f, 0.06f), ShowHome);
+        }
+
+        private void ToggleDisplayMode()
+        {
+            int current = PlayerPrefs.GetInt("diceSoccer.fullscreen", 0);
+            PlayerPrefs.SetInt("diceSoccer.fullscreen", current == 1 ? 0 : 1);
+            PlayerPrefs.Save();
+            ApplySafeArea();
+            ShowOptions();
         }
 
         private void ToggleSound()
@@ -944,8 +965,12 @@ namespace DiceSoccer
             _fieldPitchRoot = pitchRootGo.GetComponent<RectTransform>();
             _fieldPitchRoot.anchorMin = new Vector2(0.5f, 0.5f);
             _fieldPitchRoot.anchorMax = new Vector2(0.5f, 0.5f);
-            _fieldPitchRoot.sizeDelta = new Vector2(1920f, 960f);
-            _fieldPitchRoot.anchoredPosition = new Vector2(GetPitchOffsetForLocation(_match.Location), 0f);
+            float fieldPitchHeight = 960f;
+            if (_safeArea != null && _safeArea.rect.height > 960f)
+                fieldPitchHeight = _safeArea.rect.height;
+            float pitchScale = fieldPitchHeight / 960f;
+            _fieldPitchRoot.sizeDelta = new Vector2(1920f * pitchScale, fieldPitchHeight);
+            _fieldPitchRoot.anchoredPosition = new Vector2(GetPitchOffsetForLocation(_match.Location) * pitchScale, 0f);
 
             // Left half of pitch (goal on left, center circle on right):
             var leftFieldGo = new GameObject("FieldLeft", typeof(RectTransform), typeof(Image));
@@ -953,7 +978,7 @@ namespace DiceSoccer
             var leftRect = leftFieldGo.GetComponent<RectTransform>();
             leftRect.anchorMin = leftRect.anchorMax = new Vector2(0.5f, 0.5f);
             leftRect.pivot = new Vector2(1f, 0.5f);
-            leftRect.sizeDelta = new Vector2(960f, 960f);
+            leftRect.sizeDelta = new Vector2(fieldPitchHeight, fieldPitchHeight);
             leftRect.anchoredPosition = Vector2.zero;
             var leftImg = leftFieldGo.GetComponent<Image>();
             leftImg.sprite = GetUiSprite("Original/sprites/Season0Field2(1.1)/Field");
@@ -966,7 +991,7 @@ namespace DiceSoccer
             var rightRect = rightFieldGo.GetComponent<RectTransform>();
             rightRect.anchorMin = rightRect.anchorMax = new Vector2(0.5f, 0.5f);
             rightRect.pivot = new Vector2(1f, 0.5f);
-            rightRect.sizeDelta = new Vector2(960f, 960f);
+            rightRect.sizeDelta = new Vector2(fieldPitchHeight, fieldPitchHeight);
             rightRect.anchoredPosition = Vector2.zero;
             rightRect.localScale = new Vector3(-1f, 1f, 1f);
             var rightImg = rightFieldGo.GetComponent<Image>();
@@ -1093,10 +1118,10 @@ namespace DiceSoccer
             _buffBeltText.fontStyle = FontStyle.Bold;
             _buffBeltGo.SetActive(false);
 
-            // Shake button & prompt above soccer ball:
+            // Shake button & prompt in field center circle:
             _shakePrompt = AddResourceImage("ShakePrompt", "Original/sprites/Prompt1/Shake",
-                _field, new Vector2(0.5f, 0.58f), new Vector2(0.5f, 0.58f));
-            _shakePrompt.rectTransform.sizeDelta = new Vector2(165f, 95f);
+                _field, new Vector2(0.5f, 0.40f), new Vector2(0.5f, 0.40f));
+            _shakePrompt.rectTransform.sizeDelta = new Vector2(360f, 295f);
             _shakePrompt.preserveAspect = true;
             _shakePrompt.raycastTarget = true;
             var shakeBtn = _shakePrompt.gameObject.AddComponent<Button>();
@@ -3315,7 +3340,7 @@ namespace DiceSoccer
             else if (hasPair && _homeDieRoots != null && _homeDieRoots[0] != null)
             {
                 Vector2 burstPos = _homeDieRoots[0].GetComponent<RectTransform>().anchorMin;
-                yield return StartCoroutine(PlayAbilityBurst(burstPos, "Original/sprites/BuffTrigger1/Trigger2", "Pair Boost"));
+                yield return StartCoroutine(PlayAbilityBurst(burstPos, "Original/sprites/BuffTrigger1/Trigger2", null));
                 yield return new WaitForSeconds(0.85f);
             }
             else
@@ -3544,68 +3569,81 @@ namespace DiceSoccer
             containerRect.anchoredPosition = new Vector2(0f, 30f);
             burstContainer.transform.SetAsLastSibling();
 
-            // 1. Ray burst background (TriggerBurst01..09)
-            var rayGo = new GameObject("RayBurst", typeof(RectTransform), typeof(Image));
-            rayGo.transform.SetParent(burstContainer.transform, false);
-            var rayRect = rayGo.GetComponent<RectTransform>();
-            rayRect.sizeDelta = new Vector2(220f, 220f);
-            rayRect.anchoredPosition = Vector2.zero;
-            var rayImg = rayGo.GetComponent<Image>();
-            rayImg.preserveAspect = true;
-            rayImg.raycastTarget = false;
-
-            // 2. Trigger badge (e.g. Trigger21 "3*" or Trigger2 "PAIR!")
-            var badgeGo = new GameObject("TriggerBadge", typeof(RectTransform), typeof(Image));
-            badgeGo.transform.SetParent(burstContainer.transform, false);
-            var badgeRect = badgeGo.GetComponent<RectTransform>();
-            badgeRect.sizeDelta = new Vector2(160f, 130f);
-            badgeRect.anchoredPosition = new Vector2(0f, 10f);
-            var badgeImg = badgeGo.GetComponent<Image>();
-            badgeImg.sprite = GetUiSprite(triggerBadgePath);
-            badgeImg.preserveAspect = true;
-            badgeImg.raycastTarget = false;
-
-            // 3. Ribbon banner (e.g. AbilityName-Critical Striker)
-            Image ribbonImg = null;
-            if (!string.IsNullOrEmpty(abilityName))
+            try
             {
-                var ribbonGo = new GameObject("AbilityRibbon", typeof(RectTransform), typeof(Image));
-                ribbonGo.transform.SetParent(burstContainer.transform, false);
-                var ribbonRect = ribbonGo.GetComponent<RectTransform>();
-                ribbonRect.sizeDelta = new Vector2(240f, 48f);
-                ribbonRect.anchoredPosition = new Vector2(0f, -45f);
-                ribbonImg = ribbonGo.GetComponent<Image>();
-                ribbonImg.sprite = GetUiSprite($"Original/sprites/BuffTrigger/AbilityName-{abilityName}");
-                ribbonImg.preserveAspect = true;
-                ribbonImg.raycastTarget = false;
-            }
+                // 1. Ray burst background (TriggerBurst01..09)
+                var rayGo = new GameObject("RayBurst", typeof(RectTransform), typeof(Image));
+                rayGo.transform.SetParent(burstContainer.transform, false);
+                var rayRect = rayGo.GetComponent<RectTransform>();
+                rayRect.sizeDelta = new Vector2(220f, 220f);
+                rayRect.anchoredPosition = Vector2.zero;
+                var rayImg = rayGo.GetComponent<Image>();
+                rayImg.preserveAspect = true;
+                rayImg.raycastTarget = false;
 
-            // Animate ray burst cycling + badge punch
-            float elapsed = 0f;
-            const float duration = 0.65f;
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / duration);
+                // 2. Trigger badge (e.g. Trigger21 "3*" or Trigger2 "PAIR!")
+                var badgeGo = new GameObject("TriggerBadge", typeof(RectTransform), typeof(Image));
+                badgeGo.transform.SetParent(burstContainer.transform, false);
+                var badgeRect = badgeGo.GetComponent<RectTransform>();
+                badgeRect.sizeDelta = new Vector2(160f, 130f);
+                badgeRect.anchoredPosition = new Vector2(0f, 10f);
+                var badgeImg = badgeGo.GetComponent<Image>();
+                var badgeSprite = TryGetUiSprite(triggerBadgePath);
+                if (badgeSprite != null) badgeImg.sprite = badgeSprite;
+                badgeImg.preserveAspect = true;
+                badgeImg.raycastTarget = false;
 
-                // Ray burst animation frames (TriggerBurst01..09)
-                int burstFrame = Mathf.Clamp((int)(t * 9f) + 1, 1, 9);
-                rayImg.sprite = GetUiSprite($"Original/sprites/BuffTrigger/TriggerBurst{burstFrame:00}");
-
-                // Badge scale punch
-                float badgeScale = 1f + Mathf.Sin(t * Mathf.PI) * 0.28f;
-                badgeRect.localScale = new Vector3(badgeScale, badgeScale, 1f);
-
-                if (ribbonImg != null)
+                // 3. Ribbon banner (e.g. AbilityName-Critical Striker)
+                Image ribbonImg = null;
+                if (!string.IsNullOrEmpty(abilityName))
                 {
-                    float ribbonScale = Mathf.Clamp01(t * 3f);
-                    ribbonImg.rectTransform.localScale = new Vector3(ribbonScale, ribbonScale, 1f);
+                    var ribbonSprite = TryGetUiSprite($"Original/sprites/BuffTrigger/AbilityName-{abilityName}")
+                                    ?? TryGetUiSprite($"Original/sprites/BuffTrigger1/AbilityName-{abilityName}");
+                    if (ribbonSprite != null)
+                    {
+                        var ribbonGo = new GameObject("AbilityRibbon", typeof(RectTransform), typeof(Image));
+                        ribbonGo.transform.SetParent(burstContainer.transform, false);
+                        var ribbonRect = ribbonGo.GetComponent<RectTransform>();
+                        ribbonRect.sizeDelta = new Vector2(240f, 48f);
+                        ribbonRect.anchoredPosition = new Vector2(0f, -45f);
+                        ribbonImg = ribbonGo.GetComponent<Image>();
+                        ribbonImg.sprite = ribbonSprite;
+                        ribbonImg.preserveAspect = true;
+                        ribbonImg.raycastTarget = false;
+                    }
                 }
 
-                yield return null;
-            }
+                // Animate ray burst cycling + badge punch
+                float elapsed = 0f;
+                const float duration = 0.65f;
+                while (elapsed < duration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / duration);
 
-            Destroy(burstContainer);
+                    // Ray burst animation frames (TriggerBurst01..09)
+                    int burstFrame = Mathf.Clamp((int)(t * 9f) + 1, 1, 9);
+                    var bSprite = TryGetUiSprite($"Original/sprites/BuffTrigger/TriggerBurst{burstFrame:00}");
+                    if (bSprite != null) rayImg.sprite = bSprite;
+
+                    // Badge scale punch
+                    float badgeScale = 1f + Mathf.Sin(t * Mathf.PI) * 0.28f;
+                    badgeRect.localScale = new Vector3(badgeScale, badgeScale, 1f);
+
+                    if (ribbonImg != null)
+                    {
+                        float ribbonScale = Mathf.Clamp01(t * 3f);
+                        ribbonImg.rectTransform.localScale = new Vector3(ribbonScale, ribbonScale, 1f);
+                    }
+
+                    yield return null;
+                }
+            }
+            finally
+            {
+                if (burstContainer != null)
+                    Destroy(burstContainer);
+            }
         }
 
         private IEnumerator PlayGoalAnimation(bool homeScored)
@@ -4851,8 +4889,10 @@ namespace DiceSoccer
 
         private IEnumerator SmoothShiftFieldAndBall(int fromLoc, int toLoc, int possession)
         {
-            var startPitchX = GetPitchOffsetForLocation(fromLoc);
-            var targetPitchX = GetPitchOffsetForLocation(toLoc);
+            float pitchScale = (_fieldPitchRoot != null && _fieldPitchRoot.sizeDelta.y > 960f)
+                ? _fieldPitchRoot.sizeDelta.y / 960f : 1f;
+            var startPitchX = GetPitchOffsetForLocation(fromLoc) * pitchScale;
+            var targetPitchX = GetPitchOffsetForLocation(toLoc) * pitchScale;
             var startBallPos = _ballMarker != null ? _ballMarker.rectTransform.anchorMin : GetBallPosition(fromLoc, possession);
             var targetBallPos = GetBallPosition(toLoc, possession, _match != null ? _match.BallHolderSlotIndex : 1);
             var elapsed = 0f;
@@ -5049,7 +5089,7 @@ namespace DiceSoccer
                 _ => 0.395f
             };
 
-            float x = possession == 0 ? 0.435f : 0.565f;
+            float x = possession == 0 ? 0.365f : 0.645f;
             return new Vector2(x, y);
         }
 
@@ -5130,6 +5170,7 @@ namespace DiceSoccer
         private Image[] AddFormationPlayers(PlayerData[] lineup, Transform parent, bool home)
         {
             var players = new Image[lineup.Length];
+            var scales = new float[lineup.Length];
 
             for (var slot = 0; slot < lineup.Length; slot++)
             {
@@ -5150,6 +5191,7 @@ namespace DiceSoccer
 
                 // Calibrate visual height so junior squad members stand uniformly alongside adult figures
                 float vScale = GetPlayerFigureVisualScale(pId);
+                scales[slot] = vScale;
                 player.rectTransform.localScale = new Vector3((home ? -1f : 1f) * vScale, vScale, 1f);
 
                 // Add shadow under player feet (1:1 overlay with 200x340 sprite)
@@ -5168,6 +5210,9 @@ namespace DiceSoccer
 
                 players[slot] = player;
             }
+
+            if (home) _homePlayerScales = scales;
+            else _awayPlayerScales = scales;
 
             return players;
         }
@@ -5196,10 +5241,10 @@ namespace DiceSoccer
                 var p = _homePlayers[slot];
                 p.gameObject.SetActive(true);
                 float y = activeHome.Length == 1 ? 0.38f : ys[i];
-                float x = activeHome.Length == 1 ? (loc == 2 ? 0.38f : 0.42f) : 0.395f;
+                float x = activeHome.Length == 1 ? (loc == 2 ? 0.38f : 0.42f) : 0.31f;
                 p.rectTransform.anchorMin = p.rectTransform.anchorMax = new Vector2(x, y);
                 p.rectTransform.anchoredPosition = Vector2.zero;
-                float currentScale = Mathf.Abs(p.rectTransform.localScale.y);
+                float currentScale = (_homePlayerScales != null && slot < _homePlayerScales.Length) ? _homePlayerScales[slot] : 1f;
                 p.rectTransform.localScale = new Vector3(-currentScale, currentScale, 1f);
             }
 
@@ -5210,10 +5255,10 @@ namespace DiceSoccer
                 var p = _awayPlayers[slot];
                 p.gameObject.SetActive(true);
                 float y = activeAway.Length == 1 ? 0.38f : ys[i];
-                float x = activeAway.Length == 1 ? (loc == 2 ? 0.58f : 0.62f) : 0.605f;
+                float x = activeAway.Length == 1 ? (loc == 2 ? 0.58f : 0.62f) : 0.70f;
                 p.rectTransform.anchorMin = p.rectTransform.anchorMax = new Vector2(x, y);
                 p.rectTransform.anchoredPosition = Vector2.zero;
-                float currentScale = Mathf.Abs(p.rectTransform.localScale.y);
+                float currentScale = (_awayPlayerScales != null && slot < _awayPlayerScales.Length) ? _awayPlayerScales[slot] : 1f;
                 p.rectTransform.localScale = new Vector3(currentScale, currentScale, 1f);
             }
 
@@ -5296,6 +5341,8 @@ namespace DiceSoccer
             _awayTotalText = null;
             _homeDieRoots = null;
             _awayDieRoots = null;
+            _homePlayerScales = null;
+            _awayPlayerScales = null;
         }
 
         private void ApplySafeArea()
@@ -5307,25 +5354,36 @@ namespace DiceSoccer
             float screenW = Screen.width;
             float screenH = Screen.height;
 
-            // Strict 2:3 aspect ratio letterboxing
-            const float targetAspect = ReferenceWidth / ReferenceHeight; // 640 / 960 = 2/3 = 0.666667f
-            float currentAspect = screenW / screenH;
+            bool fullScreen = PlayerPrefs.GetInt("diceSoccer.fullscreen", 0) == 1;
 
-            if (currentAspect < targetAspect)
+            if (fullScreen)
             {
-                // Screen is taller than 2:3 (modern phones) -> top/bottom letterbox bars
-                float viewportHeightFraction = currentAspect / targetAspect;
-                float marginY = (1f - viewportHeightFraction) * 0.5f;
-                _safeArea.anchorMin = new Vector2(0f, marginY);
-                _safeArea.anchorMax = new Vector2(1f, 1f - marginY);
+                // Edge-to-edge safe area: fills the screen while respecting hardware notch and nav bar
+                _safeArea.anchorMin = new Vector2(area.xMin / screenW, area.yMin / screenH);
+                _safeArea.anchorMax = new Vector2(area.xMax / screenW, area.yMax / screenH);
             }
             else
             {
-                // Screen is wider than 2:3 (tablets) -> left/right pillarbox bars
-                float viewportWidthFraction = targetAspect / currentAspect;
-                float marginX = (1f - viewportWidthFraction) * 0.5f;
-                _safeArea.anchorMin = new Vector2(marginX, 0f);
-                _safeArea.anchorMax = new Vector2(1f - marginX, 1f);
+                // Strict authentic 2:3 aspect ratio letterboxing
+                const float targetAspect = ReferenceWidth / ReferenceHeight; // 640 / 960 = 2/3 = 0.666667f
+                float currentAspect = screenW / screenH;
+
+                if (currentAspect < targetAspect)
+                {
+                    // Screen is taller than 2:3 (modern phones) -> top/bottom letterbox bars
+                    float viewportHeightFraction = currentAspect / targetAspect;
+                    float marginY = (1f - viewportHeightFraction) * 0.5f;
+                    _safeArea.anchorMin = new Vector2(0f, marginY);
+                    _safeArea.anchorMax = new Vector2(1f, 1f - marginY);
+                }
+                else
+                {
+                    // Screen is wider than 2:3 (tablets) -> left/right pillarbox bars
+                    float viewportWidthFraction = targetAspect / currentAspect;
+                    float marginX = (1f - viewportWidthFraction) * 0.5f;
+                    _safeArea.anchorMin = new Vector2(marginX, 0f);
+                    _safeArea.anchorMax = new Vector2(1f - marginX, 1f);
+                }
             }
 
             _safeArea.offsetMin = Vector2.zero;
