@@ -3519,8 +3519,13 @@ namespace DiceSoccer
                     int[] eligible = new int[homeFaces.Length];
                     for (int e = 0; e < eligible.Length; e++) eligible[e] = e;
 
+                    int bestDie = 0;
+                    int maxVal = -1;
+                    for (int d = 0; d < homeFaces.Length; d++)
+                        if (homeFaces[d] > maxVal) { maxVal = homeFaces[d]; bestDie = d; }
+
                     int chosenDie = -1;
-                    yield return StartCoroutine(SelectBuffTarget(0, eligible, chosen => chosenDie = chosen));
+                    yield return StartCoroutine(SelectBuffTarget(0, eligible, bestDie, chosen => chosenDie = chosen));
 
                     if (chosenDie >= 0 && chosenDie < homeFaces.Length)
                     {
@@ -3578,8 +3583,13 @@ namespace DiceSoccer
                     int[] eligible = new int[homeFaces.Length];
                     for (int e = 0; e < eligible.Length; e++) eligible[e] = e;
 
+                    int bestDie = 0;
+                    int minVal = 999;
+                    for (int d = 0; d < homeFaces.Length; d++)
+                        if (homeFaces[d] < minVal) { minVal = homeFaces[d]; bestDie = d; }
+
                     int chosenDie = -1;
-                    yield return StartCoroutine(SelectBuffTarget(0, eligible, chosen => chosenDie = chosen));
+                    yield return StartCoroutine(SelectBuffTarget(0, eligible, bestDie, chosen => chosenDie = chosen));
 
                     if (chosenDie >= 0 && chosenDie < homeFaces.Length)
                     {
@@ -3637,8 +3647,13 @@ namespace DiceSoccer
                     int[] awayEligible = new int[awayFaces.Length];
                     for (int e = 0; e < awayEligible.Length; e++) awayEligible[e] = e;
 
+                    int bestDie = 0;
+                    int maxVal = -1;
+                    for (int d = 0; d < awayFaces.Length; d++)
+                        if (awayFaces[d] > maxVal) { maxVal = awayFaces[d]; bestDie = d; }
+
                     int chosenDie = -1;
-                    yield return StartCoroutine(SelectBuffTarget(1, awayEligible, chosen => chosenDie = chosen));
+                    yield return StartCoroutine(SelectBuffTarget(1, awayEligible, bestDie, chosen => chosenDie = chosen));
 
                     if (chosenDie >= 0 && chosenDie < awayFaces.Length)
                     {
@@ -5346,7 +5361,7 @@ namespace DiceSoccer
             _selectedBuffDieIndex = index;
         }
 
-        private IEnumerator SelectBuffTarget(int targetSide, int[] eligibleIndices, Action<int> onSelected)
+        private IEnumerator SelectBuffTarget(int targetSide, int[] eligibleIndices, int defaultFallbackIndex, Action<int> onSelected)
         {
             _isAwaitingBuffSelection = true;
             _selectedBuffDieIndex = -1;
@@ -5392,8 +5407,10 @@ namespace DiceSoccer
             int chosen = _selectedBuffDieIndex;
             if (chosen < 0 || Array.IndexOf(eligibleIndices, chosen) < 0)
             {
-                // Auto-select fallback (e.g. choose first eligible die)
-                chosen = eligibleIndices[0];
+                // Auto-select fallback matching autoTargetBuff in Cocos2d binary
+                chosen = (defaultFallbackIndex >= 0 && Array.IndexOf(eligibleIndices, defaultFallbackIndex) >= 0)
+                    ? defaultFallbackIndex
+                    : eligibleIndices[0];
             }
 
             onSelected?.Invoke(chosen);

@@ -181,6 +181,56 @@ namespace DiceSoccer.Editor
             try { Call("ShowOptions"); SaveScreen("Options"); } catch (Exception e) { Debug.LogWarning(e); }
             try { Call("ShowDonationModal"); SaveScreen("DonationModal"); } catch (Exception e) { Debug.LogWarning(e); }
 
+            // 11. Match FullScreen on 20:9 Aspect Ratio (Google Pixel 10)
+            try
+            {
+                PlayerPrefs.SetInt("diceSoccer.fullscreen", 1);
+                int fsHeight = 1422;
+                var fsRt = new RenderTexture(width, fsHeight, 24);
+                cam.orthographicSize = fsHeight / 2f;
+                cam.targetTexture = fsRt;
+
+                var catalog = GameCatalog.Load();
+                var fixtures = catalog.GetFixtures(0, "League");
+                var lineupField = typeof(DiceSoccerBootstrap).GetField("_lineupIds", BindingFlags.Instance | BindingFlags.NonPublic);
+                var fixtureField = typeof(DiceSoccerBootstrap).GetField("_currentFixture", BindingFlags.Instance | BindingFlags.NonPublic);
+                var matchField = typeof(DiceSoccerBootstrap).GetField("_match", BindingFlags.Instance | BindingFlags.NonPublic);
+                
+                var lineupIds = (int[])lineupField.GetValue(bootstrap);
+                var homeLineup = catalog.ResolveLineup(lineupIds);
+                fixtureField.SetValue(bootstrap, fixtures[0]);
+                
+                var match = new MatchSimulation(
+                    homeLineup,
+                    catalog.ResolveLineup(fixtures[0].lineup),
+                    fixtures[0].teamName,
+                    0,
+                    new int[0],
+                    fixtures[0].entourageLineup,
+                    0,
+                    fixtures[0].possessionBonus);
+                matchField.SetValue(bootstrap, match);
+
+                var showMatchScreenMethod = typeof(DiceSoccerBootstrap).GetMethod("ShowMatchScreen", BindingFlags.Instance | BindingFlags.NonPublic);
+                showMatchScreenMethod?.Invoke(bootstrap, new object[] { homeLineup });
+
+                cam.Render();
+                RenderTexture.active = fsRt;
+                var fsTex = new Texture2D(width, fsHeight, TextureFormat.RGB24, false);
+                fsTex.ReadPixels(new Rect(0, 0, width, fsHeight), 0, 0);
+                fsTex.Apply();
+                File.WriteAllBytes("Screenshots/Match_FullScreen.png", fsTex.EncodeToPNG());
+                UnityEngine.Object.DestroyImmediate(fsTex);
+                RenderTexture.active = null;
+                cam.targetTexture = null;
+                UnityEngine.Object.DestroyImmediate(fsRt);
+                Debug.Log("Saved Screenshots/Match_FullScreen.png");
+
+                // Reset back to classic
+                PlayerPrefs.SetInt("diceSoccer.fullscreen", 0);
+            }
+            catch (Exception e) { Debug.LogWarning(e); }
+
             RenderTexture.active = null;
             cam.targetTexture = null;
             UnityEngine.Object.DestroyImmediate(rt);
