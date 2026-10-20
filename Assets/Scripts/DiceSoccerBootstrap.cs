@@ -3244,6 +3244,59 @@ namespace DiceSoccer
                 _match.LastHomeFaces, _match.LastAwayFaces, attackingSide));
         }
 
+        private static bool IsAbilityTriggered(int trigger, int[] faces, int total)
+        {
+            if (faces == null || faces.Length == 0) return false;
+
+            switch (trigger)
+            {
+                case 2: // PAIR: at least two dice show identical positive values
+                    if (faces.Length < 2) return false;
+                    for (int a = 0; a < faces.Length; a++)
+                        for (int b = a + 1; b < faces.Length; b++)
+                            if (faces[a] == faces[b] && faces[a] > 0)
+                                return true;
+                    return false;
+
+                case 3: // ALL dice are ODD
+                    for (int i = 0; i < faces.Length; i++)
+                        if (faces[i] % 2 == 0) return false;
+                    return true;
+
+                case 4: // ALL dice are EVEN
+                    for (int i = 0; i < faces.Length; i++)
+                        if (faces[i] % 2 != 0) return false;
+                    return true;
+
+                case 5: // 3 consecutive numbers
+                    if (faces.Length < 3) return false;
+                    int[] sorted = (int[])faces.Clone();
+                    Array.Sort(sorted);
+                    return (sorted[1] == sorted[0] + 1) && (sorted[2] == sorted[1] + 1);
+
+                case 6: // TRIPLE: all 3 dice identical
+                    if (faces.Length < 3) return false;
+                    return faces[0] == faces[1] && faces[1] == faces[2] && faces[0] > 0;
+
+                case 7: // Total is ODD
+                    return (total % 2 != 0);
+
+                case 8: // Total is EVEN
+                    return (total % 2 == 0);
+
+                case 19: return Array.IndexOf(faces, 1) >= 0; // Team rolls a 1
+                case 20: return Array.IndexOf(faces, 2) >= 0; // Team rolls a 2
+                case 21: return Array.IndexOf(faces, 3) >= 0; // Team rolls a 3
+                case 22: return Array.IndexOf(faces, 4) >= 0; // Team rolls a 4
+                case 23: return Array.IndexOf(faces, 5) >= 0; // Team rolls a 5
+                case 24: return Array.IndexOf(faces, 6) >= 0; // Team rolls a 6
+                case 26: return Array.IndexOf(faces, 8) >= 0; // Team rolls an 8
+
+                default:
+                    return false;
+            }
+        }
+
         private IEnumerator AnimateEncounter(int[] homeFaces, int[] awayFaces, int attackingSide)
         {
             _inEncounterAnimation = true;
@@ -3413,58 +3466,47 @@ namespace DiceSoccer
             yield return new WaitForSeconds(0.70f);
 
             // 6. Interactive Superpower & Ability activation (matching Cocos2d BuffTargetLayer & media_1792421110113_45d0305f.png)
+            // An ability ONLY activates if an active player currently in the duel has that superpower equipped,
+            // its specific BuffTrigger condition is satisfied, and BuffTarget == 1!
             PlayerData[] currentLineup = (_catalog != null && _lineupIds != null) ? _catalog.ResolveLineup(_lineupIds) : null;
-            bool hasPair = false;
-            if (homeFaces.Length >= 2)
-            {
-                for (int a = 0; a < homeFaces.Length; a++)
-                    for (int b = a + 1; b < homeFaces.Length; b++)
-                        if (homeFaces[a] == homeFaces[b] && homeFaces[a] > 0)
-                            hasPair = true;
-            }
-
-            int threeIdx = Array.IndexOf(homeFaces, 3);
-            int oneIdx = Array.IndexOf(homeFaces, 1);
-            int twoIdx = Array.IndexOf(homeFaces, 2);
-
-            // Check if any active home player has specific ability data
             AbilityData activeAbility = null;
             int triggeringSlot = -1;
+
             for (int i = 0; i < activeHome.Length; i++)
             {
                 int s = activeHome[i];
-                if (currentLineup != null && s < currentLineup.Length && currentLineup[s] != null && currentLineup[s].superpower > 0)
+                if (currentLineup != null && s < currentLineup.Length && currentLineup[s] != null)
                 {
-                    var ab = _catalog?.TryGetAbility(currentLineup[s].superpower);
-                    if (ab != null)
+                    int spId = currentLineup[s].superpower;
+                    if (spId > 0)
                     {
-                        // Check if trigger matches
-                        if ((ab.trigger == 2 && hasPair) ||
-                            (ab.trigger == 19 && oneIdx >= 0) ||
-                            (ab.trigger == 21 && threeIdx >= 0) ||
-                            (ab.trigger == 7 && (_match.LastHomeTotal % 2 != 0)))
+                        var ab = _catalog?.TryGetAbility(spId);
+                        // BuffTarget == 1 means interactive single-die selection ("Choose a die", "Select a die", "Re-roll any one die of your choice")
+                        if (ab != null && ab.target == 1 && IsAbilityTriggered(ab.trigger, homeFaces, _match.LastHomeTotal))
                         {
                             activeAbility = ab;
                             triggeringSlot = i;
-                            break;
+                            break; // First triggering active superpower in duel
                         }
                     }
                 }
             }
 
-            if (activeAbility != null || hasPair || threeIdx >= 0)
+            if (activeAbility != null)
             {
-                // Multiplier (BuffType 2 or PAIR or Critical Striker):
-                if ((activeAbility != null && activeAbility.type == 2) || hasPair || threeIdx >= 0)
+                // Multiplier (BuffType 2, e.g. Critical Striker, Bicycle Kick):
+                if (activeAbility.type == 2)
                 {
-                    int burstDie = triggeringSlot >= 0 && triggeringSlot < homeFaces.Length ? triggeringSlot : (threeIdx >= 0 ? threeIdx : 0);
+                    int burstDie = triggeringSlot >= 0 && triggeringSlot < homeFaces.Length ? triggeringSlot : 0;
                     Vector2 burstPos = (_homeDieRoots != null && burstDie < _homeDieRoots.Length && _homeDieRoots[burstDie] != null)
                         ? _homeDieRoots[burstDie].GetComponent<RectTransform>().anchorMin
                         : new Vector2(0.27f, 0.50f);
 
-                    string badgeSpritePath = hasPair ? "Original/sprites/BuffTrigger1/Trigger2" : "Original/sprites/BuffTrigger/Trigger21";
-                    string abilityTitle = activeAbility != null ? activeAbility.name : "Critical Striker";
-                    yield return StartCoroutine(PlayAbilityBurst(burstPos, badgeSpritePath, abilityTitle));
+                    string badgeSpritePath = (activeAbility.trigger == 2)
+                        ? "Original/sprites/BuffTrigger1/Trigger2"
+                        : "Original/sprites/BuffTrigger/Trigger21";
+
+                    yield return StartCoroutine(PlayAbilityBurst(burstPos, badgeSpritePath, activeAbility.name));
 
                     // Show Buff Belt prompt "PLEASE SELECT TARGET" (media_1792421110113_45d0305f.png)
                     if (_buffBeltGo != null && _buffBeltText != null && _buffBeltMedal != null)
@@ -3512,14 +3554,14 @@ namespace DiceSoccer
 
                         _match.AdjustHomeTotal(originalVal);
                         if (_homeTotalText != null) _homeTotalText.text = _match.LastHomeTotal.ToString();
-                        if (_buffBeltText != null) _buffBeltText.text = "CRITICAL STRIKER x2!";
+                        if (_buffBeltText != null) _buffBeltText.text = $"{activeAbility.name.ToUpper()} x2!";
                         yield return new WaitForSeconds(0.70f);
                     }
                 }
-                // Reroll (BuffType 5 / Assist on 1):
-                else if (activeAbility != null && activeAbility.type == 5)
+                // Reroll (BuffType 5, e.g. Assist on 1, Parry on 3):
+                else if (activeAbility.type == 5)
                 {
-                    int burstDie = triggeringSlot >= 0 && triggeringSlot < homeFaces.Length ? triggeringSlot : (oneIdx >= 0 ? oneIdx : 0);
+                    int burstDie = triggeringSlot >= 0 && triggeringSlot < homeFaces.Length ? triggeringSlot : 0;
                     Vector2 burstPos = (_homeDieRoots != null && burstDie < _homeDieRoots.Length && _homeDieRoots[burstDie] != null)
                         ? _homeDieRoots[burstDie].GetComponent<RectTransform>().anchorMin
                         : new Vector2(0.27f, 0.50f);
@@ -3567,6 +3609,55 @@ namespace DiceSoccer
                         _match.AdjustHomeTotal(newVal - oldVal);
                         if (_homeTotalText != null) _homeTotalText.text = _match.LastHomeTotal.ToString();
                         if (_buffBeltText != null) _buffBeltText.text = $"REROLLED TO {newVal}!";
+                        yield return new WaitForSeconds(0.70f);
+                    }
+                }
+                // Debuff / Tackle (BuffType 0, e.g. Tackle, Hard Tackle, Charge):
+                else if (activeAbility.type == 0 && awayFaces.Length > 0)
+                {
+                    int burstDie = triggeringSlot >= 0 && triggeringSlot < homeFaces.Length ? triggeringSlot : 0;
+                    Vector2 burstPos = (_homeDieRoots != null && burstDie < _homeDieRoots.Length && _homeDieRoots[burstDie] != null)
+                        ? _homeDieRoots[burstDie].GetComponent<RectTransform>().anchorMin
+                        : new Vector2(0.27f, 0.50f);
+
+                    string badgeSpritePath = (activeAbility.trigger == 2)
+                        ? "Original/sprites/BuffTrigger1/Trigger2"
+                        : "Original/sprites/BuffTrigger/Trigger21";
+
+                    yield return StartCoroutine(PlayAbilityBurst(burstPos, badgeSpritePath, activeAbility.name));
+
+                    // Show Buff Belt prompt "PLEASE SELECT TARGET" targeting opponent
+                    if (_buffBeltGo != null && _buffBeltText != null && _buffBeltMedal != null)
+                    {
+                        _buffBeltGo.SetActive(true);
+                        _buffBeltMedal.sprite = GetUiSprite("Original/sprites/Buff6/DisplayBuffMinus");
+                        _buffBeltText.text = "PLEASE SELECT TARGET";
+                    }
+
+                    int[] awayEligible = new int[awayFaces.Length];
+                    for (int e = 0; e < awayEligible.Length; e++) awayEligible[e] = e;
+
+                    int chosenDie = -1;
+                    yield return StartCoroutine(SelectBuffTarget(1, awayEligible, chosen => chosenDie = chosen));
+
+                    if (chosenDie >= 0 && chosenDie < awayFaces.Length)
+                    {
+                        if (_awayDieBuffBadges != null && chosenDie < _awayDieBuffBadges.Length && _awayDieBuffBadges[chosenDie] != null)
+                        {
+                            _awayDieBuffBadges[chosenDie].sprite = GetUiSprite("Original/sprites/Buff6/DisplayBuffMinus");
+                            _awayDieBuffBadges[chosenDie].enabled = true;
+                        }
+
+                        AudioManager.Instance.PlayTap();
+                        int oldVal = awayFaces[chosenDie];
+                        int newVal = Math.Max(0, oldVal - 1);
+                        awayFaces[chosenDie] = newVal;
+                        if (_awayDice != null && chosenDie < _awayDice.Length && _awayDice[chosenDie] != null)
+                            SetDieFace(_awayDice[chosenDie], newVal);
+
+                        _match.AdjustAwayTotal(-1);
+                        if (_awayTotalText != null) _awayTotalText.text = _match.LastAwayTotal.ToString();
+                        if (_buffBeltText != null) _buffBeltText.text = $"{activeAbility.name.ToUpper()} -1!";
                         yield return new WaitForSeconds(0.70f);
                     }
                 }
