@@ -80,6 +80,24 @@ namespace DiceSoccer
         public int HomeExtraBonus { get; set; }
         public int AwayExtraBonus { get; set; }
 
+        public void AdjustHomeTotal(int delta)
+        {
+            if (_pendingEncounter != null)
+            {
+                _pendingEncounter.HomeTotal = Math.Max(0, _pendingEncounter.HomeTotal + delta);
+                LastHomeTotal = _pendingEncounter.HomeTotal;
+            }
+        }
+
+        public void AdjustAwayTotal(int delta)
+        {
+            if (_pendingEncounter != null)
+            {
+                _pendingEncounter.AwayTotal = Math.Max(0, _pendingEncounter.AwayTotal + delta);
+                LastAwayTotal = _pendingEncounter.AwayTotal;
+            }
+        }
+
         public MatchSimulation(
             PlayerData[] home,
             PlayerData[] away,
@@ -541,8 +559,8 @@ namespace DiceSoccer
         {
             public readonly bool IsShot;
             public readonly int Attacker;
-            public readonly int HomeTotal;
-            public readonly int AwayTotal;
+            public int HomeTotal { get; set; }
+            public int AwayTotal { get; set; }
             public readonly string HomeFaces;
             public readonly string AwayFaces;
             public readonly int[] HomeSlots;

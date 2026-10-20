@@ -271,6 +271,11 @@ namespace DiceSoccer
             throw new KeyNotFoundException($"The original game data references missing ability ID {id}.");
         }
 
+        public AbilityData TryGetAbility(int id)
+        {
+            return _abilities != null && _abilities.TryGetValue(id, out var ability) ? ability : null;
+        }
+
         public ShirtData GetShirt(int id)
         {
             return _shirts.TryGetValue(id, out var shirt) ? shirt : null;
