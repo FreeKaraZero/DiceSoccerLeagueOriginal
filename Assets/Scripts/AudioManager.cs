@@ -35,6 +35,7 @@ namespace DiceSoccer
             {
                 _soundEnabled = value;
                 AudioListener.volume = _soundEnabled ? 1f : 0f;
+                AudioListener.pause = !_soundEnabled;
                 if (!_soundEnabled)
                 {
                     _bgmSource?.Pause();
@@ -44,6 +45,10 @@ namespace DiceSoccer
                 {
                     _bgmSource?.UnPause();
                     _crowdSource?.UnPause();
+                    if (_bgmSource != null && !_bgmSource.isPlaying && _bgmSource.clip != null)
+                    {
+                        _bgmSource.Play();
+                    }
                 }
             }
         }
@@ -61,15 +66,25 @@ namespace DiceSoccer
 
             _soundEnabled = PlayerPrefs.GetInt("diceSoccer.sound", 1) != 0;
             AudioListener.volume = _soundEnabled ? 1f : 0f;
+            AudioListener.pause = !_soundEnabled;
         }
 
         private void EnsureInitialized()
         {
+            if (FindAnyObjectByType<AudioListener>() == null)
+            {
+                gameObject.AddComponent<AudioListener>();
+            }
+
             if (_bgmSource == null)
             {
                 _bgmSource = gameObject.AddComponent<AudioSource>();
                 _bgmSource.loop = true;
                 _bgmSource.playOnAwake = false;
+                _bgmSource.spatialBlend = 0f; // 2D Sound
+                _bgmSource.bypassEffects = true;
+                _bgmSource.bypassListenerEffects = true;
+                _bgmSource.bypassReverbZones = true;
             }
 
             if (_crowdSource == null)
@@ -78,6 +93,10 @@ namespace DiceSoccer
                 _crowdSource.loop = true;
                 _crowdSource.playOnAwake = false;
                 _crowdSource.volume = 0.4f;
+                _crowdSource.spatialBlend = 0f; // 2D Sound
+                _crowdSource.bypassEffects = true;
+                _crowdSource.bypassListenerEffects = true;
+                _crowdSource.bypassReverbZones = true;
             }
 
             if (_sfxSource == null)
@@ -85,15 +104,19 @@ namespace DiceSoccer
                 _sfxSource = gameObject.AddComponent<AudioSource>();
                 _sfxSource.loop = false;
                 _sfxSource.playOnAwake = false;
+                _sfxSource.spatialBlend = 0f; // 2D Sound
+                _sfxSource.bypassEffects = true;
+                _sfxSource.bypassListenerEffects = true;
+                _sfxSource.bypassReverbZones = true;
             }
         }
 
         public void PlayBgm(string trackName = "MainTheme", float volume = 0.5f)
         {
+            EnsureInitialized();
             var clip = LoadClip(trackName);
             if (clip == null) return;
 
-            EnsureInitialized();
             if (_bgmSource.clip == clip && _bgmSource.isPlaying) return;
 
             _bgmSource.clip = clip;
@@ -109,10 +132,10 @@ namespace DiceSoccer
 
         public void PlayCrowdChant(float volume = 0.35f)
         {
+            EnsureInitialized();
             var clip = LoadClip("StadiumCrowdChant");
             if (clip == null) return;
 
-            EnsureInitialized();
             if (_crowdSource != null)
             {
                 _crowdSource.clip = clip;
@@ -130,10 +153,10 @@ namespace DiceSoccer
         public void PlayEffect(string effectName, float pitch = 1.0f, float volume = 1.0f)
         {
             if (!_soundEnabled) return;
+            EnsureInitialized();
             var clip = LoadClip(effectName);
             if (clip == null) return;
 
-            EnsureInitialized();
             if (_sfxSource != null)
             {
                 _sfxSource.pitch = pitch;
@@ -259,6 +282,7 @@ namespace DiceSoccer
             var clip = Resources.Load<AudioClip>($"Original/audio/{name}");
             if (clip != null)
             {
+                clip.LoadAudioData();
                 _clipCache[name] = clip;
             }
             return clip;

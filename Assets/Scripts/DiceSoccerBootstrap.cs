@@ -111,6 +111,10 @@ namespace DiceSoccer
         {
             Application.targetFrameRate = 60;
             Screen.orientation = ScreenOrientation.Portrait;
+            if (FindAnyObjectByType<AudioListener>() == null)
+            {
+                gameObject.AddComponent<AudioListener>();
+            }
             _soundEnabled = PlayerPrefs.GetInt("diceSoccer.sound", 1) != 0;
             AudioManager.Instance.SoundEnabled = _soundEnabled;
             InitBasePositions();

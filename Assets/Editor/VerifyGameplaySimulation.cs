@@ -113,7 +113,40 @@ namespace DiceSoccer.Editor
             showFixtures?.Invoke(bootstrap, null);
             Debug.Log("[TEST] ShowLeagueFixtures executed successfully.");
 
-            Debug.Log("[TEST] ALL GAMEPLAY AND UI SIMULATION TESTS PASSED COMPLETELY!");
+            // 8. Verify Audio system and clips
+            var listener = UnityEngine.Object.FindAnyObjectByType<AudioListener>();
+            if (listener == null)
+            {
+                throw new Exception("No AudioListener found in scene! Audio will not play!");
+            }
+            Debug.Log($"[TEST] AudioListener verified on GameObject: {listener.gameObject.name}");
+
+            var audioManager = AudioManager.Instance;
+            if (audioManager == null)
+            {
+                throw new Exception("AudioManager instance is null!");
+            }
+
+            var bgmField = typeof(AudioManager).GetField("_bgmSource", BindingFlags.Instance | BindingFlags.NonPublic);
+            var bgmSource = bgmField?.GetValue(audioManager) as AudioSource;
+            if (bgmSource == null || bgmSource.spatialBlend != 0f)
+            {
+                throw new Exception("BGM AudioSource invalid or not 2D!");
+            }
+
+            string[] testClips = { "MainTheme", "StadiumCrowdChant", "Tap1", "DiceRoll1", "Whistle1", "KidsCheering" };
+            foreach (var clipName in testClips)
+            {
+                var clip = Resources.Load<AudioClip>($"Original/audio/{clipName}");
+                if (clip == null)
+                {
+                    throw new Exception($"AudioClip {clipName} could not be loaded from Resources!");
+                }
+                clip.LoadAudioData();
+                Debug.Log($"[TEST] AudioClip {clipName} verified: Channels={clip.channels}, Frequency={clip.frequency}, Length={clip.length}s, LoadState={clip.loadState}");
+            }
+
+            Debug.Log("[TEST] ALL GAMEPLAY, UI AND AUDIO VERIFICATION TESTS PASSED COMPLETELY!");
         }
     }
 }
