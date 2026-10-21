@@ -3679,7 +3679,124 @@ namespace DiceSoccer
             }
             else
             {
-                yield return new WaitForSeconds(0.35f);
+                // Check if Away team has an active superpower that triggers (AI / Opponent autoTargetBuff)
+                PlayerData[] awayLineup = (_catalog != null && _currentFixture != null && _currentFixture.lineup != null)
+                    ? _catalog.ResolveLineup(_currentFixture.lineup) : null;
+                AbilityData awayAbility = null;
+                int awayTriggeringSlot = -1;
+
+                for (int i = 0; i < activeAway.Length; i++)
+                {
+                    int s = activeAway[i];
+                    if (awayLineup != null && s < awayLineup.Length && awayLineup[s] != null)
+                    {
+                        int spId = awayLineup[s].superpower;
+                        if (spId > 0)
+                        {
+                            var ab = _catalog?.TryGetAbility(spId);
+                            if (ab != null && ab.target == 1 && IsAbilityTriggered(ab.trigger, awayFaces, _match.LastAwayTotal))
+                            {
+                                awayAbility = ab;
+                                awayTriggeringSlot = i;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (awayAbility != null)
+                {
+                    int burstDie = awayTriggeringSlot >= 0 && awayTriggeringSlot < awayFaces.Length ? awayTriggeringSlot : 0;
+                    Vector2 burstPos = (_awayDieRoots != null && burstDie < _awayDieRoots.Length && _awayDieRoots[burstDie] != null)
+                        ? _awayDieRoots[burstDie].GetComponent<RectTransform>().anchorMin
+                        : new Vector2(0.73f, 0.50f);
+
+                    string badgeSpritePath = (awayAbility.trigger == 2)
+                        ? "Original/sprites/BuffTrigger1/Trigger2"
+                        : "Original/sprites/BuffTrigger/Trigger21";
+
+                    yield return StartCoroutine(PlayAbilityBurst(burstPos, badgeSpritePath, awayAbility.name));
+
+                    if (_buffBeltGo != null && _buffBeltText != null && _buffBeltMedal != null)
+                    {
+                        _buffBeltGo.SetActive(true);
+                        _buffBeltMedal.sprite = GetUiSprite(awayAbility.type == 0 ? "Original/sprites/Buff6/DisplayBuffMinus" : "Original/sprites/Buff6/DisplayBuffTimes");
+                        _buffBeltText.text = $"{awayAbility.name.ToUpper()} ACTIVATED!";
+                    }
+
+                    // AutoTargetBuff for Away team (symmetrical to Cocos2d AI autoTargetBuff)
+                    if (awayAbility.type == 2)
+                    {
+                        // Multiplier: pick highest away die
+                        int bestDie = 0;
+                        int maxVal = -1;
+                        for (int d = 0; d < awayFaces.Length; d++)
+                            if (awayFaces[d] > maxVal) { maxVal = awayFaces[d]; bestDie = d; }
+
+                        if (_awayDieBuffBadges != null && bestDie < _awayDieBuffBadges.Length && _awayDieBuffBadges[bestDie] != null)
+                        {
+                            _awayDieBuffBadges[bestDie].sprite = GetUiSprite("Original/sprites/Buff6/DisplayBuffTimes");
+                            _awayDieBuffBadges[bestDie].enabled = true;
+                        }
+
+                        AudioManager.Instance.PlayPowerup(1);
+                        AudioManager.Instance.PlayBuff();
+
+                        if (_awayDieRoots != null && bestDie < _awayDieRoots.Length && _awayDieRoots[bestDie] != null)
+                        {
+                            for (int f = 0; f < 6; f++)
+                            {
+                                float p = f / 5f;
+                                float punch = 1f + Mathf.Sin(p * Mathf.PI) * 0.32f;
+                                _awayDieRoots[bestDie].transform.localScale = new Vector3(punch, punch, 1f);
+                                yield return new WaitForSeconds(0.025f);
+                            }
+                            _awayDieRoots[bestDie].transform.localScale = Vector3.one;
+                        }
+
+                        int originalVal = awayFaces[bestDie];
+                        awayFaces[bestDie] *= 2;
+                        if (_awayDice != null && bestDie < _awayDice.Length && _awayDice[bestDie] != null)
+                            SetDieFace(_awayDice[bestDie], awayFaces[bestDie]);
+
+                        _match.AdjustAwayTotal(originalVal);
+                        if (_awayTotalText != null) _awayTotalText.text = _match.LastAwayTotal.ToString();
+                        yield return new WaitForSeconds(0.70f);
+                    }
+                    else if (awayAbility.type == 0 && homeFaces.Length > 0)
+                    {
+                        // Tackle: debuff highest home die
+                        int bestDie = 0;
+                        int maxVal = -1;
+                        for (int d = 0; d < homeFaces.Length; d++)
+                            if (homeFaces[d] > maxVal) { maxVal = homeFaces[d]; bestDie = d; }
+
+                        if (_homeDieBuffBadges != null && bestDie < _homeDieBuffBadges.Length && _homeDieBuffBadges[bestDie] != null)
+                        {
+                            _homeDieBuffBadges[bestDie].sprite = GetUiSprite("Original/sprites/Buff6/DisplayBuffMinus");
+                            _homeDieBuffBadges[bestDie].enabled = true;
+                        }
+
+                        AudioManager.Instance.PlayTap();
+                        int oldVal = homeFaces[bestDie];
+                        int newVal = Math.Max(0, oldVal - 1);
+                        homeFaces[bestDie] = newVal;
+                        if (_homeDice != null && bestDie < _homeDice.Length && _homeDice[bestDie] != null)
+                            SetDieFace(_homeDice[bestDie], newVal);
+
+                        _match.AdjustHomeTotal(-1);
+                        if (_homeTotalText != null) _homeTotalText.text = _match.LastHomeTotal.ToString();
+                        yield return new WaitForSeconds(0.70f);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(0.35f);
+                    }
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.35f);
+                }
             }
 
             // 7. Smoke poof on dice before hiding them
